@@ -16,10 +16,11 @@ class MySQL {
 	
 	function query($qry, $return = false) {
 		if($return):
-			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
-			$aresult = $result->fetch_all();
-			$result->close();
-			return $aresult;
+			$result = $this->mysql->query($qry);// or die("MySQL-Error: ".$this->mysql->error);
+			var_dump($result);
+			//$aresult = $result->fetch_all();
+			//$result->close();
+			//return $aresult;
 		else:
 			return($this->mysql->query($qry));
 		endif;

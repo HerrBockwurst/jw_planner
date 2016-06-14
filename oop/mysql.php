@@ -19,6 +19,7 @@ class MySQL {
 	function query($qry, $return = false) {
 		if($return):
 			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
+			echo $result->num_rows;
 			$aresult = $result->fetch_assoc();
 			var_dump($aresult);
 			$result->free();

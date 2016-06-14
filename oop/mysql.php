@@ -1,10 +1,10 @@
 <?php
 class MySQL {
 	protected $mysql;
-	private $MYSQL_HOST = $MYSQL_HOST;
-	private $MYSQL_USER = $MYSQL_USER;
-	private $MYSQL_PASSWORD = $MYSQL_PASSWORD;
-	private $MYSQL_DATABASE = $MYSQL_DATABASE;
+	private $HOST = $MYSQL_HOST;
+	private $USER = $MYSQL_USER;
+	private $PASSWORD = $MYSQL_PASSWORD;
+	private $DATABASE = $MYSQL_DATABASE;
 	
 	function __construct() {
 		echo $this->$MYSQL_USER;

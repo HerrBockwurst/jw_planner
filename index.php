@@ -7,7 +7,9 @@ require_once 'oop/urlpath.php';
 require_once 'libs/functions.php';
 // Blau 4a6da7
 
-printURL();
+//printURL();
+$result = $mysql->doQuery("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1", true);
+var_dump($result);
 /*
 $mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
 $result = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1");

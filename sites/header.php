@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title></title>
-		<style type="text/css" href="<?php  ?>"></style>
+		<style type="text/css" href="<?php printURL(); ?>"></style>
 	</head>
 	<body></body>
 </html>

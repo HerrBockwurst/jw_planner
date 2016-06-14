@@ -1,22 +1,26 @@
 <?php
 class MySQL {
-	protected $mysql;
-	private $HOST = $MYSQL_HOST;
-	/*private $USER = $MYSQL_USER;
-	private $PASSWORD = $MYSQL_PASSWORD;
-	private $DATABASE = $MYSQL_DATABASE;*/
+	private $mysql;
+	private $HOST;
+	private $USER;
+	private $PASSWORD;
+	private $DATABASE;
 	
 	function __construct() {
-		//echo $this->USER;
-		/*$this->mysql = new mysqli($this->MYSQL_HOST, $this->$MYSQL_USER, $this->$MYSQL_PASSWORD, $this->$MYSQL_DATABASE);
+		$this->$HOST = $MYSQL_HOST;
+		$this->$USER = $MYSQL_USER;
+		$this->$PASSWORD = $MYSQL_PASSWORD;
+		$this->$DATABASE = $MYSQL_DATABASE;
+		
+		$this->mysql = new mysqli($this->MYSQL_HOST, $this->$MYSQL_USER, $this->$MYSQL_PASSWORD, $this->$MYSQL_DATABASE);
 		if ($this->mysql->connect_errno) {
 		    printf("Connect failed: %s\n", $this->mysql->connect_error);
 		    exit();
-		}*/
+		}
 	}
-	/*
+	
 	function __destruct() {
-		//$this->mysql->close();
+		$this->mysql->close();
 	}
 	
 	function doQuery($qry, $return = false) {
@@ -29,7 +33,7 @@ class MySQL {
 			return($this->mysql->query($qry));
 		endif;
 		
-	}*/
+	}
 }
 
 $mysql = new MySQL();

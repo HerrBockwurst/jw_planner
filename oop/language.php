@@ -6,7 +6,7 @@ class language {
 	}
 	
 	function getString($id) {
-		return "testico";
+		echo "testico";
 	}
 }
 ?>

@@ -4,7 +4,7 @@ require_once 'config.php';
 require_once 'oop/language.php';
 require_once 'oop/mysql.php';
 require_once 'oop/urlpath.php';
-require_once 'libs/functions.php';
+//require_once 'libs/functions.php';
 // Blau 4a6da7
 
 //printURL();

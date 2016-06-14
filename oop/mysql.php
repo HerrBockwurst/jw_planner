@@ -8,15 +8,15 @@ class MySQL {
 	
 	function __construct() {
 		echo $this->$MYSQL_USER;
-		//$this->mysql = new mysqli($this->MYSQL_HOST, $this->$MYSQL_USER, $this->$MYSQL_PASSWORD, $this->$MYSQL_DATABASE);
+		/*$this->mysql = new mysqli($this->MYSQL_HOST, $this->$MYSQL_USER, $this->$MYSQL_PASSWORD, $this->$MYSQL_DATABASE);
 		if ($this->mysql->connect_errno) {
 		    printf("Connect failed: %s\n", $this->mysql->connect_error);
 		    exit();
-		}
+		}*/
 	}
 	
 	function __destruct() {
-		$this->mysql->close();
+		//$this->mysql->close();
 	}
 	
 	function doQuery($qry, $return = false) {

@@ -14,14 +14,13 @@ class MySQL {
 		$this->mysql->close();
 	}
 	
-	function query($qry, $return = false) {
+	function doQuery($qry, $return = false) {
 		if($return):
-			//$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
+			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
 			var_dump($result);
-			//$aresult = $result->fetch_all();
-			//$result->close();
-			//return $aresult;
-			return false;
+			$aresult = $result->fetch_all();
+			$result->close();
+			return $aresult;
 		else:
 			return($this->mysql->query($qry));
 		endif;

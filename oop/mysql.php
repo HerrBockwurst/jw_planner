@@ -20,7 +20,8 @@ class MySQL {
 			var_dump($result);
 			//$aresult = $result->fetch_all();
 			//$result->close();
-			return $aresult;
+			//return $aresult;
+			return false;
 		else:
 			return($this->mysql->query($qry));
 		endif;

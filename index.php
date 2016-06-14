@@ -10,8 +10,8 @@ require_once 'libs/functions.php';
 //printURL();
 
 $mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
-$result = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1");
-$var_dump($result);
+//$result = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1");
+//$var_dump($result);
 //echo $mysql->error;
 
 

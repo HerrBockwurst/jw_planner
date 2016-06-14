@@ -7,8 +7,7 @@ require_once 'oop/urlpath.php';
 require_once 'libs/functions.php';
 // Blau 4a6da7
 
-getcss();
-printTitle(true);
+
 
 switch ($url->value(0)) {
 	case 'calendar':
@@ -18,7 +17,7 @@ switch ($url->value(0)) {
 		echo "Profil";
 		break;
 	default:
-		//require '';
+		require_once 'sites/header.php';
 		break;
 }
 ?>

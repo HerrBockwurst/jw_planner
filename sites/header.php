@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title></title>
+		<title><?php printTitle(true); ?></title>
 		<link rel="stylesheet" href="<?php printURL(); ?>/ <?php getcss(); ?>"></link>
 	</head>
 	<body></body>

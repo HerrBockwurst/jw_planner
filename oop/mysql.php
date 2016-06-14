@@ -19,9 +19,9 @@ class MySQL {
 	function query($qry, $return = false) {
 		if($return):
 			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
-			$aresult = $result->fetch_all();
+			$aresult = $result->fetch_assoc();
 			var_dump($aresult);
-			$result->close();
+			$result->free();
 			return $aresult;
 		else:
 			return($this->mysql->query($qry));

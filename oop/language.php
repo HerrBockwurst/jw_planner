@@ -14,7 +14,7 @@ class language {
 		$this->lang = simplexml_load_file('language/de_de.xml');	
 	}
 	
-	function print($tree) {
+	function display($tree) {
 		echo $this->lang->$tree;
 	}
 }

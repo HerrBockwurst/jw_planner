@@ -7,6 +7,8 @@ require_once 'oop/urlpath.php';
 require_once 'libs/functions.php';
 // Blau 4a6da7
 
+printURL();
+
 switch ($url->value(0)) {
 	case 'calendar':
 		echo "Kalender";

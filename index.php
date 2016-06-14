@@ -5,7 +5,7 @@ require_once 'oop/language.php';
 require_once 'libs/mysql.php';
 require_once 'oop/urlpath.php';
 
-switch ('hi') {
+switch ($url->value(0)) {
 	case 'calendar':
 		echo "Kalender";
 		break;

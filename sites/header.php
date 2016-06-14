@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div id="header">
-			<div id="logo"></div>
+			<div id="logo">Das ist ein Logo</div>
 			<div id="menu"></div>
 		</div>
 	</body>

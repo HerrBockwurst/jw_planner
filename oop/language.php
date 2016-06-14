@@ -15,7 +15,13 @@ class language {
 	}
 	
 	function display($tree) {
-		echo $this->lang->$tree;
+		$expl = explode('>', $tree);
+		$tmpobj = $this->lang;
+		foreach ($expl as $part) {
+			$tmpobj = $tmpobj->$part;
+		}
+			
+		echo $tmpobj;		
 	}
 }
 ?>

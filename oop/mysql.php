@@ -25,7 +25,7 @@ class MySQL {
 			$this->result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
 			if($this->result->num_rows == 1):
 				$aresult = $this->result->fetch_assoc();
-				$this->result->free();
+				$this->free();
 				return $aresult;
 			else:
 				return $this->result;

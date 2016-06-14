@@ -11,7 +11,7 @@ class MySQL {
 		$this->USER = $MYSQL_USER;
 		$this->PASSWORD = $MYSQL_PASSWORD;
 		$this->DATABASE = $MYSQL_DATABASE;
-		
+		echo $this->USER;
 		$this->mysql = new mysqli($this->HOST, $this->USER, $this->PASSWORD, $this->DATABASE);
 		if ($this->mysql->connect_errno) {
 		    printf("Connect failed: %s\n", $this->mysql->connect_error);

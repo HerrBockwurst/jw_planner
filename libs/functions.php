@@ -17,6 +17,7 @@ function printURL() {
 }
 
 function getcss() {
-	
+	$browser = get_browser(null, true);
+	echo $browser['platform'];
 }
 ?>

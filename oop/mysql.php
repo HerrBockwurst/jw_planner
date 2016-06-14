@@ -16,10 +16,14 @@ class MySQL {
 	
 	function query($qry, $return = false) {
 		if($return):
-			$result = $this->mysql->query($qry);
-			$aresult = $result->mysqli_fetch_all();
-			$result->close();
-			return $aresult;
+			if($result = $this->mysql->query($qry)):
+				$aresult = $result->fetch_all();
+				$result->close();
+				return $aresult;
+			else:
+				echo "ERROR";
+				exit;
+			endif;
 		else:
 			return($this->mysql->query($qry));
 		endif;

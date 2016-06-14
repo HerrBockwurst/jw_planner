@@ -4,7 +4,7 @@ class MySQL {
 	
 	function __construct() {
 		$this->mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
-		if ($This->mysql->connect_errno) {
+		if ($this->mysql->connect_errno) {
 		    printf("Connect failed: %s\n", $this->mysql->connect_error);
 		    exit();
 		}

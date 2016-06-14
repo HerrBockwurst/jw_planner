@@ -1,8 +1,8 @@
 <?php
 class MySQL {
 	protected $mysql;
-/*	private $HOST = $MYSQL_HOST;
-	private $USER = $MYSQL_USER;
+	private $HOST = $MYSQL_HOST;
+	/*private $USER = $MYSQL_USER;
 	private $PASSWORD = $MYSQL_PASSWORD;
 	private $DATABASE = $MYSQL_DATABASE;*/
 	

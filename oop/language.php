@@ -24,4 +24,6 @@ class language {
 		echo $tmpobj;		
 	}
 }
+
+$lang = new language();
 ?>

@@ -4,10 +4,10 @@ require_once 'config.php';
 require_once 'oop/language.php';
 require_once 'oop/mysql.php';
 require_once 'oop/urlpath.php';
-//require_once 'libs/functions.php';
+require_once 'libs/functions.php';
 // Blau 4a6da7
 
-//printURL();
+printURL();
 //$result = $mysql->doQuery("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1", true);
 //var_dump($result);
 /*

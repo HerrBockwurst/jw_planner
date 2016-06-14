@@ -1,6 +1,6 @@
 <?php
 class MySQL {
-	private $mysql;
+	protected $mysql;
 	
 	function __construct() {
 		$this->mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
@@ -16,6 +16,7 @@ class MySQL {
 	
 	function doQuery($qry, $return = false) {
 		if($return):
+			echo $qry;
 			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
 			var_dump($result);
 			$aresult = $result->fetch_all();

@@ -7,12 +7,12 @@ class MySQL {
 	private $DATABASE;
 	
 	function __construct() {
-		$this->$HOST = $MYSQL_HOST;
-		$this->$USER = $MYSQL_USER;
-		$this->$PASSWORD = $MYSQL_PASSWORD;
-		$this->$DATABASE = $MYSQL_DATABASE;
+		$this->HOST = $MYSQL_HOST;
+		$this->USER = $MYSQL_USER;
+		$this->PASSWORD = $MYSQL_PASSWORD;
+		$this->DATABASE = $MYSQL_DATABASE;
 		
-		$this->mysql = new mysqli($this->MYSQL_HOST, $this->$MYSQL_USER, $this->$MYSQL_PASSWORD, $this->$MYSQL_DATABASE);
+		$this->mysql = new mysqli($this->HOST, $this->USER, $this->PASSWORD, $this->DATABASE);
 		if ($this->mysql->connect_errno) {
 		    printf("Connect failed: %s\n", $this->mysql->connect_error);
 		    exit();

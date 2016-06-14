@@ -19,7 +19,7 @@ class MySQL {
 			$result = $this->mysql->query($qry);// or die("MySQL-Error: ".$this->mysql->error);
 			//$aresult = $result->fetch_all();
 			//$result->close();
-			return "hi";
+			return $result;
 		else:
 			return($this->mysql->query($qry));
 		endif;

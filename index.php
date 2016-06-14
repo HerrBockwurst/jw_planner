@@ -8,7 +8,7 @@ require_once 'libs/functions.php';
 // Blau 4a6da7
 
 getcss();
-printTitle();
+printTitle(true);
 
 switch ($url->value(0)) {
 	case 'calendar':

@@ -1,12 +1,13 @@
 <?php
 class language {
+	private $lang;
 	function __construct() {
-		
+		$this->lang = simplexml_load_file('language/de_de.xml');
 		
 	}
 	
 	function getString($id) {
-		echo "testico";
+		echo $this->lang->menu->calendar;
 	}
 }
 ?>

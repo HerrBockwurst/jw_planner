@@ -1,3 +1,7 @@
 <?php
-//mysql passwort 6TPhHjEYZQCmyEKz
+//MySQL Daten hier
+$MYSQL_HOST = "localhost";
+$MYSQL_USER = "jwplanner";
+$MYSQL_PASSWORD = "6TPhHjEYZQCmyEKz";
+$MYSQL_DB = "jwplanner";		
 ?>

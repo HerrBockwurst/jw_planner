@@ -11,7 +11,7 @@ require_once 'libs/functions.php';
 
 $mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
 $result = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1");
-//$var_dump($result);
+$var_dump($result);
 //echo $mysql->error;
 
 

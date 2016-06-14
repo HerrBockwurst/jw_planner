@@ -1,6 +1,6 @@
 <?php
 class language {
-	private $lang;
+	public $lang;
 	function __construct() {
 		$this->lang = simplexml_load_file('language/de_de.xml');
 		

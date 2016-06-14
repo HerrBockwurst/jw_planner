@@ -18,9 +18,9 @@ class MySQL {
 		if($return):
 			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
 			
-			//$aresult = $result->fetch_all();
-			//$result->close();
-			//return $aresult;
+			$aresult = $result->fetch_all();
+			$result->close();
+			return $aresult;
 		else:
 			return($this->mysql->query($qry));
 		endif;
@@ -28,6 +28,6 @@ class MySQL {
 	}
 }
 
-//$mysql = new MySQL();
+$mysql = new MySQL();
 
 ?>

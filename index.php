@@ -8,10 +8,10 @@ require_once 'libs/functions.php';
 // Blau 4a6da7
 
 //printURL();
-//$mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
-//$result = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1");
-//$var_dump($result);
-//echo $mysql->error;
+$mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
+$result = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1");
+$var_dump($result);
+echo $mysql->error;
 
 switch ($url->value(0)) {
 	case 'calendar':
@@ -21,7 +21,7 @@ switch ($url->value(0)) {
 		echo "Profil";
 		break;
 	default:
-		require '';
+		//require '';
 		break;
 }
 ?>

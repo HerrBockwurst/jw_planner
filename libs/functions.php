@@ -41,5 +41,6 @@ function printTitle($withVersion = false) {
 		if ($withVersion && $row['conf'] == 'version') $string .= " | ".$row['value'];		
 	endwhile;
 	echo $string;
+	$mysql->free();
 }
 ?>

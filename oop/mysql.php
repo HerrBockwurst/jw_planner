@@ -7,14 +7,14 @@ class MySQL {
 	private $DATABASE = $MYSQL_DATABASE;
 	
 	function __construct() {
-		echo $this->$MYSQL_USER;
+		echo $this->USER;
 		/*$this->mysql = new mysqli($this->MYSQL_HOST, $this->$MYSQL_USER, $this->$MYSQL_PASSWORD, $this->$MYSQL_DATABASE);
 		if ($this->mysql->connect_errno) {
 		    printf("Connect failed: %s\n", $this->mysql->connect_error);
 		    exit();
 		}*/
 	}
-	
+	/*
 	function __destruct() {
 		//$this->mysql->close();
 	}
@@ -29,7 +29,7 @@ class MySQL {
 			return($this->mysql->query($qry));
 		endif;
 		
-	}
+	}*/
 }
 
 $mysql = new MySQL();

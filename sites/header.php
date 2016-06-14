@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="<?php printURL();?>/reset.css"></link>
 		<link rel="stylesheet" href="<?php printURL();?>/<?php getcss(); ?>"></link>
 	</head>
-	<body></body>
+	<body>hi</body>
 </html>
 
 <?php

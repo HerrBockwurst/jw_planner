@@ -1,7 +1,7 @@
 <?php
 class MySQL {
 	private $mysql;
-	
+	private $result;
 	
 	function __construct() {
 		global $MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE;
@@ -16,14 +16,20 @@ class MySQL {
 		$this->mysql->close();
 	}
 	
+	function free() {
+		$this->result->free();
+	}
+	
 	function query($qry, $return = false) {
 		if($return):
-			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
-			echo $result->num_rows;
-			$aresult = $result->fetch_assoc();
-			var_dump($aresult);
-			$result->free();
-			return $aresult;
+			$this->result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
+			if($this->result->num_rows == 1):
+				$aresult = $this->result->fetch_assoc();
+				$this->result->free();
+				return $aresult;
+			else:
+				return $this->result;
+			endif;
 		else:
 			return($this->mysql->query($qry));
 		endif;

@@ -8,6 +8,9 @@ require_once 'oop/urlpath.php';
 require_once 'libs/functions.php';
 
 
+require_once 'libs/auth.php';
+
+
 require_once 'sites/header.php';
 switch ($url->value(0)) {
 	case 'calendar':

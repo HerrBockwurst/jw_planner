@@ -1,6 +1,19 @@
 body {	
 	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, "Arial Unicode MS", sans-serif;
 	background-color: #eee;
-		
+	
 }
 
+#header {
+	width: 100%;
+	background-color: #ccc;
+	height: 80px;	
+}
+
+#logo {
+	height: 100%;
+	position: realtive;
+	margin-left: 200px;
+	background-color: #4a6da7;
+	color: white;
+}

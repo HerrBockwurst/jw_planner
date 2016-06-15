@@ -1,8 +1,5 @@
 <?php
 
-function getTitle() {
-}
-
 function printURL() {
 	global $mysql;
 	$url = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1", true);
@@ -12,8 +9,6 @@ function printURL() {
 	else: 
 		echo "http://".$url['value'];
 	endif;
-		
-	
 }
 
 function getcss() {

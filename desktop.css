@@ -7,13 +7,21 @@ body {
 #header {
 	width: 100%;
 	background-color: #ccc;
-	height: 80px;	
+	height: 100px;	
 }
 
 #logo {
-	height: 100%;
-	position: realtive;
-	margin-left: 200px;
-	background-color: #4a6da7;
-	color: white;
+    height: 100px;
+    position: relative;
+    margin-left: 200px;
+    background-color: #4a6da7;
+    color: white;
+    width: 100px;
+    text-align: center;
+    padding: 10px;
+    	
+}
+
+.3.5em {
+	font-size: 3.5em;
 }

@@ -13,7 +13,7 @@ body {
 #logo {
     height: 100px;
     position: absolute;
-    margin-left: 200px;
+    margin-left: 20px;
     background-color: #4a6da7;
     color: white;
     width: 100px;
@@ -26,6 +26,8 @@ body {
 	height: 50px;
 	background-color: #777;
 	float: left;
+	width: 100%;
+	padding-left: 150px;
 }
 
 #menu li, ul {
@@ -34,7 +36,7 @@ body {
 	line-height: 50px;
 	color: #eee;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 #menu li:hover {

@@ -6,7 +6,10 @@ class urlpath {
 	}
 	
 	function value($index) {
-		return $this->patharray[$index];
+		if(isset($this->patharray[$index]))
+			return $this->patharray[$index];
+		else 
+			return false;
 	}
 }
 

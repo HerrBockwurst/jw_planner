@@ -7,8 +7,9 @@
 	</head>
 	<body>
 		<div id="header">
-			<div id="logo"><span class="3.5em">JW</span><br />Planner</div>
+			<div id="logo"><span style="font-size:3.5em">JW</span><br /><span style="font-size:2em">Planner</span></div>
 			<div id="menu"></div>
+			
 		</div>
 	</body>
 </html>

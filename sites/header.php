@@ -10,10 +10,10 @@
 			<div id="logo"><span style="font-size:3.5em">JW</span><br /><span style="font-size:1.5em">Planner</span></div>
 			<div id="menu">
 				<ul>
-					<li><?php $lang->display('menu>calendar'); ?></li>
-					<li><?php $lang->display('menu>profile'); ?></li>
-					<li><?php $lang->display('menu>admin'); ?></li>
-					<li><?php $lang->display('menu>dev'); ?></li>
+					<li><?php displayMenuLink('menu>calendar', '/calendar'); ?></li>
+					<li><?php displayMenuLink('menu>profile', '/profile'); ?></li>
+					<li><?php displayMenuLink('menu>admin', '/admin'); ?></li>
+					<li><?php displayMenuLink('menu>dev', '/system'); ?></li>
 				</ul>
 			</div>			
 		</div>

@@ -1,5 +1,10 @@
 <?php
 
+function displayMenuLink($langpath, $link) {
+	global $lang;
+	echo $string = "<a href=\"".printURL().$link."\">".$lang->display($langpath)."</a>";	
+}
+
 function printURL() {
 	global $mysql;
 	$url = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1", true);

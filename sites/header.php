@@ -11,9 +11,9 @@
 			<div id="menu">
 				<ul>
 					<li><?php $lang->display('menu>calendar'); ?></li>
-					<li><?php $lang->display('menu>profile'); ?><li>
-					<li><?php $lang->display('menu>admin'); ?><li>
-					<li><?php $lang->display('menu>dev'); ?><li>
+					<li><?php $lang->display('menu>profile'); ?></li>
+					<li><?php $lang->display('menu>admin'); ?></li>
+					<li><?php $lang->display('menu>dev'); ?></li>
 				</ul>
 			</div>			
 		</div>

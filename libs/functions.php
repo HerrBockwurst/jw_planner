@@ -2,7 +2,7 @@
 
 function displayMenuLink($langpath, $link) {
 	global $lang;
-	echo "<a href=\"".getURL().$link."\">".$lang->display($langpath)."</a>";	
+	echo "<a href=\"".getURL().$link."\">".$lang->get($langpath)."</a>";	
 }
 
 function printURL() {

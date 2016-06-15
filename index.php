@@ -6,6 +6,7 @@ require_once 'oop/mysql.php';
 require_once 'libs/sysvars.php';
 require_once 'oop/urlpath.php';
 require_once 'libs/functions.php';
+require_once 'oop/log.php';
 
 
 require_once 'libs/auth.php';

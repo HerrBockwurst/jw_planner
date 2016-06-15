@@ -20,6 +20,10 @@ class MySQL {
 		$this->result->free();
 	}
 	
+	function error() {
+		return $this->mysql->error;
+	}
+	
 	function query($qry, $return = false) {
 		if($return):
 			$this->result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);

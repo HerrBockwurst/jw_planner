@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="<?php printURL();?>/<?php getcss(); ?>"></link>
 	</head>
 	<body>
+		<?php if($url->value(0) != 'login'): //Nur ausgeben, wenn keine Login Maske ?>
 		<div id="header">
 			<div id="logo"><span style="font-size:3.5em">JW</span><br /><span style="font-size:1.5em">Planner</span></div>
 			<div id="menu">
@@ -16,8 +17,9 @@
 					<li><?php displayMenuLink('menu>dev', '/system'); ?></li>
 				</ul>
 			</div>			
-		</div>
+		</div>		
 		<div id="wrapper">
+		<?php endif; ?>
 
 
 <?php

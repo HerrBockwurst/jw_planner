@@ -43,8 +43,10 @@ body {
 
 #menu li:hover {
 	background-color: #696969;
+	color: #ccc;
 }
 
 #menu a {
-	font-decoration: none;
+	text-decoration: none;
+	color: #eee;
 }

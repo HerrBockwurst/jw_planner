@@ -26,6 +26,7 @@ switch ($url->value(0)) {
 		echo "System";
 		break;
 	default:
+		echo session_id();
 		echo "Default";
 		break;
 }

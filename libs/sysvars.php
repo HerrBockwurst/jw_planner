@@ -10,7 +10,6 @@ function initArray() {
 		$config[$row['conf']] = $row['value'];	
 	endwhile;
 	$mysql->free();
-	var_dump($config);
 }
 
 initArray();

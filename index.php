@@ -11,7 +11,7 @@ require_once 'libs/functions.php';
 require_once 'sites/header.php';
 switch ($url->value(0)) {
 	case 'calendar':
-		echo "Kalender";
+		require_once 'sites/calendar.php';
 		break;
 	case 'profile':
 		echo "Profil";
@@ -23,7 +23,7 @@ switch ($url->value(0)) {
 		echo "System";
 		break;
 	default:
-		echo "Profil";
+		echo "Default";
 		break;
 }
 require_once 'sites/footer.php';

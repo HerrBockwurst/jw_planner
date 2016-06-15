@@ -4,5 +4,7 @@
 	<menu>
 		<calendar>Kalender</calendar>
 		<profile>Profil</profile>
+		<admin>Administration</admin>
+		<dev>System</dev>
 	</menu>
 </language>

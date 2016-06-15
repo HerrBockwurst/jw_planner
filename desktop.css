@@ -32,11 +32,13 @@ body {
 
 #menu li, ul {
 	float: left;
-	padding: 0px 30px;
 	line-height: 50px;
 	color: #eee;
 	font-weight: bold;
 	font-size: 1.2em;
+}
+#menu li {
+	padding: 0px 30px;
 }
 
 #menu li:hover {

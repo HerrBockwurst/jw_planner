@@ -8,7 +8,14 @@
 	<body>
 		<div id="header">
 			<div id="logo"><span style="font-size:3.5em">JW</span><br /><span style="font-size:1.5em">Planner</span></div>
-			<div id="menu"><ul><li>Kalender<li><li>Profil<li></ul></div>			
+			<div id="menu">
+				<ul>
+					<li><?php $lang->display('menu>calendar'); ?></li>
+					<li><?php $lang->display('menu>profile'); ?><li>
+					<li><?php $lang->display('menu>admin'); ?><li>
+					<li><?php $lang->display('menu>dev'); ?><li>
+				</ul>
+			</div>			
 		</div>
 	</body>
 </html>

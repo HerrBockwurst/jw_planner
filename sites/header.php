@@ -7,9 +7,8 @@
 	</head>
 	<body>
 		<div id="header">
-			<div id="logo"><span style="font-size:3.5em">JW</span><br /><span style="font-size:2em">Planner</span></div>
-			<div id="menu"></div>
-			
+			<div id="logo"><span style="font-size:3.5em">JW</span><br /><span style="font-size:1.5em">Planner</span></div>
+			<div id="menu"><ul><li>Kalender<li><li>Profil<li></ul></div>			
 		</div>
 	</body>
 </html>

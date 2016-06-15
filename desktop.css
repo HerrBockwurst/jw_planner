@@ -22,6 +22,14 @@ body {
     	
 }
 
-.3.5em {
-	font-size: 3.5em;
+#menu {
+	margin-top: 50px;
+	height: 50px;
+	background-color: #999;
+}
+
+#menu li ul {
+	float: left;
+	padding: 10px 0px;
+	line-height: 3em;
 }

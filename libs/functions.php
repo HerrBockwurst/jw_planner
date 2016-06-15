@@ -2,7 +2,7 @@
 
 function displayMenuLink($langpath, $link) {
 	global $lang;
-	echo $string = "<a href=\"".printURL().$link."\">".$lang->display($langpath)."</a>";	
+	echo "<a href=\"".getURL().$link."\">".$lang->display($langpath)."</a>";	
 }
 
 function printURL() {
@@ -13,6 +13,17 @@ function printURL() {
 		echo "https://".$url['value'];
 	else: 
 		echo "http://".$url['value'];
+	endif;
+}
+
+function getURL() {
+	global $mysql;
+	$url = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1", true);
+	$ssl = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'ssl' LIMIT 1", true);
+	if ($ssl['value'] == 'true'):
+	echo "https://".$url['value'];
+	else:
+	echo "http://".$url['value'];
 	endif;
 }
 

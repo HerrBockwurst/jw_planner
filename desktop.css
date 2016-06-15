@@ -6,20 +6,19 @@ body {
 
 #header {
 	width: 100%;
-	background-color: #bbb;
+	background-color: #999;
 	height: 100px;	
 }
 
 #logo {
     height: 100px;
-    position: relative;
+    position: absolute;
     margin-left: 200px;
     background-color: #4a6da7;
     color: white;
     width: 100px;
     text-align: center;
     padding: 10px;
-    float: left;
 }
 
 #menu {
@@ -31,9 +30,17 @@ body {
 
 #menu li, ul {
 	float: left;
-	padding: 0px 20px;
+	padding: 0px 30px;
 	line-height: 50px;
 	color: #eee;
 	font-weight: bold;
 	font-size: 1.5em;
+}
+
+#menu li:hover {
+	background-color: #ddd;
+}
+
+#menu a {
+	font-decoration: none;
 }

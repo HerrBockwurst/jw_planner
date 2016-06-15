@@ -19,17 +19,20 @@ body {
     width: 100px;
     text-align: center;
     padding: 10px;
-    	
+    float: left;
 }
 
 #menu {
 	padding-top: 50px;
 	height: 50px;
-	background-color: #999;
+	background-color: #777;
 }
 
 #menu li, ul {
 	float: left;
-	padding: 10px 0px;
+	padding: 0px 20px;
 	line-height: 50px;
+	color: #eee;
+	font-weight: bold;
+	font-size: 1.5em;
 }

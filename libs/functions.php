@@ -6,24 +6,26 @@ function displayMenuLink($langpath, $link) {
 }
 
 function printURL() {
-	global $mysql;
-	$url = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1", true);
-	$ssl = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'ssl' LIMIT 1", true);
-	if ($ssl['value'] == 'true'):
-		echo "https://".$url['value'];
+	/*
+	 * Gibt URL mit ECHO aus
+	 */
+	global $config;
+	if ($config['ssl'] == true):
+		echo "https://".$config['url'];
 	else: 
-		echo "http://".$url['value'];
+		echo "http://".$config['url'];
 	endif;
 }
 
 function getURL() {
-	global $mysql;
-	$url = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'url' LIMIT 1", true);
-	$ssl = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'ssl' LIMIT 1", true);
-	if ($ssl['value'] == 'true'):
-	echo "https://".$url['value'];
+	/*
+	 * Gibt Wert als RETURN zurück
+	 */
+	global $config;
+	if ($config['ssl'] == true):
+		return "https://".$config['url'];
 	else:
-	echo "http://".$url['value'];
+		return "http://".$config['url'];
 	endif;
 }
 

@@ -17,8 +17,7 @@
 				</ul>
 			</div>			
 		</div>
-	</body>
-</html>
+
 
 <?php
 ?>

@@ -8,7 +8,7 @@ require_once 'oop/urlpath.php';
 require_once 'libs/functions.php';
 
 
-
+require_once 'sites/header.php';
 switch ($url->value(0)) {
 	case 'calendar':
 		echo "Kalender";
@@ -16,8 +16,15 @@ switch ($url->value(0)) {
 	case 'profile':
 		echo "Profil";
 		break;
+	case 'admin':
+		echo "Admin";
+		break;
+	case 'system':
+		echo "System";
+		break;
 	default:
-		require_once 'sites/header.php';
+		echo "Profil";
 		break;
 }
+require_once 'sites/footer.php';
 ?>

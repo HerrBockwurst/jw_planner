@@ -11,4 +11,6 @@ function initArray() {
 	var_dump($config);
 }
 
+initArray();
+
 ?>

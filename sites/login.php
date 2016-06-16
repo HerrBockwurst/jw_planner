@@ -1,5 +1,5 @@
 <div id="loginwrapper">
-	<div id="loginlogo"><span style="font-size:3.5em">JW</span><br /><span style="font-size:1.5em">Planner</span></div>
+	<div id="loginlogo"><span style="font-size:3.5em">JW</span><span style="font-size:1.5em">Planner</span></div>
 	<div id="loginformwrapper">
 		<form id="login" action="#">
 			<div class="pos_rel">

@@ -12,7 +12,7 @@ a:hover {
 }
 #header {
 	width: 100%;
-	background-color: #999;
+	background-color: #8bd090;
 	height: 100px;	
 }
 #wrapper {
@@ -44,33 +44,33 @@ a:hover {
 	top: 5px;
 }
 
-#logo, #loginlogo {
-	height: 100px;
-    background-color: #4a6da7;
+#logo, #loginlogo {	
+    background-color: #30a939;
     color: white;
-    width: 100px;
+    width: 200px;
     text-align: center;
-    padding: 10px;
-    
 }
 
 #loginlogo {
+	height: 50px;
 	margin: 0 auto;
 	position: relative;
+	padding: 10px;
 }
 
 #logo {
+	height: 44px;
 	position: absolute;
-	margin-left: 20px;
+	margin: 0px;
+	padding: 3px 10px;
 }
 
 #menu {
 	margin-top: 50px;
 	height: 50px;
-	background-color: #777;
+	background-color: #008a0a;
 	float: left;
 	width: 100%;
-	padding-left: 150px;
 }
 
 #menu li, ul {
@@ -85,7 +85,7 @@ a:hover {
 }
 
 #menu li:hover {
-	background-color: #696969;
+	background-color: #006d08;
 	color: #ccc;
 }
 
@@ -110,7 +110,7 @@ a:hover {
 	font-size: 14px;
 }
 .loginsubmit {
-	background-color: #4a6da7;
+	background-color: #30a939;
 	color: #eee;
 	padding: 10px 50px;
 	margin: 0 auto;

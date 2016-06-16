@@ -1,9 +1,15 @@
 body {	
 	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, "Arial Unicode MS", sans-serif;
 	background-color: #eee;
-	
+	color: #333;
 }
-
+a {
+	text-decoration: none;
+	color: #4a6da7;	
+}
+a:hover {
+	text-decoration: underline;
+}
 #header {
 	width: 100%;
 	background-color: #999;
@@ -13,15 +19,49 @@ body {
 	margin: 30px;
 }
 
-#logo {
-    height: 100px;
-    position: absolute;
-    margin-left: 20px;
+#loginwrapper {
+	width: 600px;
+	margin: 100px auto 0px auto;
+	background-color: #ccc;
+	padding: 30px 10px 10px 10px;
+	border-radius: 50px; 
+	-moz-border-radius: 50px; 
+	-webkit-border-radius: 50px; 
+	position: relative;
+}
+#loginformwrapper {
+	background-color: #efefef;
+	border-radius: 10px; 
+	-moz-border-radius: 10px; 
+	-webkit-border-radius: 10px;
+	width: 450px;
+	margin: 30px auto;
+	padding: 20px;
+	position:relative;	
+}
+#loginformwrapper label {
+	position: absolute;
+	top: 5px;
+}
+
+#logo, #loginlogo {
+	height: 100px;
     background-color: #4a6da7;
     color: white;
     width: 100px;
     text-align: center;
     padding: 10px;
+    
+}
+
+#loginlogo {
+	margin: 0 auto;
+	position: relative;
+}
+
+#logo {
+	position: absolute;
+	margin-left: 20px;
 }
 
 #menu {
@@ -52,4 +92,44 @@ body {
 #menu a {
 	text-decoration: none;
 	color: #eee;
+}
+
+.loginformfield, .loginsubmit {
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px solid #aaa;
+}
+
+.loginformfield {
+	width: 280px;
+	padding: 5px 5px 5px 30px;	
+	position:absolute;
+	left: 140px;
+	height: 14px;
+	font-size: 14px;
+}
+.loginsubmit {
+	background-color: #4a6da7;
+	color: #eee;
+	padding: 10px 50px;
+	margin: 0 auto;
+}
+.loginimage {
+	left: 150px;
+	top: 5px;
+	position:absolute;
+}
+.pos_rel {
+	position: relative;
+}
+
+.center {
+	text-align: center;
+}
+.small {
+	font-size: 0.9em;
+}
+.smaller {
+	font-size: 0.8em;
 }

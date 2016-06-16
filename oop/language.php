@@ -18,10 +18,6 @@ class language {
 			
 	}
 	
-	public function display($tree) {
-		echo $this->get($tree);		
-	}
-	
 	public function get($tree) {
 		$expl = explode('>', $tree);
 		$tmpobj = $this->lang;

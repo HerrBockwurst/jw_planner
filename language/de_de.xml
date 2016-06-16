@@ -7,4 +7,11 @@
 		<admin>Administration</admin>
 		<dev>System</dev>
 	</menu>
+	<login>
+		<user>Benutzername</user>
+		<password>Passwort</password>
+		<submit>Einloggen</submit>
+		<forgotten>Passwort vergessen?</forgotten>
+		<wantaccess>Deine Versammlung möchte JW-Planner nutzen?</wantaccess>
+	</login>
 </language>

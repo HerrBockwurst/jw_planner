@@ -4,8 +4,8 @@ class MySQL {
 	private $result;
 	
 	function __construct() {
-		global $MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE;
-		$this->mysql = new mysqli($MYSQL_HOST, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
+		global $CONFIG;
+		$this->mysql = new mysqli($CONFIG['MYSQL_HOST'], $CONFIG['MYSQL_USER'], $CONFIG['MYSQL_PASSWORD'], $CONFIG['MYSQL_DATABASE']);
 		if ($this->mysql->connect_errno) {
 		    printf("Connect failed: %s\n", $this->mysql->connect_error);
 		    exit();
@@ -32,6 +32,7 @@ class MySQL {
 				$this->free();
 				return $aresult;
 			else:
+				$this->result;
 				return $this->result;
 			endif;
 		else:

@@ -5,15 +5,20 @@ function displayMenuLink($langpath, $link) {
 	echo "<a href=\"".getURL().$link."\">".$lang->get($langpath)."</a>";	
 }
 
+function displayText($langpath) {
+	global $lang;
+	echo $lang->get($langpath);
+}
+
 function printURL() {
 	/*
 	 * Gibt URL mit ECHO aus
 	 */
-	global $config;
-	if ($config['ssl'] == true):
-		echo "https://".$config['url'];
+	global $CONFIG;
+	if ($CONFIG['ssl'] == true):
+		echo "https://".$CONFIG['home'];
 	else: 
-		echo "http://".$config['url'];
+		echo "http://".$CONFIG['home'];
 	endif;
 }
 
@@ -21,11 +26,11 @@ function getURL() {
 	/*
 	 * Gibt Wert als RETURN zurück
 	 */
-	global $config;
-	if ($config['ssl'] == true):
-		return "https://".$config['url'];
+	global $CONFIG;
+	if ($CONFIG['ssl'] == true):
+		return "https://".$CONFIG['home'];
 	else:
-		return "http://".$config['url'];
+		return "http://".$CONFIG['home'];
 	endif;
 }
 
@@ -46,14 +51,10 @@ function getcss() {
 }
 
 function printTitle($withVersion = false) {
-	global $mysql;
-	$string = "";
-	$result = $mysql->query("SELECT * FROM `config` WHERE `conf` = 'title' OR `conf` = 'version'", true);
-	while ($row = $result->fetch_assoc()):
-		if ($row['conf'] == 'title') $string .= $row['value'];
-		if ($withVersion && $row['conf'] == 'version') $string .= " | ".$row['value'];		
-	endwhile;
-	echo $string;
-	$mysql->free();
+	global $CONFIG;
+	if($withVersion)
+		echo $CONFIG['title']." | ".$CONFIG['version']." - ".$CONFIG['version_count'];
+	else
+		echo $CONFIG['title'];
 }
 ?>

@@ -6,7 +6,6 @@
 //if(!isset($_SESSION['dbid']) && $url->value(0) != 'login' ) header("Location:".getURL()."/login");
 
 $result = $mysql->query('SELECT * FROM `sessions`', true);
-$mysql->free();
 while($row = $result->fetch_assoc()):
 	
 	if($row['expire'] < time()):
@@ -26,4 +25,5 @@ while($row = $result->fetch_assoc()):
 	endif;
 		
 endwhile;
+$mysql->free();
 ?>

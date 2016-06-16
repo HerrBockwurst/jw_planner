@@ -10,7 +10,7 @@ function displayText($langpath) {
 	echo $lang->get($langpath);
 }
 
-function getText($langpath) {
+function getLang($langpath) {
 	global $lang;
 	return $lang->get($langpath);
 }

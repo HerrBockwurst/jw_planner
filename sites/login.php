@@ -7,7 +7,7 @@ if(isset($_POST['submitted'])):
 		
 	endif;
 	
-	$error = getText('errors>login_wrong');
+	$error = getLang('errors>login_wrong');
 	return;
 endif;
 

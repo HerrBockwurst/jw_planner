@@ -9,7 +9,7 @@
 	<body>
 		<?php if($url->value(0) != 'login'): //Nur ausgeben, wenn keine Login Maske ?>
 		<div id="header">
-			<div id="logo"><span style="font-size:3em">JW</span><span style="font-size:1.2em">Planner</span></div>
+			<a id="logo" href="<?php printURL(); ?>"><span style="font-size:3em">JW</span><span style="font-size:1.2em">Planner</span></a>
 			<div id="menu">
 				<ul>
 					<li><?php displayMenuLink('menu>calendar', '/calendar'); ?></li>

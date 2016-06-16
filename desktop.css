@@ -5,7 +5,7 @@ body {
 }
 a {
 	text-decoration: none;
-	color: #4a6da7;	
+	color: #008a0a;	
 }
 a:hover {
 	text-decoration: underline;
@@ -56,6 +56,10 @@ a:hover {
 	margin: 0 auto;
 	position: relative;
 	padding: 10px;
+	display:block;
+}
+#logo:hover, #loginlogo:hover {
+	text-decoration:none;
 }
 
 #logo {

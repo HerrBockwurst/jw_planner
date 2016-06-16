@@ -10,6 +10,26 @@ function displayText($langpath) {
 	echo $lang->get($langpath);
 }
 
+function getText($langpath) {
+	global $lang;
+	return $lang->get($langpath);
+}
+
+function getIfSet($var, $index=NULL) {
+	if($index == NULL):
+		if(isset($var)):
+			return $var;
+		endif;
+	else:
+		if(isset($var[$index]))
+			return $var[$index];
+	endif;
+}
+
+function printIfSet($var, $index=NULL) {
+	echo getIfSet($var, $index);
+}
+
 function printURL() {
 	/*
 	 * Gibt URL mit ECHO aus

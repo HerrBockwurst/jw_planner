@@ -24,21 +24,47 @@ class MySQL {
 		return $this->mysql->error;
 	}
 	
-	function query($qry, $return = false) {
-		if($return):
-			$this->result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
-			if($this->result->num_rows == 1):
-				$aresult = $this->result->fetch_assoc();
-				$this->free();
-				return $aresult;
-			else:
-				$this->result;
-				return $this->result;
-			endif;
-		else:
-			return($this->mysql->query($qry));
+	function execute($qry, $param=NULL, $mixed=NULL) {
+		/*
+		 * Einfaches Execute ohne Prepared Statement
+		 */
+		if($param == NULL):
+			$this->result =  $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
+			return $this->result;
 		endif;
 		
+		/*
+		 * Prepared Statement
+		 */
+		
+		if(gettype($param) != 'string') return false; //Prüft, ob $param eine String ist
+		
+		if(strlen($param) > 1 && gettype($mixed) != 'array') return false; //Wenn mehrere Werte in $param übergeben werden, muss $mixed ein Array sein
+		
+		$stmt = $this->mysql->prepare($qry);
+
+		/*
+		 * Binde $mixed an $stmt
+		 */
+		
+		if(strlen($param) > 1):
+			/*
+			 * Neuer Array für Reflection anlegen, da $param erstes Element von $array sein muss.
+			 */
+			$array = array();
+			$array[] = $param;
+			foreach($mixed as &$value) $array[] = $value;
+			$ref = new ReflectionClass('mysqli_stmt');
+			$method = $ref->getMethod("bind_param");
+			$method->invokeArgs($stmt,$array);
+		else:
+			$stmt->bind_param($param, $mixed);
+		endif;
+		
+		$stmt->execute();
+		$this->result = $stmt->get_result();
+		$stmt->close();
+		return $this->result;
 	}
 }
 

@@ -31,7 +31,7 @@ function getURL() {
 
 function getcss() {
 	
-	if ($_COOKIE['nomobile']):
+	if (isset($_COOKIE['nomobile']) && $_COOKIE['nomobile']):
 		echo "desktop.css";
 		return;
 	endif;

@@ -7,8 +7,8 @@
 
 $result = $mysql->query('SELECT * FROM `sessions`', true);
 $mysql->free();
-
 while($row = $result->fetch_assoc()):
+	
 	if($row['expire'] < time()):
 		/*
 		 * Lösche alte Sessions
@@ -26,5 +26,4 @@ while($row = $result->fetch_assoc()):
 	endif;
 		
 endwhile;
-
 ?>

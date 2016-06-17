@@ -33,12 +33,22 @@ if(!isset($_SESSION['dbid']) && $url->value(0) != 'login' ) header("Location:".g
 if(isset($_SESSION['dbid'])):
 	$result = $mysql->execute("SELECT * FROM `sessions` WHERE `sid` = ? LIMIT 1", "s", $_SESSION['dbid']);
 	if($result->num_rows != 1):
+		/*
+		 * Zum Login falls Session-Variable vorhanden, aber keine Session in DB besteht
+		 */
 		unset($_SESSION['dbid']);
 		header("Location:".getURL()."/login");
 	else:
+		/*
+		 * Update Session
+		 */
+		if(!$mysql->execute("UPDATE `sessions` SET `expire` = '".getSQLDate(time()+($CONFIG['sessiontime']*60))."' WHERE `sid` = ?", 's', $_SESSION['dbid']))
+			$log->write("Konnte Session für User", "error"); //TODO
+		/*
+		 * Erstelle User-Objekt
+		 */
+		$USER = new user();
 		
-		if(!$mysql->execute("UPDATE `sessions` SET `expire` = '".date("Y-m-d H:i:s",time()+($CONFIG['sessiontime']*60))."' WHERE `sid` = ?", 's', $_SESSION['dbid']))
-			echo "Fehler";
 	endif;
 	
 	

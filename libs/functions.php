@@ -1,5 +1,27 @@
 <?php
 
+function getIP($type='FULL') {
+	
+	if($type == 'FORWARD'):
+		if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) return $_SERVER['HTTP_X_FORWARDED_FOR'];
+		else return "";
+	elseif($type == 'REMOTE'):
+		return $_SERVER['REMOTE_ADDR'];
+	else:
+		$ip = $_SERVER['REMOTE_ADDR'];
+		if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $ip .= "|".$_SERVER['HTTP_X_FORWARDED_FOR'];
+	endif;
+	return $ip;
+}
+
+function getSQLDate($date=NULL) {	
+	global $CONFIG;
+	if($date == NULL) $date = time();
+	$newdate = date("Y-m-d H:i:s",$date);
+	return $newdate;
+}
+
+
 function displayMenuLink($langpath, $link) {
 	global $lang;
 	echo "<a href=\"".getURL().$link."\">".$lang->get($langpath)."</a>";	

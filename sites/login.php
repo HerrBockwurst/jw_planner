@@ -1,12 +1,21 @@
 <?php
 
-
 while(true):
 	/*
 	 * Zuerst kommen Abfragen, ob das Forumlar übergeben wurde und ob es richtig ausgefüllt wurde.
 	 * Jede Verneinung bringt einen abbruch des Login-Vorgangs mit sich.
 	 */
+
 	if(!isset($_POST['submitted'])) break; //Überhaupt abgesendet?
+
+	if(!$mysql->execute("DELETE FROM `loginfails` WHERE `expires` <= ?", 's', getSQLDate()))
+		echo Test;
+	
+	$result = $mysql->execute("SELECT * FROM `loginfails` WHERE `ip` LIKE ? OR `ip` LIKE ?", "ss", array("%".getIP('REMOTE')."%", "%".getIP('FORWARD')."%")) or die($mysql->error());
+	if($result->num_rows >= 10):
+		$ERROR['login'] = getLang('errors>login_delay');
+		break;
+	endif;
 	
 	if($_POST['username'] == "" || $_POST['password'] == ""): //Felder leer gelassen?
 		$ERROR['login'] = getLang('errors>login_wrong');
@@ -21,7 +30,7 @@ while(true):
 		break;
 	endif;
 	
-	if(password_hash($_POST['password'], PASSWORD_DEFAULT, array('salt' => $CONFIG['password_salt'])) != $result['password']):
+	if(hash('sha512',$_POST['password']) != $result['password']):
 		/*
 		 * Falsches Passwort
 		 */
@@ -30,9 +39,12 @@ while(true):
 		/*
 		 * Login Sperre nach 10 versuchen
 		 */
-		
-		
+
+		$mixed = array(getIP(),$_POST['username'],getSQLDate(time()+(60*10)));
+		if(!$mysql->execute("INSERT INTO `loginfails` (`ip`, `uid`, `expires`) VALUES (?, ?, ?)", 'sss', $mixed))
+			$log->write("Konnte Loginfail nicht eintragen: ".$mysql->error(), 'error');					
 		break;
+		
 	endif;
 	
 	if($result['status'] != 'active'): //Wenn Benutzer gesperrt wurde
@@ -47,17 +59,17 @@ while(true):
 	
 	$_SESSION['uid'] = $result['uid'];
 	$_SESSION['dbid'] = session_id();
+	$log->write("Benutzer ".$_SESSION['uid']." hat sich erfolgreich angemeldet!");
 
 	/*
-	 * Session anlegen
+	 * Session anlegen (Vorher evtl alte Session löschen)
 	 */
+	$mysql->execute("DELETE FROM `sessions` WHERE `sid` = ?", 's', $_SESSION['dbid']);
 	
 	$sessqry = "INSERT INTO `sessions` (`sid`, `user`, `expire`) VALUES (?, ?, ?)";	
 
-	if($mysql->execute($sessqry, 'sss', array($_SESSION['dbid'], $_SESSION['uid'], date("Y-m-d H:i:s",time()+($CONFIG['sessiontime']*60)))))
+	if($mysql->execute($sessqry, 'sss', array($_SESSION['dbid'], $_SESSION['uid'], getSQLDate(time()+($CONFIG['sessiontime']*60)))))
 		header("Location:".getURL());
-	
-	
 	
 	break;
 endwhile;

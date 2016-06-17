@@ -51,7 +51,7 @@ class MySQL {
 			 */
 			$array = array();
 			$array[] = $param;
-			foreach($mixed as &$value) $array[] = $value;
+			for($i = 0; $i<count($mixed); $i++) $array[] = &$mixed[$i]; //Erstellt Referenz
 			$ref = new ReflectionClass('mysqli_stmt');
 			$method = $ref->getMethod("bind_param");
 			$method->invokeArgs($stmt,$array);

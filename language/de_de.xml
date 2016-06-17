@@ -6,6 +6,7 @@
 		<profile>Profil</profile>
 		<admin>Administration</admin>
 		<dev>System</dev>
+		<logout>Ausloggen</logout>
 	</menu>
 	<login>
 		<user>Benutzername</user>
@@ -18,5 +19,6 @@
 		<login_wrong>Falscher Benutzname/Passwort!</login_wrong>
 		<login_delay>Aufgrund mehrfacher falscher Loginversuche kannst du dich dich nächsten 10 Minuten nicht einloggen.</login_delay>
 		<login_inactive>Dein Benutzerkonto wurde durch einen Administrator gesperrt.</login_inactive>
+		
 	</errors>
 </language>

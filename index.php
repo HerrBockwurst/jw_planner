@@ -1,5 +1,6 @@
 <?php
 session_start();
+header ('Content-type: text/html; charset=utf-8');
 require_once 'config.php';
 require_once 'oop/language.php';
 require_once 'oop/mysql.php';
@@ -16,6 +17,9 @@ require_once 'libs/auth.php';
 
 require_once 'sites/header.php';
 switch ($url->value(0)) {
+	case 'logout':
+		require_once 'sites/logout.php';
+		break;
 	case 'calendar':
 		require_once 'sites/calendar.php';
 		break;

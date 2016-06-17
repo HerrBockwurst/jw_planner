@@ -1,21 +1,75 @@
-<?php 
-if(isset($_POST['submitted'])):
-	if($_POST['username'] != "" || $_POST['password'] != ""):
-		$result = $mysql->execute("SELECT * FROM `users` WHERE `uid` = ".$_POST['username']);
+<?php
 
-		
-		
+
+while(true):
+	/*
+	 * Zuerst kommen Abfragen, ob das Forumlar übergeben wurde und ob es richtig ausgefüllt wurde.
+	 * Jede Verneinung bringt einen abbruch des Login-Vorgangs mit sich.
+	 */
+	if(!isset($_POST['submitted'])) break; //Überhaupt abgesendet?
+	
+	if($_POST['username'] == "" || $_POST['password'] == ""): //Felder leer gelassen?
+		$ERROR['login'] = getLang('errors>login_wrong');
+		break;
 	endif;
 	
-	$error = getLang('errors>login_wrong');
-	return;
-endif;
+	$result = $mysql->execute("SELECT * FROM `users` WHERE `uid` = ? LIMIT 1", "s", $_POST['username']);
+	$result = $result->fetch_assoc();
+	
+	if($result == NULL): //Wenn Benutzer nicht existiert
+		$ERROR['login'] = getLang('errors>login_wrong');
+		break;
+	endif;
+	
+	if(password_hash($_POST['password'], PASSWORD_DEFAULT, array('salt' => $CONFIG['password_salt'])) != $result['password']):
+		/*
+		 * Falsches Passwort
+		 */
+	
+		$ERROR['login'] = getLang('errors>login_wrong');
+		/*
+		 * Login Sperre nach 10 versuchen
+		 */
+		
+		
+		break;
+	endif;
+	
+	if($result['status'] != 'active'): //Wenn Benutzer gesperrt wurde
+		$ERROR['login'] = getLang('errors>login_inactive');
+		break;
+	endif;
+
+	
+	/*
+	 * Login Erfolgreich:
+	 */
+	
+	$_SESSION['uid'] = $result['uid'];
+	$_SESSION['dbid'] = session_id();
+
+	/*
+	 * Session anlegen
+	 */
+	
+	$sessqry = "INSERT INTO `sessions` (`sid`, `user`, `expire`) VALUES (?, ?, ?)";	
+
+	if($mysql->execute($sessqry, 'sss', array($_SESSION['dbid'], $_SESSION['uid'], date("Y-m-d H:i:s",time()+($CONFIG['sessiontime']*60)))))
+		header("Location:".getURL());
+	
+	
+	
+	break;
+endwhile;
 
 ?>
 
 <div id="loginwrapper">
 	<a id="loginlogo" href="<?php printURL(); ?>"><span style="font-size:3.5em">JW</span><span style="font-size:1.5em">Planner</span></a>
 	<div id="loginformwrapper">
+		<?php if(isset($ERROR['login'])): ?>
+		<div class="error pos_rel center" style="margin: 10px auto;"><?php echo $ERROR['login']; ?></div>
+		<?php endif; ?>
 		<form id="login" action="<?php printURL(); ?>/login" method="POST">
 			<div class="pos_rel">
 				<label for="username"><?php displayText('login>user'); ?>:</label>

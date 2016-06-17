@@ -1,6 +1,6 @@
 <?php
 class log {
-	function write($loglevel='info', $text) {
+	function write($text,$loglevel='info') {
 		//TODO
 	}
 }

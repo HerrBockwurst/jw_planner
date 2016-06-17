@@ -106,7 +106,7 @@ a:hover {
 }
 
 .loginformfield {
-	width: 280px;
+	width: 270px;
 	padding: 5px 5px 5px 30px;	
 	position:absolute;
 	left: 140px;
@@ -136,4 +136,13 @@ a:hover {
 }
 .smaller {
 	font-size: 0.8em;
+}
+.error {
+	color: #b70000;
+	background-color: #ffd2d2;
+	border: 1px solid #b70000;
+	padding: 6px;
+}
+.margin_center {
+	margin: 0 auto;
 }

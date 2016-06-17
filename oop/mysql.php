@@ -1,7 +1,6 @@
 <?php
 class MySQL {
 	private $mysql;
-	private $result;
 	
 	function __construct() {
 		global $CONFIG;
@@ -15,11 +14,7 @@ class MySQL {
 	function __destruct() {
 		$this->mysql->close();
 	}
-	
-	function free() {
-		$this->result->free();
-	}
-	
+		
 	function error() {
 		return $this->mysql->error;
 	}
@@ -29,8 +24,8 @@ class MySQL {
 		 * Einfaches Execute ohne Prepared Statement
 		 */
 		if($param == NULL):
-			$this->result =  $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
-			return $this->result;
+			$result = $this->mysql->query($qry) or die("MySQL-Error: ".$this->mysql->error);
+			return $result;
 		endif;
 		
 		/*
@@ -42,11 +37,14 @@ class MySQL {
 		if(strlen($param) > 1 && gettype($mixed) != 'array') return false; //Wenn mehrere Werte in $param übergeben werden, muss $mixed ein Array sein
 		
 		$stmt = $this->mysql->prepare($qry);
-
+		
+		if($stmt == false):
+			echo $this->mysql->error;
+			exit;
+		endif;
 		/*
 		 * Binde $mixed an $stmt
 		 */
-		
 		if(strlen($param) > 1):
 			/*
 			 * Neuer Array für Reflection anlegen, da $param erstes Element von $array sein muss.
@@ -60,11 +58,20 @@ class MySQL {
 		else:
 			$stmt->bind_param($param, $mixed);
 		endif;
-		
+
 		$stmt->execute();
-		$this->result = $stmt->get_result();
+		$result = $stmt->get_result(); //Return Result Set, wenn vorhanden
+		/*
+		 * Check Result -> Wenn kein Object dann prüft er auf Fehler und gibt true oder false zurück
+		 */
+		
+		if(gettype($result) != 'object'):
+			if($stmt->errno == 0) $result = true;
+			else $result = false;
+		endif;
 		$stmt->close();
-		return $this->result;
+		
+		return $result;
 	}
 }
 

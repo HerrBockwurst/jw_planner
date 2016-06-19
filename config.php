@@ -8,7 +8,7 @@ $CONFIG['MYSQL_PASSWORD'] = '6TPhHjEYZQCmyEKz';
 $CONFIG['MYSQL_DATABASE'] = 'jwplanner';
 
 $CONFIG['ssl'] = false;
-$CONFIG['home'] = 'localhost';
+$CONFIG['home'] = 'jw.herrbockwurst.de';
 $CONFIG['title'] = 'JW Planner';
 $CONFIG['version'] = 'PREALPHA 0.1';
 $CONFIG['version_count'] = '16w24';

@@ -27,7 +27,7 @@ switch ($url->value(0)) {
 		echo "Profil";
 		break;
 	case 'admin':
-		echo "Admin";
+		require_once 'sites/admin.php';
 		break;
 	case 'system':
 		echo "System";
@@ -36,8 +36,6 @@ switch ($url->value(0)) {
 		require_once 'sites/login.php';
 		break;
 	default:
-		echo session_id();
-		echo "Default";
 		break;
 }
 require_once 'sites/footer.php';

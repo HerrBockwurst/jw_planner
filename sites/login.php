@@ -100,7 +100,7 @@ endwhile;
 			</div>
 			<input type="hidden" name="submitted" value="1" />
 		</form>
-		<!--  comming soon <span class="smaller"><?php displayText('login>forgotten'); ?></span> -->
+		<a href="<?php printURL() ?>/password_reset" class="smaller" style="float:right"><?php displayText('login>forgotten'); ?></a>
 	</div>
 	<div class="center small"><a href="mailto:<?php echo $CONFIG['contactmail']; ?>"><?php displayText('login>wantaccess')?></a></div>
 </div>

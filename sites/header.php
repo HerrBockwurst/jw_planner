@@ -15,8 +15,8 @@
 				<ul>
 					<li><?php displayMenuLink('menu>calendar', '/calendar'); ?></li>
 					<li><?php displayMenuLink('menu>profile', '/profile'); ?></li>
-					<li><?php displayMenuLink('menu>admin', '/admin'); ?></li>
-					<li><?php displayMenuLink('menu>dev', '/system'); ?></li>
+					<?php if($USER->hasPerm('admin.visible')): ?><li><?php displayMenuLink('menu>admin', '/admin'); ?></li><?php endif; ?>
+					<?php if($USER->hasPerm('dev.visible')): ?><li><?php displayMenuLink('menu>dev', '/system'); ?></li><?php endif; ?>
 				</ul>
 			</div>			
 		</div>		

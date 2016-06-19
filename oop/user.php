@@ -4,18 +4,44 @@ class user {
 	private $perms;
 	
 	function __construct() {
-		$uid = $_SESSION['uid'];
+		$this->uid = $_SESSION['uid'];
 		$this->perms = array();
 		
 		global $mysql;
-		$result = $mysql->execute("SELECT u.`name`, p.`perm`, v.`name`, v.`anschrift`, u.`email`, u.`profilbild` FROM `users` AS u
+		$result = $mysql->execute("SELECT u.`name` AS `username`, p.`perm`, v.`name` AS `vsname`, v.`anschrift`, v.`id` AS `vsid`, u.`email`, u.`profilbild` 
+									FROM `users` AS u
 									INNER JOIN `permissions` AS p ON p.`uid` = u.`uid`
 									INNER JOIN `versammlungen` AS v ON u.`versammlung` = v.`id`
-									WHERE u.`uid` = ?", 's', $uid);
+									WHERE u.`uid` = ?", 's', $this->uid);
+
 		while($row = $result->fetch_assoc()):
-			//foreach($row as $r) echo utf8_encode($r."<br>");
+			
+			/*
+			 * Permissions auslesen
+			 */
+			if(isset($row['perm']) && !in_array($row['perm'], $this->perms)) $this->perms[] = $row['perm'];
+			
+			/*
+			 * Nutzerdaten auslesen
+			 */
+			if(isset($row['username']) && !isset($this->username)) $this->username = $row['username'];
+			if(isset($row['vsname']) && !isset($this->versammlung)) $this->versammlung = $row['vsname'];
+			if(isset($row['vsid']) && !isset($this->vsid)) $this->vsid = $row['vsid'];
+			if(isset($row['email']) && !isset($this->email)) $this->email = $row['email'];
+			if(isset($row['profilbild']) && !isset($this->profpic)) $this->profpic = $row['profilbild'];
 			
 		endwhile;
+		
+		
+	}
+	
+	function hasPerm($perm) {
+		if(in_array($perm, $this->perms)) return true;
+		else return false;
+	}
+	
+	function addPerm() {
+		
 	}
 	
 }

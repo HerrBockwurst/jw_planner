@@ -12,13 +12,17 @@ a:hover {
 }
 #header {
 	width: 100%;
-	background-color: #8bd090;
+	background-color: #bbb;
 	height: 100px;
 	position:relative;	
 }
 #wrapper {
 	margin: 30px;
+	position:relative;
+	min-height: 300px;
+	font-size: 0.9em;
 }
+
 #logout {
 	display: block;
 	right:0px;
@@ -87,7 +91,7 @@ a:hover {
 #menu {
 	margin-top: 50px;
 	height: 50px;
-	background-color: #008a0a;
+	background-color: #999;
 	float: left;
 	width: 100%;
 }
@@ -104,7 +108,7 @@ a:hover {
 }
 
 #menu li:hover {
-	background-color: #006d08;
+	background-color: #777; /*#006d08*/
 	color: #ccc;
 }
 
@@ -112,6 +116,34 @@ a:hover {
 	text-decoration: none;
 	color: #eee;
 }
+#usersearch {position:relative; line-height: 22px;}
+#usersearch  input[type="text"]{
+	left: 100px;
+	padding: 2px;
+	height: 16px;
+	wdith: 100px;
+}
+
+#usersearch input {
+	position:absolute;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px solid #aaa;	
+}
+
+.inputsubmit {
+	
+	background-color: #30a939;
+	color: #eee;
+	padding: 2px 20px;
+	height: 22px;
+	position:absolute;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px solid #aaa;
+} 
 
 .loginformfield, .loginsubmit {
 	border-radius: 5px; 
@@ -142,7 +174,6 @@ a:hover {
 .pos_rel {
 	position: relative;
 }
-
 .center {
 	text-align: center;
 }
@@ -161,3 +192,31 @@ a:hover {
 .margin_center {
 	margin: 0 auto;
 }
+
+.smallspace {margin: 5px 0px;}
+.morespace { margin: 10px 0px;}
+
+.field {
+	position:relative;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	background-color: #ddd;
+	min-width: 500px;	
+	min-height: 100px;
+	float:left;
+	padding: 10px;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+}
+.headline {
+	font-weight: bold;
+	margin-bottom: 10px;
+	font-size: 1.1em;
+}
+.bordered {
+	padding: 5px;
+	border: 1px solid #777;
+}
+.relative {position:relative;}
+.ffheight {line-height: 24px;}

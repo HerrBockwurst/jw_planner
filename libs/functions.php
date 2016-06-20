@@ -28,8 +28,8 @@ function displayMenuLink($langpath, $link) {
 }
 
 function displayText($langpath) {
-	global $lang;
-	echo $lang->get($langpath);
+	global $lang;	
+	echo utf8_encode($lang->get($langpath));
 }
 
 function getLang($langpath) {

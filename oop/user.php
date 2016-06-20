@@ -44,4 +44,13 @@ class user {
 		
 	}
 	
+	function getSubPerm($search) {
+		$returnval = array();
+		foreach($this->perms AS $perm):
+			if(strpos($perm, $search) !== false) $returnval[] = substr($perm, strlen($search));
+		endforeach;
+		return $returnval;
+	}
+	
+	
 }

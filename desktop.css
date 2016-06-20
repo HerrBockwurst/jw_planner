@@ -10,6 +10,10 @@ a {
 a:hover {
 	text-decoration: underline;
 }
+input[type="checkbox"] {
+	display:inline-block;
+	margin: 0px;
+}
 #header {
 	width: 100%;
 	background-color: #bbb;
@@ -96,10 +100,9 @@ a:hover {
 	width: 100%;
 }
 
-#menu li, ul {
+#menu li, #menu ul {
 	float: left;
 	line-height: 50px;
-	color: #eee;
 	font-weight: bold;
 	font-size: 1.2em;
 }
@@ -114,10 +117,10 @@ a:hover {
 
 #menu a {
 	text-decoration: none;
-	color: #eee;
+	color: #fff;
 }
-#usersearch {position:relative; line-height: 22px;}
-#usersearch  input[type="text"]{
+
+#usersearch input[type="text"]{
 	left: 100px;
 	padding: 2px;
 	height: 16px;
@@ -131,6 +134,57 @@ a:hover {
 	-webkit-border-radius: 5px;
 	border: 1px solid #aaa;	
 }
+#useradd select {
+	padding:2px;
+	height: 22px;
+	position: absolute;
+	left: 150px;
+	min-width: 200px;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px solid #aaa;
+}
+#useradd input[type="text"], #useradd input[type="password"] {
+	padding:2px;
+	height: 16px;
+	position: absolute;
+	left: 150px;
+	min-width: 200px;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px solid #aaa;	
+}
+#useradd input[type="checkbox"] {
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #aaa;	
+}
+
+#useradd_rights label {
+	line-height: 14px;
+	position:relative;
+	padding-left: 20px;
+}
+#useradd_rights input[type="checkbox"] {
+	width: 14px;
+	height: 14px;
+	bottom:0;
+	left: 0;
+	position:absolute;
+}
+#useradd_rights li {
+	
+}
+
+#useradd_rights ul {
+	width: 244px; 
+	float:left;
+}
 
 .inputsubmit {
 	
@@ -138,7 +192,6 @@ a:hover {
 	color: #eee;
 	padding: 2px 20px;
 	height: 22px;
-	position:absolute;
 	border-radius: 5px; 
 	-moz-border-radius: 5px; 
 	-webkit-border-radius: 5px;
@@ -170,9 +223,6 @@ a:hover {
 	left: 150px;
 	top: 5px;
 	position:absolute;
-}
-.pos_rel {
-	position: relative;
 }
 .center {
 	text-align: center;
@@ -220,3 +270,6 @@ a:hover {
 }
 .relative {position:relative;}
 .ffheight {line-height: 24px;}
+.formrow {position:relative; line-height: 22px;}
+.fett {font-weight: bold;}
+.floatbreak {clear:both; float:none;}

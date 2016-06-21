@@ -19,7 +19,9 @@
 		<login_wrong>Falscher Benutzname/Passwort!</login_wrong>
 		<login_delay>Aufgrund mehrfacher falscher Loginversuche kannst du dich dich nächsten 10 Minuten nicht einloggen.</login_delay>
 		<login_inactive>Dein Benutzerkonto wurde durch einen Administrator gesperrt.</login_inactive>	
-		<noperm>Dafür hast du keine Berechtigung!</noperm>	
+		<noperm>Dafür hast du keine Berechtigung!</noperm>
+		<emptyfields>Bitte fülle das Formular korrekt aus!</emptyfields>
+		<passwordnomatch>Die Passwörter stimmen nicht überein!</passwordnomatch>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
@@ -30,4 +32,10 @@
 	<common>
 		<search>Suchen</search>
 	</common>
+	<permissions>
+		<admin.visible>Admin-Zugang</admin.visible>
+		<admin.useredit>Benutzer verwalten</admin.useredit>
+		<admin.useredit.global>Globale Benutzerverwaltung</admin.useredit.global>
+		<dev.visible>System-Zugang</dev.visible>
+	</permissions>
 </language>

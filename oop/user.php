@@ -35,6 +35,10 @@ class user {
 		
 	}
 	
+	function countPerms() {
+		return count($this->perms);		
+	}
+	
 	function hasPerm($perm) {
 		if(in_array($perm, $this->perms)) return true;
 		else return false;
@@ -42,6 +46,10 @@ class user {
 	
 	function addPerm() {
 		
+	}
+	
+	function getPerms() {
+		return $this->perms;
 	}
 	
 	function getSubPerm($search) {

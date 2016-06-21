@@ -20,20 +20,50 @@ while(true):
 			break;
 	endif;
 	
+
+	/*
+	 * Teste Permissions
+	 */
+	
+	foreach($_POST AS $key => $value):
+		if(strpos($key, 'permission') !== false && !$USER->hasPerm(str_replace('_', '.', substr($key, 11)))):
+			$ERROR['useradd'] = getLang('errors>noperm');
+			break 2;
+		endif;
+	endforeach;
+	
 	/*
 	 * Teste auf alles ausgefüllt
 	 */
 	
-	if($_POST[''] == "" ):
+	if($_POST['name'] == "" || $_POST['password'] == "" || $_POST['password2'] == "" || $_POST['versammlung'] == ""):
+		$ERROR['useradd'] = getLang('errors>emptyfields');
+		break;
 	endif;
 	
 	/*
 	 * Teste ob Passwörter überein stimmen
 	 */
-		
+	
+	if(utf8_decode($_POST['password']) != utf8_decode($_POST['password2'])):
+		$ERROR['useradd'] = getLang('errors>passwordnomatch');
+		break;
+	endif;
+	
 	/*
-	 * Teste Permissions
+	 * Alles OK, eintragen
 	 */
+	
+	$password = hash('sha512', utf8_decode($_POST['password']));
+	$username = str_replace(' ', '-', utf8_decode($_POST['name'])); // Replaces all spaces with hyphens.
+	$username = str_replace('ä', 'ae', $username);
+	$username = str_replace('ö', 'oe', $username);
+	$username = str_replace('ü', 'ue', $username);
+	$username = str_replace('ß', 'ss', $username);
+	$username = preg_replace('/[^A-Za-z\-]/', '', $username);
+	$username = strtolower($username);
+	
+	echo $username;
 	
 	break;
 endwhile;
@@ -92,8 +122,8 @@ endif;
 			<label class="smaller formrow" style="position:absolute; left: 400px" for="noexpire">Laeuft nicht aus</label>
 		</div>
 		<div class="smallspace formrow">
-			<label for="password">Passwort wiederholen:</label>
-			<input type="password" id="password" name="password" />
+			<label for="password2">Passwort wiederholen:</label>
+			<input type="password" id="password2" name="password2" />
 		</div>
 		<div class="smallspace formrow">
 			<label for="email">EMail:</label>
@@ -102,17 +132,24 @@ endif;
 		
 		<div id="useradd_rights" class="smallspace formrow bordered small">
 		<p class="fett">Berechtigungen</p>
-			<ul>
-				<li><label><input type="checkbox" name="" value="">permission</label></li>
-				<li><label><input type="checkbox" name="" value="">permisdsdssdssion</label></li>
-				<li><label><input type="checkbox" name="" value="">permission</label></li>
-				<li><label><input type="checkbox" name="" value="">permission</label></li>
+			<?php
+				$links = round($USER->countPerms() / 2, 0, PHP_ROUND_HALF_UP); 
+				$rechts = $USER->countPerms() - $links;
+				$perms = $USER->getPerms();
+				$order = $lang->getPermOrder();
+				$orderedperms = array();
+				
+				foreach($order AS $key => $orObj) if(in_array($orObj, $perms)) $orderedperms[] = $order[$key];
+			?>				
+			<ul>				
+			<?php for($i=0; $i<($links); $i++):	if(strpos($perms[$i], 'admin.useredit.vs') === false):	//Letze IF ist dafür da, um die Permissions für die Benutzerverwaltung einzelner Versammlungen zu filtern ?> 				
+				<li><label><input type="checkbox" name="permission.<?php echo $orderedperms[$i]?>" value="1"><?php displayText('permissions>'.$orderedperms[$i])?></label></li>					
+			<?php endif; endfor; ?>
 			</ul>
 			<ul>
-				<li><label><input type="checkbox" name="" value="">permission</label></li>
-				<li><label><input type="checkbox" name="" value="">permission</label></li>
-				<li><label><input type="checkbox" name="" value="">permission</label></li>
-				<li><label><input type="checkbox" name="" value="">permission</label></li>
+			<?php for($i=$links; $i<($rechts+$links); $i++): if(strpos($perms[$i], 'admin.useredit.vs') === false): ?>				
+				<li><label><input type="checkbox" name="permission.<?php echo $orderedperms[$i]?>" value="1"><?php displayText('permissions>'.$orderedperms[$i])?></label></li>	
+			<?php endif; endfor; ?>
 			</ul>
 			<br class="floatbreak" />
 		</div>

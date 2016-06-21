@@ -27,6 +27,12 @@ class language {
 			
 		return $tmpobj;
 	}
+	
+	function getPermOrder() {
+		$retval = array();
+		foreach($this->lang->permissions->children() AS $node => $value) $retval[] = $node;
+		return $retval;		
+	}
 }
 
 $lang = new language();

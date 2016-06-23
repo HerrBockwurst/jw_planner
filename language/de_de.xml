@@ -22,6 +22,7 @@
 		<noperm>Dafür hast du keine Berechtigung!</noperm>
 		<emptyfields>Bitte fülle das Formular korrekt aus!</emptyfields>
 		<passwordnomatch>Die Passwörter stimmen nicht überein!</passwordnomatch>
+		<mysql>Ein Fehler in der Datenbank ist aufgetreten. Wenn der Fehler nocheinmal auftritt, wende dich an einen Administrator (Menu Hilfe)</mysql>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>

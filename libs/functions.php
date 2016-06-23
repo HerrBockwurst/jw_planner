@@ -16,6 +16,7 @@ function getIP($type='FULL') {
 
 function getSQLDate($date=NULL) {	
 	global $CONFIG;
+	if($date != NULL) intval($date);
 	if($date == NULL) $date = time();
 	$newdate = date("Y-m-d H:i:s",$date);
 	return $newdate;

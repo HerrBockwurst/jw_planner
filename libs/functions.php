@@ -30,7 +30,7 @@ function displayMenuLink($langpath, $link) {
 
 function displayText($langpath) {
 	global $lang;	
-	echo utf8_encode($lang->get($langpath));
+	echo $lang->get($langpath);
 }
 
 function getLang($langpath) {
@@ -99,5 +99,26 @@ function printTitle($withVersion = false) {
 		echo $CONFIG['title']." | ".$CONFIG['version']." - ".$CONFIG['version_count'];
 	else
 		echo $CONFIG['title'];
+}
+
+function getVersArray() {
+	global $mysql, $USER;
+	$result = $mysql->execute("SELECT `id`, `name` FROM `versammlungen`");
+	$versammlungen = array();
+	$accessvs = $USER->getSubPerm('admin.useredit.vs.');
+	
+	if($USER->hasPerm('admin.useredit.global')):
+		while($row = $result->fetch_assoc()) $versammlungen[$row['id']] = $row['name'];
+	elseif($accessvs != false):
+	
+		while($row = $result->fetch_assoc()):
+		foreach($accessvs as $vs)
+			if($row['id'] == $vs) $versammlungen[$row['id']] = $row['name'];
+		endwhile;
+		if(!in_array($USER->versammlung, $versammlungen)): $versammlungen[$USER->vsid] = $USER->versammlung; endif;
+	else:
+		$versammlungen[$USER->vsid] = $USER->versammlung;
+	endif;
+	return $versammlungen;
 }
 ?>

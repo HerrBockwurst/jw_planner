@@ -1,6 +1,7 @@
 <?php
 $CONFIG = array(); //Init Array
 $ERROR = array(); //Init Error Array
+$SUCCESS = array(); //Init Success Array
 
 $CONFIG['MYSQL_HOST'] = 'localhost';
 $CONFIG['MYSQL_USER'] = 'jwplanner';

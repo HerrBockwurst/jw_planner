@@ -16,12 +16,13 @@ endif;
 /*
  * Teste Permissions
  */
-
+$perms = array();
 foreach($_POST AS $key => $value):
+	if(strpos($key, 'permission') !== false) $perms[] = str_replace('_', '.', substr($key, 11));
 	if(strpos($key, 'permission') !== false && !$USER->hasPerm(str_replace('_', '.', substr($key, 11)))):
-	$ERROR['useradd'] = getLang('errors>noperm');
-	break 2;
-	endif;
+		$ERROR['useradd'] = getLang('errors>noperm');
+		break 2;
+	endif;	
 endforeach;
 
 /*
@@ -47,6 +48,7 @@ endif;
  * Passwort Hashen und Username erstellen
  */
 
+$cleanpw = utf8_encode($_POST['password']);
 $password = hash('sha512', utf8_decode($_POST['password']));
 $username = str_replace(' ', '-', utf8_decode($_POST['name'])); // Replaces all spaces with hyphens.
 $username = str_replace('ä', 'ae', $username);
@@ -111,7 +113,17 @@ endif;
  * Benutzer ist angelegt, hier jetzt Berechtigungen anlegen.
  */
 
+foreach($perms AS $perm):	
+	$insertdata = array($username, $perm); 
+	$result = $mysql->execute("INSERT INTO `permissions` (`uid`,`perm`) VALUES (?,?)", 'ss', $insertdata);
+	if($result != true):
+		$log->write("Konnte Permissions nicht eintragen: ".$mysql->error(), 'error');
+		break 2;
+	endif;
+endforeach;
 
+$log->write("Benutzer ".$username." erfolgreich angelegt.");
+$SUCCESS['useradd'] = array($username, $password);
 
 break;
 endwhile;

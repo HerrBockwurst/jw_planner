@@ -23,15 +23,33 @@
 		<emptyfields>Bitte fülle das Formular korrekt aus!</emptyfields>
 		<passwordnomatch>Die Passwörter stimmen nicht überein!</passwordnomatch>
 		<mysql>Ein Fehler in der Datenbank ist aufgetreten. Wenn der Fehler nocheinmal auftritt, wende dich an einen Administrator (Menu Hilfe)</mysql>
+		<nouserfound>Kein Benutzer gefunden</nouserfound>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
 		<edit_user>Benutzer bearbeiten</edit_user>
-		<search_name>Name</search_name>
+		<searchuser>Benutzer suchen</searchuser>
 		<add_user>Neuer Benutzer</add_user>
+		<user_added>Benutzer erfolgreich angelegt</user_added>
+		<password_repeat>Passwort wiederholen</password_repeat>
+		<active>Aktiv</active>
+		<noexpire>Läuft nicht aus</noexpire>
 	</admin>
 	<common>
 		<search>Suchen</search>
+		<username>Benutzername</username>
+		<name>Name</name>
+		<password>Passwort</password>
+		<adress>Adresse</adress>
+		<print>Drucken</print>
+		<back>Zurück</back>
+		<vers>Versammlung</vers>
+		<mail>E-Mail</mail>
+		<permissions>Berechtigungen</permissions>
+		<reportError>Fehler melden</reportError>
+		<donate>Unterstütze uns</donate>
+		<about>Impressum</about>
+		<datasec>Datenschutz</datasec>
 	</common>
 	<permissions>
 		<admin.visible>Admin-Zugang</admin.visible>

@@ -57,6 +57,7 @@ class user {
 		foreach($this->perms AS $perm):
 			if(strpos($perm, $search) !== false) $returnval[] = substr($perm, strlen($search));
 		endforeach;
+		if(empty($returnval)) return false;
 		return $returnval;
 	}
 	

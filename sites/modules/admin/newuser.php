@@ -21,35 +21,17 @@ endwhile;
  * Code für Zugriffsrechte auf Versammlung
  */
 
+$versammlungen = getVersArray();
 
-
-$result = $mysql->execute("SELECT `id`, `name` FROM `versammlungen`");
-$versammlungen = array();
-$accessvs = $USER->getSubPerm('admin.useredit.vs.');
-
-if($USER->hasPerm('admin.useredit.global')):
-
-	while($row = $result->fetch_assoc()) $versammlungen[$row['id']] = $row['name'];
-	 
-elseif($accessvs != false):		
-	
-	while($row = $result->fetch_assoc()):
-		foreach($accessvs as $vs)
-			if($row['id'] == $vs) $versammlungen[$row['id']] = $row['name'];
-	endwhile;
-	if(!in_array($USER->versammlung, $versammlungen)): $versammlungen[$USER->vsid] = $USER->versammlung; endif;
-else:
-	$versammlungen[$USER->vsid] = $USER->versammlung;	
-endif;
-
+if(!isset($SUCCESS['useradd'])):
 ?>
 
 <div class="field">
-	<div class="headline">Benutzer anlegen</div>
+	<div class="headline"><?php displayText('admin>add_user');?></div>
 	<?php if(isset($ERROR['useradd'])): ?><div class="error"><?php echo $ERROR['useradd']; ?></div><?php endif;?>
 	<form id="useradd" action="<?php printURL(); ?>/<?php echo $url->value(0)?>/<?php echo $url->value(1)?>/add" method="POST">
 		<div class="smallspace formrow">
-			<label for="versammlung">Versammlung:</label>
+			<label for="versammlung"><?php displayText('common>vers');?>:</label>
 			<select name="versammlung" id="versammlung">
 				<?php foreach($versammlungen AS $id => $vs): ?>
 				<option value="<?php echo $id;?>"><?php echo utf8_encode($vs); ?></option>
@@ -57,26 +39,26 @@ endif;
 			</select>
 		</div>
 		<div class="smallspace formrow">
-			<label for="name">Name:</label>
+			<label for="name"><?php displayText('common>name');?>:</label>
 			<input type="text" id="name" name="name" />
-			<label class="smaller" style="position:absolute; right:0px; line-height: 22px;"><input type="checkbox" name="active" value="1" style="position: absolute; top:2px; left: -20px" checked> Aktiv</label>
+			<label class="smaller" style="position:absolute; right:0px; line-height: 22px;"><input type="checkbox" name="active" value="1" style="position: absolute; top:2px; left: -20px" checked> <?php displayText('admin>active');?></label>
 		</div>
 		<div class="smallspace formrow">
-			<label for="password">Passwort:</label>
+			<label for="password"><?php displayText('common>password');?>:</label>
 			<input type="password" id="password" name="password" />		
-			<label class="smaller" style="position:absolute; right:0px; line-height: 22px;"><input type="checkbox" name="noexpire" value="1" style="position: absolute; top:2px; left: -20px"> Laeuft nicht aus</label>
+			<label class="smaller" style="position:absolute; right:0px; line-height: 22px;"><input type="checkbox" name="noexpire" value="1" style="position: absolute; top:2px; left: -20px"> <?php displayText('admin>noexpire');?></label>
 		</div>
 		<div class="smallspace formrow">
-			<label for="password2">Passwort wiederholen:</label>
+			<label for="password2"><?php displayText('admin>password_repeat');?>:</label>
 			<input type="password" id="password2" name="password2" />
 		</div>
 		<div class="smallspace formrow">
-			<label for="email">EMail:</label>
+			<label for="email"><?php displayText('common>mail');?>:</label>
 			<input type="text" id="email" name="email" />
 		</div>
 		
 		<div id="useradd_rights" class="smallspace formrow bordered small">
-		<p class="fett">Berechtigungen</p>
+		<p class="fett"><?php displayText('common>permissions');?></p>
 			<?php
 				$links = round($USER->countPerms() / 2, 0, PHP_ROUND_HALF_UP); 
 				$rechts = $USER->countPerms() - $links;
@@ -103,5 +85,25 @@ endif;
 	</form>	
 </div>
 
-<?php
-?>
+<?php else: ?>
+
+<div class="field">
+	<div class="headline"><?php displayText('admin>user_added');?></div>
+	<div style="width:38%; float:left;">
+		<?php displayText('common>adress');?>:<br />
+		<?php displayText('common>username');?>:<br />
+		<?php displayText('common>password');?>:<br />
+	</div>
+	<div style="width:60%; float:left;">
+		<?php printURL(); ?><br />
+		<?php echo $username; ?><br />
+		<?php echo $cleanpw; ?><br />
+	</div>
+	<br class="floatbreak" />
+	<div class="morespace relative">
+		<a href="<?php printURL();?>/printdata?u=<?php echo $username;?>&p=<?php echo $cleanpw; ?>" target="_blank"><?php displayText('common>print')?></a>
+		<a href="<?php printURL();?>/<?php echo $url->value(0); ?>" style="position:absolute; left:100px"><?php displayText('common>back')?></a>
+	</div>
+</div>
+
+<?php endif;?>

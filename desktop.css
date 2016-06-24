@@ -18,7 +18,18 @@ input[type="checkbox"] {
 	width: 100%;
 	background-color: #bbb;
 	height: 100px;
-	position:relative;	
+	position:relative;
+}
+#footer {
+	width: 100%;
+	background-color: #999;
+	height: 30px;
+	position:fixed;
+	bottom: 0px;
+	color: white;	
+}
+#footer a {
+	color:white;
 }
 #wrapper {
 	margin: 30px;
@@ -72,6 +83,8 @@ input[type="checkbox"] {
     color: white;
     width: 200px;
     text-align: center;
+    top:0px;
+    left:0px;
 }
 
 #loginlogo {
@@ -270,3 +283,11 @@ input[type="checkbox"] {
 .formrow {position:relative; line-height: 22px;}
 .fett {font-weight: bold;}
 .floatbreak {clear:both; float:none;}
+
+.darkerList {
+	background-color:#ccc;
+}
+.colorchangerList a:hover {
+	background-color: #30a939;
+	color: white;
+}

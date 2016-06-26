@@ -34,7 +34,7 @@ if(!isset($SUCCESS['useradd'])):
 			<label for="versammlung"><?php displayText('common>vers');?>:</label>
 			<select name="versammlung" id="versammlung">
 				<?php foreach($versammlungen AS $id => $vs): ?>
-				<option value="<?php echo $id;?>"><?php echo utf8_encode($vs); ?></option>
+				<option value="<?php echo $id;?>"><?php echo $vs; ?></option>
 				<?php endforeach;?>
 			</select>
 		</div>
@@ -81,7 +81,7 @@ if(!isset($SUCCESS['useradd'])):
 			<br class="floatbreak" />
 		</div>
 		<input type="hidden" name="submitted" value="1" />
-		<input type="submit" class="inputsubmit" value="Benutzer anlegen" />
+		<input type="submit" class="inputsubmit" value="<?php displayText('admin>add_user_button')?>" />
 	</form>	
 </div>
 

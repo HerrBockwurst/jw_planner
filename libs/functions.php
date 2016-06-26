@@ -108,12 +108,12 @@ function getVersArray() {
 	$accessvs = $USER->getSubPerm('admin.useredit.vs.');
 	
 	if($USER->hasPerm('admin.useredit.global')):
-		while($row = $result->fetch_assoc()) $versammlungen[$row['id']] = $row['name'];
+		while($row = $result->fetch_assoc()) $versammlungen[$row['id']] = utf8_encode($row['name']);
 	elseif($accessvs != false):
 	
 		while($row = $result->fetch_assoc()):
 		foreach($accessvs as $vs)
-			if($row['id'] == $vs) $versammlungen[$row['id']] = $row['name'];
+			if($row['id'] == $vs) $versammlungen[$row['id']] = utf8_encode($row['name']);
 		endwhile;
 		if(!in_array($USER->versammlung, $versammlungen)): $versammlungen[$USER->vsid] = $USER->versammlung; endif;
 	else:

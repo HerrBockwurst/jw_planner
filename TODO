@@ -3,6 +3,9 @@ einloggen über email
 Vorausgefüllte Formular bei benutzer hinzufügen (wenn nicht korrekt ausgefüllt)
 Benutzer suchen auch mit Versammlung
 
+NOTIZ
+Useredit: Permission werden angezeigt: Welche der Benutzer schon vorher hatte + die, welche der eingeloggte user hat
+
 Permissions
 - Kalender zugriff + Einzelzugriff
 - Kalender erstellen/bearbeiten/löschen

@@ -24,16 +24,20 @@
 		<passwordnomatch>Die Passwörter stimmen nicht überein!</passwordnomatch>
 		<mysql>Ein Fehler in der Datenbank ist aufgetreten. Wenn der Fehler nocheinmal auftritt, wende dich an einen Administrator (Menu Hilfe)</mysql>
 		<nouserfound>Kein Benutzer gefunden</nouserfound>
+		<userinvalid>Ungültiger Benutzer</userinvalid>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
 		<edit_user>Benutzer bearbeiten</edit_user>
 		<searchuser>Benutzer suchen</searchuser>
 		<add_user>Neuer Benutzer</add_user>
+		<add_user_button>Benutzer anlegen</add_user_button>
 		<user_added>Benutzer erfolgreich angelegt</user_added>
 		<password_repeat>Passwort wiederholen</password_repeat>
 		<active>Aktiv</active>
 		<noexpire>Läuft nicht aus</noexpire>
+		<userdelete>Benutzer löschen</userdelete>
+		<edit_user_button>Benutzer updaten</edit_user_button>
 	</admin>
 	<common>
 		<search>Suchen</search>

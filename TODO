@@ -3,8 +3,11 @@ einloggen über email
 Vorausgefüllte Formular bei benutzer hinzufügen (wenn nicht korrekt ausgefüllt)
 Benutzer suchen auch mit Versammlung
 
+<<<<<<< HEAD
 libs/edituser -> VS Check
 
+=======
+>>>>>>> refs/remotes/origin/master
 NOTIZ
 Useredit: Permission werden angezeigt: Welche der Benutzer schon vorher hatte + die, welche der eingeloggte user hat
 

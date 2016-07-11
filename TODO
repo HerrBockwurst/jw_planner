@@ -3,6 +3,8 @@ einloggen über email
 Vorausgefüllte Formular bei benutzer hinzufügen (wenn nicht korrekt ausgefüllt)
 Benutzer suchen auch mit Versammlung
 
+libs/edituser -> VS Check
+
 NOTIZ
 Useredit: Permission werden angezeigt: Welche der Benutzer schon vorher hatte + die, welche der eingeloggte user hat
 
@@ -13,4 +15,3 @@ Permissions
 - Versammlungen erstellen
 - Rundmails
 - Systemzugang
-fs

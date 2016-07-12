@@ -249,6 +249,12 @@ input[type="checkbox"] {
 	border: 1px solid #b70000;
 	padding: 6px;
 }
+.success {
+	color: #0e650c;
+	background-color: #d9ffd2;
+	border: 1px solid #0e650c;
+	padding: 6px;
+}
 .margin_center {
 	margin: 0 auto;
 }

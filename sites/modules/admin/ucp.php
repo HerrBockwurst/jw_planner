@@ -1,4 +1,3 @@
-<?php if($USER->hasPerm('admin.useredit')): ?>
 <div class="field">
 	<div class="headline"><?php displayText('admin>ucp_head')?></div>
 	<form id="usersearch" class="bordered" action="<?php printURL(); ?>/<?php echo $url->value(0) ?>/searchuser" method="POST">
@@ -13,7 +12,3 @@
 		&nbsp;
 	</form>
 </div>
-
-<?php
-endif;
-?>

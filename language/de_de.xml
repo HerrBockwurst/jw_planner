@@ -25,6 +25,7 @@
 		<mysql>Ein Fehler in der Datenbank ist aufgetreten. Wenn der Fehler nocheinmal auftritt, wende dich an einen Administrator (Menu Hilfe)</mysql>
 		<nouserfound>Kein Benutzer gefunden</nouserfound>
 		<userinvalid>Ungültiger Benutzer</userinvalid>
+		<no_calendar_applied>Kein Kalender angelegt.</no_calendar_applied>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
@@ -38,6 +39,9 @@
 		<noexpire>Läuft nicht aus</noexpire>
 		<userdelete>Benutzer löschen</userdelete>
 		<edit_user_button>Benutzer updaten</edit_user_button>
+		<userdeleted>Benutzer erfolgreich gelöscht!</userdeleted>
+		<user_edited>Änderung erfolgreich!</user_edited>
+		<applied_calender>Angelegte Kalender</applied_calender>
 	</admin>
 	<common>
 		<search>Suchen</search>
@@ -54,11 +58,13 @@
 		<donate>Unterstütze uns</donate>
 		<about>Impressum</about>
 		<datasec>Datenschutz</datasec>
+		<calendar>Kalender</calendar>
 	</common>
 	<permissions>
 		<admin.visible>Admin-Zugang</admin.visible>
 		<admin.useredit>Benutzer verwalten</admin.useredit>
 		<admin.useredit.global>Globale Benutzerverwaltung</admin.useredit.global>
+		<admin.calender>Kalenderverwaltung</admin.calender>
 		<dev.visible>System-Zugang</dev.visible>
 	</permissions>
 </language>

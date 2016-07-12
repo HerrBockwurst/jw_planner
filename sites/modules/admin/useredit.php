@@ -18,6 +18,8 @@ endwhile;
  * Prefill Daten für Formular
  */
 while(true):
+	if(isset($SUCCESS['userdel'])) break;
+
 	$result = $mysql->execute("SELECT * FROM `users` WHERE `uid` = ? LIMIT 1", 's', $url->value(2));
 	if($result->num_rows == 0):
 		$ERROR['useredit'] = getLang('errors>userinvalid');
@@ -50,6 +52,9 @@ endwhile;
 <div class="field">
 	<div class="headline"><?php displayText('admin>edit_user');?></div>
 	<?php if(isset($ERROR['useredit'])): $noform = true; ?><div class="error"><?php echo $ERROR['useredit']; ?></div><?php endif;?>
+	<?php if(isset($SUCCESS['userdel'])): $noform = true; ?><div class="success"><?php displayText('admin>userdeleted') ?></div><?php endif;?>
+	<?php if(isset($SUCCESS['useredit'])): ?><div class="success"><?php displayText('admin>user_edited') ?></div><?php endif;?>
+	
 	
 	<?php if(!isset($noform)): //Formular nur anzeigen, wenn benutzer existiert ?> 
 	
@@ -104,12 +109,12 @@ endwhile;
 			?>
 			<ul>				
 			<?php for($i=0; $i<($links); $i++):	if(strpos($perms[$i], 'admin.useredit.vs') === false):	//Letze IF ist dafür da, um die Permissions für die Benutzerverwaltung einzelner Versammlungen zu filtern ?> 				
-				<li><label><input type="checkbox" name="permission.<?php echo $orderedperms[$i]?>" value="1" <?php if(in_array($orderedperms[$i], $euserperms)) echo "checked"; ?>><?php displayText('permissions>'.$orderedperms[$i])?></label></li>					
+				<li><label><input type="checkbox" name="permission.<?php echo $orderedperms[$i]?>" value="1" <?php if(in_array($orderedperms[$i], $euserperms)) echo "checked"; ?>><?php displayText('permissions>'.$orderedperms[$i])?></label><input type="hidden" value="1" name="hidden.<?php echo $orderedperms[$i]?>" /></li>
 			<?php endif; endfor; ?>
 			</ul>
 			<ul>
 			<?php for($i=$links; $i<($rechts+$links); $i++): if(strpos($perms[$i], 'admin.useredit.vs') === false): ?>				
-				<li><label><input type="checkbox" name="permission.<?php echo $orderedperms[$i]?>" value="1" <?php if(in_array($orderedperms[$i], $euserperms)) echo "checked"; ?>><?php displayText('permissions>'.$orderedperms[$i])?></label></li>	
+				<li><label><input type="checkbox" name="permission.<?php echo $orderedperms[$i]?>" value="1" <?php if(in_array($orderedperms[$i], $euserperms)) echo "checked"; ?>><?php displayText('permissions>'.$orderedperms[$i])?></label><input type="hidden" value="1" name="hidden.<?php echo $orderedperms[$i]?>" /></li>	
 			<?php endif; endfor; ?>
 			</ul>
 			<br class="floatbreak" />
@@ -118,5 +123,8 @@ endwhile;
 		<input type="submit" class="inputsubmit" value="<?php displayText('admin>edit_user_button')?>" />
 	</form>	
 	<?php else: ?>
+	<div class="morespace">
+		<a href="<?php printURL();?>/<?php echo $url->value(0); ?>"><?php displayText('common>back')?></a>
+	</div>
 	<?php endif;?>
 </div> 

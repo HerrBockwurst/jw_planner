@@ -21,6 +21,12 @@ while(true):
 	
 	if($USER->hasPerm('admin.useredit')) require_once 'sites/modules/admin/ucp.php';
 
+	/*
+	 * Modul Kalender
+	 */
+	
+	if($USER->hasPerm('admin.calendar')) require_once 'sites/modules/admin/ccp.php';
+	
 	break;
 endwhile;
 ?>

@@ -1,4 +1,4 @@
-<?php if(!$USER->hasPerm('admin.useredit')): header("Location:".printURL()); exit; endif; ?>
+<?php if(!$USER->hasPerm('admin.useredit')): header("Location:".getURL()); exit; endif; ?>
 
 <?php 
 /*

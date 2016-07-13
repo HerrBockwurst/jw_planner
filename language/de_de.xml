@@ -26,6 +26,7 @@
 		<nouserfound>Kein Benutzer gefunden</nouserfound>
 		<userinvalid>Ungültiger Benutzer</userinvalid>
 		<no_calendar_applied>Kein Kalender angelegt.</no_calendar_applied>
+		<cid_not_available>Eindeutige ID ist schon vergeben!</cid_not_available>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
@@ -42,6 +43,17 @@
 		<userdeleted>Benutzer erfolgreich gelöscht!</userdeleted>
 		<user_edited>Änderung erfolgreich!</user_edited>
 		<applied_calender>Angelegte Kalender</applied_calender>
+		<new_cal>Neuer Kalender</new_cal>
+		<add_cal>Kalender anlegen</add_cal>
+		<c_id>Eindeutige ID</c_id>
+		<c_name>Name</c_name>
+		<c_type>Kalendertyp</c_type>
+		<c_type_full>Vollständig</c_type_full>
+		<c_type_selective>Selektiv</c_type_selective>
+		<c_type_once>Einmalig</c_type_once>
+		<c_add_success>Kalender erfolgreich erstellt!</c_add_success>
+		<c_monthly>Monatlich</c_monthly>
+		<c_weekly>Wöchentlich</c_weekly>
 	</admin>
 	<common>
 		<search>Suchen</search>
@@ -59,12 +71,20 @@
 		<about>Impressum</about>
 		<datasec>Datenschutz</datasec>
 		<calendar>Kalender</calendar>
+		<monday>Montag</monday>
+		<tuesday>Dienstag</tuesday>
+		<wednesday>Mittwoch</wednesday>
+		<thursday>Donnerstag</thursday>
+		<friday>Freitag</friday>
+		<saturday>Samstag</saturday>
+		<sunday>Sonntag</sunday>
+		<next>Weiter</next>
 	</common>
 	<permissions>
 		<admin.visible>Admin-Zugang</admin.visible>
 		<admin.useredit>Benutzer verwalten</admin.useredit>
 		<admin.useredit.global>Globale Benutzerverwaltung</admin.useredit.global>
-		<admin.calender>Kalenderverwaltung</admin.calender>
+		<admin.calendar>Kalenderverwaltung</admin.calendar>
 		<dev.visible>System-Zugang</dev.visible>
 	</permissions>
 </language>

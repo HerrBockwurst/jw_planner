@@ -196,6 +196,25 @@ input[type="checkbox"] {
 	float:left;
 }
 
+#caladd input[type="text"], select{
+	padding:2px;
+	height: 16px;
+	position: absolute;
+	left: 150px;
+	min-width: 200px;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px solid #aaa;	
+}
+#caladd select {
+	height: 22px !important;
+}
+#caladd input[type="radio"] {
+	border: 1px solid #aaa;
+	background-color: #30a939;
+}
+
 .inputsubmit {
 	
 	background-color: #30a939;

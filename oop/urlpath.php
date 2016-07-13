@@ -9,7 +9,7 @@ class urlpath {
 		if(isset($this->patharray[$index]))
 			return $this->patharray[$index];
 		else 
-			return false;
+			return '';
 	}
 }
 

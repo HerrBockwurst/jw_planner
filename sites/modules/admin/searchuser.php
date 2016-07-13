@@ -1,7 +1,7 @@
 <?php
-if(!$USER->hasPerm('admin.useredit')) header("Location:".printURL());
+if(!$USER->hasPerm('admin.useredit')) header("Location:".getURL());
 
-if(!isset($_POST['name']) || $_POST['name'] == "")  header("Location:".printURL()."/".$url->value(0));
+if(!isset($_POST['name']) || $_POST['name'] == "")  header("Location:".getURL()."/".$url->value(0));
 
 $versammlungen = getVersArray();
 

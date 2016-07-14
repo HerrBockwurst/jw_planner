@@ -68,8 +68,10 @@ while(true):
 	
 	$sessqry = "INSERT INTO `sessions` (`sid`, `user`, `expire`) VALUES (?, ?, ?)";	
 
-	if($mysql->execute($sessqry, 'sss', array($_SESSION['dbid'], $_SESSION['uid'], getSQLDate(time()+($CONFIG['sessiontime']*60)))))
+	if($mysql->execute($sessqry, 'sss', array($_SESSION['dbid'], $_SESSION['uid'], getSQLDate(time()+($CONFIG['sessiontime']*60))))):
 		header("Location:".getURL());
+		exit;
+	endif;
 	
 	break;
 endwhile;

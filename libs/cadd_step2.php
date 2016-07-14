@@ -26,7 +26,7 @@ while(true):
 		$ERROR['caladd'] = getLang('errors>cid_not_available');
 		break;
 	endif;
-	/*
+	
 	$result = $mysql->execute("INSERT INTO `calendar` (`cid`, `name`, `type`, `versammlung`) VALUES (?,?,?,?)", 'ssss',
 								array($cname,$_POST['name'],$_POST['type'],$USER->vsid));
 	
@@ -35,7 +35,7 @@ while(true):
 		$ERROR['caladd'] = getLang('errors>mysql');
 		$log->write("[".$USER->uid."]Fehler beim Hinzufügen vom Kalender: ".$mysql->error(), 'error');
 		break;
-	endif;*/	
+	endif;	
 	
 	$SUCCESS['caladd'] = getLang('admin>c_add_success');
 	

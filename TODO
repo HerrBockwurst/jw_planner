@@ -15,3 +15,14 @@ Permissions
 - Versammlungen erstellen
 - Rundmails
 - Systemzugang
+
+
+a 0
+	- type weekly
+	- startdate 
+	- visibility
+	- id
+	- patterna
+	- patternb
+	- start
+	- end

@@ -2,7 +2,7 @@
 
 while(true):
 	
-	if(!$USER->hasPerm('admin.visible')) header("Location:".getURL());
+	if(!$USER->hasPerm('admin.visible')): header("Location:".getURL()); exit; endif;
 
 	switch($url->value(1)):
 		case 'newuser':
@@ -20,6 +20,9 @@ while(true):
 		case 'editcal':
 			require_once 'sites/modules/admin/editcal.php';
 			break 2;
+		case 'deletepost':
+			require_once 'libs/deletepost.php';
+			break;
 	
 	endswitch;
 	

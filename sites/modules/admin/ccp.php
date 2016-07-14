@@ -27,7 +27,7 @@
 					?>
 					
 				
-					<a href="<?php printURL()?>/<?php echo $url->value(0)?>/caledit/<?php echo $res['cid']?>" <?php if($darker == true):?>class="darkerList"<?php endif; ?> style="display:block;">
+					<a href="<?php printURL()?>/<?php echo $url->value(0)?>/editcal/<?php echo $res['cid']?>" <?php if($darker == true):?>class="darkerList"<?php endif; ?> style="display:block;">
 						<span style="padding: 2px; position:relative; width:100%;display:block;">
 							<span style="position:absolute; left: 10px;"><?php echo utf8_encode($res['name']);?></span>
 							<span style="position:absolute; right: 10px; text-align:right"><?php echo utf8_encode($res['vsname'])?></span>

@@ -22,7 +22,7 @@
 	
 	<?php endif; ?>
 	<div class="morespace">
-		<a href="<?php printURL();?>/<?php echo $url->value(0); ?>/<?php echo $url->value(1);?>"><?php displayText('common>back')?></a>
+		<a href="<?php printURL();?>/<?php echo $url->value(0); ?>"><?php displayText('common>back')?></a>
 	</div>
 </div>
 

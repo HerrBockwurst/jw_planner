@@ -25,8 +25,11 @@
 		<mysql>Ein Fehler in der Datenbank ist aufgetreten. Wenn der Fehler nocheinmal auftritt, wende dich an einen Administrator (Menu Hilfe)</mysql>
 		<nouserfound>Kein Benutzer gefunden</nouserfound>
 		<userinvalid>Ungültiger Benutzer</userinvalid>
+		<calinvalid>Ungültiger Kalender</calinvalid>
 		<no_calendar_applied>Kein Kalender angelegt.</no_calendar_applied>
 		<cid_not_available>Eindeutige ID ist schon vergeben!</cid_not_available>
+		<invalidNumFormat>Falsche Zahlenformat. Bitte überprüfe deine Eingabe!</invalidNumFormat>
+		<posts_TooMuchVis>Bitte beachte dass die Anzahl der sichtbaren Wochen/Monate 1-4 betragen muss!</posts_TooMuchVis>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
@@ -45,6 +48,14 @@
 		<applied_calender>Angelegte Kalender</applied_calender>
 		<new_cal>Neuer Kalender</new_cal>
 		<add_cal>Kalender anlegen</add_cal>
+		<edit_cal>Kalender bearbeiten</edit_cal>
+		<update_cal>Kalender updaten</update_cal>
+		<delete_cal>Kalender löschen?</delete_cal>
+		<add_post>Termin hinzufügen</add_post>
+		<cal_updated>Kalender erfolgreich aktualisiert!</cal_updated>
+		<cal_deleted>Kalender erfolgreich gelöscht!</cal_deleted>
+		<p_type>Terminart</p_type>
+		<p_startdate>Startdatum</p_startdate>
 		<c_id>Eindeutige ID</c_id>
 		<c_name>Name</c_name>
 		<c_type>Kalendertyp</c_type>
@@ -52,8 +63,18 @@
 		<c_type_selective>Selektiv</c_type_selective>
 		<c_type_once>Einmalig</c_type_once>
 		<c_add_success>Kalender erfolgreich erstellt!</c_add_success>
-		<c_monthly>Monatlich</c_monthly>
-		<c_weekly>Wöchentlich</c_weekly>
+		<p_monthly>Monatlich</p_monthly>
+		<p_weekly>Wöchentlich</p_weekly>
+		<c_posts>Offene Termine</c_posts>
+		<p_every>Jeden</p_every>
+		<no_posts_applied>Keine Termine angelegt!</no_posts_applied>
+		<p_from>Von</p_from>
+		<p_to>Bis</p_to>
+		<p_first>Ersten</p_first>
+		<p_second>Zweiten</p_second>
+		<p_third>Dritten</p_third>
+		<p_fourth>Vierten</p_fourth>
+		<p_visibility>Sichtbar ab</p_visibility>
 	</admin>
 	<common>
 		<search>Suchen</search>
@@ -79,6 +100,8 @@
 		<saturday>Samstag</saturday>
 		<sunday>Sonntag</sunday>
 		<next>Weiter</next>
+		<month>Monat</month>
+		<week>Woche</week>
 	</common>
 	<permissions>
 		<admin.visible>Admin-Zugang</admin.visible>

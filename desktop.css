@@ -196,7 +196,7 @@ input[type="checkbox"] {
 	float:left;
 }
 
-#caladd input[type="text"], select{
+#caladd input[type="text"], #caladd select, #editcal input[type="text"], #addpost select, #addpost input[type="text"] {
 	padding:2px;
 	height: 16px;
 	position: absolute;
@@ -207,12 +207,19 @@ input[type="checkbox"] {
 	-webkit-border-radius: 5px;
 	border: 1px solid #aaa;	
 }
-#caladd select {
-	height: 22px !important;
+#editcal input[type="checkbox"] {
+	padding:2px;
+	height: 22px;
+	width:16px;
+	position: absolute;
+	left: 150px;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
 }
-#caladd input[type="radio"] {
-	border: 1px solid #aaa;
-	background-color: #30a939;
+
+#caladd select, #addpost select {
+	height: 22px !important;
 }
 
 .inputsubmit {
@@ -311,6 +318,9 @@ input[type="checkbox"] {
 
 .darkerList {
 	background-color:#ccc;
+}
+.lightList {
+	background-color:#ddd;
 }
 .colorchangerList a:hover {
 	background-color: #30a939;

@@ -24,7 +24,7 @@ while($row = $result->fetch_assoc()):
 		
 endwhile;
 
-if(!isset($_SESSION['dbid']) && $url->value(0) != 'login' ) header("Location:".getURL()."/login");
+if(!isset($_SESSION['dbid']) && $url->value(0) != 'login' ): header("Location:".getURL()."/login"); exit; endif;
 
 /*
  * Prüfung ob gültige Session vorhanden
@@ -38,6 +38,7 @@ if(isset($_SESSION['dbid'])):
 		 */
 		unset($_SESSION['dbid']);
 		header("Location:".getURL()."/login");
+		exit;
 	else:
 		/*
 		 * Update Session

@@ -9,14 +9,14 @@ function doRedirect() {
 	
 	if($url->value(0) == 'ajax'):
 		$redirect = true;
+	else:
+		
+		/*
+		 * Weiterleitung
+		 */
+		header("Location:".getURL()."/login");
 		exit;
 	endif;
-		
-	/*
-	 * Weiterleitung
-	 */
-	header("Location:".getURL()."/login");
-	exit;
 }
 
 

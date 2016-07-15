@@ -4,5 +4,7 @@
 
 $( "#cal_calSelect" ).change(function() {
 	var val = $( "#cal_calSelect" ).val();
-	$( "#cal" ).load(url + "/ajax/updateCal.php", udata);
+	var data = udata;
+	data.cid = val;
+	$( "#cal" ).load(url + "/ajax/updateCal.php", data);
 });

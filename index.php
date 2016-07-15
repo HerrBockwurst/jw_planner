@@ -29,7 +29,7 @@ switch ($url->value(0)) {
 	case 'admin':
 		require_once 'sites/admin.php';
 		break;
-	case 'system':
+	case 'sytem':
 		echo "System";
 		break;
 	case 'login':

@@ -1,11 +1,12 @@
-<form action="<?php printURL(); ?>/calendar" id="cal_selectCal">
-	<select name="calender">
-	
-	</select>
-
-</form>
-<div style="height:1000px"></div>
-
 <?php
+while(true):
+
+	/*
+	 * Modul Kalender
+	 */
+
+	require_once 'sites/modules/user/calendar.php';
+	break;
+endwhile;
 
 ?>

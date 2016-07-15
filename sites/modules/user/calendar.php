@@ -34,4 +34,5 @@ endwhile;
 	
 	
 	<?php endif;?>
+	<script src="<?php printURL(); ?>/scripts/updateCal.js"></script>
 </div>

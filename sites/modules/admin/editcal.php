@@ -100,6 +100,7 @@ endwhile;
 			<?php if($cmeta['type'] == 'weekly'): ?>
 				<span style="position:absolute; left: 120px;"><?php displayText('admin>p_every')?> <?php displayText('common>'.$cmeta['patternA'])?></span>
 			<?php else:?>
+				<span style="position:absolute; left: 120px;"><?php displayText('admin>p_every')?> <?php displayText('admin>p_'.$cmeta['patternA'])?> <?php displayText('common>'.$cmeta['patternB'])?></span>
 			<?php endif; ?>
 				<span style="position:absolute; left: 280px;">
 					<?php displayText('admin>p_from')?> <?php echo $cmeta['start']?> <?php displayText('admin>p_to')?> <?php echo $cmeta['end'] ?> 

@@ -1,4 +1,22 @@
 <?php
+
+function doRedirect() {
+	
+	/*
+	 * Weiterleiten wenn Seite als Ajax aufgerufen wurde
+	 */
+	
+	if($url->value(0) == 'ajax') $redirect = true;
+		
+	/*
+	 * Weiterleitung
+	 */
+	header("Location:".getURL()."/login");
+	exit;
+}
+
+
+
 /*
  * Weiterleiten, wenn keine aktuelle Session besteht
  */
@@ -24,7 +42,7 @@ while($row = $result->fetch_assoc()):
 		
 endwhile;
 
-if(!isset($_SESSION['dbid']) && $url->value(0) != 'login' ): header("Location:".getURL()."/login"); exit; endif;
+if(!isset($_SESSION['dbid']) && $url->value(0) != 'login' ) doRedirect();
 
 /*
  * Prüfung ob gültige Session vorhanden
@@ -37,8 +55,7 @@ if(isset($_SESSION['dbid'])):
 		 * Zum Login falls Session-Variable vorhanden, aber keine Session in DB besteht
 		 */
 		unset($_SESSION['dbid']);
-		header("Location:".getURL()."/login");
-		exit;
+		doRedirect();
 	else:
 		/*
 		 * Update Session

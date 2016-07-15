@@ -197,4 +197,5 @@ endwhile;
 		</div>
 	</form>
 </div>
+<script src="<?php printURL(); ?>/scripts/updatePosts.js"></script>
 <?php endif;?>

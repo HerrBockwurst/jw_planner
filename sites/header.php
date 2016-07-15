@@ -6,6 +6,10 @@
 		<link rel="stylesheet" href="<?php printURL();?>/<?php getcss(); ?>"></link>
 		<meta charset="utf-8">
 		<script src="<?php printURL(); ?>/scripts/jquery-3.0.0.min.js"></script>
+		<script>
+			var url = "test";
+		</script>
+		
 	</head>
 	<body>
 		<?php if($url->value(0) != 'login'): //Nur ausgeben, wenn keine Login Maske ?>

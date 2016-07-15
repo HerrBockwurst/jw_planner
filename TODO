@@ -3,6 +3,7 @@ einloggen über email
 Vorausgefüllte Formular bei benutzer hinzufügen (wenn nicht korrekt ausgefüllt)
 Benutzer suchen auch mit Versammlung
 Einzelne Daten aus Kalender löschen
+ZEITEN PRÜFEN für Post eintrag (damit bis nicht kleiner als von sein darf)
 
 libs/edituser -> VS Check
 

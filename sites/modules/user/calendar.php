@@ -1,4 +1,5 @@
 <?php
+while(true):
 	/*
 	 * Kalenderliste erzeugen
 	 */
@@ -12,12 +13,25 @@
 	
 	$cals = $result->fetch_all(MYSQLI_ASSOC);
 	
-	var_dump($cals);
+	
+	
+	break;
+endwhile;	
 ?>
 
 <div class="field">
 	<div class="headline"><?php displayText('common>calendar')?></div>
-	<select id="cal_calSelect">
+	<?php if(isset($nocal)): ?>
+		<div class="morespace"><?php displayText('common>no_cal_applied')?></div>
+	<?php else: ?>
+	
+		<select id="cal_calSelect">
+			<?php foreach($cals AS $cal): ?>
+				<option value="<?php echo $cal['cid']?>"><?php echo $cal['name']?></option>
+			<?php endforeach;?>			
+		</select>
 		
-	</select>
+	
+	
+	<?php endif;?>
 </div>

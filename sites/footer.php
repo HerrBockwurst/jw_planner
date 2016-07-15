@@ -13,7 +13,6 @@
 				<a href="<?php printURL(); ?>/datenschutz"><?php displayText('common>datasec');?></a>
 			</div>
 		</div>
-		<script src="<?php printURL(); ?>/scripts/script.js"></script>
 	</body>
 </html>
 <?php

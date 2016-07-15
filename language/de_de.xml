@@ -103,6 +103,7 @@
 		<next>Weiter</next>
 		<month>Monat</month>
 		<week>Woche</week>
+		<no_cal_applied>Für deine Versammlung wurde noch keine Kalender angelegt.</no_cal_applied>
 	</common>
 	<permissions>
 		<admin.visible>Admin-Zugang</admin.visible>

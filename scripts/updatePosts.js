@@ -1,3 +1,7 @@
+/*
+ * Zum Updaten des Admin-Moduls fürs Anlegen der Posts
+ */
+
 $( "#p_type" ).change(function() {
 	var val = $( "#p_type" ).val();
 	if(val == 'weekly') {

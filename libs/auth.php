@@ -1,7 +1,9 @@
 <?php
 
+$redirect = false; //Definition der Redirectvariable für Ajax
+
 function doRedirect() {
-	global $url;
+	global $url, $redirect;
 	
 	/*
 	 * Weiterleiten wenn Seite als Ajax aufgerufen wurde

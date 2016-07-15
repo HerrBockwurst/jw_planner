@@ -1,4 +1,4 @@
-<?php if(isset($redirect)): ?>
+<?php if($redirect == true): ?>
 	<script>
 		$(document).ready(function() {
 			window.location.replace(url);

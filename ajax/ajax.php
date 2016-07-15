@@ -1,11 +1,18 @@
 <?php if($redirect == true): ?>
 	<script>
 		$(document).ready(function() {
-			window.location.replace(url);
+			setTimeout(function() {
+				window.location.replace(url);
+				}, 3000);
 		});
 	
 	</script>
-<?php endif;?>
+	<div class="error"><?php displayText('errors>session_expired')?></div>
+<?php
+	
+	exit;
+	endif;
+?>
 
 <?php
 	

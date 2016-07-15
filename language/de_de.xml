@@ -30,6 +30,7 @@
 		<cid_not_available>Eindeutige ID ist schon vergeben!</cid_not_available>
 		<invalidNumFormat>Falsche Zahlenformat. Bitte überprüfe deine Eingabe!</invalidNumFormat>
 		<posts_TooMuchVis>Bitte beachte dass die Anzahl der sichtbaren Wochen/Monate 1-4 betragen muss!</posts_TooMuchVis>
+		<session_expired>Deine Sitzung ist ausgelaufen, du wirst zum Login weitergeleitet!</session_expired>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>

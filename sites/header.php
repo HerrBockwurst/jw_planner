@@ -7,7 +7,8 @@
 		<meta charset="utf-8">
 		<script src="<?php printURL(); ?>/scripts/jquery-3.0.0.min.js"></script>
 		<script>
-			var url = "test";
+			var url = "<?php printURL(); ?>";
+			var udata = { uid: "<?php echo $USER->uid;?>" };
 		</script>
 		
 	</head>

@@ -1,5 +1,5 @@
 <?php
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
 class log {
 	function write($text,$loglevel='info') {

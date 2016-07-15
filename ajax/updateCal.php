@@ -1,7 +1,7 @@
-<?php checkIndex(); ?>
-
-Daten:
 <?php
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
-var_dump($_POST);
+require_once 'libs/calendar.php';
+
 ?>
+

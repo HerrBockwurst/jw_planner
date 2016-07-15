@@ -1,5 +1,5 @@
 <?php
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
 $redirect = false; //Definition der Redirectvariable für Ajax
 

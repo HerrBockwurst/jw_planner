@@ -1,4 +1,4 @@
-<?php checkIndex(); ?>
+<?php if(!isset($fromIndex)): header("Location:".getURL()); exit; endif; ?>
 		<?php if($url->value(0) != 'login'): //Nur ausgeben, wenn keine Login Maske ?>			
 		</div> <!--  Wrapper -->
 		<?php endif; ?>

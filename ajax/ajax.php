@@ -1,5 +1,5 @@
 <?php
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 /*
  * Weiterleiten zu Loginseite wenn Session ausgelaufen ist
  */

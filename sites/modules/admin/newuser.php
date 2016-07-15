@@ -1,5 +1,5 @@
 <?php 
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 if(!$USER->hasPerm('admin.useredit')): header("Location:".getURL()); exit; endif; 
 ?>
 

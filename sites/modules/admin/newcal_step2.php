@@ -1,5 +1,5 @@
 <?php 
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
 require_once 'libs/cadd_step2.php';
 ?>

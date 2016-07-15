@@ -1,5 +1,5 @@
 <?php
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
 class user {
 	public $username, $uid, $versammlung, $vsid, $email, $profpic;

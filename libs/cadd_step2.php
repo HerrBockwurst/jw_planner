@@ -1,5 +1,5 @@
 <?php
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
 while(true):
 	if($_POST['cid'] =='' || $_POST['name'] == '' || !isset($_POST['type'])): //Ausgabe wenn Formular nicht richtig ausgefüllt

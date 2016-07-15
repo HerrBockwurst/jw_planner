@@ -1,5 +1,5 @@
 <?php
-checkIndex();
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
 while(true):
 	$cid = $url->value(2); //KalenderID auslesen

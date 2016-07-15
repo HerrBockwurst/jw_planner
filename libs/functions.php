@@ -1,13 +1,5 @@
 <?php
-checkIndex();
-
-function checkIndex() {
-	global $fromIndex;
-	if(!isset($fromIndex)):
-		header("Location:".getURL());
-		exit;
-	endif;
-}
+if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
 
 function checktime($hour, $min, $sec) {
 	if ($hour < 0 || $hour > 23 || !is_numeric($hour)) return false;

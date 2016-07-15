@@ -1,4 +1,4 @@
-<?php checkIndex(); ?>
+<?php if(!isset($fromIndex)): header("Location:".getURL()); exit; endif; ?>
 <!DOCTYPE HTML>
 <html>
 	<head>

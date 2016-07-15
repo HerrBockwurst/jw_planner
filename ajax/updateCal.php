@@ -1,4 +1,4 @@
-<?php require 'secureCheck.php';?>
+
 
 Daten:
 <?php

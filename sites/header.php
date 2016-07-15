@@ -13,7 +13,7 @@
 		
 	</head>
 	<body>
-		<?php if($url->value(0) != 'login'): //Nur ausgeben, wenn keine Login Maske ?>
+		<?php if($url->value(0) != 'login' && $url->value(0) != 'ajax'): //Nur ausgeben, wenn keine Login Maske und kein Ajax ?>
 		<div id="header">
 			<a id="logout" href="<?php printURL(); ?>/logout"><?php displayText("menu>logout")?></a>
 			<a id="logo" href="<?php printURL(); ?>"><span style="font-size:3em">JW</span><span style="font-size:1.2em">Planner</span></a>

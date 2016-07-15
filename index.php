@@ -35,6 +35,8 @@ switch ($url->value(0)) {
 	case 'login':
 		require_once 'sites/login.php';
 		break;
+	case 'ajax':
+		require_once 'ajax/ajax.php';
 	default:
 		break;
 }

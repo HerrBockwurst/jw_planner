@@ -7,7 +7,10 @@ function doRedirect() {
 	 * Weiterleiten wenn Seite als Ajax aufgerufen wurde
 	 */
 	
-	if($url->value(0) == 'ajax') $redirect = true;
+	if($url->value(0) == 'ajax'):
+		$redirect = true;
+		exit;
+	endif;
 		
 	/*
 	 * Weiterleitung

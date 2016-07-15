@@ -137,6 +137,12 @@ while(true):
 		$SUCCESS['posts'] = getLang('admin>post_added');
 		
 	else:
+	
+		//m_every
+		//m_tag
+		//m_from
+		//m_to
+	
 		
 	endif;
 		

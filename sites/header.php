@@ -1,4 +1,6 @@
 <?php if(!isset($fromIndex)) exit; ?>
+
+<?php if($url->value(0) != 'ajax'): //Nur ausgeben, wenn kein Ajax ?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -14,7 +16,7 @@
 		
 	</head>
 	<body>
-		<?php if($url->value(0) != 'login' && $url->value(0) != 'ajax'): //Nur ausgeben, wenn keine Login Maske und kein Ajax ?>
+		<?php if($url->value(0) != 'login'): //Nur ausgeben, wenn keine Login Maske ?>
 		<div id="header">
 			<a id="logout" href="<?php printURL(); ?>/logout"><?php displayText("menu>logout")?></a>
 			<a id="logo" href="<?php printURL(); ?>"><span style="font-size:3em">JW</span><span style="font-size:1.2em">Planner</span></a>
@@ -29,7 +31,7 @@
 		</div>		
 		<div id="wrapper">
 		<?php endif; ?>
-
+<?php endif; ?>
 
 <?php
 ?>

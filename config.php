@@ -1,4 +1,5 @@
 <?php
+checkIndex();
 $CONFIG = array(); //Init Array
 $ERROR = array(); //Init Error Array
 $SUCCESS = array(); //Init Success Array

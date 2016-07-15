@@ -1,4 +1,6 @@
 <?php
+checkIndex();
+
 class user {
 	public $username, $uid, $versammlung, $vsid, $email, $profpic;
 	private $perms;

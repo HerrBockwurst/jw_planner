@@ -1,4 +1,6 @@
 <?php
+checkIndex();
+
 if(!$USER->hasPerm('admin.useredit')) header("Location:".getURL());
 
 if(!isset($_POST['name']) || $_POST['name'] == "")  header("Location:".getURL()."/".$url->value(0));

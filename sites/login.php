@@ -1,4 +1,5 @@
 <?php
+checkIndex();
 
 while(true):
 	/*

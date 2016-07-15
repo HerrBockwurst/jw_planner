@@ -1,4 +1,6 @@
 <?php
+checkIndex();
+
 class MySQL {
 	private $mysql;
 	

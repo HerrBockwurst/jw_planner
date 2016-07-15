@@ -1,4 +1,6 @@
 <?php
+checkIndex();
+
 while(true):
 	/*
 	 * TODO

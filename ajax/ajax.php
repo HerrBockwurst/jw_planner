@@ -1,4 +1,9 @@
-<?php if($redirect == true): ?>
+<?php
+checkIndex();
+/*
+ * Weiterleiten zu Loginseite wenn Session ausgelaufen ist
+ */
+if($redirect == true): ?>
 	<script>
 		$(document).ready(function() {
 			setTimeout(function() {
@@ -7,7 +12,7 @@
 		});
 	
 	</script>
-	<div class="error"><?php displayText('errors>session_expired')?></div>
+	<div class="error smallspace"><?php displayText('errors>session_expired')?></div>
 <?php
 	
 	exit;

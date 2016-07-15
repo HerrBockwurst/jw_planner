@@ -1,4 +1,6 @@
 <?php
+checkIndex();
+
 while(true):
 
 	$cid = $url->value(2); //KalenderID auslesen

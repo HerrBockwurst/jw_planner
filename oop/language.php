@@ -1,4 +1,5 @@
 <?php
+checkIndex();
 
 class language {
 	private $lang;

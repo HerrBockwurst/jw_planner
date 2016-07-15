@@ -1,4 +1,6 @@
 <?php
+checkIndex();
+
 class log {
 	function write($text,$loglevel='info') {
 		global $mysql;

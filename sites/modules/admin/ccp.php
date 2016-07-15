@@ -1,3 +1,4 @@
+<?php checkIndex();?>
 <div class="field">
 	<div class="headline"><?php displayText('common>calendar')?></div>
 	<div class="bordered">

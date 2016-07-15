@@ -1,4 +1,7 @@
-<?php if(!$USER->hasPerm('admin.useredit')): header("Location:".getURL()); exit; endif; ?>
+<?php 
+checkIndex();
+if(!$USER->hasPerm('admin.useredit')): header("Location:".getURL()); exit; endif;
+?>
 
 <?php 
 /*

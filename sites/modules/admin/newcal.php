@@ -1,4 +1,7 @@
-<?php if(!$USER->hasPerm('admin.calendar')) header("Location:".getURL()); ?>
+<?php
+checkIndex();
+if(!$USER->hasPerm('admin.calendar')) header("Location:".getURL());
+?>
 
 <?php
 switch($url->value(2)):

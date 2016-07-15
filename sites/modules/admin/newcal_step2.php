@@ -1,4 +1,8 @@
-<?php require_once 'libs/cadd_step2.php';?>
+<?php 
+checkIndex();
+
+require_once 'libs/cadd_step2.php';
+?>
 <div class="field">
 	<div class="headline"><?php displayText('admin>add_cal')?></div>
 	

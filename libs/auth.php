@@ -1,4 +1,5 @@
 <?php
+checkIndex();
 
 $redirect = false; //Definition der Redirectvariable für Ajax
 

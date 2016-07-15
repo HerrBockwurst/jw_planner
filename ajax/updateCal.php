@@ -1,4 +1,4 @@
-
+<?php checkIndex(); ?>
 
 Daten:
 <?php

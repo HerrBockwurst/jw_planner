@@ -1,3 +1,4 @@
+<?php checkIndex(); ?>
 <!DOCTYPE HTML>
 <html>
 	<head>

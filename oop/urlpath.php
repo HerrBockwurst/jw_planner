@@ -1,4 +1,6 @@
 <?php
+checkIndex();
+
 class urlpath {
 	private $patharray = array();
 	function __construct() {

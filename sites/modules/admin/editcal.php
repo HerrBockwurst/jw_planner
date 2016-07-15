@@ -114,11 +114,11 @@ endwhile;
 				
 	 	<?php 
 	 	endforeach;
-	endif; ?>
+	endif; var_dump($meta);?>
 	<form class="bordered smallspace" id="addpost" method="POST" action="<?php printURL();?>/<?php echo $url->value(0);?>/<?php echo $url->value(1);?>/<?php echo $result['cid'] ?>">
 		<div style="font-weight: bold;"><?php displayText('admin>add_post')?></div>
 		<?php if(isset($ERROR['postserror'])): ?><div class="error"><?php echo $ERROR['postserror'];?></div><?php endif;?>
-		<?php if(isset($SUCCESS['posts'])): ?><div class="success"><?php echo $SUCCESS['posts'];?></div><?php endif;?>
+		<?php if(isset($SUCCESS['posts'])): ?><div class="success"><?php echo $SUCCESS['posts']; ?></div><?php endif;?>
 		<div class="formrow smallspace">
 			<label for="p_type"><?php displayText('admin>p_type')?></label>
 			<select id="p_type" name="type">

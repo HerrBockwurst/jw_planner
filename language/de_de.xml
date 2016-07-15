@@ -54,6 +54,7 @@
 		<add_post>Termin hinzufügen</add_post>
 		<cal_updated>Kalender erfolgreich aktualisiert!</cal_updated>
 		<cal_deleted>Kalender erfolgreich gelöscht!</cal_deleted>
+		<post_added>Eintrag erfolgreich erzeugt!</post_added>
 		<p_type>Terminart</p_type>
 		<p_startdate>Startdatum</p_startdate>
 		<c_id>Eindeutige ID</c_id>

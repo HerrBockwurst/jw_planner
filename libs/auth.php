@@ -1,6 +1,7 @@
 <?php
 
 function doRedirect() {
+	global $url;
 	
 	/*
 	 * Weiterleiten wenn Seite als Ajax aufgerufen wurde

@@ -23,7 +23,7 @@ while(true):
 	$validdata = array("type" => array("weekly","monthly"),
 						"vis" => array("week", "month"),
 						"tage" => array("monday","tuesday","wednesday","thursday","friday","saturday","sunday"),
-						"m_every" => array("1","2","3","4") );
+						"m_every" => array("first","second","third","fourth") );
 	
 	if(!in_array($_POST['type'], $validdata['type']) ||
 		!in_array($_POST['visibility2'], $validdata['vis']) ||

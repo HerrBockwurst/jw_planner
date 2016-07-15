@@ -165,10 +165,10 @@ endwhile;
 				<div class="formrow">
 					<?php displayText('admin>p_every')?>
 					<select name="m_every">
-						<option value="1"><?php displayText('admin>p_first')?></option>
-						<option value="2"><?php displayText('admin>p_second')?></option>
-						<option value="3"><?php displayText('admin>p_third')?></option>
-						<option value="4"><?php displayText('admin>p_fourth')?></option>
+						<option value="first"><?php displayText('admin>p_first')?></option>
+						<option value="second"><?php displayText('admin>p_second')?></option>
+						<option value="third"><?php displayText('admin>p_third')?></option>
+						<option value="fourth"><?php displayText('admin>p_fourth')?></option>
 					</select>
 				</div>
 				<div class="formrow smallspace">

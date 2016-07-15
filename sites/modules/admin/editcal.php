@@ -101,7 +101,7 @@ endwhile;
 				<span style="position:absolute; left: 120px;"><?php displayText('admin>p_every')?> <?php displayText('common>'.$cmeta['patternA'])?></span>
 			<?php else:?>
 			<?php endif; ?>
-				<span style="position:absolute; left: 260px;">
+				<span style="position:absolute; left: 280px;">
 					<?php displayText('admin>p_from')?> <?php echo $cmeta['start']?> <?php displayText('admin>p_to')?> <?php echo $cmeta['end'] ?> 
 				</span>
 				<span style="position:absolute; right: 2px;">

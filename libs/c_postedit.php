@@ -137,11 +137,73 @@ while(true):
 		$SUCCESS['posts'] = getLang('admin>post_added');
 		
 	else:
+		/*
+		 * Startzeit prüfen
+		 */
+		
+		if(strpos($_POST['m_from'], ":")): $from = explode(":", $_POST['m_from']);
+		elseif(strpos($_POST['m_from'], ".")): $from = explode(".", $_POST['m_from']);
+		else:
+			$ERROR['postserror'] = getLang('errors>invalidNumFormat');
+			break;
+		endif;
+			
+		foreach($from AS $key => $val) $from[$key] = intval(preg_replace('/\D/', '', $val));
+		
+		if(!checktime($from[0], $from[1], 0)):
+			$ERROR['postserror'] = getLang('errors>invalidNumFormat');
+			break;
+		endif;
+		
+		foreach($from AS $key=>$cfrom):
+			$from[$key] = strval($cfrom); //Rückkonvertierung zu String
+			if(strlen($from[$key]) == 1) $from[$key] = "0".$from[$key];
+		endforeach;
+		
+		
+		/*
+		 * Endzeit Prüfen
+		 */
+		
+		if(strpos($_POST['m_to'], ":")): $to = explode(":", $_POST['m_to']);
+		elseif(strpos($_POST['m_to'], ".")): $to = explode(".", $_POST['m_to']);
+		else:
+			$ERROR['postserror'] = getLang('errors>invalidNumFormat');
+			break;
+		endif;
+			
+		foreach($to AS $key => $val) $to[$key] = intval(preg_replace('/\D/', '', $val));
+		
+		if(!checktime($to[0], $to[1], 0)):
+			$ERROR['postserror'] = getLang('errors>invalidNumFormat');
+			break;
+		endif;
+		
+		foreach($to AS $key=>$cto):
+			$to[$key] = strval($cto); //Rückkonvertierung zu String
+			if(strlen($to[$key]) == 1) $to[$key] = "0".$to[$key];
+		endforeach;
+		
+		/*
+		 * Alles OK, Meta eintragen
+		 */
 	
-		//m_every
-		//m_tag
-		//m_from
-		//m_to
+		$meta[uniqid(NULL, true)] = array("type" => "monthly",
+						"startdate" => strtotime(implode(".", $startdate)),
+						"visibility" => $vis,
+						"patternA" => $_POST['m_every'],
+						"patternB" => $_POST['m_tag'],
+						"start" => implode(":", $from),
+						"end" => implode(":", $to)
+						);
+	
+		if(!$mysql->execute("UPDATE `calendar` SET `meta` = ? WHERE `cid` = ?", 'ss', array(json_encode($meta), $cid))):
+			$ERROR['postserror'] = getLang('errors>mysql');
+			$log->write("Fehler beim Updaten der Kalendermeta von Kalender '".$cid."': ".$mysql->error(), 'error');
+			break;
+		endif;
+		
+		$SUCCESS['posts'] = getLang('admin>post_added');
 	
 		
 	endif;

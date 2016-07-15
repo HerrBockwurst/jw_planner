@@ -1,4 +1,4 @@
-<?php if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;?>
+<?php if(!isset($fromIndex)) exit;?>
 <div class="field">
 	<div class="headline"><?php displayText('common>calendar')?></div>
 	<div class="bordered">

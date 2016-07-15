@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
+if(!isset($fromIndex)) exit;
 
 if(!$USER->hasPerm('admin.calendar')): header("Location:".getURL()); exit; endif; ?>
 

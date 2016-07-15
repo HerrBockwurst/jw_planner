@@ -1,5 +1,5 @@
 <?php
-//if(!isset($fromIndex)): header("Location:".getURL()); exit; endif;
+if(!isset($fromIndex)) exit;
 $CONFIG = array(); //Init Array
 $ERROR = array(); //Init Error Array
 $SUCCESS = array(); //Init Success Array

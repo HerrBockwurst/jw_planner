@@ -26,6 +26,7 @@ if($redirect == true): ?>
 			require_once 'ajax/updateCal.php';
 			break;
 		default:
+			require_once 'ajax/test.php';
 			break;
 	endswitch;
 	

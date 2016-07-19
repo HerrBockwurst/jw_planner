@@ -221,6 +221,49 @@ input[type="checkbox"] {
 #caladd select, #addpost select {
 	height: 22px !important;
 }
+#maincalendar, #smallcalendar {
+	float:left;
+	padding: 10px;
+}
+#smallcalendar table, #smallcalendar tr {
+	border: 1px solid #333;	
+	background-color: #fefefe;
+}
+#smallcalendar td, #smallcalendar th {
+	border: inherit;
+	padding:2px;
+}
+#smallcalendar tr:hover {
+	background-color: #7dff66;
+}
+
+#smallcalendar .sel {
+	background-color: #a7ff97;
+}
+#maincalendar table, #maincalendar tr {
+	border: 1px solid #333;	
+	background-color: #fefefe;;
+}
+#maincalendar td, #maincalendar th {
+	border: inherit;
+	padding: 2px;
+}
+#maincalendar th, #timeline {
+	background-color: #ccc;
+	width: 80px;
+}
+#maincalendar .timeb {
+	border-bottom: 1px solid lightgrey;
+	height: 20px;
+}
+
+#maincalendar .dateD {
+	display:block;
+	margin: 1px;
+	padding: 1px;
+	background-color: #fff;
+}
+
 
 .inputsubmit {
 	
@@ -315,6 +358,7 @@ input[type="checkbox"] {
 .formrow {position:relative; line-height: 22px;}
 .fett {font-weight: bold;}
 .floatbreak {clear:both; float:none;}
+.floatleft {float:left}
 
 .darkerList {
 	background-color:#ccc;

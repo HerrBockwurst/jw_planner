@@ -31,6 +31,7 @@
 		<invalidNumFormat>Falsche Zahlenformat. Bitte überprüfe deine Eingabe!</invalidNumFormat>
 		<posts_TooMuchVis>Bitte beachte dass die Anzahl der sichtbaren Wochen/Monate 1-4 betragen muss!</posts_TooMuchVis>
 		<session_expired>Deine Sitzung ist ausgelaufen, du wirst zum Login weitergeleitet!</session_expired>
+		<unknown>Ein unbekannter Fehler ist aufgetreten.</unknown>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
@@ -104,6 +105,18 @@
 		<next>Weiter</next>
 		<month>Monat</month>
 		<week>Woche</week>
+		<jan>Januar</jan>
+		<feb>Februar</feb>
+		<mar>März</mar>
+		<apr>April</apr>
+		<may>Mai</may>
+		<jun>Juni</jun>
+		<jul>Juli</jul>
+		<aug>August</aug>
+		<sep>September</sep>
+		<oct>Oktober</oct>
+		<nov>November</nov>
+		<dec>Dezember</dec>		
 		<no_cal_applied>Für deine Versammlung wurde noch keine Kalender angelegt.</no_cal_applied>
 	</common>
 	<permissions>

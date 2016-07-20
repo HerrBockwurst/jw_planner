@@ -241,20 +241,35 @@ input[type="checkbox"] {
 	background-color: #a7ff97;
 }
 #maincalendar table, #maincalendar tr {
-	border: 1px solid #333;	
+	border: 1px solid #666;	
 	background-color: #fefefe;;
 }
 #maincalendar td, #maincalendar th {
 	border: inherit;
 	padding: 2px;
 }
-#maincalendar th, #timeline {
+#maincalendar th, .timeline {
 	background-color: #ccc;
 	width: 80px;
 }
+#maincalendar .timeline {
+	vertical-align: middle;
+}
 #maincalendar .timeb {
 	border-bottom: 1px solid lightgrey;
-	height: 20px;
+	height: 30px;
+}
+#maincalendar .lasttimeb {
+	height: 30px;
+}
+#maincalendar .noentry {
+	height: 10px !important;
+}
+#maincalendar .post {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	width: 100%;
 }
 
 #maincalendar .dateD {
@@ -262,6 +277,10 @@ input[type="checkbox"] {
 	margin: 1px;
 	padding: 1px;
 	background-color: #fff;
+}
+
+#maincalendar .lightgreen {
+	background-color: #dbffd5 !important;
 }
 
 

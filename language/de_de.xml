@@ -118,6 +118,7 @@
 		<nov>November</nov>
 		<dec>Dezember</dec>		
 		<no_cal_applied>Für deine Versammlung wurde noch keine Kalender angelegt.</no_cal_applied>
+		<clock>Uhr</clock>
 	</common>
 	<permissions>
 		<admin.visible>Admin-Zugang</admin.visible>

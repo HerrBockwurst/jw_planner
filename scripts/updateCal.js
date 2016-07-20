@@ -2,9 +2,10 @@
  * Updaten des Kalender-Moduls
  */
 
-$( "#cal_calSelect" ).change(function() {
-	var val = $( "#cal_calSelect" ).val();
+$(function() {
+	alert('hi');
 	if(typeof csel === "undefined") { var csel = null; }
-	var data = {cid: val, csel: csel};
+	var data = {csel: csel};
 	$( "#cal" ).load(url + "/ajax/updateCal", data);
+	
 });

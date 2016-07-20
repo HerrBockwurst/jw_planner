@@ -3,20 +3,25 @@ if(!isset($fromIndex)) exit;
 
 class calendar {
 	
-	private $cdata, $meta, $iTimes, $iPosts;
+	private $cdata, $meta, $iPosts, $days, $counter;
 	
 	function __construct() {
 		global $_POST, $USER, $mysql;
 		
-		$result = $mysql->execute("SELECT * FROM `calendar` WHERE `cid` = ? AND `versammlung` = ? LIMIT 1", 'ss',
-				array($_POST['cid'], $USER->vsid));
+		$result = $mysql->execute("SELECT * FROM `calendar` WHERE `versammlung` = ?", 's', $USER->vsid);
 		
-		$this->cdata = $result->fetch_assoc();
+		$this->cdata = $result->fetch_all(MYSQLI_ASSOC);
 		
-		$this->meta = json_decode($this->cdata['meta'], true);
-		if($this->meta == NULL) $this->meta = array();
-		unset($this->cdata['meta']);
-		var_dump($this->meta);
+		foreach ($this->cdata AS $cdata):
+		
+			$this->meta[$cdata['cid']] = json_decode($cdata['meta'], true);
+			if($this->meta[$cdata['cid']] == NULL) $this->meta[$cdata['cid']] = array();
+			
+		endforeach;
+		$this->iPosts = array();
+		$this->days = array("monday" => 1, "tuesday" => 2, "wednesday" => 3, "thursday" => 4, "friday" => 5,
+							"saturday" => 6, "sunday" => 7);
+		$this->counter = 0;
 	}
 
 	private function makeSmallCal($month, $year, $sel) {
@@ -90,7 +95,7 @@ class calendar {
 				endif;
 				
 			?>
-				<?php if($cDayinWeek == 1):?><tr style="cursor: pointer" onclick="$('#cal').load('/ajax/updateCal', {cid: '<?php echo $this->cdata['cid'];?>', csel: '<?php echo $cstamp; ?>'});" class="<?php echo $trparam; ?>"><?php endif;?>
+				<?php if($cDayinWeek == 1):?><tr style="cursor: pointer" onclick="$('#cal').load('/ajax/updateCal', {csel: '<?php echo $cstamp; ?>'});" class="<?php echo $trparam; ?>"><?php endif;?>
 					
 					<?php
 					$wochentag = date("N", strtotime($daysCreate.".".$month.".".$year));
@@ -182,7 +187,7 @@ class calendar {
 		?> <div class="floatbreak">&nbsp;</div> <?php
 	}
 	
-	public function createMainCal($csel, $cid) {
+	public function createMainCal($csel) {
 		
 		if($csel == "") $csel = time();
 		if(!is_numeric($csel)):
@@ -190,6 +195,10 @@ class calendar {
 			return;
 		endif;
 		$csel = intval($csel);
+		
+		
+		$this->getPosts($csel);
+		
 		
 		?>
 		<table>
@@ -203,45 +212,98 @@ class calendar {
 				<th><?php displayText('common>saturday')?><br /><span class="dateD"><?php $this->displayDate(6, $csel); ?></span></th>
 				<th><?php displayText('common>sunday')?><br /><span class="dateD"><?php $this->displayDate(7, $csel); ?></span></th>
 			</tr>
-			<tr class="timeb">
-				<td id="timeline" class="relative"><?php $this->getTimeline($cid, $csel) ?></td>
-				<td id="c_monday"></td>
-				<td id="c_tuesday">d</td>
-				<td id="c_wednesday">m</td>
-				<td id="c_thursday">d</td>
-				<td id="c_friday">f</td>
-				<td id="c_saturday">s</td>
-				<td id="c_sunday">s</td>
+			<?php for($i=0; $i<24; $i++): ?>
+			<tr class="small <?php if($i != 23) echo "timeb"; else echo "lasttimeb"?> <?php if(($i % 2) != 0) echo "lightgreen"; ?> <?php $this->checkTime($i);?>">
+				<td class="timeline relative"><?php $this->printTime($i); ?></td>
+				<td class="relative"><?php $this->printPost(1, $i); ?></td>
+				<td class="relative"><?php $this->printPost(2, $i); ?></td>
+				<td class="relative"><?php $this->printPost(3, $i); ?></td>
+				<td class="relative"><?php $this->printPost(4, $i); ?></td>
+				<td class="relative"><?php $this->printPost(5, $i); ?></td>
+				<td class="relative"><?php $this->printPost(6, $i); ?></td>
+				<td class="relative"><?php $this->printPost(7, $i); ?></td>
 			</tr>
+			<?php endfor; ?>
 		</table>
 		
 		<?php 
 	}
 	
-	private function getTimeline($cid, $csel) {
+	private function checkTime($time) {
+		$found = false;
+		foreach($this->iPosts AS $post):
+			if($post['start'] == $time) $found = true;
+			if($time > $post['start'] && $time < ($post['start'] + ($post['height'] / 30))) $found = true;
+		endforeach;
+		
+		
+		if($found != true) echo "noentry";
+	}
+	
+	private function printTime($time) {
+		$string = "";
+		if($time < 10) $string .= "0";
+		$string .= $time.":00 ".getLang('common>clock');
+		echo $string;
+	}
+
+	private function gimmeColor() {
+		$colors = array("#7dff66", "#E57373", "#2cddbe", "#e4fdc4", "#c1a8e9", "#bababa");
+		
+		if($this->counter > sizeof($colors)) $this->counter = 0;
+		$retval = $colors[$this->counter];
+		$this->counter++;
+		return $retval;
+	}
+	
+	private function getPosts($csel) {
 		
 		$csel = strtotime(date("j.n.Y", $csel)); //Timestamp vom Tag aber von 0:00 Uhr
-
-		foreach($this->meta AS $id => $cmeta) :
-			while(true):
-				/*
-				 * Stop, wenn Startdatum von Post noch nicht erreicht oder die Sichtbarkeit nicht erreicht wurde
-				 */
-				if(time() < $cmeta['startdate'] || $csel > (time() + $cmeta['visibility'])) break;
 		
-				
-				if($cmeta['type'] == 'weekly'):
-					var_dump($cmeta);
-				endif;
-				
-				
-				break;
-			endwhile;
+		foreach($this->meta AS $cidmeta):
+			$color = $this->gimmeColor();
+			foreach($cidmeta AS $id => $cmeta) :
+				while(true):
+					/*
+					 * Stop, wenn Startdatum von Post noch nicht erreicht oder die Sichtbarkeit nicht erreicht wurde
+					 */
+					if(!key_exists("type", $cmeta)) break;
+					if(($csel + (60*60*24*7)) < $cmeta['startdate'] || $csel > (time() + $cmeta['visibility'])) break;
+					
+					if($cmeta['type'] == 'weekly'):
+						
+						$start = explode(":", $cmeta['start']);
+						$end = explode(":", $cmeta['end']);
+						$duration = (($end[0] - $start[0]) * 60) + ($end[1] - $start[1]);
+					
+						$arr = array("type" => "weekly", "day" => $this->days[$cmeta['patternA']], "start" => $start[0],
+									 "end" => $end[0], "top" => round((30 / 60) * $start[1]), "height" => round((30 / 60) * $duration),
+									 "color" => $color
+						);
+						
+						$this->iPosts[$id] = $arr;
+					endif;
+					
+					
+					break;
+				endwhile;
+			endforeach;
 		endforeach;
 	}
 	
-	private function getPosts($cid) {
-		
+	private function printPost($day, $time) {
+		foreach($this->iPosts AS $key => $post):
+			while(true):
+				if($post['type'] == 'weekly'):
+					if($post['day'] != $day || $post['start'] != $time) break; //Abbrechen wenn nicht richtiger Tag oder Zeit
+					
+					?> <div class="post" style="background-color:<?php echo $post['color'];?>; top:<?php echo $post['top']?>px; height:<?php echo $post['height'];?>px"></div> <?php 
+					//TODO Bild von Männel anzeigen
+					//TODO Anzahl der verfügbaren Plätze erstellen + anzeigen
+				endif;
+				break;
+			endwhile;
+		endforeach;
 	}
 
 }

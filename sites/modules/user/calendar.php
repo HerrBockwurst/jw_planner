@@ -1,41 +1,25 @@
 <?php
 if(!isset($fromIndex)) exit;
 
-while(true):
-	/*
-	 * Kalenderliste erzeugen
-	 */
+require_once 'oop/calendar.php';
 
-	$result = $mysql->execute("SELECT * FROM `calendar` WHERE `versammlung` = ?", 's', $USER->vsid);
-	
-	if($result->num_rows == 0): //Beenden wenn kein Kalender angelegt ist	
-		$nocal = true;
-		break;
-	endif;
-	
-	$cals = $result->fetch_all(MYSQLI_ASSOC);
-	
-	
-	
-	break;
-endwhile;	
+if(!isset($_POST['csel'])) $_POST['csel'] = null;
 ?>
 
 <div class="field">
 	<div class="headline"><?php displayText('common>calendar')?></div>
 	<?php if(isset($nocal)): ?>
 		<div class="morespace"><?php displayText('common>no_cal_applied')?></div>
-	<?php else: ?>
-	
-		<select id="cal_calSelect">
-			<?php foreach($cals AS $cal): ?>
-				<option value="<?php echo $cal['cid']?>"><?php echo $cal['name']?></option>
-			<?php endforeach;?>			
-		</select>
-		
-	
-	
 	<?php endif;?>
-	<div id="cal"></div>
-	<script src="<?php printURL(); ?>/scripts/updateCal.js"></script>
+	<div id="cal">	
+		<div>
+			<div id="maincalendar">
+				<?php $calendar->createMainCal($_POST['csel']); ?>
+			</div>
+		
+			<div id="smallcalendar">
+				<?php $calendar->createSmallCalTables($_POST['csel']); ?>
+			</div>
+		</div>
+	</div>
 </div>

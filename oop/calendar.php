@@ -3,15 +3,14 @@ if(!isset($fromIndex)) exit;
 
 class calendar {
 	
-	private $cdata, $meta, $iPosts, $days, $counter;
+	private $cdata, $meta, $iPosts, $days, $counter, $dayCounter;
 	
 	function __construct() {
 		global $_POST, $USER, $mysql;
 		
 		$result = $mysql->execute("SELECT * FROM `calendar` WHERE `versammlung` = ?", 's', $USER->vsid);
-		
+
 		$this->cdata = $result->fetch_all(MYSQLI_ASSOC);
-		
 		foreach ($this->cdata AS $cdata):
 		
 			$this->meta[$cdata['cid']] = json_decode($cdata['meta'], true);
@@ -21,6 +20,7 @@ class calendar {
 		$this->iPosts = array();
 		$this->days = array("monday" => 1, "tuesday" => 2, "wednesday" => 3, "thursday" => 4, "friday" => 5,
 							"saturday" => 6, "sunday" => 7);
+		$this->dayCounter = array("first" => 1, "second" => 2, "third" => 3, "fourth" => 4);
 		$this->counter = 0;
 	}
 
@@ -198,9 +198,26 @@ class calendar {
 		
 		
 		$this->getPosts($csel);
+		var_dump($this->iPosts);
 		
+		foreach($this->cdata AS $cdata):
+			/*
+			 * Farben ausgben
+			 */
+			$cmeta = $this->meta[$cdata['cid']];
+			$firstPostElement = $this->iPosts[key($cmeta)];
+			$color = $firstPostElement['color'];
+			
+			?>
+			
+			<div class="cIndicator" style="background-color: <?php echo $color;?>"><?php echo $cdata['name']; ?></div>
+			
+			<?php 
+			
+		endforeach;
 		
 		?>
+		<br class="floatbreak" />
 		<table>
 			<tr>
 				<th></th>
@@ -270,20 +287,26 @@ class calendar {
 					if(!key_exists("type", $cmeta)) break;
 					if(($csel + (60*60*24*7)) < $cmeta['startdate'] || $csel > (time() + $cmeta['visibility'])) break;
 					
-					if($cmeta['type'] == 'weekly'):
-						
-						$start = explode(":", $cmeta['start']);
-						$end = explode(":", $cmeta['end']);
-						$duration = (($end[0] - $start[0]) * 60) + ($end[1] - $start[1]);
+					$start = explode(":", $cmeta['start']);
+					$end = explode(":", $cmeta['end']);
+					$duration = (($end[0] - $start[0]) * 60) + ($end[1] - $start[1]);
 					
+					if($cmeta['type'] == 'weekly'):
+											
 						$arr = array("type" => "weekly", "day" => $this->days[$cmeta['patternA']], "start" => $start[0],
 									 "end" => $end[0], "top" => round((30 / 60) * $start[1]), "height" => round((30 / 60) * $duration),
-									 "color" => $color
+									 "color" => $color, "count" => $cmeta['count']
 						);
 						
-						$this->iPosts[$id] = $arr;
+						
+					else:
+						$arr = array("type" => "monthly", "day" => $this->days[$cmeta['patternB']], "start" => $start[0], 
+									 "end" => $end[0], "top" => round((30 / 60) * $start[1]), "height" => round((30 / 60) * $duration),
+									 "color" => $color, "count" => $cmeta['count'], "dayCounter" => $this->dayCounter[$cmeta['patternA']]
+						);
+						
 					endif;
-					
+					$this->iPosts[$id] = $arr;
 					
 					break;
 				endwhile;
@@ -297,10 +320,40 @@ class calendar {
 				if($post['type'] == 'weekly'):
 					if($post['day'] != $day || $post['start'] != $time) break; //Abbrechen wenn nicht richtiger Tag oder Zeit
 					
-					?> <div class="post" style="background-color:<?php echo $post['color'];?>; top:<?php echo $post['top']?>px; height:<?php echo $post['height'];?>px"></div> <?php 
-					//TODO Bild von Männel anzeigen
-					//TODO Anzahl der verfügbaren Plätze erstellen + anzeigen
+					?> <div id="<?php echo $key."clk"; ?>" class="post" style="background-color:<?php echo $post['color'];?>; top:<?php echo $post['top']?>px; height:<?php echo $post['height'];?>px">
+										
+					<?php
+						for($i = 1; $i <= $post['count']; $i++): 
+						$full = false //TODO Check ob schon ein eintrag vorhanden ist
+					?>
+					
+						<img src="<?php printURL(); ?>/images/shadow_p.png" style="width: 20px; height: 20px;" />						
+					<?php endfor;?>
+					<div id="<?php echo $key; ?>" style="display:none;" class="memberinfo">
+						<?php displayText('common>entries', "", ":")?>
+						<span style=""><?php displayText('common>noOne')?></span>
+						<?php //TODO Teilnehmer hinzufügen ?> 
+					</div>
+					</div>
+					<script>
+						if(typeof progress === 'undefined') var progress = false;
+						$("#<?php echo implode("\\\\.", explode(".", $key))."clk"; ?>").hover(function() {							
+							if(progress == false) {
+								progress = true;
+								$("#<?php echo implode("\\\\.", explode(".", $key))?>").show(100);
+								setTimeout(function() {
+									progress = false;
+									}, 100);
+							}
+						}, function() {
+							$("#<?php echo implode("\\\\.", explode(".", $key))?>").hide(100);							
+						});
+					</script>
+					<?php 
+				else:
+					
 				endif;
+				
 				break;
 			endwhile;
 		endforeach;

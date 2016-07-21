@@ -32,6 +32,7 @@
 		<posts_TooMuchVis>Bitte beachte dass die Anzahl der sichtbaren Wochen/Monate 1-4 betragen muss!</posts_TooMuchVis>
 		<session_expired>Deine Sitzung ist ausgelaufen, du wirst zum Login weitergeleitet!</session_expired>
 		<unknown>Ein unbekannter Fehler ist aufgetreten.</unknown>
+		<countNotValid>Die Anzahl der Personen ist ungültig. Bitte gib einen Wert zwischen 1 und 3 ein!</countNotValid>
 	</errors>
 	<admin>
 		<ucp_head>Benutzerverwaltung</ucp_head>
@@ -78,6 +79,7 @@
 		<p_third>Dritten</p_third>
 		<p_fourth>Vierten</p_fourth>
 		<p_visibility>Sichtbar ab</p_visibility>
+		<p_count>Personen</p_count>
 	</admin>
 	<common>
 		<search>Suchen</search>
@@ -119,6 +121,8 @@
 		<dec>Dezember</dec>		
 		<no_cal_applied>Für deine Versammlung wurde noch keine Kalender angelegt.</no_cal_applied>
 		<clock>Uhr</clock>
+		<entries>Teilnehmer</entries>
+		<noOne>Niemand</noOne>
 	</common>
 	<permissions>
 		<admin.visible>Admin-Zugang</admin.visible>

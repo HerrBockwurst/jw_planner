@@ -132,6 +132,10 @@ endwhile;
 			<input type="text" name="startdate" id="startdate" value="<?php echo date("d.m.Y"); ?>" />
 		</div>
 		<div class="formrow smallspace">
+			<label for="count"><?php displayText('admin>p_count')?></label>
+			<input type="text" name="count" id="count" value="1" />
+		</div>
+		<div class="formrow smallspace">
 			<label for="visibility1"><?php displayText('admin>p_visibility')?></label>
 			<input type="text" id="visibility1" name="visibility1" value="1" style="min-width: 20px; width: 20px;" />
 			<select name="visibility2" style="left: 180px; min-width: 100px; width: 100px;">

@@ -36,9 +36,9 @@ function displayMenuLink($langpath, $link) {
 	echo "<a href=\"".getURL().$link."\">".$lang->get($langpath)."</a>";	
 }
 
-function displayText($langpath) {
-	global $lang;	
-	echo $lang->get($langpath);
+function displayText($langpath, $before = "", $after = "") {
+	global $lang;
+	echo $before.$lang->get($langpath).$after;
 }
 
 function getLang($langpath) {

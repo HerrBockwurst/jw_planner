@@ -31,7 +31,8 @@ while(true):
 		!in_array($_POST['visibility2'], $validdata['vis']) ||
 		!in_array($_POST['w_tag'], $validdata['tage']) ||
 		!in_array($_POST['m_tag'], $validdata['tage']) ||
-		!in_array($_POST['m_every'], $validdata['m_every']) ):
+		!in_array($_POST['m_every'], $validdata['m_every']) ||
+		!is_numeric($_POST['count'])):
 		$ERROR['postserror'] = getLang('errors>emptyfields');
 		break;
 	endif;
@@ -64,6 +65,15 @@ while(true):
 	
 	$multipl = array("week" => 604800, "month" =>2592000);
 	$vis = $vis[0] * $multipl[$vis[1]]; 
+	
+	/*
+	 * Anzahl Personen
+	 */
+	
+	if($_POST['count'] > 3 || $_POST['count'] < 1):
+		$ERROR['postserror'] = getLang('errors>countNotValid');
+		break;
+	endif;
 	
 	/*
 	 * Wenn Wöchtenlich
@@ -127,7 +137,8 @@ while(true):
 						"visibility" => $vis,
 						"patternA" => $_POST['w_tag'],
 						"start" => implode(":", $from),
-						"end" => implode(":", $to)
+						"end" => implode(":", $to),
+						"count" => $_POST['count']
 						);
 		
 		if(!$mysql->execute("UPDATE `calendar` SET `meta` = ? WHERE `cid` = ?", 'ss', array(json_encode($meta), $cid))):
@@ -196,7 +207,8 @@ while(true):
 						"patternA" => $_POST['m_every'],
 						"patternB" => $_POST['m_tag'],
 						"start" => implode(":", $from),
-						"end" => implode(":", $to)
+						"end" => implode(":", $to),
+						"count" => $_POST['count']
 						);
 	
 		if(!$mysql->execute("UPDATE `calendar` SET `meta` = ? WHERE `cid` = ?", 'ss', array(json_encode($meta), $cid))):

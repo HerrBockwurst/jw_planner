@@ -270,6 +270,16 @@ input[type="checkbox"] {
 	left: 0px;
 	right: 0px;
 	width: 100%;
+	min-height: 20px !important; 
+	z-index: 2;
+	cursor: pointer;
+}
+#maincalendar .cIndicator {
+	padding: 5px 20px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #555;
+	float: left; 
 }
 
 #maincalendar .dateD {
@@ -281,6 +291,16 @@ input[type="checkbox"] {
 
 #maincalendar .lightgreen {
 	background-color: #dbffd5 !important;
+}
+
+#maincalendar .memberinfo {
+	position: absolute;
+	top: -40px;
+	height: 28px;
+	background-color: #ccc;
+	border: 1px solid #aaa;
+	padding: 5px;
+	left: -1px;
 }
 
 

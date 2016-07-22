@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<language>
+	<noscript1>Du hast kein Javascript aktiviert. Um diese Seite nutzen zu können benötigst du JavaScript.</noscript1>
+	<noscript2>Wenn du nicht weißt, wie du JavaScript aktiviert, wende dich an eine(n) Bruder/Schwester, der dir dabei hilft.</noscript2>
+	<errors>
+		<filenotfound>Datei wurde nicht gefunden!</filenotfound>
+	</errors>
+</language>

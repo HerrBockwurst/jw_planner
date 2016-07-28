@@ -1,5 +1,5 @@
 <?php
-if(!isset($index)) exit;
+if(!defined('index')) exit;
 $MAILS = array();
 
 define('MYSQL_HOST', 'localhost');
@@ -12,6 +12,13 @@ define('HOME', 'localhost:90');
 define('TITLE', 'JWPlanner');
 define('VERSION', 'PREALPHA 0.1');
 define('SESSIONTIME', 20);
+
+/*
+ * Für Bob
+ */
+define('MODUL', 1);
+define('PAGE', 2);
+define('DIRECT', 3);
 
 $MAILS['contact'] = 'contact@jwplanner.com';
 $MAILS['error'] = 'bugreport@jwplanner.com';

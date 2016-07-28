@@ -1,5 +1,5 @@
 <?php
-if(!isset($index)) exit;
+if(!defined('index')) exit;
 
 class ModulHandler {
 	private $modules;
@@ -33,4 +33,4 @@ class ModulHandler {
 
 $ModulHandler = new ModulHandler();
 
-loadModules(); 
+loadModules();

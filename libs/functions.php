@@ -1,5 +1,5 @@
 <?php
-if(!isset($index)) exit;
+if(!defined('index')) exit;
 
 function getURL($int) {
 	$url = explode('/', substr($_SERVER['REQUEST_URI'], 1));
@@ -37,7 +37,6 @@ function loadModules() {
 	/*
 	 * modules Ordner durchsuchen und index in jeden unterordner starten
 	 */
-	global $index;
 	if($handle = opendir('modules')):
 		while(false !== ($entry = readdir($handle))):
 			if($entry != '.' && $entry != '..' && is_dir('modules/'.$entry)):
@@ -50,4 +49,25 @@ function loadModules() {
 }
 function destruct($var) {
 	$var->__destruct();
+}
+
+function addDataHandler($path) {
+	global $DataHandler;
+	if(!isset($DataHandler)) $DataHandler = array();
+	
+	if($path[0] == 1) $path[0] = 'modules/'; 
+	elseif($path[0] == 2) $path[0] = 'pages/';
+	
+	$DataHandler[$path[1]] = $path[0].$path[1]."/".$path[2];
+}
+
+function getDataHandler($id) {
+	global $DataHandler;
+	if(!key_exists($id, $DataHandler)) return false;
+	
+	require_once $DataHandler[$id];
+}
+
+function displayHandlerURL($name) {
+	echo PROTO.HOME.'/ajax/datahandler/'.$name;
 }

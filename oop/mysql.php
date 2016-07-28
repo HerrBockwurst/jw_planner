@@ -1,5 +1,5 @@
 <?php
-if(!isset($index)) exit;
+if(!defined('index')) exit;
 
 class MySQL {
 	private $mysql;

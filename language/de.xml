@@ -5,5 +5,13 @@
 	<noscript2>Wenn du nicht weißt, wie du JavaScript aktiviert, wende dich an eine(n) Bruder/Schwester, der dir dabei hilft.</noscript2>
 	<errors>
 		<filenotfound>Datei wurde nicht gefunden!</filenotfound>
+		<invalidFormSubmit>Bitte fülle das Formular vollständig aus!</invalidFormSubmit>
+		<MySQL>Es ist ein MySQL Fehler aufgetreten. Bitte versuch es später erneut!</MySQL>
+		<wrongAuth>Benutzername oder Passwort ungültig!</wrongAuth>
 	</errors>
+	<common>
+		<username>Benutzername</username>
+		<password>Passwort</password>
+		<login>Einloggen</login>
+	</common>
 </language>

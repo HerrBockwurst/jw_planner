@@ -1,3 +1,3 @@
 $(function() {
-	$("#site").load(url + "/ajax/load", {page: 'default', noheader: true});	
+	$("#site").load(url + "/ajax/load", {page: 'default'});	
 });

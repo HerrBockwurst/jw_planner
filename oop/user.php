@@ -1,5 +1,5 @@
 <?php
-if(!isset($index)) exit;
+if(!defined('index')) exit;
 
 class user {
 	
@@ -9,9 +9,7 @@ class user {
 	
 	function __construct() {
 		global $mysql;
-		$this->auth();
-		
-		
+		$this->auth();				
 	}
 	
 	private function auth() {
@@ -21,7 +19,7 @@ class user {
 		 * Wenn keine Session in Sessionvariable, dann Login
 		 */
 		if(!isset($_SESSION['sid'])):
-			$bob->build(array(MODUL, 'login'));
+			$this->maybeLogin();
 			return false;
 		endif;
 		
@@ -35,6 +33,14 @@ class user {
 			$bob->build('login');
 		endif;
 		
+	}
+	
+	private function maybeLogin() {
+		global $bob;
+		if(!defined('datahandler')):
+			$bob->build(array(MODUL, 'login'));
+			define('stopbob', true);
+		endif;
 	}
 }
 

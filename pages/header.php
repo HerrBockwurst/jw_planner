@@ -1,4 +1,6 @@
-<?php if(!isset($index)) exit; ?>
+<?php if(!defined('index')) exit; ?>
+
+<?php if(!defined('ajax')): ?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -31,3 +33,4 @@
 	</noscript>
 	<div id="site">
 	</div>
+<?php endif;?>

@@ -15,13 +15,15 @@ class user {
 	private function auth() {
 		global $bob, $mysql;
 		
+		$this->cleanupSessions();
+		
 		/*
 		 * Wenn keine Session in Sessionvariable, dann Login
 		 */
 		if(!isset($_SESSION['sid'])):
 			$this->maybeLogin();
 			return false;
-		endif;
+		endif;		
 		
 		/*
 		 * Session von Server abfragen
@@ -30,9 +32,54 @@ class user {
 		
 		if($result->num_rows != 1):
 			unset($_SESSION['sid']);
-			$bob->build('login');
+			$this->maybeLogin();
+		endif;
+		$result = $result->fetch_assoc();
+		
+		/*
+		 * Session Updaten
+		 */
+		
+		if(!$mysql->execute("UPDATE sessions SET expire=? WHERE uid = ?", 'ss', array(getSQLDate(time() + (SESSIONTIME * 60)), $result['uid']))):
+			//TODO Log
 		endif;
 		
+		/*
+		 * Userdaten laden
+		 */
+		$this->loadUserData($result['uid']);
+		
+	}
+	
+	private function loadUserData($uid) {
+		global $mysql;
+		
+		$data = $mysql->execute("SELECT u.*, v.name AS vname, p.perms FROM user AS u
+								INNER JOIN versammlungen AS v ON (u.vsid = v.vsid)
+								INNER JOIN permissions AS p ON (u.uid = p.uid)
+								WHERE u.uid = ? LIMIT 1", 's', $uid);
+		$data = $data->fetch_assoc();
+
+		
+		$this->uid = $data['uid'];
+		$this->name = $data['name'];
+		$this->email = $data['email'];
+		$this->vsid = $data['vsid'];
+		$this->versammlung = $data['vname'];
+		
+		$this->perms = json_decode($data['perms']);
+	}
+	
+	public function hasPerm($string) {
+		if(in_array($string, $this->perms)) return true;
+		return false;
+	}
+	
+	private function cleanupSessions() {
+		global $mysql;
+		if(!$mysql->execute("DELETE FROM `sessions` WHERE `expire` <= ?", 's', getSQLDate())):
+			//TODO Log
+		endif;
 	}
 	
 	private function maybeLogin() {

@@ -71,3 +71,10 @@ function getDataHandler($id) {
 function displayHandlerURL($name) {
 	echo PROTO.HOME.'/ajax/datahandler/'.$name;
 }
+
+function getSQLDate($date=NULL) {
+	if($date != NULL) intval($date);
+	if($date == NULL) $date = time();
+	$newdate = date("Y-m-d H:i:s",$date);
+	return $newdate;
+}

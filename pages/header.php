@@ -21,6 +21,7 @@
 			var url = "<?php echo PROTO.HOME; ?>";
 		</script>
 		<script src="<?php echo PROTO.HOME; ?>/scripts/loader.js"></script>
+		<script src="<?php echo PROTO.HOME; ?>/scripts/functions.js"></script>
 	</head>
 	<body>
 	<noscript>

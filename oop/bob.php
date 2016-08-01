@@ -24,13 +24,13 @@ class bob {
 		global $DataHandler;
 		if(defined('stopbob')) return;
 		switch($data[0]):
-			case 1:
+			case MODUL:
 				$this->buildModul($data);
 				break;
-			case 2:
+			case PAGE:
 				$this->buildPage($data);
 				break;
-			case 3:
+			case DIRECT:
 				$this->buildDirect($data[1]);
 				break;
 			default:

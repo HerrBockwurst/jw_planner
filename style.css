@@ -3,7 +3,14 @@ body {
 	color: #222;
 	font-size: 16px;
 }
+a {
+	color: #008a03;
+	text-decoration: none;
+}
 
+a:hover {
+	text-decoration: underline;
+}
 #noscript {
 	position: fixed;
 	width: 100%;
@@ -31,15 +38,77 @@ body {
 	position:absolute;
 }
 
-a {
-	color: #008a03;
-	text-decoration: none;
+#topbar {
+	height: 40px;
+	width: 100%;
+	background: url("images/topbar_bg.png") repeat-x;
+	position:relative;
 }
-
-a:hover {
-	text-decoration: underline;
+#usericon {
+	position: absolute;
+	right: 50px;
+	top: 10px;
+	font-size: 0.9em;
+	color: #525252;
+	font-weight: bold;
 }
-
+#usericon img {
+	position: absolute;
+	top: -5px;
+	right: -25px;
+}
+#time {
+	margin: 0 auto;
+	width: 200px;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 0.9em;
+	color: #525252;
+	font-weight: bold;
+}
+#mainmenu {
+	margin: 20px;
+	text-align: center;
+	position: relative;
+}
+.clickable {
+	cursor: pointer;
+}
+.mainmenuentry {
+	width: 200px;
+	height: 200px;
+	background-color: rgba(255,255,255,0.8);
+	border-radius: 20px; 
+	-moz-border-radius: 20px; 
+	-webkit-border-radius: 20px;	
+	display: block;
+}
+.modul {
+	background-color: rgba(255,255,255,0.8);
+	display: none;
+	border-radius: 10px; 
+	-moz-border-radius: 10px; 
+	-webkit-border-radius: 10px;
+}
+.modulheadline {
+	width: 100%;
+	border-bottom: 1px solid #888;
+	height: 30px;
+	border-radius-top: 10px 10px 0px 0px; 
+	-moz-border-radius: 10px 10px 0px 0px; 
+	-webkit-border-radius: 10px 10px 0px 0px;
+	background-color: #ccc;
+	position: relative;
+	cursor: move;
+}
+.modulheadline div {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+.modul .inner {
+	height: 100%;
+}
 .floatbreak {
 	clear: both;
 }

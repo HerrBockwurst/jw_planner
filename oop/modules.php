@@ -1,6 +1,8 @@
 <?php
 if(!defined('index')) exit;
 
+define('MENUVIS', true);
+
 class ModulHandler {
 	private $modules;
 	
@@ -14,6 +16,7 @@ class ModulHandler {
 	}
 	
 	public function registerModul($data) {
+		if(!isset($data[2])) $data[2] = false;
 		$this->modules[$data[0]] = $data; 
 	}
 	

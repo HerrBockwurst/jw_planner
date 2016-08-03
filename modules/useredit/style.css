@@ -1,0 +1,10 @@
+input[type="submit"] {
+	padding: 3px 20px;
+	border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px;
+	background-color: #00b309;
+	color: #eee;
+	border: 1px solid #006a05;
+	position: absolute;	
+}

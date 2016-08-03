@@ -39,8 +39,9 @@ class bob {
 	}
 	
 	private function buildModul($data) {
-		global $ModulHandler, $bob, $DataHandler;		
+		global $ModulHandler, $bob, $DataHandler, $user;		
 		$moduldata = $ModulHandler->getData($data[1]);
+		if(isset($moduldata[3]) && !$user->hasPerm($moduldata[3])) exit; //Modul nur bauen, wenn Benutzer Permission hat
 		require_once 'modules/'.$moduldata[0].'/'.$moduldata[1];
 		
 	}
@@ -63,7 +64,7 @@ class bob {
 	public function endForm() {
 		echo "</form>";
 	}
-	public function addFormRow($id, $label, $fielddata, $predata, $class = "formrow") {
+	public function addFormRow($id, $label, $fielddata, $predata = '', $class = "formrow") {
 		
 		if($fielddata[0] == 'hidden'):
 			echo "<input type=\"hidden\" name=\"$id\" value=\"$fielddata[1]\" />";

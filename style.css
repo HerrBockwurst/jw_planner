@@ -11,6 +11,15 @@ a {
 a:hover {
 	text-decoration: underline;
 }
+fieldset { 
+	border: 1px solid #555;
+	margin: 5px 15px;
+	padding: 5px;
+}
+legend {
+	padding: 3px;
+	font-weight: bold;
+}
 #noscript {
 	position: fixed;
 	width: 100%;
@@ -71,6 +80,10 @@ a:hover {
 	text-align: center;
 	position: relative;
 }
+#site {
+	position: relative;
+	height: 100%;
+}
 .clickable {
 	cursor: pointer;
 }
@@ -101,13 +114,14 @@ a:hover {
 	position: relative;
 	cursor: move;
 }
-.modulheadline div {
+.modulheadline img {
 	position: absolute;
 	top: 5px;
 	right: 5px;
 }
 .modul .inner {
 	height: 100%;
+	font-size: 0.9em;
 }
 .floatbreak {
 	clear: both;
@@ -142,4 +156,7 @@ a:hover {
 	background-color: #ff9393;
 	display: none;
 	text-align: center;
+}
+.pointer {
+	cursor: pointer;
 }

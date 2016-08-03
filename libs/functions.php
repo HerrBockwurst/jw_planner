@@ -58,7 +58,7 @@ function addDataHandler($path) {
 	if($path[0] == 1) $path[0] = 'modules/'; 
 	elseif($path[0] == 2) $path[0] = 'pages/';
 	
-	$DataHandler[$path[1]] = $path[0].$path[1]."/".$path[2];
+	$DataHandler[$path[1]] = $path[0].$path[2];
 }
 
 function getDataHandler($id) {

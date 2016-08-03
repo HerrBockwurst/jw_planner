@@ -75,6 +75,17 @@ class user {
 		return false;
 	}
 	
+	public function getSubPerm($needle) {
+		$retval = array();
+		foreach($this->perms AS $perm):
+			if(strpos($perm, $needle) === 0):
+				$retval[] = $perm;
+			endif;
+		endforeach;
+		if(empty($retval)) return false;
+		return $retval;
+	}
+	
 	private function cleanupSessions() {
 		global $mysql;
 		if(!$mysql->execute("DELETE FROM `sessions` WHERE `expire` <= ?", 's', getSQLDate())):

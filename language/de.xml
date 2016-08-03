@@ -8,10 +8,17 @@
 		<invalidFormSubmit>Bitte fülle das Formular vollständig aus!</invalidFormSubmit>
 		<MySQL>Es ist ein MySQL Fehler aufgetreten. Bitte versuch es später erneut!</MySQL>
 		<wrongAuth>Benutzername oder Passwort ungültig!</wrongAuth>
+		<usersearch_empty>Du kannst nicht beide Suchfelder leer lassen!</usersearch_empty>
+		<usersearch_noUserFound>Kein Benutzer gefunden!</usersearch_noUserFound>
 	</errors>
 	<common>
 		<username>Benutzername</username>
 		<password>Passwort</password>
 		<login>Einloggen</login>
+		<versammlung>Versammlung</versammlung>
 	</common>
+	<admin>
+		<usersearch>Benutzer suchen</usersearch>
+		<search>Suchen</search>
+	</admin>
 </language>

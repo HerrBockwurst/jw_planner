@@ -80,6 +80,14 @@ class bob {
 			case 'password':
 				$string .= "<input type=\"password\" id=\"$id\" name=\"$id\" value=\"$predata\" />";
 				break;
+			case 'select':
+				$options = "";
+				foreach ($fielddata[1] AS $key => $option):
+					if($fielddata[2] == $key) $options .= "<option value=\"$key\" selected>$option</option>";
+					else $options .= "<option value=\"$key\">$option</option>";
+				endforeach;
+				$string .= "<select id=\"$id\" name=\"$id\">$options</select>";
+				break;
 		endswitch;
 		
 		$string .= "<br class=\"floatbreak\" /></div>";

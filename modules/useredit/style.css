@@ -8,3 +8,39 @@ input[type="submit"] {
 	border: 1px solid #006a05;
 	position: absolute;	
 }
+#usearch_fieldset {
+	width: 400px;
+	margin-bottom: 10px;
+}
+.searchlist {
+	padding: 3px;
+	margin: 0px 5px;
+}
+.searchlist:hover {
+	background-color: #00b309;
+	color: #eee;
+}
+.darker {
+	background-color: #9fffa5;
+}
+.vsright {
+	position: absolute;
+	right: 2px;
+}
+#adduser_button {
+	padding: 5px 0px;
+	position: absolute;
+	width: 100px;
+	text-align: center;
+	border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px;
+	background-color: #00b309;
+	color: #eee;
+	border: 1px solid #006a05;
+	right: 10px;
+	top: 10px;
+}
+#adduser_window input[type=submit] {
+	background-color: red;
+}

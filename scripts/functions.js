@@ -12,3 +12,10 @@ function openModule(string) {
 	$(string).show(100);
 	$('.removeme').remove();
 }
+
+function loadModule(url, divid) {
+	$.post(url, function(data) {
+		$(divid).remove(); $('#site').append(data);
+	});
+	
+}

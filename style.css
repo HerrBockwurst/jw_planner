@@ -97,7 +97,7 @@ legend {
 	display: block;
 }
 .modul {
-	background-color: rgba(255,255,255,0.8);
+	background-color: rgba(255,255,255,0.95);
 	display: none;
 	border-radius: 10px; 
 	-moz-border-radius: 10px; 
@@ -122,6 +122,7 @@ legend {
 .modul .inner {
 	height: 100%;
 	font-size: 0.9em;
+	position: relative;
 }
 .floatbreak {
 	clear: both;
@@ -132,7 +133,7 @@ legend {
 	height: 22px;
 	margin: 5px 0px;
 }
-.formrow input {
+.formrow input, .formrow select {
 	position: absolute;
 	border-radius: 5px; 
 	-moz-border-radius: 5px; 
@@ -142,12 +143,19 @@ legend {
 	height: 16px;
 	margin-left: 200px;
 	padding: 2px;
+	width: 170px;
+}
+.formrow input[type=submit] {
+	height: 22px;
+}
+.formrow select {
+	height: 22px;
+	width: 175px;
 }
 .formrow label {
 	height: 16px;
 	position: absolute;
-	margin-top: 2px;
-	
+	margin-top: 2px;	
 }
 .error {
 	padding: 5px;
@@ -157,6 +165,18 @@ legend {
 	display: none;
 	text-align: center;
 }
-.pointer {
-	cursor: pointer;
+.smallmargin {
+	margin: 5px;
+}
+.moremargin {
+	margin: 10px 5px;
+}
+.bold {
+	font-weight: bold;
+}
+.biggerText {
+	font-size: 1.1em;
+}
+.relative {
+	position: relative;
 }

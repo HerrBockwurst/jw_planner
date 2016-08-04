@@ -36,7 +36,7 @@
 	border: 1px solid #006a05;
 	position: absolute;
 }
-.formrow input[type=submit] {
+#login input[type=submit] {
 	height: 22px;
 	position: absolute;	
 }

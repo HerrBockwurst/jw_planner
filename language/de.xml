@@ -14,11 +14,17 @@
 	<common>
 		<username>Benutzername</username>
 		<password>Passwort</password>
+		<password_repeat>Passwort wiederholen</password_repeat>
 		<login>Einloggen</login>
 		<versammlung>Versammlung</versammlung>
+		<name>Name</name>
+		<email>Email-Adresse</email>
 	</common>
 	<admin>
 		<usersearch>Benutzer suchen</usersearch>
 		<search>Suchen</search>
+		<usersearch_results>Suchergebnis</usersearch_results>
+		<add_user>Neuer Benutzer</add_user>
+		<add_user_button>Benutzer anlegen</add_user_button>
 	</admin>
 </language>

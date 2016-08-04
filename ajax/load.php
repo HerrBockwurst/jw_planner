@@ -3,7 +3,9 @@ if(!defined('index')) exit;
 
 switch(getURL(2)):
 	case 'modul':
-		$bob->build(array(DIRECT, 'modules/'.getURL(3).'/html/index.php'));
+		if(!getURL(4)) $file = "index";
+		else $file = getURL(4);
+		$bob->build(array(DIRECT, 'modules/'.getURL(3).'/html/'.$file.'.php'));
 		break;
 	default:
 		$bob->build(array(PAGE, 'main'));

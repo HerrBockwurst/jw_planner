@@ -19,6 +19,10 @@
 		<versammlung>Versammlung</versammlung>
 		<name>Name</name>
 		<email>Email-Adresse</email>
+		<permissions>Berechtigungen</permissions>
+		<calendar>Kalender</calendar>
+		<admin>Admin</admin>
+		<system>System</system>
 	</common>
 	<admin>
 		<usersearch>Benutzer suchen</usersearch>
@@ -27,4 +31,13 @@
 		<add_user>Neuer Benutzer</add_user>
 		<add_user_button>Benutzer anlegen</add_user_button>
 	</admin>
+	<permissions>
+		<calendar.entry>Eigene Kalendereintrag verfassen/bearbeiten</calendar.entry>
+		<calendar.admin>Fremde Kalendereinträge bearbeiten</calendar.admin>
+		<admin.useredit>Benutzer bearbeiten</admin.useredit>
+		<admin.calendar>Kalender bearbeiten</admin.calendar>
+		<system.query>SQL-Befehle ausführen</system.query>
+		<system.log.vis>Log einsehen</system.log.vis>
+		<system.log.edit>Logs bearbeiten</system.log.edit>
+	</permissions>
 </language>

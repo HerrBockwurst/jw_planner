@@ -100,6 +100,10 @@ class user {
 			define('stopbob', true);
 		endif;
 	}
+	
+	public function getPerms() {
+		return $this->perms;
+	}
 }
 
 $user = new user();

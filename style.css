@@ -102,12 +102,13 @@ legend {
 	border-radius: 10px; 
 	-moz-border-radius: 10px; 
 	-webkit-border-radius: 10px;
+	border: 1px solid #888;
 }
 .modulheadline {
 	width: 100%;
 	border-bottom: 1px solid #888;
 	height: 30px;
-	border-radius-top: 10px 10px 0px 0px; 
+	border-radius: 10px 10px 0px 0px; 
 	-moz-border-radius: 10px 10px 0px 0px; 
 	-webkit-border-radius: 10px 10px 0px 0px;
 	background-color: #ccc;
@@ -179,4 +180,14 @@ legend {
 }
 .relative {
 	position: relative;
+}
+.pseudobutton {
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	background-color: #00b309;
+	border: 1px solid #006a05;
+	color: #eee;
+	padding: 2px;
+	text-align: center;
 }

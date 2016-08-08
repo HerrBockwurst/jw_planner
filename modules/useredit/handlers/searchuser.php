@@ -76,6 +76,11 @@ if(empty($result)):
 	exit;
 endif;
 
+/*
+ * Array neu sortieren, weil es sonst zu anzeigefehlern kommen kann
+ */
+$result = array_values($result);
+
 echo json_encode($result);
 
 ?>

@@ -88,6 +88,9 @@ class bob {
 				endforeach;
 				$string .= "<select id=\"$id\" name=\"$id\">$options</select>";
 				break;
+			case 'checkbox':
+				$string .= "<input type=\"checkbox\" id=\"$id\" name=\"$id\" value=\"1\" $predata />";
+				break;
 		endswitch;
 		
 		$string .= "<br class=\"floatbreak\" /></div>";
@@ -95,8 +98,8 @@ class bob {
 				
 	}
 	
-	public function addButton($name, $id = '', $rowclass = 'formrow') {
-		echo "<div class=\"$rowclass\"><input type=\"submit\" value=\"$name\" id=\"$id\" /></div>";
+	public function addButton($name, $id = '', $rowclass = 'formrow', $onclick = '') {
+		echo "<div class=\"$rowclass\"><input type=\"submit\" value=\"$name\" id=\"$id\" onclick=\"$onclick\" /></div>";
 	}
 	
 	public function createErrorField($id) {

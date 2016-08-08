@@ -1,3 +1,12 @@
+@media print {
+	#useradd_print, #useradd_print * {
+		visibility: visible;
+	}
+	#useradd_print {
+		border: 1px solid #333;
+		padding: 10px;
+	}
+}
 input[type="submit"] {
 	padding: 3px 20px;
 	border-radius: 4px; 
@@ -65,11 +74,17 @@ input[type="submit"] {
 	color: #333;
 	display:none;
 	cursor: default;
+	z-index: 2;
+	width: 675px;
+}
+#a_print {
+	display: none;
 }
 .adduser_perms_subset {
 	width: 200px;
 	margin: 5px;
 	padding: 5px;
+	float:left;
 }
 .adduser_perms_subset .item {
 	width: 190px;
@@ -88,4 +103,8 @@ input[type="submit"] {
 	color: #eee;
 	border: 1px dotted #006a05;
 	background-color: #00b309;
+}
+.formrow span {
+	position: absolute;
+	left: 200px;
 }

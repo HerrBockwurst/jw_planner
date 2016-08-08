@@ -10,6 +10,9 @@
 		<wrongAuth>Benutzername oder Passwort ungültig!</wrongAuth>
 		<usersearch_empty>Du kannst nicht beide Suchfelder leer lassen!</usersearch_empty>
 		<usersearch_noUserFound>Kein Benutzer gefunden!</usersearch_noUserFound>
+		<invalidEmail>Emailadresse ist ungültig.</invalidEmail>
+		<passwordNoMatch>Passwörter stimmen nicht überein!</passwordNoMatch>
+		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
 	</errors>
 	<common>
 		<username>Benutzername</username>
@@ -23,6 +26,8 @@
 		<calendar>Kalender</calendar>
 		<admin>Admin</admin>
 		<system>System</system>
+		<url>Adresse</url>
+		<print>Drucken</print>
 	</common>
 	<admin>
 		<usersearch>Benutzer suchen</usersearch>
@@ -30,6 +35,8 @@
 		<usersearch_results>Suchergebnis</usersearch_results>
 		<add_user>Neuer Benutzer</add_user>
 		<add_user_button>Benutzer anlegen</add_user_button>
+		<active>Aktiv</active>
+		<useradded>Der Benutzer wurde erfolgreich angelegt. Drucke diese Daten aus und gib Sie dem Bruder/der Schwester.</useradded>
 	</admin>
 	<permissions>
 		<calendar.entry>Eigene Kalendereintrag verfassen/bearbeiten</calendar.entry>
@@ -40,4 +47,7 @@
 		<system.log.vis>Log einsehen</system.log.vis>
 		<system.log.edit>Logs bearbeiten</system.log.edit>
 	</permissions>
+	<warn>
+		<emptyMail>Du hast keine Email Adresse eingetragen. Dies ist nicht empfehlenswert. Wenn du dennoch diesen Benutzer ohne Email Adresse erstellen möchtest, klicke erneut auf Anlegen.</emptyMail>
+	</warn>
 </language>

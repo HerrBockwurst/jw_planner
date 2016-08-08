@@ -78,3 +78,35 @@ function getSQLDate($date=NULL) {
 	$newdate = date("Y-m-d H:i:s",$date);
 	return $newdate;
 }
+
+function getVSArray() {
+	global $user, $mysql; 
+	$vs = array();
+	
+	$vsperms = $user->getSubPerm('admin.useredit.vs');
+	
+	if(!$vsperms): $vs[$user->vsid] = $user->versammlung;
+	else:
+		$clearperms = array();
+		
+		foreach($vsperms AS $perm):
+			$tmp = explode('.', $perm);
+			$clearperms[] = $tmp[count($tmp) - 1];
+		endforeach;
+		
+		$result = $mysql->execute("SELECT * FROM versammlungen");
+		$result = $result->fetch_all(MYSQLI_ASSOC);
+		
+		while($row = current($result)):
+				if(!in_array($row['vsid'], $clearperms) && !in_array('*', $clearperms)):
+				unset($result[key($result)]);
+			else:
+				$vs[$row['vsid']] = utf8_encode($row['name']);
+				next($result);
+			endif;
+		endwhile;
+	
+	endif;
+	
+	return $vs;
+}

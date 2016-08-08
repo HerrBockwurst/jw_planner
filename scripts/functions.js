@@ -13,9 +13,14 @@ function openModule(string) {
 	$('.removeme').remove();
 }
 
-function loadModule(url, divid) {
-	$.post(url, function(data) {
+function loadModule(url, divid, postdata = {}) {
+	$.post(url, postdata, function(data) {
 		$(divid).remove(); $('#site').append(data);
 	});
 	
+}
+
+function validateEmail(email) {
+	  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	  return re.test(email);
 }

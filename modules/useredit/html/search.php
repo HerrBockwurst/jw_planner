@@ -36,7 +36,7 @@ $data = json_decode($_POST['data'], true);
 		posting.done(function(data) {
 			jdata = JSON.parse(data);
 			if(typeof jdata.error !== "undefined") {
-				$('#usersearch_error').text(<?php displayString('errors>noPerm')?>).show(100).delay(3000).hide(100);				
+				$('#usersearch_error').text(jdata.error[0]).show(100).delay(3000).hide(100);				
 				return;
 			}
 			loadModule('<?php echo PROTO.HOME?>/ajax/load/modul/edituser', '#edituser', jdata);

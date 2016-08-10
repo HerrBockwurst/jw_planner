@@ -55,10 +55,10 @@ input[type="submit"] {
 	position: relative;
 	top: 0px;
 }
-#adduser_window input[type=submit] {
+#adduser_window input[type=submit], #edituser_window input[type=submit] {
 	margin: 0px 15px;
 }
-#adduser_perms {
+#adduser_perms, #edituser_perms {
 	position: absolute;
 	right: 0px;
 	top: -5px;
@@ -66,7 +66,7 @@ input[type="submit"] {
 	width: 100px;
 	float: left;
 }
-#adduser_perms_list {
+#adduser_perms_list, #edituser_perms_list {
 	position: absolute;
 	border: 1px solid #006a05;
 	background-color: #fefefe;
@@ -76,17 +76,18 @@ input[type="submit"] {
 	cursor: default;
 	z-index: 2;
 	width: 675px;
+	left: -200px;
 }
 #a_print {
 	display: none;
 }
-.adduser_perms_subset {
+.adduser_perms_subset, .edituser_perms_subset {
 	width: 200px;
 	margin: 5px;
 	padding: 5px;
 	float:left;
 }
-.adduser_perms_subset .item {
+.adduser_perms_subset .item, .edituser_perms_subset .item {
 	width: 190px;
 	padding: 5px;
 	margin: 5px 0px;
@@ -94,12 +95,12 @@ input[type="submit"] {
 	-moz-border-radius: 4px; 
 	-webkit-border-radius: 4px;
 }
-.adduser_perms_subset .inactive {
+.adduser_perms_subset .inactive, .edituser_perms_subset .inactive {
 	color: #840000;
 	border: 1px dotted #840000;
 	background-color: #ff9393;
 }
-.adduser_perms_subset .active {
+.adduser_perms_subset .active, .edituser_perms_subset .active {
 	color: #eee;
 	border: 1px dotted #006a05;
 	background-color: #00b309;

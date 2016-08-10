@@ -73,9 +73,13 @@ class bob {
 		
 		$string = "<div class=\"$class\">
 			<label for=\"$id\">$label</label>";
+		
+		$attr = "";
+		if(isset($fielddata['disabled'])) $attr .= 'disabled'; 
+		
 		switch($fielddata[0]):
 			case 'text': 
-				$string .= "<input type=\"text\" id=\"$id\" name=\"$id\" value=\"$predata\" />";
+				$string .= "<input type=\"text\" id=\"$id\" name=\"$id\" value=\"$predata\" $attr />";
 				break;
 			case 'password':
 				$string .= "<input type=\"password\" id=\"$id\" name=\"$id\" value=\"$predata\" />";

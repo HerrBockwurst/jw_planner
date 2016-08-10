@@ -25,6 +25,23 @@ if(!array_key_exists($result['vsid'], getVSArray())):
 	exit;
 endif;
 
+$data = array("uid" => $result['uid'], "name" => $result['name'], "vsid" => $result['vsid'], "email" => $result['email'], "active" => $result['active']);
 
+/*
+ * Permissions abfragen
+ */
 
+$result = $mysql->execute("SELECT perms FROM permissions WHERE uid = ? LIMIT 1", 's', $data['uid']);
+
+if($result->num_rows != 1):
+	$data = array('error' => getString('errors>MySQL'));
+	echo json_encode($data);
+	exit;
+endif;
+
+$result = $result->fetch_assoc();
+$data['perms'] = json_decode($result['perms']);
+
+echo json_encode($data);
+exit;
 ?>

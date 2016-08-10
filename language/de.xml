@@ -35,8 +35,11 @@
 		<usersearch_results>Suchergebnis</usersearch_results>
 		<add_user>Neuer Benutzer</add_user>
 		<add_user_button>Benutzer anlegen</add_user_button>
+		<edit_user>Benutzer bearbeiten</edit_user>
+		<edit_user_button>Benutzer updaten</edit_user_button>
 		<active>Aktiv</active>
 		<useradded>Der Benutzer wurde erfolgreich angelegt. Drucke diese Daten aus und gib Sie dem Bruder/der Schwester.</useradded>
+		<delete>Benutzer löschen</delete>
 	</admin>
 	<permissions>
 		<calendar.entry>Eigene Kalendereintrag verfassen/bearbeiten</calendar.entry>
@@ -46,6 +49,7 @@
 		<system.query>SQL-Befehle ausführen</system.query>
 		<system.log.vis>Log einsehen</system.log.vis>
 		<system.log.edit>Logs bearbeiten</system.log.edit>
+		<system.vsmanagement>Versammlungen verwalten</system.vsmanagement>
 	</permissions>
 	<warn>
 		<emptyMail>Du hast keine Email Adresse eingetragen. Dies ist nicht empfehlenswert. Wenn du dennoch diesen Benutzer ohne Email Adresse erstellen möchtest, klicke erneut auf Anlegen.</emptyMail>

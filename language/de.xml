@@ -6,7 +6,7 @@
 	<errors>
 		<filenotfound>Datei wurde nicht gefunden!</filenotfound>
 		<invalidFormSubmit>Bitte fülle das Formular vollständig aus!</invalidFormSubmit>
-		<MySQL>Es ist ein MySQL Fehler aufgetreten. Bitte versuch es später erneut!</MySQL>
+		<MySQL>Es ist ein Datenbankfehler aufgetreten. Bitte versuch es später erneut!</MySQL>
 		<wrongAuth>Benutzername oder Passwort ungültig!</wrongAuth>
 		<usersearch_empty>Du kannst nicht beide Suchfelder leer lassen!</usersearch_empty>
 		<usersearch_noUserFound>Kein Benutzer gefunden!</usersearch_noUserFound>
@@ -40,6 +40,8 @@
 		<active>Aktiv</active>
 		<useradded>Der Benutzer wurde erfolgreich angelegt. Drucke diese Daten aus und gib Sie dem Bruder/der Schwester.</useradded>
 		<delete>Benutzer löschen</delete>
+		<userDeleted>Benutzer erfolgreich gelöscht!</userDeleted>
+		<userUpdated>Benutzer erfolgreich geupdated!</userUpdated>
 	</admin>
 	<permissions>
 		<calendar.entry>Eigene Kalendereintrag verfassen/bearbeiten</calendar.entry>

@@ -208,3 +208,11 @@ legend {
 	display: none;
 	text-align: center;
 }
+.success {
+	padding: 5px;
+	color: #00bb00;
+	border: 1px solid #00bb00;
+	background-color: #d5ffd5;
+	display: none;
+	text-align: center;
+}

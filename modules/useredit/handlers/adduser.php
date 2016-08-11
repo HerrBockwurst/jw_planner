@@ -74,6 +74,12 @@ if($_POST['active'] == 1) $active = 'active';
  */
 $email = $_POST['email'];
 
+if($email != '' && !filter_var($email, FILTER_VALIDATE_EMAIL)):
+	$data = array('error' => getString('errors>invalidEmail'));
+	echo json_encode($data);
+	exit;
+endif;
+
 /*
  * Versammlung
  */

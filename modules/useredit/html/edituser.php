@@ -10,6 +10,7 @@ global $user;
 				<legend><?php displayString('admin>edit_user')?></legend>
 				<div id="edituser_warn" class="warn"></div>
 				<div id="edituser_error" class="error"></div>
+				<div id="edituser_success" class="success"></div>
 				<?php
 				
 				$checked = "";
@@ -34,7 +35,10 @@ global $user;
 							/*
 							 * Liste der Permissions erstellen
 							 */
-							$uperms = $_POST['perms'];
+							$uperms = array();
+							if(isset($_POST['perms'])) $uperms = $_POST['perms']; 
+							
+							 
 							foreach($uperms AS $key => $perm) if(!$user->hasPerm($perm)) unset($uperms[$key]); //Perms die der Benutzer nicht hat, werden nicht angezeigt
 								
 							$activeperms = array();
@@ -59,7 +63,7 @@ global $user;
 										$state = 'inactive';
 										if(in_array($perm, $activeperms)) $state = 'active';
 										?>
-										<div id="<?php echo "id_".$counter ?>" class="clickable item <?php echo $state ?>" onclick="toggle('<?php echo $perm?>', '#<?php echo "id_".$counter;?>');">
+										<div id="<?php echo "e_id_".$counter ?>" class="clickable item <?php echo $state ?>" onclick="e_toggle('<?php echo $perm?>', '#<?php echo "e_id_".$counter;?>');">
 											<?php displayString('permissions>'.$perm)?>
 										</div>
 										<?php
@@ -77,9 +81,9 @@ global $user;
 			</fieldset>
 			<?php $bob->addButton(getString('admin>edit_user_button'), '', 'formrow', "$('#edituser').submit();")?>
 		</div>
-		<?php var_dump($_POST)?>
 	</div>
 </div>
+<?php reset($uperms); ?>
 <script>
 	$("#edituser_perms_button").click(function() {
 		$("#edituser_perms_list").show(100);
@@ -88,21 +92,96 @@ global $user;
 		$("#edituser_perms_list").hide(100);
 	});
 
-	var permsToDel = [];
-	var permsToAdd = [];
- 
+	var e_perms = [<?php while($cperm = current($uperms)): echo "\"$cperm\""; if(next($uperms)) echo ","; endwhile;?>]; <?php reset($uperms) ?>
 
 	function e_toggle(perm, field) {
 		if($(field).hasClass('inactive')) {
 			$(field).removeClass('inactive').addClass('active');
-			perms[perms.length] = perm;
-			$('#e_pcount').text(perms.length);
+			e_perms[e_perms.length] = perm;
+			$('#e_pcount').text(e_perms.length);
 		} else {
 			$(field).removeClass('active').addClass('inactive');
-			perms.splice(perms.indexOf(perm), 1);
-			$('#e_pcount').text(perms.length);
+			e_perms.splice(e_perms.indexOf(perm), 1);
+			$('#e_pcount').text(e_perms.length);
 		}
 	}
+	
+	var e_mailempty = false;
+	
+	$('#edituser').submit(function(event) {
+		event.preventDefault();
+		$('#edituser_warn').hide(100);
+		$('#edituser_error').hide(100);
+
+		var e_name = $('#e_name').val(),
+			e_uid = $('#e_uid').val(),
+			e_email = $('#e_email').val(),
+			e_p1 = $('#e_p1').val(),
+			e_p2 = $('#e_p2').val(),
+			e_del = 0,
+			e_vs = $('#e_versammlung').val(),
+			e_active = 0;
+
+		if($('#e_active').prop('checked')) {
+			e_active = 1;
+		}
+
+		if($('#e_delete').prop('checked')) {
+			e_del = 1;
+		}
+
+		if(e_email == '' && e_mailempty == false && e_del == 0) {
+			$('#edituser_warn').text('<?php displayString('warn>emptyMail') ?>');
+			$('#edituser_warn').show(100);
+			e_mailempty = true;
+			return;
+		}
+
+		if(!validateEmail(e_email) && e_email != '' && e_del == 0) {
+			$('#edituser_error').text('<?php displayString('errors>invalidEmail') ?>');
+			$('#edituser_error').show(100);
+			return;
+		}
+
+		if(e_p1 != e_p2 && e_del == 0) {
+			$('#edituser_error').text('<?php displayString('errors>passwordNoMatch') ?>');
+			$('#edituser_error').show(100);
+			return;
+		}
+		if(e_name == '' || e_vs == '' && e_del == 0) {
+			$('#edituser_error').text('<?php displayString('errors>invalidFormSubmit') ?>');
+			$('#edituser_error').show(100);
+			return;
+		}
+
+		var obj = {uid: e_uid, name: e_name, email: e_email, p1: e_p1, p2: e_p2, del: e_del, vs: e_vs, active: e_active, perms: e_perms};
+
+		var posting = $.post('<?php echo PROTO.HOME?>/ajax/datahandler/updateuser', obj);
+
+		posting.done(function (data) {
+			console.log(data);
+			jdata = JSON.parse(data);
+
+			if(typeof jdata.error !== "undefined") {
+				$('#edituser_error').text(jdata.error[0]).show(100);
+				return;
+			}
+			if(typeof jdata.success !== "undefined") {
+				if(typeof jdata.deleted !== "undefined") {
+					$('#edituser').find('input').prop("disabled", true);
+					$('#edituser').find('input').prop("select", true);
+					$('#edituser_success').text(jdata.success[0]).show(100).delay(3000).hide(100);
+					setTimeout(function() {
+						closeModule('#edituser_window');
+						closeModule('#usersearch_window');
+					}, 3500);
+				}
+				$('#edituser_success').text(jdata.success[0]).show(100).delay(3000).hide(100); 
+				return;
+			}
+				
+		});
+	});
 	
 </script>
 <script class="removeme">$(openModule('#edituser_window'));</script>

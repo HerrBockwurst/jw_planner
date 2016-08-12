@@ -1,5 +1,7 @@
 <?php
 if(!defined('index')) exit;
+global $user;
+if(!$user->hasPerm('admin.useredit')) exit;
 ?>
 
 <div id="useredit" class="modul" style="width: 550px;">

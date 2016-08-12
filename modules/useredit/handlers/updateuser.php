@@ -1,4 +1,5 @@
 <?php
+if(!defined('index')) exit;
 global $mysql, $user;
 $perms = array();
 if(isset($_POST['perms'])) $perms = $_POST['perms'];

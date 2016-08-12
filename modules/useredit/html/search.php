@@ -1,5 +1,7 @@
 <?php
 if(!defined('index')) exit;
+global $user;
+if(!$user->hasPerm('admin.useredit')) exit;
 
 $data = json_decode($_POST['data'], true);
 ?>

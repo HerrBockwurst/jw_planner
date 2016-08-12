@@ -1,0 +1,48 @@
+#calendaradmin_inner {
+	padding: 5px 0px;
+}
+#button_posts, #button_cal {
+	position: absolute;
+	width: 120px;
+	height: 20px;
+	top: 7px;
+	overflow:hidden;
+}
+#button_posts span, #button_cal span {
+	margin-top: 2px;
+	display:block;
+}
+#button_posts {	
+	left: 300px;
+}
+#button_cal {
+	right: 15px;
+}
+#cadmin_main_search {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 250px;
+}
+#cadmin_main_list_inner {
+	overflow-y: auto;
+	height: 100px;
+}
+#cadmin_main_list_inner .item {
+	display:block;	
+	padding: 2px;
+} 
+#cadmin_main_list_inner .darker {
+	background-color: #9fffa5;
+}
+#cadmin_add_list_u, #cadmin_add_list_g {
+	width: 200px;
+}
+#cadmin_add_infos {
+	width: 300px;
+	float:left;
+	margin-right: 0px;
+}
+#cadmin_add_infos input, #cadmin_add_infos select {
+	margin-left: 110px;
+}

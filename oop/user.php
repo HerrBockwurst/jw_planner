@@ -78,7 +78,7 @@ class user {
 	public function getSubPerm($needle) {
 		$retval = array();
 		foreach($this->perms AS $perm):
-			if(strpos($perm, $needle) === 0):
+			if(strpos($perm, $needle) !== false):
 				$retval[] = $perm;
 			endif;
 		endforeach;

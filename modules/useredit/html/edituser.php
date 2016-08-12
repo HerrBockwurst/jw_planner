@@ -1,5 +1,7 @@
 <?php
+if(!defined('index')) exit;
 global $user;
+if(!$user->hasPerm('admin.useredit')) exit;
 ?>
 
 <div id="edituser_window" class="modul" style="width: 600px;">
@@ -39,7 +41,10 @@ global $user;
 							if(isset($_POST['perms'])) $uperms = $_POST['perms']; 
 							
 							 
-							foreach($uperms AS $key => $perm) if(!$user->hasPerm($perm)) unset($uperms[$key]); //Perms die der Benutzer nicht hat, werden nicht angezeigt
+							foreach($uperms AS $key => $perm):
+								if(!$user->hasPerm($perm) || strpos($perm, '.vs.') !== false) unset($uperms[$key]); //Perms die der Benutzer nicht hat, werden nicht angezeigt
+
+							endforeach;
 								
 							$activeperms = array();
 							
@@ -60,6 +65,7 @@ global $user;
 									<legend><?php displayString('common>'.$key)?></legend>
 									<?php 
 									foreach($cperm AS $perm):
+										if(strpos($perm, '.vs.') !== false) break;
 										$state = 'inactive';
 										if(in_array($perm, $activeperms)) $state = 'active';
 										?>
@@ -82,9 +88,8 @@ global $user;
 			<?php $bob->addButton(getString('admin>edit_user_button'), '', 'formrow', "$('#edituser').submit();")?>
 		</div>
 	</div>
-</div>
-<?php reset($uperms); ?>
-<script>
+	<?php reset($uperms); ?>
+	<script>
 	$("#edituser_perms_button").click(function() {
 		$("#edituser_perms_list").show(100);
 	});
@@ -183,5 +188,7 @@ global $user;
 		});
 	});
 	
-</script>
+	</script>
+</div>
+
 <script class="removeme">$(openModule('#edituser_window'));</script>

@@ -1,4 +1,5 @@
 <?php
+if(!defined('index')) exit;
 global $mysql, $user;
 
 $perms = array();

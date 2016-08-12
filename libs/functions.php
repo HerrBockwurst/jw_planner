@@ -83,7 +83,7 @@ function getVSArray() {
 	global $user, $mysql; 
 	$vs = array();
 	
-	$vsperms = $user->getSubPerm('admin.useredit.vs');
+	$vsperms = $user->getSubPerm('.vs.');
 	
 	if(!$vsperms): $vs[$user->vsid] = $user->versammlung;
 	else:

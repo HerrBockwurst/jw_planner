@@ -18,7 +18,7 @@ endif;
  * Wildcard * wird erkannt
  */
 
-$vs_subperms = $user->getSubPerm('admin.useredit.vs');
+$vs_subperms = $user->getSubPerm('.vs.');
 if(!$vs_subperms):
 	$versammlungen = array($user->vsid); // <- Liste der erlaubten Versammlungen ODER Liste mit Permissions
 else:

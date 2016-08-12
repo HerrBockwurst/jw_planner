@@ -1,4 +1,7 @@
-<?php global $bob, $user, $mysql; ?>
+<?php global $bob, $user, $mysql; 
+if(!defined('index')) exit;
+if(!$user->hasPerm('admin.useredit')) exit;
+?>
 
 <?php 
 /*
@@ -58,6 +61,7 @@ $vs = getVSArray();
 									<?php
 									
 									foreach($mainperms AS $perm):
+										if(strpos($perm, '.vs.') !== false) break;
 										?>
 										<div id="<?php echo "id_".$counter ?>" class="clickable item inactive" onclick="toggle('<?php echo $perm?>', '#<?php echo "id_".$counter;?>');">
 											<?php displayString('permissions>'.$perm)?>

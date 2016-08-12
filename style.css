@@ -101,6 +101,8 @@ legend {
 	-moz-border-radius: 20px; 
 	-webkit-border-radius: 20px;	
 	display: block;
+	float: left;
+	margin-right: 20px;
 }
 .modul {
 	background-color: rgba(255,255,255,0.95);

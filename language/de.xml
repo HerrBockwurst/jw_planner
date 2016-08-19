@@ -49,6 +49,10 @@
 		<c_bl_wl_g>Sonderrechte Gruppen</c_bl_wl_g>
 		<cal_infos>Kalenderinformationen</cal_infos>
 		<c_name>Kalendername</c_name>
+		<c_add_cal>Kalender anlegen</c_add_cal>
+		<c_edit_cal>Kalender updaten</c_edit_cal>
+		<c_added>Kalender erfolgreich angelegt</c_added>
+		<c_delete>Kalender löschen</c_delete>
 	</admin>
 	<calendar>
 		<no_cal_applied>Noch kein Kalender angelegt.</no_cal_applied>

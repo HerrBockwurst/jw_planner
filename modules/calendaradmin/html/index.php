@@ -27,13 +27,14 @@ if(!$user->hasPerm('admin.calendar')) exit;
 					?><div class="item darker"><?php displayString('calendar>no_cal_applied')?></div> <?php
 				else:
 					$i = 0;
-					while($row = $result->fetch_assoc):
+					while($row = $result->fetch_assoc()):
 						?>
-						<div class="item clickable relative <?php if(($i % 2) == 0) echo 'darker'; ?>">
+						<div class="item clickable relative <?php if(($i % 2) == 0) echo 'darker'; ?>" onclick="loadModule('<?php echo PROTO.HOME ?>/ajax/load/modul/calendaradmin/editcal/<?php echo $row['cid']?>', '#cadmin_editcal')">
 							<span style="position:relative; left: 0px;"><?php echo $row['name']?> (#<?php echo $row['cid']?>)</span>
-							<span style="position:relative; right: 0px;"><?php echo $row['adminname']?> (<?php echo $row['admin']?>)</span>
+							<span style="position:absolute; right: 0px;"><?php echo $row['adminname']?> (<?php echo $row['admin']?>)</span>
 						</div>
 						<?php 
+						$i++;
 					endwhile;
 				endif;
 				

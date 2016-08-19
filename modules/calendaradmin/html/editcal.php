@@ -1,40 +1,59 @@
 <?php 
 if(!defined('index')) exit;
-global $user;
+global $user, $mysql;
 if(!$user->hasPerm('calendar.admin')) exit;
 
+$result = $mysql->execute("SELECT * FROM calendar WHERE cid = ? LIMIT 1" , 'i', intval(getURL(5)));
+
+/*
+ * Teste Rechte
+ */
+
+$result = $result->fetch_assoc();
+
+if(!array_key_exists($result['vsid'], getVSArray())):
+	$name = '';
+	$vsid = $user->vsid;
+	$error = getString('errors>noPerm');
+else:
+	$name = $result['name'];
+	$vsid = $result['vsid'];
+endif;
+
 ?>
-<div id="cadmin_newcal" class="modul" style="width: 580px;">
-	<div class="modulheadline"><img src="images/close.png" onclick="closeModule('#cadmin_newcal')" class="clickable" /></div>
+
+<div id="cadmin_editcal" class="modul" style="width: 580px;">
+	<div class="modulheadline"><img src="images/close.png" onclick="closeModule('#cadmin_editcal')" class="clickable" /></div>
 	<div class="inner relative">
-		<div id="c_newcal_error" class="error smallmargin"></div>
-		<div id="c_newcal_success" class="success smallmargin"></div>
-		<fieldset id="cadmin_add_infos">
+		<div id="c_editcal_error" class="error smallmargin"></div>
+		<div id="c_editcal_success" class="success smallmargin"></div>
+		<fieldset id="cadmin_edit_infos">
 			<legend><?php displayString('admin>cal_infos')?></legend>
 			<?php 
-			$bob->startForm('cadmin_add');
-			$bob->addFormRow('c_add_name', getString('admin>c_name'), array('text'));
-			$bob->addFormRow('c_add_vs', getString('common>versammlung'), array('select', getVSArray(), $user->vsid));
+			$bob->startForm('cadmin_edit');
+			$bob->addFormRow('c_edit_name', getString('admin>c_name'), array('text'), $name);
+			$bob->addFormRow('c_edit_vs', getString('common>versammlung'), array('select', getVSArray(), $vsid));
+			$bob->addFormRow('c_edit_delete', getString('admin>c_delete'), array('checkbox'));
 			$bob->endForm();
 			
 			?>
 		</fieldset>
 		<div style="display:inline; float: right; width: 240px;">
-			<fieldset id="cadmin_add_list_u" class="smaller">
+			<fieldset id="cadmin_edit_list_u" class="smaller">
 				<legend><?php displayString('admin>c_bl_wl_u')?></legend>
 				Funktion noch nicht verf&uuml;gbar
 				<!--  <input type="text" id="c_list_u" value=""/> -->
 			</fieldset>
-			<fieldset id="cadmin_add_list_g" class="smaller">
+			<fieldset id="cadmin_edit_list_g" class="smaller">
 				<legend><?php displayString('admin>c_bl_wl_g')?></legend>
 				Funktion noch nicht verf&uuml;gbar
 			</fieldset>
 		</div>
 		<br class="floatbreak" />
-		<?php $bob->addButton(getString('admin>c_add_cal'), 'c_newcal_button', 'formrow', "$('#cadmin_add').submit();")?>
+		<?php $bob->addButton(getString('admin>c_edit_cal'), 'c_editcal_button', 'formrow', "$('#cadmin_edit').submit();")?>
 	</div>
 	<script>
-	$('#cadmin_add').submit(function (event) {
+	$('#cadmin_edit').submit(function (event) {
 		
 		event.preventDefault();
 	
@@ -66,6 +85,6 @@ if(!$user->hasPerm('calendar.admin')) exit;
 	</script>
 </div>
 
-<script class="removeme">$(openModule('#cadmin_newcal'));</script>
+<script class="removeme">$(openModule('#cadmin_editcal'));</script>
 
 <?php

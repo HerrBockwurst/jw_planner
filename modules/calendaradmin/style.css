@@ -35,14 +35,23 @@
 #cadmin_main_list_inner .darker {
 	background-color: #9fffa5;
 }
-#cadmin_add_list_u, #cadmin_add_list_g {
+#cadmin_add_list_u, #cadmin_add_list_g, #cadmin_edit_list_u, #cadmin_edit_list_u {
 	width: 200px;
 }
-#cadmin_add_infos {
+#cadmin_add_list_u legend, #cadmin_add_list_g legend, #cadmin_edit_list_u legend, #cadmin_edit_list_g legend {
+	font-size: 1.2em;
+}
+#cadmin_add_infos, #cadmin_edit_infos {
 	width: 300px;
 	float:left;
 	margin-right: 0px;
 }
-#cadmin_add_infos input, #cadmin_add_infos select {
+#cadmin_add_infos input, #cadmin_add_infos select, #cadmin_edit_infos input, #cadmin_edit_infos select {
 	margin-left: 110px;
+}
+#c_newcal_button, #c_editcal_button {
+	margin-left: 15px;
+}
+#c_edit_delete {
+	right: 10px;
 }

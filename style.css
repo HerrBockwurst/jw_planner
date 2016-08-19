@@ -189,6 +189,12 @@ legend {
 .biggerText {
 	font-size: 1.1em;
 }
+.small {
+	font-size: 0.9em;
+}
+.smaller {
+	font-size: 0.8em;
+}
 .relative {
 	position: relative;
 }

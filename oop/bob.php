@@ -67,7 +67,7 @@ class bob {
 	public function addFormRow($id, $label, $fielddata, $predata = '', $class = "formrow") {
 		
 		if($fielddata[0] == 'hidden'):
-			echo "<input type=\"hidden\" name=\"$id\" value=\"$fielddata[1]\" />";
+			echo "<input type=\"hidden\" name=\"$id\" id=\"$id\" value=\"$predata\" />";
 			return;
 		endif;
 		

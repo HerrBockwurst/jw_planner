@@ -57,27 +57,39 @@ endif;
 		
 		event.preventDefault();
 	
-		$('#c_newcal_error').hide(100);
-		$('#c_newcal_success').hide(100);
+		$('#c_editcal_error').hide(100);
+		$('#c_editcal_success').hide(100);
 		
-		var c_add_name = $('#c_add_name').val(),
-			c_add_vs = $('#c_add_vs').val();
+		var c_edit_name = $('#c_edit_name').val(),
+			c_edit_vs = $('#c_edit_vs').val();
+			c_edit_del = 0;
+
+		if($('#c_edit_delete').prop('checked')) {
+			c_edit_del = 1;
+		}
 	
-		if(c_add_name == '') {
-			$('#c_newcal_error').text('<?php displayString('errors>invalidFormSubmit')?>').show(100);
+		if(c_edit_name == '') {
+			$('#c_editcal_error').text('<?php displayString('errors>invalidFormSubmit')?>').show(100);
 			return;
 		}
 	
-		var posting = $.post('<?php echo PROTO.HOME?>/ajax/datahandler/addcal', {name: c_add_name, vs: c_add_vs});
+		var posting = $.post('<?php echo PROTO.HOME?>/ajax/datahandler/editcal', {cid: <?php echo getURL(5)?>, name: c_edit_name, vs: c_edit_vs, del: c_edit_del});
 		posting.done(function(data) {
 			var jdata = JSON.parse(data);
-			console.log(jdata);
 			if(typeof jdata.error !== "undefined") {
-				$('#c_newcal_error').text(jdata.error[0]).show(100);
+				$('#c_editcal_error').text(jdata.error[0]).show(100);
 				return;
 			}
 
-			$('#c_newcal_success').text(jdata.success[0]).show(100);
+			$('#c_editcal_success').text(jdata.success[0]).show(100);
+			
+			if(typeof jdata.deleted !== "undefined") {
+				$('#cadmin_editcal').find('input').prop('disabled', true);
+				setTimeout(function() {
+					closeModule('#cadmin_editcal');
+					$.get('<?php echo PROTO.HOME?>/ajax/load/modul/calendaradmin', function(data) { $('#calendaradmin').remove(); $('#site').append(data); })
+				}, 2000);
+			}
 			
 		});
 	

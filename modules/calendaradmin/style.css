@@ -55,3 +55,63 @@
 #c_edit_delete {
 	right: 10px;
 }
+#cadmin_posts_field {
+	width: 400px;
+	float: left;
+}
+#cadmin_posts_add {
+	width: 200px;
+	float: right;
+}
+#cadmin_posts_add input {
+	margin-left: 80px;
+	width: 110px;
+}
+#c_posts_selector {
+	width: 100%;
+}
+.cadmin_posts_post {
+	border: 1px solid #777777;
+	margin: 5px;
+	color: #555;
+	font-weight: bold;
+	height: 4em;
+	text-align: center;
+	background-color: #ddffdf;
+	padding: 5px 5px 5px 0px;
+}
+.cadmin_posts_post:hover {
+	background-color: #f0fff1;
+}
+.cadmin_posts_post_start, .cadmin_posts_post_end, .cadmin_posts_post_expire, .cadmin_posts_post_count {
+	float:left;
+	width: auto;
+	margin-right: 10px;
+}	
+.cadmin_posts_post .smallerDate {
+	font-size: 0.9em;
+}
+.cadmin_posts_post .time {
+	font-size: 2.1em;
+}
+.cadmin_posts_post_count_content {
+	font-size: 1.1em;
+	display:block;
+	padding: 3px;
+}
+.postheader {
+	font-weight: normal;
+	display:block;
+	margin-bottom: 5px;
+	font-size: 1em;
+}
+.postdeletebutton {
+	float:right;
+	padding: 5px;
+	border: 1px solid #777777;
+	background-color: #fff;
+}
+.postdeletebutton img {
+	vertical-align: middle;
+}
+

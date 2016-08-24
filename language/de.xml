@@ -13,6 +13,9 @@
 		<invalidEmail>Emailadresse ist ungültig.</invalidEmail>
 		<passwordNoMatch>Passwörter stimmen nicht überein!</passwordNoMatch>
 		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
+		<noCal>Kein Kalender gefunden.</noCal>
+		<PostTimeFailure>Deine Datumseingabe ist falsch. Das Auslaufdatum muss größer als das Enddatum sein, gleichzeitig muss das Enddatum nach den Startdatum liegen.</PostTimeFailure>
+		<invalidPers>Die Anzahl der Personen muss zwischen 1 und ?#? liegen!</invalidPers>
 	</errors>
 	<common>
 		<username>Benutzername</username>
@@ -28,6 +31,9 @@
 		<system>System</system>
 		<url>Adresse</url>
 		<print>Drucken</print>
+		<start>Beginn</start>
+		<end>Ende</end>
+		<entrys>Einträge</entrys>
 	</common>
 	<admin>
 		<usersearch>Benutzer suchen</usersearch>
@@ -38,6 +44,8 @@
 		<edit_user>Benutzer bearbeiten</edit_user>
 		<edit_user_button>Benutzer updaten</edit_user_button>
 		<active>Aktiv</active>
+		<expire>Läuft ab</expire>
+		<add>Anlegen</add>		
 		<useradded>Der Benutzer wurde erfolgreich angelegt. Drucke diese Daten aus und gib Sie dem Bruder/der Schwester.</useradded>
 		<delete>Benutzer löschen</delete>
 		<userDeleted>Benutzer erfolgreich gelöscht!</userDeleted>
@@ -53,9 +61,15 @@
 		<c_edit_cal>Kalender updaten</c_edit_cal>
 		<c_added>Kalender erfolgreich angelegt</c_added>
 		<c_delete>Kalender löschen</c_delete>
+		<c_deleted>Kalender erfolgreich gelöscht!</c_deleted>
+		<c_edited>Kalender erfolgreich geupdated!</c_edited>
+		<c_posts_add>Termin hinzufügen</c_posts_add>
+		<appl_count>Plätze</appl_count>
+		<post_added>Termin erfolgreich angelegt!</post_added>
 	</admin>
 	<calendar>
 		<no_cal_applied>Noch kein Kalender angelegt.</no_cal_applied>
+		<no_posts_applied>Keine Termine für den Kalender angelegt.</no_posts_applied>
 	</calendar>
 	<permissions>
 		<calendar.entry>Eigene Kalendereintrag verfassen/bearbeiten</calendar.entry>

@@ -41,8 +41,7 @@ class MySQL {
 		$stmt = $this->mysql->prepare($qry);
 		
 		if($stmt == false):
-			echo $this->mysql->error;
-			exit;
+			return false;
 		endif;
 		/*
 		 * Binde $mixed an $stmt

@@ -12,6 +12,7 @@ define('HOME', 'localhost:90');
 define('TITLE', 'JWPlanner');
 define('VERSION', 'PREALPHA 0.1');
 define('SESSIONTIME', 20);
+define('MAXPERS', 100);
 
 /*
  * Für Bob

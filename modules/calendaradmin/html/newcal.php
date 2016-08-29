@@ -1,7 +1,7 @@
 <?php 
 if(!defined('index')) exit;
 global $user;
-if(!$user->hasPerm('calendar.admin')) exit;
+if(!$user->hasPerm('admin.calendar')) exit;
 
 ?>
 <div id="cadmin_newcal" class="modul" style="width: 580px;">

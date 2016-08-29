@@ -1,7 +1,7 @@
 <?php 
 if(!defined('index')) exit;
 global $user, $mysql;
-if(!$user->hasPerm('calendar.admin')) exit;
+if(!$user->hasPerm('admin.calendar')) exit;
 
 $cals = $mysql->execute("SELECT cid, name FROM calendar WHERE vsid = ?", 's', $user->vsid);
 $cals = $cals->fetch_all(MYSQLI_ASSOC);
@@ -15,13 +15,13 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 		<div style="margin: 10px auto; width: 90%;">
 			<select id="c_posts_selector">
 				<?php 
-					if(empty($cals)):
-						?><option value="0"><?php displayString('calendar>no_cal_applied')?></option><?php
-					else:
-						foreach($cals AS $cal):
-							?><option value="<?php echo $cal['cid']?>"><?php echo $cal['name']?> (#<?php echo $cal['cid']?>)</option><?php 
-						endforeach;
-					endif;
+				if(empty($cals)):
+					?><option value="0"><?php displayString('calendar>no_cal_applied')?></option><?php
+				else:
+					foreach($cals AS $cal):
+						?><option value="<?php echo $cal['cid']?>"><?php echo $cal['name']?> (#<?php echo $cal['cid']?>)</option><?php 
+					endforeach;
+				endif;
 				?>
 			</select>
 		</div>
@@ -47,8 +47,18 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 		<br class="floatbreak" /><br />
 	</div>
 	<script>
+	function updatePosts(data) {
+		setTimeout(function() {
+			$('#cadmin_posts_field_content').html(data);
+			}, 100);
+		$('#cadmin_posts_field_content').hide(100).show(100);
+	}
+	
 	$('#c_posts_selector').change(function() {
 		$('#c_posts_cid').val($('#c_posts_selector').val());
+		$.post('<?php echo PROTO.HOME?>/ajax/datahandler/getposts', {cid: $('#c_posts_selector').val()}, function(data) {
+			updatePosts(data);
+		});
 	});
 	
 	var patt = new RegExp("[0-9]{1,2}.[0-9]{1,2}.[0-9]{4} [0-9]{1,2}:[0-9]{2}");
@@ -107,11 +117,24 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 
 			$('#c_posts_success').text(jdata.success[0]).show(100);
 			$.post('<?php echo PROTO.HOME?>/ajax/datahandler/getposts', {cid: c_posts_cid}, function(data) {
-				$('#cadmin_posts_field_content').hide(100).html(data).show(100);
+				updatePosts(data);
 			});
 			
 		});	
 	});
+
+	function deletepost(pid) {		
+		$.post('<?php echo PROTO.HOME?>/ajax/datahandler/delpost', {pid: pid}, function(data) {
+			jdata = JSON.parse(data);
+			if(typeof jdata.error !== "undefined") {
+				$('#c_posts_error').text(jdata.error[0]).show(100);
+				return;
+			}			
+			$.post('<?php echo PROTO.HOME?>/ajax/datahandler/getposts', {cid: $('#c_posts_selector').val()}, function(data) {
+				updatePosts(data);
+			});
+		});
+	}
 	</script>
 </div>
 <script class="removeme">

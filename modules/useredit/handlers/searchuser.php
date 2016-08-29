@@ -2,6 +2,8 @@
 
 if(!defined('index')) exit;
 global $user, $mysql;
+if(!$user->hasPerm('admin.useredit')) exit;
+
 
 if($_POST['username'] == '' && $_POST['versammlung'] == ''):
 	$data = array('error' => getString('errors>usersearch_empty'));

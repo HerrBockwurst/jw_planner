@@ -110,3 +110,16 @@ function getVSArray() {
 	
 	return $vs;
 }
+
+function deleteOldPosts() {
+	global $mysql;
+	
+	$result = $mysql->execute("SELECT pid FROM posts WHERE expire <= ?", 'i', time());
+	if($result->num_rows == 0) return;
+	$result = $result->fetch_all(MYSQLI_ASSOC);
+	
+	foreach($result AS $row):
+		$mysql->execute("DELETE FROM posts WHERE pid = ?", 'i', $row['pid']);
+		$mysql->execute("DELETE FROM entrys WHERE pid = ?", 'i', $row['pid']);
+	endforeach;
+}

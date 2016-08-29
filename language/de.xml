@@ -16,6 +16,7 @@
 		<noCal>Kein Kalender gefunden.</noCal>
 		<PostTimeFailure>Deine Datumseingabe ist falsch. Das Auslaufdatum muss größer als das Enddatum sein, gleichzeitig muss das Enddatum nach den Startdatum liegen.</PostTimeFailure>
 		<invalidPers>Die Anzahl der Personen muss zwischen 1 und ?#? liegen!</invalidPers>
+		<pid_not_found>Termin nicht gefunden.</pid_not_found>
 	</errors>
 	<common>
 		<username>Benutzername</username>
@@ -66,10 +67,12 @@
 		<c_posts_add>Termin hinzufügen</c_posts_add>
 		<appl_count>Plätze</appl_count>
 		<post_added>Termin erfolgreich angelegt!</post_added>
+		<post_deleted>Termin gelöscht!</post_deleted>
 	</admin>
 	<calendar>
 		<no_cal_applied>Noch kein Kalender angelegt.</no_cal_applied>
 		<no_posts_applied>Keine Termine für den Kalender angelegt.</no_posts_applied>
+		<no_entrys_applied>Es hat sich noch niemand eingetragen!</no_entrys_applied>
 	</calendar>
 	<permissions>
 		<calendar.entry>Eigene Kalendereintrag verfassen/bearbeiten</calendar.entry>

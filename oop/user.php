@@ -9,7 +9,8 @@ class user {
 	
 	function __construct() {
 		global $mysql;
-		$this->auth();				
+		$this->perms = array();
+		$this->auth();
 	}
 	
 	private function auth() {

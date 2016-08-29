@@ -1,7 +1,7 @@
 <?php
 if(!defined('index')) exit;
 global $mysql, $user;
-
+if(!$user->hasPerm('admin.useredit')) exit;
 /*
  * Benutzer abfragen
  */

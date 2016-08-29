@@ -1,7 +1,7 @@
 <?php
 if(!defined('index')) exit;
 global $user, $mysql;
-if(!$user->hasPerm('calendar.admin')) exit;
+if(!$user->hasPerm('admin.calendar')) exit;
 
 /*
  * Teste Versammlungsrechts
@@ -35,13 +35,36 @@ endif;
  */
 
 if($_POST['del'] == 1):
+	/*
+	 * PID's abrufen
+	 */
+
+	$pids = $mysql->execute("SELECT pid FROM posts WHERE cid = ?", 'i', $_POST['cid']);
+	$pids = $pids->fetch_all(MYSQLI_ASSOC);
+
 	if(!$mysql->execute("DELETE FROM calendar WHERE cid = ?", 'i', $_POST['cid'])):
 		$data = array("error" => getString('errors>MySQL'));
 		echo json_encode($data);
 		exit;
 	endif;
 	
-	//TODO Posts
+	if(!$mysql->execute("DELETE FROM posts WHERE cid = ?", 'i', $_POST['cid'])):
+		$data = array("error" => getString('errors>MySQL'));
+		echo json_encode($data);
+		exit;
+	endif;
+	
+	/*
+	 * Entrys anhand der PID's löschen
+	 */
+	
+	foreach($pids AS $pid):
+		if(!$mysql->execute("DELETE FROM entrys WHERE pid = ?", 'i', $pid['pid'])):
+			$data = array("error" => getString('errors>MySQL'));
+			echo json_encode($data);
+			exit;
+		endif;
+	endforeach;
 	
 	$data = array("success" => getString('admin>c_deleted'), "deleted" => true);
 	echo json_encode($data);

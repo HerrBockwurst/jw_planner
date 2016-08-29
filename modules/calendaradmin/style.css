@@ -58,6 +58,8 @@
 #cadmin_posts_field {
 	width: 400px;
 	float: left;
+	max-height: 400px;
+	overflow-y: auto;
 }
 #cadmin_posts_add {
 	width: 200px;
@@ -99,7 +101,7 @@
 	display:block;
 	padding: 3px;
 }
-.postheader {
+#cadmin_posts_field_content .postheader {
 	font-weight: normal;
 	display:block;
 	margin-bottom: 5px;
@@ -107,11 +109,8 @@
 }
 .postdeletebutton {
 	float:right;
-	padding: 5px;
+	padding: 2px;
 	border: 1px solid #777777;
 	background-color: #fff;
-}
-.postdeletebutton img {
-	vertical-align: middle;
 }
 

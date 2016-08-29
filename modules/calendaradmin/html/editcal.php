@@ -1,7 +1,7 @@
 <?php 
 if(!defined('index')) exit;
 global $user, $mysql;
-if(!$user->hasPerm('calendar.admin')) exit;
+if(!$user->hasPerm('admin.calendar')) exit;
 
 $result = $mysql->execute("SELECT * FROM calendar WHERE cid = ? LIMIT 1" , 'i', intval(getURL(5)));
 

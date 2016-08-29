@@ -1,7 +1,9 @@
 <?php
 if(!defined('index')) exit;
 global $user, $mysql;
-if(!$user->hasPerm('calendar.admin')) exit;
+if(!$user->hasPerm('admin.calendar')) exit;
+
+deleteOldPosts();
 
 /*
  * Teste Berechtigung für Kalender
@@ -61,7 +63,7 @@ foreach($posts AS $post):
 			<span class="cadmin_posts_post_count_content" style="border-bottom: 1px solid #444">0</span>
 			<span class="cadmin_posts_post_count_content"><?php echo $post['count']?></span>
 		</div>
-		<div class="postdeletebutton clickable">
+		<div class="postdeletebutton clickable" onclick="deletepost(<?php echo $post['pid']?>)">
 			<img src="<?php echo PROTO.HOME?>/images/postdelete.png" />
 		</div>
 	</div>

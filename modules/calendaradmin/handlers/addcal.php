@@ -1,7 +1,7 @@
 <?php
 if(!defined('index')) exit;
 global $user, $mysql;
-if(!$user->hasPerm('calendar.admin')) exit;
+if(!$user->hasPerm('admin.calendar')) exit;
 
 /*
  * Teste auf leeren Wert

@@ -1,0 +1,92 @@
+#cal_posts_selector {
+	width: 100%;
+}
+#calendar_posts_field .post {
+	border: 1px solid #00bb00;	
+	margin-right: 10px;
+	float:left;
+	background-color: #ddffdf;
+	width: 150px;
+	text-align: center;
+	padding: 5px 0px;
+}
+#calendar_posts_field .full {
+	border: 1px solid #ff8000;
+	background-color: #ffe9d2;
+}
+#calendar_posts_field .smallerDate, #calendar_posts_field .postheader, #calendar_posts_field .time {	
+	color: #333;
+	font-weight: bold;
+}
+.count span:first-child {
+	border-bottom: 1px solid #333;
+}
+#calendar_posts_field span {
+	display: block;
+}
+#calendar_posts_field .smallerDate {
+	font-size: 0.9em;
+}
+#calendar_posts_field .postheader {
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+#calendar_posts_field .time {
+	font-weight: bold;
+	font-size: 2.1em;
+}
+.post .bg {
+	background-color: #fefefe;
+	padding: 5px 0px;
+	margin-bottom: 10px;
+}
+.post .count {
+	font-weight: bold;	
+	width: 70%;
+	margin: 0 auto;
+}
+.count span {
+	font-size: 2.1em;
+}
+.post .tooltip_count {
+	font-weight: normal;
+	font-size: 1em;
+	position: absolute;
+	top: 0px;
+	right: -100px;
+	width: 170px;
+	text-align: left;
+	padding: 10px;
+	background-color: rgba(255,255,255,0.9);
+	display: none;
+	max-height: 100px;
+	overflow-y: auto;
+	cursor: auto;
+	z-index: 2;
+}
+.tooltip_count .pic {
+	float: left;
+	width: 20px;
+	height: 20px;
+	padding: 3px;
+	background-color: #123456;
+	color: #fefefe;
+	font-size: 20px;
+	text-align: center;
+	margin-right: 10px;
+	border-radius: 20px; 
+	-moz-border-radius: 20px; 
+}
+.tooltip_count .tooltip_count_row {
+	margin-bottom: 10px;
+	height: 1.5em;
+}
+.tooltip_count_row .text {
+	top: 0.3em;
+	position: relative;
+}
+.tooltip_count_row .deleteentry {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}

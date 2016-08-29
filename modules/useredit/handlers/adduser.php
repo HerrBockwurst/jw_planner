@@ -1,6 +1,7 @@
 <?php
 if(!defined('index')) exit;
 global $mysql, $user;
+if(!$user->hasPerm('admin.useredit')) exit;
 
 $perms = array();
 if(isset($_POST['perms'])) $perms = $_POST['perms'];

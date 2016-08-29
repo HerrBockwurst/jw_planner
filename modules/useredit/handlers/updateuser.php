@@ -64,8 +64,7 @@ if($p1 != $p2):
 	exit;
 endif;
 
-$nopw = false;
-if($_POST['p1'] != '') $nopw = true;
+if($_POST['p1'] == '' || $_POST['p1'] == '') $p1 = $result['password'];
 
 /*
  * Email Test
@@ -127,16 +126,9 @@ endforeach;
  * Benutzer updaten
  */
 
-$qry = "UPDATE user SET name = ?, vsid = ?, email = ?, active = ?";
-if(!$nopw) $qry .= ", password = ?";
-$qry .= " WHERE uid = ?";
-
-$s = 'sssss';
-if(!$nopw) $s .= 's';
-
-$udata = array($_POST['name'], $_POST['vs'], $email, $active);
-if(!$nopw) $udata[] = $p1;
-$udata[] = $_POST['uid'];
+$qry = "UPDATE user SET name = ?, vsid = ?, email = ?, active = ?, password = ? WHERE uid = ?";
+$s = 'ssssss';
+$udata = array($_POST['name'], $_POST['vs'], $email, $active, $p1, $_POST['uid']);
 
 if(!$mysql->execute($qry, $s, $udata)):
 	$data = array('error' => getString('errors>MySQL'));

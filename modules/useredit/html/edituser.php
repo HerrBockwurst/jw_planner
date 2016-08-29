@@ -58,14 +58,14 @@ if(!$user->hasPerm('admin.useredit')) exit;
 							<?php 
 														
 							foreach ($myperms AS $key => $cperm):
-								if($cperm == false) break;
+								if($cperm == false) continue;
 								?>
 								
 								<fieldset id="edituser_perms_<?php echo $key;?>" class="edituser_perms_subset">
 									<legend><?php displayString('common>'.$key)?></legend>
 									<?php 
 									foreach($cperm AS $perm):
-										if(strpos($perm, '.vs.') !== false) break;
+										if(strpos($perm, '.vs.') !== false) continue;
 										$state = 'inactive';
 										if(in_array($perm, $activeperms)) $state = 'active';
 										?>

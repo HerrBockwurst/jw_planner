@@ -54,14 +54,14 @@ $vs = getVSArray();
 							$counter = 1;
 							
 							foreach($perms AS $key => $mainperms):
-								if($mainperms == false) break;
+								if($mainperms == false) continue;
 								?>
 								<fieldset id="adduser_perms_<?php echo $key;?>" class="adduser_perms_subset">
 									<legend><?php displayString('common>'.$key)?></legend>
 									<?php
 									
 									foreach($mainperms AS $perm):
-										if(strpos($perm, '.vs.') !== false) break;
+										if(strpos($perm, '.vs.') === false) continue;
 										?>
 										<div id="<?php echo "id_".$counter ?>" class="clickable item inactive" onclick="toggle('<?php echo $perm?>', '#<?php echo "id_".$counter;?>');">
 											<?php displayString('permissions>'.$perm)?>

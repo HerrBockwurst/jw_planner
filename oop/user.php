@@ -83,7 +83,7 @@ class user {
 				$retval[] = $perm;
 			endif;
 		endforeach;
-		print_r($retval);
+		
 		if(empty($retval)) return false;
 		return $retval;
 	}

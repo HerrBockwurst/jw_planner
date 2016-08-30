@@ -5,7 +5,7 @@ function closeModule(string) {
 
 function openModule(string) {
 	$(string).disableSelection();
-	$(string).draggable({ containment: "#site", cancel: "div.inner", cursor: "move" }).css({'position' : 'absolute'});
+	$(string).draggable({ containment: "window", cancel: "div.inner", cursor: "move" }).css({'position' : 'absolute'});
 	var x = ($(window).width() - $(string).width()) / 2;
 	var y = ($(window).height() - $(string).height()) / 2;
 	$(string).css({'left': x, 'top': y});

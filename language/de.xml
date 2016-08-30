@@ -17,6 +17,7 @@
 		<PostTimeFailure>Deine Datumseingabe ist falsch. Das Auslaufdatum muss größer als das Enddatum sein, gleichzeitig muss das Enddatum nach den Startdatum liegen.</PostTimeFailure>
 		<invalidPers>Die Anzahl der Personen muss zwischen 1 und ?#? liegen!</invalidPers>
 		<pid_not_found>Termin nicht gefunden.</pid_not_found>
+		<postFull>Der Termin ist bereits voll belegt!</postFull>
 	</errors>
 	<common>
 		<username>Benutzername</username>
@@ -73,6 +74,8 @@
 		<no_cal_applied>Noch kein Kalender angelegt.</no_cal_applied>
 		<no_posts_applied>Keine Termine für den Kalender angelegt.</no_posts_applied>
 		<no_entrys_applied>Es hat sich noch niemand eingetragen!</no_entrys_applied>
+		<entry_successful>Erfolgreich eingetragen.</entry_successful>
+		<entry_successful_remove>Du hast dich ausgetragen.</entry_successful_remove>
 	</calendar>
 	<permissions>
 		<calendar.entry>Eigene Kalendereintrag verfassen/bearbeiten</calendar.entry>

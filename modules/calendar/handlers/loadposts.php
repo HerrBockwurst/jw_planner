@@ -66,7 +66,8 @@ endforeach;
 
 foreach($posts AS $post):
 	?>
-	<div class="post clickable <?php if(count($post['entrys']) == intval($post['count'])) echo "full"?>" onclick="applyme(<?php ?>)">
+	<div class="relative post clickable <?php if(count($post['entrys']) == intval($post['count'])) echo "full"?>" onclick="applyme(<?php echo $post['pid'] ?>, <?php echo $_POST['cid'] ?>)">
+		<img class="poststar" style="<?php if(in_array_r($user->uid, $post['entrys'])) echo 'display: block;';?>" id="star_<?php echo $post['pid']?>" src="images/star.png"/>
 		<div class="date">
 			<span class="postheader"><?php displayString('common>start')?></span>
 			<div class="bg">
@@ -79,7 +80,7 @@ foreach($posts AS $post):
 				<span class="time"><?php echo date("H:i", $post['end'])?></span>
 			</div>
 			<div class="count relative" onmouseenter="showtooltip(<?php echo $post['pid']?>)" onmouseleave="hidetooltip(<?php echo $post['pid']?>)">
-				<span><?php echo count($post['entrys'])?></span>
+				<span id="counter_<?php echo $post['pid']?>"><?php echo count($post['entrys'])?></span>
 				<span><?php echo $post['count']?></span>
 				<div id="<?php echo $post['pid']?>" class="tooltip_count <?php if($user->hasPerm('calendar.admin')) echo 'adminview'?>">
 					<?php 

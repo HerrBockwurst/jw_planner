@@ -61,10 +61,10 @@ $vs = getVSArray();
 									<?php
 									
 									foreach($mainperms AS $perm):
-										if(strpos($perm, '.vs.') === false) continue;
+										if(strpos($perm, '.vs.') !== false) continue;
 										?>
 										<div id="<?php echo "id_".$counter ?>" class="clickable item inactive" onclick="toggle('<?php echo $perm?>', '#<?php echo "id_".$counter;?>');">
-											<?php displayString('permissions>'.$perm)?>
+											<?php displayString('permissions>'.$perm); ?>
 										</div>
 										<?php 
 										$counter++;

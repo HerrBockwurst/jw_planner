@@ -8,7 +8,7 @@ define('MYSQL_PASSWORD', '6TPhHjEYZQCmyEKz');
 define('MYSQL_DATABASE', 'jwplanner_rewrite');
 
 define('SSL', false);
-define('HOME', 'jw.herrbockwurst.de');
+define('HOME', 'localhost:90');
 define('TITLE', 'JWPlanner');
 define('VERSION', 'PREALPHA 0.1');
 define('SESSIONTIME', 20);

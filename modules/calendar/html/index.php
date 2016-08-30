@@ -28,6 +28,8 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 				?>
 			</select>
 		</fieldset>
+		<div class="error" id="cal_entry_error"></div>
+		<div class="success" id="cal_entry_success"></div>
 		<fieldset>
 			<div id="calendar_posts_field">
 			</div>
@@ -52,6 +54,29 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 		$('#cal_posts_selector').change(function() {
 			loadPosts($('#cal_posts_selector').val());
 		});
+
+		function applyme(pid, cid) {
+			$('#cal_entry_error').hide(100);
+			$('#cal_entry_success').hide(100);
+
+			$.post('<?php echo PROTO.HOME?>/ajax/datahandler/applyentry', {pid: pid, cid: cid}, function(data) {
+				console.log(data);
+				var jdata = JSON.parse(data);
+
+				if(typeof jdata.error !== "undefined") {
+					$('#cal_entry_error').text(jdata.error[0]).show(100).delay(1000).hide(100);
+					return;
+				}
+
+				$('#counter_' + pid).text(jdata.newcount);
+				if($('#star_' + pid).css('display') != 'none') {
+					$('#star_' + pid).hide(100);
+				} else {
+					$('#star_' + pid).show(100);
+				}
+				$('#cal_entry_success').text(jdata.success[0]).show(100).delay(1000).hide(100);
+			});
+		}
 	</script>	
 </div>
 <script class="removeme">

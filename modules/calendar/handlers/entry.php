@@ -47,8 +47,6 @@ if($full):
 	exit;
 endif;
 
-
-
 if(!isset($remove)):
 	/*
 	 * Eintrag erzeugen
@@ -58,7 +56,7 @@ if(!isset($remove)):
 		exit;
 	endif;
 	
-	echo json_encode(array("success" => getString('calendar>entry_successful'), "newcount" => count($entrys) + 1));
+	echo json_encode(array("success" => getString('calendar>entry_successful'), "newcount" => count($entrys) + 1, "tooltip" => getTooltip($_POST['pid'])));
 	exit;
 endif;
 
@@ -70,4 +68,4 @@ if(!$mysql->execute("DELETE FROM entrys WHERE eid = ?", 'i', $remove)):
 	exit;
 endif;
 
-echo json_encode(array("success" => getString('calendar>entry_successful_remove'), "newcount" => count($entrys) - 1));
+echo json_encode(array("success" => getString('calendar>entry_successful'), "newcount" => count($entrys) - 1, "tooltip" => getTooltip($_POST['pid'])));

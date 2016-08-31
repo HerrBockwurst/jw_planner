@@ -156,7 +156,7 @@ $vs = getVSArray();
 				jdata = JSON.parse(data);
 
 				if(typeof jdata.error !== "undefined") {
-					$('#adduser_error').text(jdata.error[0]);
+					$('#adduser_error').text(jdata.error);
 					$('#adduser_error').show(100);
 					return;	
 				}

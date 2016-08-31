@@ -168,20 +168,20 @@ if(!$user->hasPerm('admin.useredit')) exit;
 			jdata = JSON.parse(data);
 
 			if(typeof jdata.error !== "undefined") {
-				$('#edituser_error').text(jdata.error[0]).show(100);
+				$('#edituser_error').text(jdata.error).show(100);
 				return;
 			}
 			if(typeof jdata.success !== "undefined") {
 				if(typeof jdata.deleted !== "undefined") {
 					$('#edituser').find('input').prop("disabled", true);
 					$('#edituser').find('input').prop("select", true);
-					$('#edituser_success').text(jdata.success[0]).show(100).delay(3000).hide(100);
+					$('#edituser_success').text(jdata.success).show(100).delay(3000).hide(100);
 					setTimeout(function() {
 						closeModule('#edituser_window');
 						closeModule('#usersearch_window');
 					}, 3500);
 				}
-				$('#edituser_success').text(jdata.success[0]).show(100).delay(3000).hide(100); 
+				$('#edituser_success').text(jdata.success).show(100).delay(3000).hide(100); 
 				return;
 			}
 				

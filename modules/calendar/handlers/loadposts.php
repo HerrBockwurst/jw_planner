@@ -66,49 +66,29 @@ endforeach;
 
 foreach($posts AS $post):
 	?>
-	<div class="relative post clickable <?php if(count($post['entrys']) == intval($post['count'])) echo "full"?>" onclick="applyme(<?php echo $post['pid'] ?>, <?php echo $_POST['cid'] ?>)">
-		<img class="poststar" style="<?php if(in_array_r($user->uid, $post['entrys'])) echo 'display: block;';?>" id="star_<?php echo $post['pid']?>" src="images/star.png"/>
-		<div class="date">
-			<span class="postheader"><?php displayString('common>start')?></span>
-			<div class="bg">
-				<span class="smallerDate"><?php echo date("d.m.Y", $post['start'])?></span>
-				<span class="time"><?php echo date("H:i", $post['start'])?></span>
-			</div>
-			<span class="postheader"><?php displayString('common>end')?></span>
-			<div class="bg">
-				<span class="smallerDate"><?php echo date("d.m.Y", $post['end'])?></span>
-				<span class="time"><?php echo date("H:i", $post['end'])?></span>
-			</div>
-			<div class="count relative" onmouseenter="showtooltip(<?php echo $post['pid']?>)" onmouseleave="hidetooltip(<?php echo $post['pid']?>)">
-				<span id="counter_<?php echo $post['pid']?>"><?php echo count($post['entrys'])?></span>
-				<span><?php echo $post['count']?></span>
-				<div id="<?php echo $post['pid']?>" class="tooltip_count <?php if($user->hasPerm('calendar.admin')) echo 'adminview'?>">
-					<?php 
-					if(empty($post['entrys'])):
-						displayString('calendar>no_entrys_applied');
-					endif;
-					?>
-					<?php foreach($post['entrys'] AS $entry): ?>
-					<div class="tooltip_count_row floatbreak relative">
-						<div class="pic"><?php echo strtoupper(substr($entry['name'], 0, 1))?></div>
-						<div class="text"><?php echo $entry['name'];?></div>
-						<?php
-						if($user->hasPerm('calendar.admin') || $entry['uid'] == $user->uid):
-						?>
-							<div class="deleteentry clickable" onclick="deleteentry(<?php echo $entry['eid']?>)">
-								<img src="<?php echo PROTO.HOME?>/images/postdelete.png" />
-							</div>
-						<?php 
-						endif;
-						?>
-					</div>
-					<?php endforeach;?>
+	<div class="relative" style="float:left" onmouseleave="hidetooltip(<?php echo $post['pid']?>)">
+		<div class="post clickable <?php if(count($post['entrys']) == intval($post['count'])) echo "full"?>" onclick="applyme(<?php echo $post['pid'] ?>, <?php echo $_POST['cid'] ?>)">
+			<img class="poststar" style="<?php if(in_array_r($user->uid, $post['entrys'])) echo 'display: block;';?>" id="star_<?php echo $post['pid']?>" src="images/star.png"/>
+			<div class="date">
+				<span class="postheader"><?php displayString('common>start')?></span>
+				<div class="bg">
+					<span class="smallerDate"><?php echo date("d.m.Y", $post['start'])?></span>
+					<span class="time"><?php echo date("H:i", $post['start'])?></span>
 				</div>
-			</div>			
+				<span class="postheader"><?php displayString('common>end')?></span>
+				<div class="bg">
+					<span class="smallerDate"><?php echo date("d.m.Y", $post['end'])?></span>
+					<span class="time"><?php echo date("H:i", $post['end'])?></span>
+				</div>
+				<div class="count relative" onmouseenter="showtooltip(<?php echo $post['pid']?>)">
+					<span id="counter_<?php echo $post['pid']?>"><?php echo count($post['entrys'])?></span>
+					<span><?php echo $post['count']?></span>					
+				</div>			
+			</div>
 		</div>
-		<script>
-
-		</script>
+		<div id="tooltip_<?php echo $post['pid']?>" class="tooltip_count">
+			<?php echo getTooltip($post['pid'])?>
+		</div>
 	</div>
 	<?php 
 endforeach;

@@ -77,11 +77,11 @@ endif;
 		posting.done(function(data) {
 			var jdata = JSON.parse(data);
 			if(typeof jdata.error !== "undefined") {
-				$('#c_editcal_error').text(jdata.error[0]).show(100);
+				$('#c_editcal_error').text(jdata.error).show(100);
 				return;
 			}
 
-			$('#c_editcal_success').text(jdata.success[0]).show(100);
+			$('#c_editcal_success').text(jdata.success).show(100);
 			
 			if(typeof jdata.deleted !== "undefined") {
 				$('#cadmin_editcal').find('input').prop('disabled', true);

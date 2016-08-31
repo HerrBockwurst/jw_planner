@@ -54,11 +54,11 @@ if(!$user->hasPerm('admin.calendar')) exit;
 			var jdata = JSON.parse(data);
 			console.log(jdata);
 			if(typeof jdata.error !== "undefined") {
-				$('#c_newcal_error').text(jdata.error[0]).show(100);
+				$('#c_newcal_error').text(jdata.error).show(100);
 				return;
 			}
 
-			$('#c_newcal_success').text(jdata.success[0]).show(100);
+			$('#c_newcal_success').text(jdata.success).show(100);
 			
 		});
 	

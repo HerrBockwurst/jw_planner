@@ -106,16 +106,11 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 			var jdata = JSON.parse(data);
 			console.log(jdata);
 			if(typeof jdata.error !== "undefined") {
-				if(typeof jdata.error == "object") {
-					$('#c_posts_error').text(jdata.error[0]).show(100);
-					return;
-				} else {
-					$('#c_posts_error').text(jdata.error).show(100);
-					return;
-				}
+				$('#c_posts_error').text(jdata.error).show(100);
+				return;
 			}
 
-			$('#c_posts_success').text(jdata.success[0]).show(100);
+			$('#c_posts_success').text(jdata.success).show(100);
 			$.post('<?php echo PROTO.HOME?>/ajax/datahandler/getposts', {cid: c_posts_cid}, function(data) {
 				updatePosts(data);
 			});
@@ -127,7 +122,7 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 		$.post('<?php echo PROTO.HOME?>/ajax/datahandler/delpost', {pid: pid}, function(data) {
 			jdata = JSON.parse(data);
 			if(typeof jdata.error !== "undefined") {
-				$('#c_posts_error').text(jdata.error[0]).show(100);
+				$('#c_posts_error').text(jdata.error).show(100);
 				return;
 			}			
 			$.post('<?php echo PROTO.HOME?>/ajax/datahandler/getposts', {cid: $('#c_posts_selector').val()}, function(data) {

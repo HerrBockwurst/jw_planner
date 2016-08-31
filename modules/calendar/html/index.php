@@ -28,8 +28,8 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 				?>
 			</select>
 		</fieldset>
-		<div class="error" id="cal_entry_error"></div>
-		<div class="success" id="cal_entry_success"></div>
+		<div class="error smallmargin" id="cal_entry_error"></div>
+		<div class="success smallmargin" id="cal_entry_success"></div>
 		<fieldset>
 			<div id="calendar_posts_field">
 			</div>
@@ -37,10 +37,10 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 	</div>
 	<script>
 		function showtooltip(id) {
-			$('#' + id).show(100);
+			$('#tooltip_' + id).show(100);
 		}
 		function hidetooltip(id) {
-			$('#' + id).hide(100);
+			$('#tooltip_' + id).hide(100);
 		}
 		function loadPosts(cid) {
 			$.post('<?php echo PROTO.HOME?>/ajax/datahandler/loadposts', {cid: cid}, function(data){
@@ -64,17 +64,41 @@ $cals = $cals->fetch_all(MYSQLI_ASSOC);
 				var jdata = JSON.parse(data);
 
 				if(typeof jdata.error !== "undefined") {
-					$('#cal_entry_error').text(jdata.error[0]).show(100).delay(1000).hide(100);
+					$('#cal_entry_error').text(jdata.error).show(100).delay(1000).hide(100);
 					return;
 				}
 
 				$('#counter_' + pid).text(jdata.newcount);
+				$('#tooltip_' + pid).html(jdata.tooltip);
 				if($('#star_' + pid).css('display') != 'none') {
 					$('#star_' + pid).hide(100);
 				} else {
 					$('#star_' + pid).show(100);
 				}
-				$('#cal_entry_success').text(jdata.success[0]).show(100).delay(1000).hide(100);
+				$('#cal_entry_success').text(jdata.success).show(100).delay(1000).hide(100);
+			});
+		}
+
+		function deleteentry(eid) {
+			$('#cal_entry_error').hide(100);
+			$('#cal_entry_success').hide(100);
+
+			$.post('<?php echo PROTO.HOME?>/ajax/datahandler/deleteentry', {eid: eid}, function(data) {
+				var jdata = JSON.parse(data);
+
+				if(typeof jdata.error !== "undefined") {
+					$('#cal_entry_error').text(jdata.error).show(100).delay(1000).hide(100);
+					return;
+				}
+
+				$('#counter_' + jdata.pid).text(jdata.newcount);
+				$('#tooltip_' + jdata.pid).html(jdata.tooltip);
+				if($('#star_' + jdata.pid).css('display') != 'none') {
+					$('#star_' + jdata.pid).hide(100);
+				} else {
+					$('#star_' + jdata.pid).show(100);
+				}
+				$('#cal_entry_success').text(jdata.success).show(100).delay(1000).hide(100);
 			});
 		}
 	</script>	

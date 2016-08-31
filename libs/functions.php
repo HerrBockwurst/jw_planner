@@ -20,7 +20,7 @@ function displayString($tree) {
 
 function getString($tree) {
 	global $lang;
-	return $lang->get($tree);
+	return strval($lang->get($tree));
 }
 
 function registerModul($data) {
@@ -132,4 +132,32 @@ function in_array_r($needle, $haystack, $strict = false) {
 	}
 
 	return false;
+}
+
+function getTooltip($pid) {
+	global $mysql, $user;
+	
+	$tooltip = $mysql->execute("SELECT e.*, u.name FROM entrys AS e INNER JOIN user AS u ON (e.uid = u.uid) WHERE pid = ?", 'i', $pid);
+	if($tooltip->num_rows == 0):
+		$tooltipstring = getString('calendar>no_entrys_applied');
+	else:
+		$tooltip = $tooltip->fetch_all(MYSQLI_ASSOC);
+		$tooltipstring = "";
+		foreach($tooltip AS $entry):
+			$tooltipstring .= "
+						<div class=\"tooltip_count_row floatbreak relative\">
+							<div class=\"pic\">".strtoupper(substr($entry['name'], 0, 1))."</div>
+							<div class=\"text\">".$entry['name']."</div>
+							";
+		if($user->hasPerm('calendar.admin') || $entry['uid'] == $user->uid):
+			$tooltipstring .= "
+			<div class=\"deleteentry clickable\" onclick=\"deleteentry(".$entry['eid'].")\">
+				<img src=\"".PROTO.HOME."/images/postdelete.png\" />
+			</div>";
+		endif;
+		$tooltipstring .= "</div>";
+		endforeach;
+	endif;
+
+	return strval($tooltipstring); 
 }

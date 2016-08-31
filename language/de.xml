@@ -18,6 +18,7 @@
 		<invalidPers>Die Anzahl der Personen muss zwischen 1 und ?#? liegen!</invalidPers>
 		<pid_not_found>Termin nicht gefunden.</pid_not_found>
 		<postFull>Der Termin ist bereits voll belegt!</postFull>
+		<entry_not_found>Eintrag ist nicht mehr vorhanden.</entry_not_found>
 	</errors>
 	<common>
 		<username>Benutzername</username>
@@ -87,6 +88,15 @@
 		<system.log.edit>Logs bearbeiten</system.log.edit>
 		<system.vsmanagement>Versammlungen verwalten</system.vsmanagement>
 	</permissions>
+	<sql>
+		<query>SQL-Befehl senden</query>
+		<result>Ergebnis</result>
+		<raw>RAW</raw>
+		<fetched>Fetched</fetched>
+		<dump>var_dump</dump>
+		<printr>print_r</printr>
+		<send>Query senden</send>
+	</sql>
 	<warn>
 		<emptyMail>Du hast keine Email Adresse eingetragen. Dies ist nicht empfehlenswert. Wenn du dennoch diesen Benutzer ohne Email Adresse erstellen möchtest, klicke erneut auf Anlegen.</emptyMail>
 	</warn>

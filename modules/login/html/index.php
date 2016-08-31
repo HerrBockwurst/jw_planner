@@ -29,7 +29,7 @@
 				var newdata = JSON.parse(data);
 				console.log(data);
 				if(typeof newdata.error !== "undefined") {
-					$('#loginerror').html('').html(newdata.error[0]).show(100).delay(2000).hide(100);
+					$('#loginerror').html('').html(newdata.error).show(100).delay(2000).hide(100);
 					return;
 				}
 				$('#login').fadeOut(800);				

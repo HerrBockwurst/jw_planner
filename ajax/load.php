@@ -7,6 +7,9 @@ switch(getURL(2)):
 		else $file = getURL(4);
 		$bob->build(array(DIRECT, 'modules/'.getURL(3).'/html/'.$file.'.php'));
 		break;
+	case 'page':
+		
+		break;
 	default:
 		$bob->build(array(PAGE, 'main'));
 		$bob->build(array(PAGE, 'topbar'));

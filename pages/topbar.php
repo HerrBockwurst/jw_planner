@@ -3,7 +3,7 @@
 
 <div id="topbar">
 	<div id="time"><?php echo date("d.m.Y H:i", time())?></div>
-	<div id="usericon"><?php echo $user->name ?> <img src="images/guy.png" /></div>
+	<div id="usericon"><?php echo $user->name ?><img src="images/guy.png" /></div>
 </div>
 <script>
 setInterval(function() {
@@ -15,20 +15,16 @@ setInterval(function() {
 	min = d.getMinutes();
 
 	month = month + 1;
-	if(month < 10) {
-		month = "0" + month;
-	}
-	if(day < 10) {
-		day = "0" + day;
-	}
-	if(hour < 10) {
-		hour = "0" + hour;
-	}
-	if(min < 10) {
-		min = "0" + hour;
-	}
+	month = "0" + month;
+	day = "0" + day;
+	hour = "0" + hour;
+	min = "0" + hour;
 	
-	var datestring = day + "." + month + "." + year + " " + hour + ":" + min;
+	var datestring = day.substring(day.length -2) + "." + month.substring(month.length -2) + "." + year + " " + hour.substring(hour.length -2) + ":" + min.substring(min.length -2);
 	$('#time').text(datestring);
 }, 1000);
+
+$('#usericon').click(function() {
+	
+});
 </script>

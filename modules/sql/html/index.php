@@ -49,7 +49,7 @@ if(!$user->hasPerm('system.query')) exit;
 		var step2 = $('input[name=resulttype]:checked').val();
 		var step3 = $('input[name=action]:checked').val();
 		$.post('<?php echo PROTO.HOME?>/ajax/datahandler/query', {qry: qry, step2: step2, step3: step3}, function(data) {
-			$('#sqlresult').text(data);
+			$('#sqlresult').html(data);
 		});
 	});
 	</script>

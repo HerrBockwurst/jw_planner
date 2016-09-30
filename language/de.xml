@@ -83,11 +83,15 @@
 		<calendar.admin>Fremde Kalendereinträge bearbeiten</calendar.admin>
 		<admin.useredit>Benutzer bearbeiten</admin.useredit>
 		<admin.calendar>Kalender bearbeiten</admin.calendar>
+		<admin.groups>Gruppen verwalten</admin.groups>
 		<system.query>SQL-Befehle ausführen</system.query>
 		<system.log.vis>Log einsehen</system.log.vis>
 		<system.log.edit>Logs bearbeiten</system.log.edit>
 		<system.vsmanagement>Versammlungen verwalten</system.vsmanagement>
 	</permissions>
+	<groups>
+		<add>Gruppe anlegen</add>
+	</groups>
 	<sql>
 		<query>SQL-Befehl senden</query>
 		<result>Ergebnis</result>

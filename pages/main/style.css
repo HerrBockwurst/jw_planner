@@ -1,0 +1,75 @@
+#sidebar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: #676767 url("/images/bg_sidebar.png");
+	background-repeat: repeat-y;
+	background-position: top right;
+	width: 200px;
+	height: 100%;
+	color: #fff;
+}
+#topbar {
+	display: block;
+	padding-left: 200px;
+	height: 30px;
+	background-color: #787878;
+	line-height: 30px;
+	overflow: hidden;
+}
+#topbar > li {
+	float: left;
+	padding: 0 10px;
+	border-right: 1px solid #555;
+	cursor: pointer;
+	color: #fff;
+	font-size: 0.9em;
+	position: relative;
+}
+#topbar > li:last-of-type {
+	border-right: 0px;
+}
+#topbar > li:hover, #topbar > li[data-active="1"] {
+	background-color: #898989;
+}
+#topbar img {
+	position: relative;
+	background-color: rgba(240,240,240,0.8);
+	border: 1px solid #aaa;
+	padding: 2px;
+	top: 4px;
+	margin-left: 5px;
+	right: -5px;
+}
+#sidebarlogo {
+	font-size: 3em;
+	color: #fff;
+	background-color: rgba(0, 179, 9, 1);
+	display: inline-block;
+	margin: 20px auto;
+	padding: 10px;
+	text-decoration: none;
+}
+#sidebarlogo > span {
+	display: block;
+	font-size: 0.5em;	
+}
+#thecontent {
+	margin-left: 200px;
+	padding: 10px;
+	font-size: 14px;
+}
+#sidebar li {
+	font-size: 1.1em;
+	font-weight: bold;
+	font-style: italic;
+	padding-left: 10px;
+	background-color: rgba(120,120,120,0.7);
+	line-height: 1.8em;
+	cursor: pointer;
+	margin-bottom: 2px;
+}
+#sidebar li:hover {
+	color: #eee;
+	background-color: rgba(130,130,130,0.7);
+}

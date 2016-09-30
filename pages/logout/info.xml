@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<page>
+	<id>logout</id>
+	<type>module</type>
+	<pages>
+		<index>index.php</index>
+	</pages>	
+	<permission></permission>
+	<handlers></handlers>
+	<css></css>
+	<js></js>
+</page>

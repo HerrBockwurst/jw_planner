@@ -1,45 +1,15 @@
 <?php
-$fromIndex = true;
 session_start();
-header ('Content-type: text/html; charset=utf-8');
-require_once 'libs/functions.php';
+define('index', true);
+
 require_once 'config.php';
-require_once 'oop/language.php';
+require_once 'libs/functions.php';
 require_once 'oop/mysql.php';
+require_once 'oop/contentAdmin.php';
+require_once 'oop/lang.php';
 require_once 'oop/user.php';
-require_once 'oop/urlpath.php';
-require_once 'oop/log.php';
 
-
-require_once 'libs/auth.php';
-
-
-
-
-require_once 'sites/header.php';
-switch ($url->value(0)) {
-	case 'logout':
-		require_once 'sites/logout.php';
-		break;
-	case 'calendar':
-		require_once 'sites/calendar.php';
-		break;
-	case 'profile':
-		echo "Profil";
-		break;
-	case 'admin':
-		require_once 'sites/admin.php';
-		break;
-	case 'sytem':
-		echo "System";
-		break;
-	case 'login':
-		require_once 'sites/login.php';
-		break;
-	case 'ajax':
-		require_once 'ajax/ajax.php';
-	default:
-		break;
-}
-require_once 'sites/footer.php';
-?>
+if(!checkURL(0, 'load') && !checkURL(0, 'datahandler')) buildHeader(); //Header wenn nicht per Ajax geladen
+elseif(checkURL(0, 'datahandler')) $content->loadHandler(getURL(1), getURL(2)); //Datahandler
+elseif(checkURL(0, 'load') && checkURL(2, false)) $content->displayContent(getURL(1)); //Page ohne Subpage
+elseif(checkURL(0, 'load')) $content->displayContent(getURL(1),getURL(2)); //Page mit Subpage

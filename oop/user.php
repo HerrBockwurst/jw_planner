@@ -1,67 +1,100 @@
 <?php
-if(!isset($fromIndex)) exit;
-
-class user {
-	public $username, $uid, $versammlung, $vsid, $email, $profpic;
+class UserObject {
+	public $uid, $name, $email, $vsid;
 	private $perms;
 	
 	function __construct() {
-		$this->uid = $_SESSION['uid'];
-		$this->perms = array();
-		
+		$this->auth();
+	}
+	
+	private function insertUserData($result) {
+		$this->uid = strval($result->uid);
+		$this->name = strval($result->name);
+		$this->email = strval($result->email);
+		$this->vsid = strval($result->vsid);
+		$this->perms = json_decode($result->perms);
+	}
+	
+	function auth() {
 		global $mysql;
-		$result = $mysql->execute("SELECT u.`name` AS `username`, p.`perm`, v.`name` AS `vsname`, v.`anschrift`, v.`id` AS `vsid`, u.`email`, u.`profilbild` 
-									FROM `users` AS u
-									INNER JOIN `permissions` AS p ON p.`uid` = u.`uid`
-									INNER JOIN `versammlungen` AS v ON u.`versammlung` = v.`id`
-									WHERE u.`uid` = ?", 's', $this->uid);
+		/*
+		 * Alte Sessions löschen
+		 */
+		
+		$mysql->where('expire', time(), '<');
+		$mysql->delete('sessions');
+		
+		/*
+		 * Teste ob Benutzer Session hat
+		 */
+		
+		$mysql->where('sid', session_id());
+		$mysql->select('sessions');
+		$result = $mysql->fetchRow();
+		
+		if(!$result &&
+			(checkURL(0, 'datahandler') || checkURL(0, 'load')) &&
+			(strpos(getURL(2), '.css') === false && strpos(getURL(2), '.js') === false) &&
+			!checkURL(1, 'login')) {	
+			/*
+			 * Bedingungen: 
+			 * Keine Session gefunden
+			 * URL = Datahandler oder load
+			 * Url 2 is nicht .css und nicht .js
+			 * Es soll nicht Login geladen werden
+			 */
+			echo json_encode(array('redirect' => PROTO.HOME));
+			exit;
+		}			
+		elseif(!$result && $_SERVER['HTTP_HOST'] != HOME) {
+			//Wenn eine unterseite direkt angefahren wird
+			header('Location: '.PROTO.HOME);
+			exit;
+		}
 
-		while($row = $result->fetch_assoc()):
-			
+		if($result) {
 			/*
-			 * Permissions auslesen
+			 * Session updaten
 			 */
-			if(isset($row['perm']) && !in_array($row['perm'], $this->perms)) $this->perms[] = $row['perm'];
 			
-			/*
-			 * Nutzerdaten auslesen
-			 */
-			if(isset($row['username']) && !isset($this->username)) $this->username = $row['username'];
-			if(isset($row['vsname']) && !isset($this->versammlung)) $this->versammlung = $row['vsname'];
-			if(isset($row['vsid']) && !isset($this->vsid)) $this->vsid = $row['vsid'];
-			if(isset($row['email']) && !isset($this->email)) $this->email = $row['email'];
-			if(isset($row['profilbild']) && !isset($this->profpic)) $this->profpic = $row['profilbild'];
+			$mysql->where('uid', strval($result->uid));
+			$mysql->select('users', array('uid', 'name', 'email', 'vsid', 'perms'), 1);
+			$result = $mysql->fetchRow();
+				
+			$mysql->where('sid', session_id());
+			$mysql->update('sessions', array('expire' => time() + 20*SESSIONTIME));
 			
-		endwhile;
-		
-		
+			$this->insertUserData($result);
+		}
 	}
 	
-	function countPerms() {
-		return count($this->perms);		
-	}
-	
-	function hasPerm($perm) {
+	public function hasPerm($perm = ''): bool {		
 		if(in_array($perm, $this->perms)) return true;
-		else return false;
+		return false;
 	}
 	
-	function addPerm() {
-		
-	}
-	
-	function getPerms() {
-		return $this->perms;
-	}
-	
-	function getSubPerm($search) {
-		$returnval = array();
+	public function getSubPerm($needle) {
+		$retval = array();
 		foreach($this->perms AS $perm):
-			if(strpos($perm, $search) !== false) $returnval[] = substr($perm, strlen($search));
+		if(strpos($perm, $needle) !== false):
+		$retval[] = $perm;
+		endif;
 		endforeach;
-		if(empty($returnval)) return false;
-		return $returnval;
+	
+		if(empty($retval)) return false;
+		return $retval;
 	}
 	
-	
+	public function getAllPerms($withSpecial = false): array {
+		if($withSpecial) return $this->perms;
+		
+		$retPerms = $this->perms;
+		$specialPerms = $this->getSubPerm('.vs.');
+		
+		foreach($specialPerms AS $specialPerm) unset($retPerms[array_search($specialPerm, $retPerms)]);
+		
+		return $retPerms;
+	}
 }
+
+$user = new UserObject();

@@ -1,0 +1,18 @@
+#logo {
+	font-size: 3em;
+	color: #fff;
+	background-color: #00b309;
+	padding: 20px;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	display: inline-block;
+}
+#login {
+	width: 500px;
+	background-color: rgba(255,255,255,0.8);
+	padding: 20px;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	margin: 200px auto;
+	text-align: center;
+}

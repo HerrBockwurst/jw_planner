@@ -1,0 +1,103 @@
+body {
+	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, "Arial Unicode MS", sans-serif;
+	font-size: 16px;
+	background-image: url("/images/bg.png");
+	background-repeat: repeat-x;
+}
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: #00b309;
+}
+a:hover {
+	text-decoration: underline;
+}
+fieldset {
+	border: 1px solid #777;
+	padding: 5px;
+	margin: 0px 10px 10px 0px;
+}
+legend {
+	padding: 0px 2px;
+}
+input[type="text"], input[type="password"], input[type="checkbox"] {
+	position: relative;	
+	width: 200px;
+	height: 16pt;
+	padding: 3px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #555;
+	top: -3px;
+	right: 0px;
+	margin-left: 40px;
+	float:right;
+}
+input[type="checkbox"] {
+	width: 16px;
+}
+button {
+	background-color: #00b309;
+	cursor: pointer;
+	color: #fefefe;
+	padding: 5px 20px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #555;
+}
+#noscript {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 999;
+	background-color: #111;
+}
+#noscriptBox {
+	width: 500px;
+	padding: 20px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin: 200px auto;
+	background-color: rgba(250,250,250,0.9);
+	
+}
+.floatbreak {
+	clear: both;
+}
+.formrow {
+	display: block;
+	margin: 10px 0px;
+	position: relative;
+	text-align: left;
+	clear: both;
+}
+.formrowcontainer {
+	display: inline-block;
+}
+.error {
+	border: 1px solid #800000;
+	color: #800000;
+	background-color: #ff8080;
+	display: none;
+	padding: 2px;
+}
+.fieldset {
+	background-color: rgba(255,255,255,0.7);
+	display: inline-block;
+	padding: 10px;
+	position: relative;
+}
+.fieldset .headline {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.scrollable {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.clickable {
+	cursor: pointer;
+}
+.shader {
+	background-color: rgba(200,200,200,0.5);
+}

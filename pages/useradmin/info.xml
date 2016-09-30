@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<page>
+	<id>useradmin</id>
+	<type>module</type>
+	<pages>
+		<index>index.php</index>
+	</pages>
+	<permission>admin.useredit</permission>
+	<handlers>
+		<adduser>handlers/addUser.php</adduser>
+	</handlers>
+	<css>style.css</css>
+	<js></js>
+</page>

@@ -1,0 +1,12 @@
+#adduser .entry {
+	padding: 2px;
+}
+#adduser .entry:hover,
+#adduser .entry[data-active="1"] {
+	background-color: rgba(0,179,9,0.5);
+}
+#adduser .scrollable {
+	min-height: 100px;
+	width: 150px;
+	background-color: rgba(255,255,255,0.5);
+}

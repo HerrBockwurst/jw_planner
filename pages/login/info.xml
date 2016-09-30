@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<page>
+	<id>login</id>
+	<type>page</type>
+	<pages>
+		<index>index.php</index>
+	</pages>	
+	<permission></permission>
+	<handlers>
+		<login>datahandler.php</login>
+	</handlers>
+	<css>style.css</css>
+	<js>script.js</js>
+</page>

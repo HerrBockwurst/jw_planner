@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<language>
+	<noscript>Diese Seite benötigt JavaScript. Dies ist in deinem Browser wahrscheinlich deaktiviert. Bitte aktiviere JavaScript und lade die Seite erneut!</noscript>
+	<common>
+		<username>Benutzername</username>
+		<password>Passwort</password>
+		<login>Einloggen</login>
+		<name>Name</name>
+		<email>E-Mail</email>
+		<active>Aktiv</active>
+	</common>
+	<menu>
+		<calendar>Kalender</calendar>
+		<useradmin>Benutzerverwaltung</useradmin>
+		<logout>Abmelden</logout>
+	</menu>
+	<errors>
+		<FormfillError>Bitte fülle alle Felder aus!</FormfillError>
+		<invalidAuth>Benutzername und/oder Passwort falsch!</invalidAuth>
+		<accountInactive>Dein Benutzerkonto wurde gesperrt!</accountInactive>
+		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
+		<sql>Ein Fehler in der Datenbank ist aufgetreten.</sql>
+	</errors>
+	<useredit>
+		<adduser>Benutzer hinzufügen</adduser>
+		<selectVS>Versammlung</selectVS>
+		<selectGroups>Gruppen</selectGroups>
+		<noGroupsAssigned>Es sind noch keine Gruppen angelegt.</noGroupsAssigned>
+		<selectVSfirst>Bitte wähle zuerst eine Versammlung aus.</selectVSfirst>
+		<permissions>Berechtigungen</permissions>
+		<add>Benutzer anlegen</add>
+	</useredit>
+	<permissions>
+		<admin.useredit>Benutzer verwalten</admin.useredit>
+		<admin.groups>Gruppen verwalten</admin.groups>
+		<admin.calendar>Kalender verwalten</admin.calendar>
+		<admin.message>Nachrichten senden</admin.message>
+		<calendar.entry>Kalender nutzen</calendar.entry>
+		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
+	</permissions>
+</language>

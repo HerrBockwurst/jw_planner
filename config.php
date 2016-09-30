@@ -1,22 +1,11 @@
 <?php
-if(!isset($fromIndex)) exit;
-$CONFIG = array(); //Init Array
-$ERROR = array(); //Init Error Array
-$SUCCESS = array(); //Init Success Array
-
-$CONFIG['MYSQL_HOST'] = 'localhost';
-$CONFIG['MYSQL_USER'] = 'jwplanner';
-$CONFIG['MYSQL_PASSWORD'] = '6TPhHjEYZQCmyEKz';
-$CONFIG['MYSQL_DATABASE'] = 'jwplanner';
-
-$CONFIG['ssl'] = false;
-$CONFIG['home'] = 'localhost:90';
-$CONFIG['title'] = 'JW Planner';
-$CONFIG['version'] = 'PREALPHA 0.1';
-$CONFIG['version_count'] = '16w28';
-$CONFIG['contactmail'] = 'contact@jwplanner.com';
-$CONFIG['errormail'] = 'bugreport@jwplanner.com';
-$CONFIG['sessiontime'] = 20;
+define('MYSQL_HOST', 'localhost');
+define('MYSQL_USER', 'jwplanner');
+define('MYSQL_DB', 'jwplanner2');
+define('MYSQL_PASSWD', '6TPhHjEYZQCmyEKz');
 
 
-?>
+define('PROTO', 'http://');
+define('HOME', 'localhost:90');
+define('SESSIONTIME', 20);
+define('TITLE', 'JWPlanner');

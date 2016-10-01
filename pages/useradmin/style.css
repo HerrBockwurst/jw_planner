@@ -1,12 +1,22 @@
-#adduser .entry {
+#adduser .entry,
+#edituser .entry {
 	padding: 2px;
 }
 #adduser .entry:hover,
-#adduser .entry[data-active="1"] {
+#adduser .entry[data-active="1"],
+#edituser .entry:hover,
+#edituser .entry[data-active="1"] {
 	background-color: rgba(0,179,9,0.5);
 }
-#adduser .scrollable {
+#adduser .scrollable,
+#edituser .scrollable{
 	min-height: 100px;
 	width: 150px;
 	background-color: rgba(255,255,255,0.5);
+}
+.searchentry span:last-of-type {
+	float: right;
+}
+.inner {
+	width: 500px;
 }

@@ -9,6 +9,8 @@
 		<name>Name</name>
 		<email>E-Mail</email>
 		<active>Aktiv</active>
+		<search>Suchen</search>
+		<vs>Versammlung</vs>
 	</common>
 	<menu>
 		<calendar>Kalender</calendar>
@@ -21,6 +23,7 @@
 		<accountInactive>Dein Benutzerkonto wurde gesperrt!</accountInactive>
 		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
 		<sql>Ein Fehler in der Datenbank ist aufgetreten.</sql>
+		<noUsersFound>Es wurde kein Benutzer gefunden!</noUsersFound>
 	</errors>
 	<useredit>
 		<adduser>Benutzer hinzufügen</adduser>
@@ -30,6 +33,8 @@
 		<selectVSfirst>Bitte wähle zuerst eine Versammlung aus.</selectVSfirst>
 		<permissions>Berechtigungen</permissions>
 		<add>Benutzer anlegen</add>
+		<edit>Benutzer aktualisieren</edit>
+		<edituser>Benutzer bearbeiten</edituser>
 	</useredit>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

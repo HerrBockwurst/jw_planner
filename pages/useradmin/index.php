@@ -18,7 +18,7 @@
 		<legend><?php displayString('useredit selectGroups')?></legend>
 		<div class="scrollable">
 			<?php 
-			global $mysql, $user;
+			global $mysql, $user, $content;
 			if(!$user->getSubPerm('useredit.vs.*')) 
 				foreach(getVSAccess('useredit') AS $vsid => $vsname) {
 					$mysql->where('vsid', $vsid);
@@ -65,6 +65,7 @@
 	<button id="b_addUser"><?php displayString("useredit add")?></button>
 	<div class="error" style="position: absolute; max-width: 500px; bottom: 10px; right: 10px"></div>
 </div>
+<?php $content->displayContent('useradmin', 'useredit'); ?>
 <script>
 	/*
 	 * Benutzer anlegen

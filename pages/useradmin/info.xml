@@ -5,10 +5,12 @@
 	<type>module</type>
 	<pages>
 		<index>index.php</index>
+		<useredit>fieldset_edit.php</useredit>
 	</pages>
 	<permission>admin.useredit</permission>
 	<handlers>
 		<adduser>handlers/addUser.php</adduser>
+		<searchuser>handlers/searchUser.php</searchuser>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

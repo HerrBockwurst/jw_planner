@@ -1,7 +1,7 @@
 <?php
 class MySQL {
 	private $mysql = null, $join = array(), $where = array(), $prep = '', $result = null;
-	public $error = array();
+	public $error = array(), $lastQuery;
 
 	function __construct($host, $user, $password, $db, $port = 3306) {
 		$this->mysql = new mysqli($host, $user, $password, $db, $port);
@@ -62,9 +62,16 @@ class MySQL {
 		$values = array();
 		$i = 0;
 		while($where = current($this->where)) {
+			
+			$pre = '';
+			if(strpos($where[0], '.') !== false) {
+				$pre = "`".substr($where[0], 0, strpos($where[0], '.'))."`.";
+				$where[0] = substr($where[0], strpos($where[0], '.') + 1);				
+			}
+			
 			if($i == 0)
-				$ret .= "`".$where[0]."` ".$where[2]." "."? ";
-			else $ret .= $where[3]." `".$where[0]."` ".$where[2]." ? ";
+				$ret .= $pre."`".$where[0]."` ".$where[2]." "."? ";
+			else $ret .= $where[3]." $pre`".$where[0]."` ".$where[2]." ? ";
 			
 			if(is_int($where[1])) $this->prep .= "i";
 			elseif(is_numeric($where[1])) $this->prep .= "d";
@@ -83,7 +90,7 @@ class MySQL {
 	}
 	
 	private function createJoinString(): string {
-		if(empty($this->where)) return "";
+		if(empty($this->join)) return "";
 		$ret = '';
 		foreach($this->join AS $join) {
 			$type; $tableA; $fieldA; $tableB; $fieldB;
@@ -131,6 +138,7 @@ class MySQL {
 		$qry = rtrim($qry, ', ');
 		$qry .= ")";
 		
+		$this->lastQuery = $qry;
 		$stmt = $this->mysql->prepare($qry);
 		if(!$stmt) {
 			$this->error = array("Fehler beim Erstellen des Statements: ".$this->mysql->error, $qry);
@@ -160,6 +168,7 @@ class MySQL {
 		$where = $this->createWhereArray();
 		$qry .= $where[1];
 	
+		$this->lastQuery = $qry;
 		$stmt = $this->mysql->prepare($qry);
 		if(!$stmt) {
 			$this->error = array("Fehler beim Erstellen des Statements: ".$this->mysql->error, $qry);
@@ -204,6 +213,7 @@ class MySQL {
 		$locPreps .= $this->prep;
 		$qry .= $where[1];
 		
+		$this->lastQuery = $qry;
 		$stmt = $this->mysql->prepare($qry);
 		if(!$stmt) {
 			$this->error = array("Fehler beim Erstellen des Statements: ".$this->mysql->error, $qry);
@@ -237,9 +247,11 @@ class MySQL {
 				
 			while($field = current($fields)) {
 				$pre = '';
-				if(strpos($field, ".") === false) $pre = $table;
+				if(strpos(key($fields), ".") === false) $pre = $table;
+				else $pre = substr(key($fields), 0, strpos(key($fields), "."));
+				
 				if(is_int(key($fields))) $fieldstring .= "`".$pre."`.`".$field."`, ";
-				else $fieldstring .= "`".$pre."`.`".key($fields)."` AS ".$field.", ";
+				else $fieldstring .= "`".$pre."`.`".substr(key($fields), strpos(key($fields), '.') + 1)."` AS ".$field.", ";
 			
 				next($fields);
 			}
@@ -254,6 +266,7 @@ class MySQL {
 		
 		$qry = "SELECT $fieldstring FROM `$table` $join ".$where[1].$limitstring;
 		
+		$this->lastQuery = $qry;
 		$stmt = $this->mysql->prepare($qry);
 		if(!$stmt) {
 			$this->error = array("Fehler beim Erstellen des Statements: ".$this->mysql->error, $qry);

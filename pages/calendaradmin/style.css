@@ -1,0 +1,90 @@
+#calarea, #postmanager {
+	background-color: rgba(255,255,255,0.7);
+	padding: 2px;
+	margin-bottom: 5px;
+}
+#calarea .switch_cal {
+	margin: 5px;
+	padding: 2px;
+	border: 1px dotted #555;
+	color: #555;
+	background-color: #bbb;
+	display: inline-block;
+	position: relative;
+}
+#calarea .switch_cal[data-active="1"] {
+	border: 1px dotted #00b309;
+	color: #fefefe;
+	background-color: #00b309;	
+}
+#input_addcal {
+	margin: -3px;
+	position: relative;
+	padding: 2px;
+	float:none;
+	width: auto;
+	top: -1px;
+	left: 1px;
+	-moz-border-radius: 0px;
+    border-radius: 0px;
+    background-color: rgba(255,255,255,0.4);
+    border: 0px;
+    height: 13.5pt;
+}
+#button_addcal {
+	padding: 0px 5px;
+	font-weight: bold;
+}
+.weekentry {
+	width: 100px;
+	min-height: 150px;
+	border: 1px solid black;
+	border-right: 0px;
+	float:left;
+	font-size: 13px;
+}
+.weekentry:last-of-type {
+	border-right: 1px solid black;
+}
+.weekentry > span:first-of-type {
+	display: block;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	background-color: rgba(0,179,9,0.5);
+	font-size: 14px;
+}
+.weekentry .post {
+	margin: 2px;
+	padding: 2px;
+	border: 1px solid rgb(0,179,9);
+	color: rgb(0,140,7);
+	background-color: rgba(0,179,9,0.3);
+	text-align: center;
+	min-height: 20px;
+}
+.weekentry .post:last-of-type {
+	line-height: 20px;
+}
+.timefield {
+	border: 1px solid #333;
+	width: 40px;
+	line-height: 40px;
+	height: 40px;
+	font-size: 30px;
+	text-align: center
+}
+.timefield:first-of-type {
+	-moz-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(0,0,0,0.2);
+}
+.timefield:last-of-type {
+	-moz-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(0,0,0,0.2);
+}

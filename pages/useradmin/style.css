@@ -14,9 +14,21 @@
 	width: 150px;
 	background-color: rgba(255,255,255,0.5);
 }
+#b_delUser {
+	background-color: #de0c11;
+}
 .searchentry span:last-of-type {
 	float: right;
 }
+.searchentry {
+	padding: 2px;
+}
+.searchentry:hover {
+	background-color: rgba(0,179,9,0.5);
+}
 .inner {
 	width: 500px;
+}
+#editcontent {
+	display:none;
 }

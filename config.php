@@ -6,6 +6,6 @@ define('MYSQL_PASSWD', '6TPhHjEYZQCmyEKz');
 
 
 define('PROTO', 'http://');
-define('HOME', 'localhost');
-define('SESSIONTIME', 20);
+define('HOME', 'localhost:90');
+define('SESSIONTIME', 30);
 define('TITLE', 'JWPlanner');

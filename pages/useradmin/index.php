@@ -105,11 +105,12 @@
 			if(testJSON(data)) {
 				jdata = JSON.parse(data);
 
+				
 				$('#adduser').find('.error').stop().fadeOut(0).text(jdata.error).fadeIn(100).delay(3000).fadeOut(100);
 				return;
 			}
 
-			console.log(data);
+			alert("<?php displayString('useredit addSuccess')?>");
 		});
 	});
 </script>
@@ -127,7 +128,6 @@
 	$('input').change(function() {
 		$(this).attr('value', $(this).val());
 	});
-
 	
 	$('#useredit_groupSelector, #useredit_permSelector').find('.entry').click(function() {
 		if($(this).attr('data-active') == 0) {

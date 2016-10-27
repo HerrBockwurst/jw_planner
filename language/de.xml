@@ -11,11 +11,23 @@
 		<active>Aktiv</active>
 		<search>Suchen</search>
 		<vs>Versammlung</vs>
+		<loading>Lade...</loading>
+		<monday>Montag</monday>
+		<tuesday>Dienstag</tuesday>
+		<wednesday>Mittwoch</wednesday>
+		<thursday>Donnerstag</thursday>
+		<friday>Freitag</friday>
+		<saturday>Samstag</saturday>
+		<sunday>Sonntag</sunday>
+		<start>Start</start>
+		<end>Ende</end>
+		<count>Personen</count>
 	</common>
 	<menu>
 		<calendar>Kalender</calendar>
 		<useradmin>Benutzerverwaltung</useradmin>
 		<logout>Abmelden</logout>
+		<calendaradmin>Kalenderverwaltung</calendaradmin>
 	</menu>
 	<errors>
 		<FormfillError>Bitte fülle alle Felder aus!</FormfillError>
@@ -35,7 +47,17 @@
 		<add>Benutzer anlegen</add>
 		<edit>Benutzer aktualisieren</edit>
 		<edituser>Benutzer bearbeiten</edituser>
+		<searchresult>Suchergebnis</searchresult>
+		<delete>Benutzer löschen</delete>
+		<addSuccess>Benutzer wurde erfolgreich angelegt</addSuccess>
+		<editSuccess>Benutzer wurde erfolgreich aktualisiert</editSuccess>
+		<delSuccess>Benutzer wurde erfolgreich gelöscht</delSuccess>
 	</useredit>
+	<calendaradmin>
+		<headline>Kalender</headline>
+		<repeatingPosts>Regelmäßige Termine</repeatingPosts>
+		<addpost>Neuer Termin</addpost>
+	</calendaradmin>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>
 		<admin.groups>Gruppen verwalten</admin.groups>

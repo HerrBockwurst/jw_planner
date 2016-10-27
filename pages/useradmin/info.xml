@@ -11,6 +11,9 @@
 	<handlers>
 		<adduser>handlers/addUser.php</adduser>
 		<searchuser>handlers/searchUser.php</searchuser>
+		<getuserdata>handlers/getUser.php</getuserdata>
+		<deluser>handlers/delUser.php</deluser>
+		<updateuser>handlers/updateUser.php</updateuser>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

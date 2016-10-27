@@ -93,7 +93,11 @@ class ContentAdmin {
 	}
 	
 	public function loadHandler($pageid, $handler) {
+		global $user;
+		
 		if(!isset($this->content[$pageid])) return;
+		if($this->content[$pageid]->permission != '' && !$user->hasPerm($this->content[$pageid]->permission)) return;
+		
 		$url = $this->content[$pageid]->getHandlerUrl($handler);
 		if($url) require_once "pages/$pageid/$url";
 		else return false;

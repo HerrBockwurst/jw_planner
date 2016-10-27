@@ -8,13 +8,13 @@ $name = $_POST['name'];
 $password = hash('sha512', $_POST['password']);
 $email = $_POST['email'];
 $active = intval($_POST['active']);
-$vsid = $_POST['vsid'];
-$perms = $_POST['perms'];
+$vsid = empty($_POST['vsid']) ? null : $_POST['vsid'];
+$perms = empty($_POST['perms']) ? array() : $_POST['perms'];
 $groups = empty($_POST['groups']) ? array() : $_POST['groups'];
 
-if(empty($name) || empty($_POST['password']) || ($active !== 0 && $active != 1) || empty($vsid))
+if(empty($_POST['name']) || empty($_POST['password']) || ($active !== 0 && $active != 1) || empty($_POST['vsid']))
 	returnErrorJSON(getString('errors FormfillError'));
-
+		
 /*
  * Recht prüfen
  */
@@ -66,7 +66,7 @@ while(true) {
 /*
  * Daten eintragen
  */
-		
+	
 if(!$mysql->insert('users', array(
 		"uid" => $username,
 		"name" => $name,

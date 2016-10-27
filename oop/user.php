@@ -62,7 +62,7 @@ class UserObject {
 			$result = $mysql->fetchRow();
 				
 			$mysql->where('sid', session_id());
-			$mysql->update('sessions', array('expire' => time() + 20*SESSIONTIME));
+			$mysql->update('sessions', array('expire' => time() + 60*SESSIONTIME));
 			
 			$this->insertUserData($result);
 		}

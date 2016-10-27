@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<page>
+	<id>calendaradmin</id>
+	<type>module</type>
+	<pages>
+		<index>index.php</index>
+		<calendars>calendars.php</calendars>
+		<getposts>getPosts.php</getposts>
+	</pages>
+	<permission>admin.calendar</permission>
+	<handlers>
+		<addcal>handlers/addCal.php</addcal>
+	</handlers>
+	<css>style.css</css>
+	<js></js>
+</page>

@@ -58,6 +58,9 @@
 		<repeatingPosts>Regelmäßige Termine</repeatingPosts>
 		<addpost>Neuer Termin</addpost>
 		<addPost>Termin eintragen</addPost>
+		<invalidTime>Die Endzeit darf nicht vor der Startzeit liegen</invalidTime>
+		<timeBlocked>Die gewünschte Zeit ist schon vergeben</timeBlocked>
+		<wrongDay>Der Tag wurde nicht gefunden</wrongDay>
 	</calendaradmin>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

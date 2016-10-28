@@ -89,3 +89,14 @@ function getVSAccess($xtraneedle = '') {
 	}
 	return $vs;
 }
+
+function createTime($string): int {
+	/*
+	 * Gibt Minuten seit Mitternacht zurück
+	 */
+	$a = explode(":", $string);
+	$h = intval($a[0]);
+	$m = intval($a[1]);
+	
+	return ($h * 60) + $m;
+}

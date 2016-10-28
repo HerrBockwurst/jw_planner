@@ -57,6 +57,7 @@
 		<headline>Kalender</headline>
 		<repeatingPosts>Regelmäßige Termine</repeatingPosts>
 		<addpost>Neuer Termin</addpost>
+		<addPost>Termin eintragen</addPost>
 	</calendaradmin>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

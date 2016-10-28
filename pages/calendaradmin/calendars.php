@@ -17,6 +17,7 @@ foreach($calendars AS $currCal) {
 $(".switch_cal[data-active='0']").click(function() {
 	$('.switch_cal').attr('data-active', 0);
 	$(this).attr('data-active', 1);
+	$('.tooltip').stop().fadeOut(100);
 	loadContent('<?php echo PROTO.HOME?>/load/calendaradmin/getposts', '#postmanager', {cid: $(this).attr('data-cid')});
 })
 

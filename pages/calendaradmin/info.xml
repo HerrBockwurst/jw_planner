@@ -11,6 +11,7 @@
 	<permission>admin.calendar</permission>
 	<handlers>
 		<addcal>handlers/addCal.php</addcal>
+		<addpattern>handlers/addPattern.php</addpattern>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

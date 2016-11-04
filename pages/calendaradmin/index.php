@@ -3,9 +3,7 @@
 	<div id="calarea">
 		<?php displayString('common loading')?>
 	</div>
-	<div id="postmanager" style="display: none">
-		
-	</div>
+	<div id="postmanager" style="display: none"></div>
 </div>
 <div class="tooltip">
 	<input type="hidden" id="day" value="" />
@@ -48,6 +46,7 @@
 		</div>
 	</div>
 	<br class="floatbreak" />
+	<div class="error" style="margin-top: 10px;"></div>
 	<button id="b_addPost" style="margin-top: 20px;"><?php displayString('calendaradmin addPost')?></button>
 </div>
 <script>
@@ -93,7 +92,9 @@ $(".timefield[data-action='count']").children('input').change(function() {
 	var newval = parseInt($(this).val());
 	
 	if(!Number.isInteger(newval)) $(this).val(2);
-	else $(this).val(newval);
+	if(newval < 1) newval = 1;
+	
+	$(this).val(newval);
 });
 
 $(".timefield[data-action='plus'], .timefield[data-action='minus']").click(function() {
@@ -118,6 +119,7 @@ $(".timefield[data-action='plus'], .timefield[data-action='minus']").click(funct
 
 $("#b_addPost").click(function() {
 
+	$('.tooltip').find('.error').stop().fadeOut(100);
 	var postdata = {};
 	
 	postdata.start = $('#start_time').find(".timefield[data-action='hour']").children('input').val() + ":" + $('#start_time').find(".timefield[data-action='min']").children('input').val();
@@ -125,10 +127,17 @@ $("#b_addPost").click(function() {
 	postdata.count = parseInt($('#counter').find('input').val());
 	postdata.cid = $('#hidden_cid').val();
 	postdata.day = $('#day').val();
-
-	console.log(postdata);
+	
 	$.post('<?php echo PROTO.HOME?>/datahandler/calendaradmin/addpattern', postdata, function(data) {
+		if(testJSON(data)) {
+			jdata = JSON.parse(data);			
+			$('.tooltip').find('.error').stop().fadeOut(0).text(jdata.error).fadeIn(100).delay(3000).fadeOut(100);
+			return;
+		}
+		
+		$(".tooltip").fadeOut(100);
 		console.log(data);
+		loadContent('<?php echo PROTO.HOME?>/load/calendaradmin/getposts', '#postmanager', {cid: $('#hidden_cid').val()});
 	});	
 });
 

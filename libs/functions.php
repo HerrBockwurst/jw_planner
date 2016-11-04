@@ -100,3 +100,30 @@ function createTime($string): int {
 	
 	return ($h * 60) + $m;
 }
+
+function getPatternByDay($day, $cid) {
+	global $mysql;
+	
+	$mysql->where('cid', $cid);
+	$mysql->where('day', $day);
+	$mysql->orderBy('start');
+	$mysql->select('pattern');
+	
+	$result = $mysql->fetchAll();
+	
+	foreach($result AS $currPatt) {
+		$patt = $currPatt['patt_id'];
+		$start = substr("0".floor($currPatt['start']/60), -2).":".substr("0".$currPatt['start']%60, -2);
+		$end = substr("0".floor($currPatt['end']/60), -2).":".substr("0".$currPatt['end']%60, -2);
+		$count = $currPatt['count']." ".substr(getString('common count'), 0, 1).".";
+		echo <<<EOF
+<div class="post clickable floatbreak" data-patt="$patt">
+	<div style="float: left;">
+		<span>$start</span>
+		<span>$end</span>
+	</div>
+	<span style="line-height: 32px">$count</span>
+</div>
+EOF;
+	}
+}

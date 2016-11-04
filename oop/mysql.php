@@ -1,6 +1,6 @@
 <?php
 class MySQL {
-	private $mysql = null, $join = array(), $where = array(), $prep = '', $result = null;
+	private $mysql = null, $join = array(), $where = array(), $prep = '', $result = null, $order = "";
 	public $error = array(), $lastQuery;
 
 	function __construct($host, $user, $password, $db, $port = 3306) {
@@ -240,6 +240,10 @@ class MySQL {
 		else return false;		
 	}
 	
+	public function orderBy($field, $order = "ASC") {
+		$this->order = " ORDER BY `$field` $order";
+	}
+	
 	public function select($table, $fields = null, $limit = null) {
 		$this->prep = '';
 		if($fields != null) {
@@ -264,7 +268,8 @@ class MySQL {
 		$limitstring = '';
 		if($limit != null) $limitstring = " LIMIT ".$limit;
 		
-		$qry = "SELECT $fieldstring FROM `$table` $join ".$where[1].$limitstring;
+		$qry = "SELECT $fieldstring FROM `$table` $join ".$where[1].$limitstring.$this->order;
+		$this->order = "";
 		
 		$this->lastQuery = $qry;
 		$stmt = $this->mysql->prepare($qry);

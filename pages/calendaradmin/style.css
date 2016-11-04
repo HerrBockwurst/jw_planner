@@ -35,36 +35,38 @@
 	padding: 0px 5px;
 	font-weight: bold;
 }
-.weekentry {
-	width: 100px;
-	min-height: 150px;
+#postmanager table {
 	border: 1px solid black;
-	border-right: 0px;
-	float:left;
+}
+#postmanager td, #postmanager th {
+	width: 100px;
+	border-right: 1px solid black;
 	font-size: 13px;
 }
-.weekentry:last-of-type {
-	border-right: 1px solid black;
+#postmanager th {
+	border-bottom: 0px;
 }
-.weekentry > span:first-of-type {
-	display: block;
+#postmanager td {
+	padding: 2px;
+}
+#postmanager th {
 	height: 25px;
 	line-height: 25px;
 	text-align: center;
 	background-color: rgba(0,179,9,0.5);
 	font-size: 14px;
 }
-.weekentry .post {
-	margin: 2px;
+#postmanager .post {
 	padding: 2px;
+	margin-bottom: 2px;
 	border: 1px solid rgb(0,179,9);
 	color: rgb(0,140,7);
 	background-color: rgba(0,179,9,0.3);
 	text-align: center;
 	min-height: 20px;
 }
-.weekentry .post:last-of-type {
-	line-height: 20px;
+#postmanager .post:last-of-type {
+	line-height: 33px;
 }
 .timefield {
 	border: 1px solid #333;
@@ -98,4 +100,16 @@
 	margin: 0;
 	text-align: center;
 	font-size: 24px;
+}
+#postmanager .post span {
+	font-size: 16px;
+	font-weight: bold;
+	display: block;
+	line-height: 16px;
+}
+#generator input {
+	width: 100px;
+	top: 0px;
+	float: none;
+	margin: 0px;
 }

@@ -22,7 +22,12 @@
 		<start>Start</start>
 		<end>Ende</end>
 		<count>Personen</count>
+		<from>Von</from>
+		<to>bis</to>
 	</common>
+	<calendar>
+		
+	</calendar>
 	<menu>
 		<calendar>Kalender</calendar>
 		<useradmin>Benutzerverwaltung</useradmin>
@@ -59,8 +64,17 @@
 		<addpost>Neuer Termin</addpost>
 		<addPost>Termin eintragen</addPost>
 		<invalidTime>Die Endzeit darf nicht vor der Startzeit liegen</invalidTime>
+		<invalidMin>Die Minuten sind ungültig</invalidMin>
 		<timeBlocked>Die gewünschte Zeit ist schon vergeben</timeBlocked>
 		<wrongDay>Der Tag wurde nicht gefunden</wrongDay>
+		<generatePosts>Termine generieren</generatePosts>
+		<generate>Generieren</generate>
+		<delPost>Termin löschen?</delPost>
+		<genPostsWarn>Willst du wirklich die Termine bis zu dem gewählten Datum generieren? (Dies kann nicht Rückgängig gemacht werden!)</genPostsWarn>
+		<invalidGenTime>Das Datumsformat stimmt nicht. Bitte überprüfe deine Eingabe.</invalidGenTime>
+		<someDeleted>Einige Einträge wurden nicht erzeugt, da in dem Zeitraum bereits Einträge vorhanden sind.</someDeleted>
+		<postsCreated>Die Einträge wurden erfolgreich erzeugt.</postsCreated>
+		<delete>Möchtest du diesen Kalender wirklich löschen?</delete>
 	</calendaradmin>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

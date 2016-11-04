@@ -82,6 +82,20 @@ button {
 	display: none;
 	padding: 2px;
 }
+.warn {
+	border: 1px solid #d74600;
+	color: #d74600;
+	background-color: #ffb591;
+	display: none;
+	padding: 2px;
+}
+.success {
+	border: 1px solid #008c23;
+	color: #008c23;
+	background-color: #79ff9b;
+	display: none;
+	padding: 2px;
+}
 .fieldset {
 	background-color: rgba(255,255,255,0.7);
 	margin: 0px 20px 20px 0px;

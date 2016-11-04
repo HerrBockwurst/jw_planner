@@ -36,21 +36,23 @@
 		var prev = parent.prev();
 		var next = parent.next();
 		
-		parent.remove();
-		delete opentabs[TabId];
-		if(prev.length != 0) {
+		if(prev.length != 0 && parent.attr('data-active') == 1) {
 			$('#thecontent').html(opentabs[prev.attr('data-id')]);
 			$('#topbar').children("li[data-id='" + prev.attr('data-id') + "']").attr('data-active', 1);
-			currOpen = prev.attr('data-id');
-		} else if (next.length != 0) {
+			currOpen = prev.attr('data-id');			
+		} else if (next.length != 0 && parent.attr('data-active') == 1) {
 			$('#thecontent').html(opentabs[next.attr('data-id')]);
 			$('#topbar').children("li[data-id='" + next.attr('data-id') + "']").attr('data-active', 1);
-			currOpen = next.attr('data-id');
-		} else {
-			$('#thecontent').html('');
-			currOpen = '';
-		}
+			currOpen = next.attr('data-id');			
+		}		
 		
+		parent.remove();
+		delete opentabs[TabId];
+
+		if($('#topbar').find("[data-active='1']").length == 0){
+			$('#thecontent').html('');
+			currOpen = '';	
+		}
 	}
 	
 	$('#sidebar').find('li').click(function() {

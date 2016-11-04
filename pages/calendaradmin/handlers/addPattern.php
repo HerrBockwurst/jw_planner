@@ -7,6 +7,7 @@ $endtime = createTime($_POST['end']);
 if($starttime >= $endtime) returnErrorJSON(getString('calendaradmin invalidTime'));
 
 if(intval($_POST['day']) > 7 || intval($_POST['day']) < 0) returnErrorJSON(getString('calendaradmin wrongDay'));
+if(!is_int(($starttime%60) / 15) || !is_int(($endtime%60) / 15)) returnErrorJSON(getString('calendaradmin invalidMin'));
 
 global $mysql, $user;
 

@@ -5,8 +5,11 @@
 	<type>module</type>
 	<pages>
 		<index>index.php</index>
+		<getcals>calendars.php</getcals>
+		<getcal>areahead.php</getcal>
+		<getgrid>grid.php</getgrid>
 	</pages>
-	<permission></permission>
+	<permission>calendar.entry</permission>
 	<handlers></handlers>
 	<css>style.css</css>
 	<js></js>

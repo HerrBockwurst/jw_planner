@@ -1,0 +1,45 @@
+#groupslist, #userlist {
+	float: left;
+	background-color: rgba(255,255,255,0.5);
+	width: 300px;
+	padding: 5px;
+	margin-right: 5px;
+}
+#groupslist > div:not(.headline):not(.addnew), #userlist > div:not(.headline) {
+	padding: 2px;	
+}
+#groupslist > div:not(.headline):not(.addnew) > img {
+	float: right;
+	display: none;
+}
+#groupslist > div[data-active='1']:not(.headline):not(.addnew) > img {
+	display: inline;
+}
+#groupslist > div:not(.shader):not(.headline), #userlist > div:not(.shader):not(.headline) {
+	background-color: rgba(255,255,255,0.5);
+}
+#groupslist > div:not(.headline):hover, #groupslist > div[data-active='1']:not(.headline), 
+#userlist > div:not(.headline):hover, #userlist > div[data-active='1']:not(.headline)  {
+	background-color: rgba(0,179,9,0.5);
+}
+
+.addnew input {
+	float: none;
+	position: static;
+	border: 0px;
+	border-radius: 0px;
+	moz-border-radius: 0px;
+	height: 18px;
+	margin: 0px;
+	margin-right: 5px;
+	background-color: rgba(255,255,255,0.3)
+}
+.addnew > div {
+	font-weight: bold;
+	float: right;
+	line-height: 18px;
+	width: 40px;
+	text-align: center;
+	font-size: 18px;
+	background-color: rgba(255,255,255,0.3)
+}

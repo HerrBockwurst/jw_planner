@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<page>
+	<id>groups</id>
+	<type>module</type>
+	<pages>
+		<index>index.php</index>
+		<getgroups>getGroups.php</getgroups>
+		<getusers>getUsers.php</getusers>
+	</pages>
+	<permission>admin.groups</permission>
+	<handlers>
+		<addnew>handlers/addNew.php</addnew>
+		<delgrp>handlers/delGrp.php</delgrp>
+		<update>handlers/updateGrp.php</update>
+	</handlers>
+	<css>style.css</css>
+	<js></js>
+</page>

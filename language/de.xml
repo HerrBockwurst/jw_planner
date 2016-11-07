@@ -32,6 +32,7 @@
 		<calendar>Kalender</calendar>
 		<useradmin>Benutzerverwaltung</useradmin>
 		<logout>Abmelden</logout>
+		<groups>Gruppenverwaltung</groups>
 		<calendaradmin>Kalenderverwaltung</calendaradmin>
 	</menu>
 	<errors>
@@ -42,6 +43,15 @@
 		<sql>Ein Fehler in der Datenbank ist aufgetreten.</sql>
 		<noUsersFound>Es wurde kein Benutzer gefunden!</noUsersFound>
 	</errors>
+	<groups>
+		<groups>Gruppen</groups>
+		<member>Benutzer</member>
+		<delConfirm>Gruppe wirklich löschen?</delConfirm>
+		<noGroupSelected>Du musst zuerst eine Gruppe auswählen.</noGroupSelected>
+		<saveGroup>Änderung speichern</saveGroup>
+		<gidNotFound>Gruppe nicht gefunden!</gidNotFound>
+		<updateSuccess>Gruppe erfolgreich aktualisiert</updateSuccess>
+	</groups>
 	<useredit>
 		<adduser>Benutzer hinzufügen</adduser>
 		<selectVS>Versammlung</selectVS>

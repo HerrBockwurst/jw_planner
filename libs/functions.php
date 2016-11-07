@@ -33,7 +33,7 @@ function loadSidebar() {
 	
 	echo "<ul>";
 		$unsorted = $content->getAllContentBy('type', 'module');
-		$sortOrdner = array('calendar', 'messages', 'calendaradmin', 'useradmin', 'system', 'logout');
+		$sortOrdner = array('calendar', 'messages', 'calendaradmin', 'useradmin', 'groups', 'system', 'logout');
 		$sorted = array();
 		
 		for($i = 0; $i < count($sortOrdner); $i++) {

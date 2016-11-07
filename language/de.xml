@@ -25,6 +25,20 @@
 		<from>Von</from>
 		<to>bis</to>
 	</common>
+	<months>
+		<jan>Januar</jan>
+		<feb>Februar</feb>
+		<mar>März</mar>
+		<apr>April</apr>
+		<may>Mai</may>
+		<jun>Juni</jun>
+		<jul>Juli</jul>
+		<aug>August</aug>
+		<sep>September</sep>
+		<oct>Oktober</oct>
+		<nov>November</nov>
+		<dec>Dezember</dec>
+	</months>
 	<calendar>
 		
 	</calendar>

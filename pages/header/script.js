@@ -7,13 +7,24 @@ function testJSON(str) {
 	return true;
 }
 
+function testRedirect(data) {
+	if(testJSON(data)) {
+		jdata = JSON.parse(data);
+		if(typeof jdata.redirect !== "undefined") {
+			window.location.replace(jdata.redirect);
+			return true;
+		}
+		return false;
+	}
+	return false;
+}
+
 function loadContent(url, container, postdata) {
 	
 	if(typeof postdata === "undefined") postdata = {};
 	
 	$.post(url, postdata, function(data) {
 		if(testJSON(data)) {
-			console.log(url);
 			jdata = JSON.parse(data);
 			if(typeof jdata.redirect !== "undefined") {
 				window.location.replace(jdata.redirect);

@@ -10,7 +10,10 @@
 		<getgrid>grid.php</getgrid>
 	</pages>
 	<permission>calendar.entry</permission>
-	<handlers></handlers>
+	<handlers>
+		<getposts>handlers/getPosts.php</getposts>
+		<getpostdata>handlers/postData.php</getpostdata>
+	</handlers>
 	<css>style.css</css>
 	<js></js>
 </page>

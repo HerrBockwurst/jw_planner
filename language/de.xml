@@ -40,7 +40,9 @@
 		<dec>Dezember</dec>
 	</months>
 	<calendar>
-		
+		<entrys>Bisherige Einträge:</entrys>
+		<noEntrys>Es gibt für diesen Termin noch keine Einträge.</noEntrys>
+		<delete>Entfernen</delete>
 	</calendar>
 	<menu>
 		<calendar>Kalender</calendar>

@@ -1,4 +1,12 @@
 <?php
+function stringToColorCode($str) {
+	$code = dechex(crc32($str));
+	$code = substr($code, 0, 6);
+	$code = hexdec(substr($code ,0,2)).",".hexdec(substr($code ,2,2)).",".hexdec(substr($code ,4,2)).",0.5";
+	
+	return $code;
+}
+
 function getURL($int) {
 	$url = explode('/', substr($_SERVER['REQUEST_URI'], 1));
 	if(!key_exists($int, $url)) return false;

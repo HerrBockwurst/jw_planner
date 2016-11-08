@@ -253,9 +253,13 @@ class MySQL {
 				$pre = '';
 				if(strpos(key($fields), ".") === false) $pre = $table;
 				else $pre = substr(key($fields), 0, strpos(key($fields), "."));
-				
-				if(is_int(key($fields))) $fieldstring .= "`".$pre."`.`".$field."`, ";
-				else $fieldstring .= "`".$pre."`.`".substr(key($fields), strpos(key($fields), '.') + 1)."` AS ".$field.", ";
+					
+				if(is_int(key($fields))) 
+					if($field == '*') $fieldstring .= "`".$pre."`.".$field.", ";
+					else $fieldstring .= "`".$pre."`.`".$field."`, ";
+				else
+					if(substr(key($fields), strpos(key($fields), '.') + 1) == '*') $fieldstring .= "`".$pre."`.".substr(key($fields), strpos(key($fields), '.') + 1)." AS ".$field.", ";
+					else $fieldstring .= "`".$pre."`.`".substr(key($fields), strpos(key($fields), '.') + 1)."` AS ".$field.", ";
 			
 				next($fields);
 			}

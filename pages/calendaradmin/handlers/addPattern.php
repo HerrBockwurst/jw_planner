@@ -12,9 +12,11 @@ if(!is_int(($starttime%60) / 15) || !is_int(($endtime%60) / 15)) returnErrorJSON
 global $mysql, $user;
 
 $mysql->where('cid', intval($_POST['cid']));
+$mysql->where('day', intval($_POST['day']));
 $mysql->where('start', $starttime, "<=");
 $mysql->where('end', $starttime, ">");
-$mysql->where('day', intval($_POST['day']));
+$mysql->where('start', $endtime, "<", "OR");
+$mysql->where('end', $endtime, ">");
 $mysql->select('pattern');
 
 if($mysql->countResult() > 0) returnErrorJSON(getString('calendaradmin timeBlocked'));

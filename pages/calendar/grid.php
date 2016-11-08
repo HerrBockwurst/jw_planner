@@ -34,11 +34,6 @@ $mysql->select('posts', array('start'));
 $result = $mysql->fetchAll();
 foreach($result AS $currPost) $daysWithPosts[date('j', $currPost['start'])] = 1;
 
-?>
-<div id="c_backbutton" class="clickable">&#10096;</div>
-<?php 
-
-
 /*
  * Tabelle schreiben
  */
@@ -61,8 +56,8 @@ while($pointerCol < 8) {
 		$weekdayOfcurrDay = date("N", strtotime($currDay.".".$month.".".$year)) == 0 ? 7 : date("N", strtotime($currDay.".".$month.".".$year));		
 		
 		if($weekdayOfcurrDay == $pointerCol) {
-			$highlight = isset($daysWithPosts[$currDay]) ? "highlight" : ""; 
-			echo "<td class=\"clickable $highlight\" data-date=\"$currDay\">".$currDay."</td>";
+			$highlight = isset($daysWithPosts[$currDay]) ? "clickable highlight" : ""; 
+			echo "<td class=\"$highlight\" data-date=\"$currDay\">".$currDay."</td>";
 			$currDay++;
 		}
 		else echo "<td class=\"shader\"></td>";
@@ -83,13 +78,43 @@ while($pointerCol < 8) {
 
 echo "</table>";
 ?>
-<br class="floatbreak" />
+<div id="c_backbutton" class="clickable">&#10096;</div>
+<div id="c_postentry"><?php displayString('common loading')?></div>
+
 <script>
+var heightChange = false;
+
 $('td.clickable').click(function() {
 
-	var attr = {height: ($('#c_table').height() - 22) +  'px', "line-height": ($('#c_table').height()) +  'px'}
+	var attrA = {height: ($('#c_table').height() - 22) +  'px', "line-height": ($('#c_table').height()) +  'px'}
+	var postdata = {};
+	var calswitch = $('#switch_main');
 	
-	$('#c_backbutton').css(attr).show('slide', {direction: 'left'}, 1000); 
-	$('#c_table').hide('slide', {direction: 'left'}, 1000);
+	postdata.date = $(this).attr('data-date') + "." + calswitch.attr('data-currmonth') + "." + calswitch.attr('data-curryear');
+	postdata.cid = $('#c_calheader').find("div[data-active='1']").attr('data-cid');
+
+	$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getposts', postdata, function(data) {
+		$('#c_postentry').html(data);
+
+		heightChange = false;
+		if($('#c_cal').height() < $('#daycontainer').height()) {
+			$('#c_cal').animate({height: $('#daycontainer').height() + "px"}, 100);
+			attrA = {height: ($('#daycontainer').height() - 22) +  'px', "line-height": ($('#daycontainer').height()) +  'px'}
+			heightChange = true;
+		}
+		
+		$('#c_postentry').animate({left: "70px"}, 500);
+		$('#c_backbutton').css(attrA).animate({left: "10px"}, 500); 
+		$('#c_table').animate({left: "-" + ($("#c_table").width() + $('#c_table').offset().left) + "px"}, 500);	
+	});
+});
+
+$('#c_backbutton').click(function() {
+
+	if(heightChange) $('#c_cal').delay(500).animate({height: $('#c_table').height() + "px"}, 100);
+		
+	$('#c_backbutton').animate({left: "-50px"}, 500);
+	$('#c_table').animate({left: "0px"}, 500);
+	$('#c_postentry').animate({left: $('#c_cal').width() + "px" });
 });
 </script>

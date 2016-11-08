@@ -34,7 +34,7 @@ if(!$mysql->delete('users')) returnErrorJSON(getString('errors sql'));
 /*
  * Benutzer aus Gruppen entfernen
  */
-print_r($gresult);
+
 foreach($gresult AS $currG) {
 	$members = json_decode($currG['members']);
 	unset($members[array_search($result['uid'], $members)]);
@@ -47,3 +47,13 @@ foreach($gresult AS $currG) {
  * Benutzer aus Posts löschen
  * TODO
  */
+
+$mysql->where('entrys', '%\"'.$result['uid'].'\"%', 'LIKE');
+$mysql->select('posts');
+foreach($mysql->fetchAll() AS $currPost) {
+	$entrys = json_decode($currPost['entrys']);
+	unset($entrys[array_search($result['uid'], $entrys)]);
+	
+	$mysql->where('pid', $currPost['pid']);
+	$mysql->update('posts', array('entrys' => json_encode($entrys)));
+}

@@ -38,6 +38,11 @@ foreach($mysql->fetchAll() AS $currPost) {
 	</div>
 </div>
 <script>
+/*
+ * Globale Variable um die Container auch von selbst heraus, ohne klick aktualisieren zu können
+ */
+var updateData = {date: '<?php echo $_POST['date']?>', cid: <?php echo $_POST['cid']?>};
+
 $('#postcontainer_left').children('div').click(function() {
 	$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getpostdata', {pid: $(this).attr('data-pid')}, function(data) {
 		if(testRedirect(data)) return;

@@ -13,6 +13,7 @@
 	<handlers>
 		<getposts>handlers/getPosts.php</getposts>
 		<getpostdata>handlers/postData.php</getpostdata>
+		<deluser>handlers/delUser.php</deluser>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

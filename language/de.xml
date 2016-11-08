@@ -43,6 +43,9 @@
 		<entrys>Bisherige Einträge:</entrys>
 		<noEntrys>Es gibt für diesen Termin noch keine Einträge.</noEntrys>
 		<delete>Entfernen</delete>
+		<signIn>Eintragen</signIn>
+		<signOut>Austragen</signOut>
+		<deletePost>Diesen Termin löschen</deletePost>
 	</calendar>
 	<menu>
 		<calendar>Kalender</calendar>

@@ -37,5 +37,25 @@ if($postdata->vsid != $user->vsid) {
 		?>
 	</div>
 	
-	<?php endforeach; ?>
+	<?php endforeach; ?>	
 </div>
+<button <?php echo in_array($user->uid, $entrys) ? "style=\"border: 1px solid rgba(128,0,0,0.5); background-color: rgba(128,0,0,0.5);\"" : "";?>>
+	<?php echo in_array($user->uid, $entrys) ? getString('calendar signOut') : getString('calendar signIn')?>
+</button>
+<?php if($user->hasPerm('admin.calendar')):?>
+<button style="border: 1px solid rgba(128,0,0,0.5); background-color: rgba(128,0,0,0.5);">
+	<?php displayString('calendar deletePost')?>
+</button>
+<?php endif;?>
+<script>
+var pid = <?php echo $_POST['pid']?>;
+$('.deletebutton').click(function() {
+	$.post('<?php echo PROTO.HOME?>/datahandler/calendar/deluser', {pid: pid, uid: $(this).parent().attr('data-uid')}, function(data) {
+		if(testRedirect(data)) return;
+
+		$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getposts', updateData, function(data) {
+			$('#c_postentry').html(data);
+		});
+	});
+});
+</script>

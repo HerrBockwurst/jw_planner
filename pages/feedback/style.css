@@ -1,0 +1,20 @@
+#feedbackfield textarea {
+	min-width: 500px;
+	min-height: 300px;
+	padding: 3px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+#feedbackfield td {
+	vertical-align: center;
+	padding: 3px;
+}
+#feedbackfield input {
+	position: static;
+	margin-left: 0px;
+	float: none;
+}
+#feedbackfield table {
+	margin: 20px;
+}

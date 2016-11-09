@@ -71,7 +71,7 @@ while($start < $end) {
 		
 		$spacer = 0; $stopIt = false;
 		
-		while($startstamp + $spacer <= $endstamp) {
+		while($startstamp + $spacer <= $endstamp - 1) {
 			if(isset($exclude[$startstamp + $spacer])) {
 				$stopIt = true;
 				$someDeleted = true;

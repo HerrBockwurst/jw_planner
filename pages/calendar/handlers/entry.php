@@ -1,9 +1,7 @@
 <?php
-if(!isset($_POST['pid']) || !isset($_POST['uid'])) exit;
+if(!isset($_POST['pid'])) exit;
 
 global $mysql, $user;
-
-if(!$user->hasPerm('calender.entry.other')) exit;
 
 $mysql->where('pid', $_POST['pid']);
 $mysql->join(array('posts' => 'cid', 'calendar' => 'cid'));
@@ -16,9 +14,10 @@ if($result->vsid != $user->vsid) exit;
 
 $entrys = json_decode($result->entrys);
 
-unset($entrys[array_search($_POST['uid'], $entrys)]);
+if(in_array($user->uid, $entrys)) unset($entrys[array_search($user->uid, $entrys)]);
+else $entrys[] = $user->uid;
 
 $entrys = array_values($entrys);
 
 $mysql->where('pid', $_POST['pid']);
-if(!$mysql->update('posts', array('entrys' => json_encode($entrys)))) returnErrorJSON(getString('errors sql'));
+if(!$mysql->update('posts', array('entrys' => json_encode($entrys)))) returnErrorJSON(getString('errors sql'));	

@@ -106,6 +106,7 @@ $('#b_genPosts').click(function() {
 			postdata.start = $('#genFrom').val();
 			postdata.end = $('#genTo').val();
 			$.post('<?php echo PROTO.HOME?>/datahandler/calendaradmin/generateposts', postdata, function(data) {
+				console.log(data);
 				if(testJSON(data)) {
 					jdata = JSON.parse(data);
 					if(typeof jdata.error !== "undefined") $('#generator').find('.error').stop().fadeOut(0).html(jdata.error).delay(100).fadeIn(100).delay(3000).fadeOut(100);

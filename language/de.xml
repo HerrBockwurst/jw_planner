@@ -40,12 +40,13 @@
 		<dec>Dezember</dec>
 	</months>
 	<calendar>
-		<entrys>Bisherige Einträge:</entrys>
+		<entrys>Bisherige Einträge (max. {1}):</entrys>
 		<noEntrys>Es gibt für diesen Termin noch keine Einträge.</noEntrys>
 		<delete>Entfernen</delete>
 		<signIn>Eintragen</signIn>
 		<signOut>Austragen</signOut>
 		<deletePost>Diesen Termin löschen</deletePost>
+		<confPostDelete>Diesen Termin wirklich löschen?</confPostDelete>
 	</calendar>
 	<menu>
 		<calendar>Kalender</calendar>
@@ -53,7 +54,16 @@
 		<logout>Abmelden</logout>
 		<groups>Gruppenverwaltung</groups>
 		<calendaradmin>Kalenderverwaltung</calendaradmin>
+		<feedback>Feedback</feedback>
 	</menu>
+	<feedback>
+		<infos>Die Entwickler dieser Seite sind auf euer Feedback angewiese. Deshalb kontaktiert uns, insbesondere bei Problemen oder Änderungswünschen.</infos>
+		<type>Grund für das Feedback</type>
+		<contact>Kontakt Email-Adresse</contact>
+		<tel>Telefonnummer (freiwillig)</tel>
+		<message>Deine Nachricht an uns</message>
+		<send>Senden</send>
+	</feedback>
 	<errors>
 		<FormfillError>Bitte fülle alle Felder aus!</FormfillError>
 		<invalidAuth>Benutzername und/oder Passwort falsch!</invalidAuth>

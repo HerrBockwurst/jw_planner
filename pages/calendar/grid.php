@@ -94,6 +94,8 @@ $('td.clickable').click(function() {
 	postdata.cid = $('#c_calheader').find("div[data-active='1']").attr('data-cid');
 
 	$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getposts', postdata, function(data) {
+		if(testRedirect(data)) return;
+		
 		$('#c_postentry').html(data);
 
 		heightChange = false;

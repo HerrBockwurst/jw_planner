@@ -17,7 +17,7 @@ if($postdata->vsid != $user->vsid) {
 
 ?>
 <div id="c_p_userholder">
-	<strong><?php displayString('calendar entrys')?></strong> 
+	<strong><?php echo preg_replace('/\{1\}/', $postdata->count, getString('calendar entrys'));?></strong> 
 	<?php
 	if(count($entrys) == 0) echo "<div class=\"c_p_userrow\">".getString('calendar noEntrys')."</div>";
 	
@@ -39,11 +39,11 @@ if($postdata->vsid != $user->vsid) {
 	
 	<?php endforeach; ?>	
 </div>
-<button <?php echo in_array($user->uid, $entrys) ? "style=\"border: 1px solid rgba(128,0,0,0.5); background-color: rgba(128,0,0,0.5);\"" : "";?>>
+<button id="b_sign" <?php echo in_array($user->uid, $entrys) ? "style=\"border: 1px solid rgba(128,0,0,0.5); background-color: rgba(128,0,0,0.5);\"" : "";?>>
 	<?php echo in_array($user->uid, $entrys) ? getString('calendar signOut') : getString('calendar signIn')?>
 </button>
 <?php if($user->hasPerm('admin.calendar')):?>
-<button style="border: 1px solid rgba(128,0,0,0.5); background-color: rgba(128,0,0,0.5);">
+<button id="b_delPost" style="border: 1px solid rgba(128,0,0,0.5); background-color: rgba(128,0,0,0.5);">
 	<?php displayString('calendar deletePost')?>
 </button>
 <?php endif;?>
@@ -51,9 +51,73 @@ if($postdata->vsid != $user->vsid) {
 var pid = <?php echo $_POST['pid']?>;
 $('.deletebutton').click(function() {
 	$.post('<?php echo PROTO.HOME?>/datahandler/calendar/deluser', {pid: pid, uid: $(this).parent().attr('data-uid')}, function(data) {
-		if(testRedirect(data)) return;
+		if(testRedirect(data)) return;		
+		if(testJSON(data)) {
+			jdata = JSON.parse(data);
+			alert(jdata.error);
+			return;
+		}
 
 		$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getposts', updateData, function(data) {
+			if(testRedirect(data)) return;
+
+			$('#postdata').stop().hide("slide", {direction: "left"}, 100);
+
+			setTimeout(function() {
+				$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getpostdata', {pid: pid}, function(data2) {
+					if(testRedirect(data2)) return;
+					
+					$('#c_postentry').html(data);
+					$('#postdata').html(data2).show("slide", {direction: "left"}, 100);
+				});				
+			},150);
+		});
+	});
+});
+
+$('#b_sign').click(function() {
+	$.post('<?php echo PROTO.HOME?>/datahandler/calendar/entry', {pid: pid}, function(data) {
+		if(testRedirect(data)) return;		
+		if(testJSON(data)) {
+			jdata = JSON.parse(data);
+			alert(jdata.error);
+			return;
+		}
+
+		$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getposts', updateData, function(data) {
+			if(testRedirect(data)) return;
+
+			$('#postdata').stop().hide("slide", {direction: "left"}, 100);
+
+			setTimeout(function() {
+				$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getpostdata', {pid: pid}, function(data2) {
+					if(testRedirect(data2)) return;
+					
+					$('#c_postentry').html(data);
+					$('#postdata').html(data2).show("slide", {direction: "left"}, 100);
+				});				
+			},150);
+		});
+	});
+});
+
+$('#b_delPost').click(function() {
+
+	if(!confirm('<?php displayString('calendar confPostDelete')?>')) return; 
+	
+	$.post('<?php echo PROTO.HOME?>/datahandler/calendar/delpost', {pid: pid}, function(data) {
+		if(testRedirect(data)) return;	
+			
+		if(testJSON(data)) {
+			jdata = JSON.parse(data);
+			alert(jdata.error);
+			return;
+		}
+
+		$.post('<?php echo PROTO.HOME?>/datahandler/calendar/getposts', updateData, function(data) {
+			if(testRedirect(data)) return;
+
+			$('#postdata').stop().hide("slide", {direction: "left"}, 100);
 			$('#c_postentry').html(data);
 		});
 	});

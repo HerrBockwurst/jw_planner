@@ -14,6 +14,8 @@
 		<getposts>handlers/getPosts.php</getposts>
 		<getpostdata>handlers/postData.php</getpostdata>
 		<deluser>handlers/delUser.php</deluser>
+		<entry>handlers/entry.php</entry>
+		<delpost>handlers/delPost.php</delpost>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

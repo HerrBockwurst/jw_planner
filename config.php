@@ -9,3 +9,5 @@ define('PROTO', 'http://');
 define('HOME', 'localhost:90');
 define('SESSIONTIME', 30);
 define('TITLE', 'JWPlanner');
+
+define('MAILHEADER', 'X-Mailer: PHP/' . phpversion());

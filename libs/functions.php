@@ -7,12 +7,14 @@ function stringToColorCode($str) {
 	return $code;
 }
 function repUmlaute($str): string {
+	echo $str;
 	$search = array("Ä", "Ö", "Ü", "ä", "ö", "ü", "ß", "´");
 	$replace = array("Ae", "Oe", "Ue", "ae", "oe", "ue", "ss", "");
 	while(current($search)) {
 		$str = preg_replace('/'.current($search).'/', $replace[key($search)], $str);
 		next($search);
 	}
+	echo $str;
 	return $str;
 }
 

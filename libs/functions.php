@@ -9,7 +9,11 @@ function stringToColorCode($str) {
 function repUmlaute($str): string {
 	$search = array("Ä", "Ö", "Ü", "ä", "ö", "ü", "ß", "´");
 	$replace = array("Ae", "Oe", "Ue", "ae", "oe", "ue", "ss", "");
-	return str_replace($search, $replace, $str);
+	while(current($search)) {
+		$str = preg_replace('/'.current($search).'/g', $replace[key($search)], $str);
+		next($search);
+	}
+	return $str;
 }
 
 function getURL($int) {

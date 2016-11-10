@@ -11,8 +11,8 @@ function repUmlaute($str): string {
 	$search = array("Ä", "Ö", "Ü", "ä", "ö", "ü", "ß", "´");
 	$replace = array("Ae", "Oe", "Ue", "ae", "oe", "ue", "ss", "");
 	while(current($search)) {
-		echo "replacing ".current($search); 
-		$str = preg_replace('/'.current($search).'/', $replace[key($search)], $string);
+		echo "replacing ".utf8_encode(current($search)); 
+		$string = preg_replace('/'.utf8_encode(current($search)).'/', $replace[key($search)], $string);
 		next($search);
 	}
 	reset($search);

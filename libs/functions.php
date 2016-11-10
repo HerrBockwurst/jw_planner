@@ -6,6 +6,11 @@ function stringToColorCode($str) {
 	
 	return $code;
 }
+function repUmlaute($str): string {
+	$search = array("Ä", "Ö", "Ü", "ä", "ö", "ü", "ß", "´");
+	$replace = array("Ae", "Oe", "Ue", "ae", "oe", "ue", "ss", "");
+	return str_replace($search, $replace, $string);
+}
 
 function getURL($int) {
 	$url = explode('/', substr($_SERVER['REQUEST_URI'], 1));

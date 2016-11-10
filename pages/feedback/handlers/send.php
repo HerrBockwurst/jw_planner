@@ -10,6 +10,7 @@ $msg = $_POST['msg'];
 if(!filter_var($mail, FILTER_VALIDATE_EMAIL)) returnErrorJSON(getString('feedback noValidMail'));
 
 $betr = repUmlaute(MAIL_BETR.$type);
+echo repUmlaute('St‰ﬂe');
 
 $msg = repUmlaute("Name: $name \nTel: $tel \n$msg");
 

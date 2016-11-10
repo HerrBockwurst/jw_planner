@@ -10,5 +10,5 @@ define('HOME', 'jw.herrbockwurst.de');
 define('SESSIONTIME', 30);
 define('TITLE', 'JWPlanner');
 
-define('MAIL_HEADER', 'X-Mailer: PHP/' . phpversion());
+define('MAIL_HEADER', 'Content-Type: text/html; charset=UTF-8'.'\r\n'.'X-Mailer: PHP/' . phpversion());
 define('MAIL_BETR', 'FEEDBACK: ');

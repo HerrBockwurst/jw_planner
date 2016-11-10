@@ -6,8 +6,9 @@ define('MYSQL_PASSWD', '6TPhHjEYZQCmyEKz');
 
 
 define('PROTO', 'http://');
-define('HOME', 'localhost:90');
+define('HOME', 'jw.herrbockwurst.de');
 define('SESSIONTIME', 30);
 define('TITLE', 'JWPlanner');
 
-define('MAILHEADER', 'X-Mailer: PHP/' . phpversion());
+define('MAIL_HEADER', 'X-Mailer: PHP/' . phpversion());
+define('MAIL_BETR', 'FEEDBACK: ');

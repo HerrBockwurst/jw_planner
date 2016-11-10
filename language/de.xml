@@ -63,6 +63,11 @@
 		<tel>Telefonnummer (freiwillig)</tel>
 		<message>Deine Nachricht an uns</message>
 		<send>Senden</send>
+		<problem>Problem/Störung</problem>
+		<suggestion>Änderungswunsch</suggestion>
+		<other>Anderes</other>
+		<noValidMail>Du hast keine gültige Email-Adresse angeben.</noValidMail>
+		<mailproblem>Deine Email konnte nicht versendet werden. Versuche es später erneut!</mailproblem>
 	</feedback>
 	<errors>
 		<FormfillError>Bitte fülle alle Felder aus!</FormfillError>

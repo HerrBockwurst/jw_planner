@@ -5,6 +5,7 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #555;
+    font-family: inherit;
 }
 #feedbackfield td {
 	vertical-align: center;
@@ -17,4 +18,42 @@
 }
 #feedbackfield table {
 	margin: 20px;
+}
+#type {
+	padding: 3px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    display: inline-block;
+    height: 16px;
+    background-color: white;
+    position: relative;
+    width: 192px;
+}
+#type > span {
+	display: block;
+	margin-right: 20px;
+}
+#type > img {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	cursor: pointer; 
+}
+#type > div {
+	display: none;
+	position: absolute;
+	left: 4px;
+	top: 22px;
+	width: 188px;
+	border: 1px solid #555;
+	background-color: white;
+}
+#type > div > span {
+	display: block;
+	padding: 4px 2px;
+	cursor: pointer; 
+}
+#type > div > span:hover {
+	background-color: rgba(0,0,0,0.2);	 
 }

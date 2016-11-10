@@ -8,6 +8,7 @@
 	</pages>
 	<permission></permission>
 	<handlers>
+		<send>handlers/send.php</send>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

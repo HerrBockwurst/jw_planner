@@ -54,7 +54,7 @@ $('#feedbackfield').find('button').click(function() {
 	postdata.name = $('#name').val();
 	postdata.mail = $('#contact').val();
 	postdata.tel = $('#tel').val();
-	postdata.msg = $('#text').text();
+	postdata.msg = $('#text').val();
 
 	$.post('<?php echo PROTO.HOME?>/datahandler/feedback/send', postdata, function(data) {
 		console.log(data);

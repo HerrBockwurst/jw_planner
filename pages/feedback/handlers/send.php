@@ -9,7 +9,7 @@ $msg = $_POST['msg'];
 
 if(!filter_var($mail, FILTER_VALIDATE_EMAIL)) returnErrorJSON(getString('feedback noValidMail'));
 
-$betr = utf8_encode(MAIL_BETR.$type);
+$betr = MAIL_BETR.$type;
 
 $msg = "Name: $name \nTel: $tel \n$msg";
 

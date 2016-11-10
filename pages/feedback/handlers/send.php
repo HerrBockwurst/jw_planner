@@ -13,4 +13,4 @@ $betr = utf8_encode(MAIL_BETR.$type);
 
 $msg = "Name: $name \nTel: $tel \n$msg";
 
-if(!@mail('chef@herrbockwurst.de', $betr, $msg, 'From: '.$name.' <'.$mail.'>\r\n'.MAIL_HEADER)) returnErrorJSON(getString('feedback mailproblem'));
+if(!@mail('chef@herrbockwurst.de', $betr, $msg, MAIL_HEADER.'From: '.$name.' <'.$mail.'>')) returnErrorJSON(getString('feedback mailproblem'));

@@ -11,6 +11,6 @@ if(!filter_var($mail, FILTER_VALIDATE_EMAIL)) returnErrorJSON(getString('feedbac
 
 $betr = MAIL_BETR.$type;
 
-$msg = "Name: $name \n Tel: $tel \n $msg";
+$msg = "Name: $name \nTel: $tel \n$msg";
 
-if(!@mail('chef@herrbockwurst.de', $betr, $msg, 'From: '.$mail.'\r\n'.MAIL_HEADER)) returnErrorJSON(getString('feedback mailproblem'));
+if(!@mail('chef@herrbockwurst.de', $betr, $msg, 'From: <'.$name.'>'.$mail.'\r\n'.MAIL_HEADER)) returnErrorJSON(getString('feedback mailproblem'));

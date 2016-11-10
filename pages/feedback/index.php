@@ -50,7 +50,7 @@ $('#type').children('img').click(function() {
 
 $('#feedbackfield').find('button').click(function() {
 	postdata = {}
-	postdata.type = $('#type').children('span').attr('data-value');
+	postdata.type = $('#type').children('span').text() + " (" + $('#type').children('span').attr('data-value') + ")";
 	postdata.name = $('#name').val();
 	postdata.mail = $('#contact').val();
 	postdata.tel = $('#tel').val();

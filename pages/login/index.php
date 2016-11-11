@@ -8,7 +8,7 @@ if($user->uid != NULL) {
 }
 ?>
 
-<div id="login">
+<div id="login">	
 	<div id="logo">JW<span style="font-size: 0.5em">Planner</span></div>
 	<form style="margin: 20px 70px;" class="formrowcontainer" id="loginform">
 		<div class="error"></div>

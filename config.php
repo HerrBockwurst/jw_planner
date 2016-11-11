@@ -12,3 +12,4 @@ define('TITLE', 'JWPlanner');
 
 define('MAIL_HEADER', '');
 define('MAIL_BETR', 'FEEDBACK: ');
+define('MAIL_CONTACT', 'kontakt@jwplanner.de');

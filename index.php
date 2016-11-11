@@ -9,6 +9,11 @@ require_once 'oop/contentAdmin.php';
 require_once 'oop/lang.php';
 require_once 'oop/user.php';
 
+if(checkURL(0, 'impressum')) {
+	require_once 'impressum.php';
+	exit;
+}
+
 if(!checkURL(0, 'load') && !checkURL(0, 'datahandler')) buildHeader(); //Header wenn nicht per Ajax geladen
 elseif(checkURL(0, 'datahandler')) $content->loadHandler(getURL(1), getURL(2)); //Datahandler
 elseif(checkURL(0, 'load') && checkURL(2, false)) $content->displayContent(getURL(1)); //Page ohne Subpage

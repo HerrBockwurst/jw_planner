@@ -46,6 +46,25 @@ button {
 	border-radius: 5px;
 	border: 1px solid #555;
 }
+p {
+	margin: 5px 0px;
+}
+h1 {
+	font-weight: bold;
+	font-size: 1.8em;
+	margin: 20px 0px;
+}
+h2 {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 10px 0px;
+}
+#impressum li {
+	list-style: disc;
+}
+#impressum ul {
+	margin-left: 20px;
+}
 #noscript {
 	width: 100%;
 	height: 100%;

@@ -57,7 +57,17 @@ $('#feedbackfield').find('button').click(function() {
 	postdata.msg = $('#text').val();
 
 	$.post('<?php echo PROTO.HOME?>/datahandler/feedback/send', postdata, function(data) {
-		console.log(data);
+		if(testRedirect(data)) return;
+
+		if(testJSON(data)) {
+			jdata = JSON.parse(data);
+			alert(jdata.error);
+			return;
+		}
+
+		alert('<?php displayString('feedback sendSuccessful')?>');
+		$('#feedbackfield').find('input').val('');
+		$('#text').val('');
 	});
 });
 </script>

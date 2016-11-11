@@ -24,7 +24,23 @@
 		<count>Personen</count>
 		<from>Von</from>
 		<to>bis</to>
+		<disclaimer>Impressum / Datenschutzerklärung</disclaimer>
 	</common>
+	<donate>
+		<info>Ziel dieser Software ist es, dass Versammlungen ihren Dienst besser, einfacher und schneller organisieren können. Damit dies für jeden attraktiv ist und jeder diese Software nutzen kann, steht sie allen kostenlos zur Verfügung.</info>
+		<cost>Für den Betrieb dieser Seite entstehen Kosten, welche durch freiwillige Spenden finanziert werden. Dadurch erhält jeder die Gelegenheit, diese Software so zu unterstützen, wie er es in seinem Herzen beschlossen hat, nicht widerwillig oder aus Zwang (2. Korinther 9:7).</cost>
+		<overflow>Wir garantieren, dass alle Spenden, welche die entstehenden Kosten überschreiten, zugunsten des Weltweiten Werkes an Jehovas Organisation weitergeleitet werden.</overflow>
+		<methods>Aktuell sind Spenden nur über Paypal möglich.</methods>
+	</donate>
+	<wannaUse>
+		<wannaUse>JWPlanner nutzen</wannaUse>
+		<functions>Die Funktionen von JWPlanner:</functions>
+		<funcList>Planen von Terminen für z.B Trolleydienst|Verschiedene Kalender anlegbar</funcList>
+		<commingSoonList>Versenden von Nachrichten</commingSoonList>
+		<commingSoon>Geplante Funktionen:</commingSoon>
+		<text>Du möchtest JWPlanner für deine Versammlung nutzen? Dann schreibe einfach eine kurze EMail mit deinen Kontaktdaten und wir melden uns bei dir zurück.</text>		
+		<contact>Kontakt:</contact>
+	</wannaUse>
 	<months>
 		<jan>Januar</jan>
 		<feb>Februar</feb>
@@ -40,6 +56,7 @@
 		<dec>Dezember</dec>
 	</months>
 	<calendar>
+		<noCalsApplied>Es wurden noch keine Kalender angelegt.</noCalsApplied>
 		<entrys>Bisherige Einträge (max. {1}):</entrys>
 		<noEntrys>Es gibt für diesen Termin noch keine Einträge.</noEntrys>
 		<delete>Entfernen</delete>
@@ -55,7 +72,17 @@
 		<groups>Gruppenverwaltung</groups>
 		<calendaradmin>Kalenderverwaltung</calendaradmin>
 		<feedback>Feedback</feedback>
+		<donate>Spenden</donate>
+		<about>Über uns</about>
 	</menu>
+	<about>
+		<intro>Lieber Bruder, liebe Schwester, lieber Besucher,</intro>
+		<text>
+		wir möchten dich darauf hinweisen, dass diese Seite in keiner direkten Verbindung zu den Jehovas Zeugen In Deutschland oder 
+		zur Watch Tower Bible and Tract Society of Pennsylvania steht. Diese Seite wird privat durch die im Impressum genannte 
+		natürlichen Person betrieben.
+		</text>
+	</about>
 	<feedback>
 		<infos>Die Entwickler dieser Seite sind auf euer Feedback angewiese. Deshalb kontaktiert uns, insbesondere bei Problemen oder Änderungswünschen.</infos>
 		<type>Grund für das Feedback</type>
@@ -68,6 +95,7 @@
 		<other>Anderes</other>
 		<noValidMail>Du hast keine gültige Email-Adresse angeben.</noValidMail>
 		<mailproblem>Deine Email konnte nicht versendet werden. Versuche es später erneut!</mailproblem>
+		<sendSuccessful>Deine Nachricht wurde erfolgreich versendet!</sendSuccessful>
 	</feedback>
 	<errors>
 		<FormfillError>Bitte fülle alle Felder aus!</FormfillError>

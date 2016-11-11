@@ -16,3 +16,15 @@
 	margin: 200px auto;
 	text-align: center;
 }
+#disclaimer {
+	font-size: 12px;
+}
+#login > .overlay li {
+	list-style: disc;
+}
+#login > .overlay ul {
+	margin-left: 20px;
+}
+#login > .overlay p {
+	margin: 20px 0px;
+}

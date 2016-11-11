@@ -73,3 +73,22 @@
 	color: #eee;
 	background-color: rgba(130,130,130,0.7);
 }
+#footer li:hover {
+	color: none;
+	background: none;
+}
+#footer li {
+	font-size: 14px;
+	background: none;
+	line-height: 16px;
+	margin-bottom: 5px;
+	font-weight:normal;
+	font-style:normal;
+}
+#footer li > a {
+	color: #fefefe;
+}
+#footer {
+	position: absolute;
+	bottom: 0px;
+}

@@ -3,7 +3,7 @@
 	<div id="c_calheader">
 		<?php displayString('common loading')?>
 	</div>
-	<div id="c_calarea">
+	<div id="c_calarea" style="display:none; min-width: 600px">
 	</div>
 </div>
 <script>

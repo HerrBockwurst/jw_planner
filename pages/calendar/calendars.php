@@ -3,6 +3,12 @@ global $mysql, $user;
 
 $mysql->where('vsid', $user->vsid);
 $mysql->select('calendar');
+
+if($mysql->countResult() == 0) {
+	displayString('calendar noCalsApplied');
+	exit;
+}
+
 $calendars = $mysql->fetchAll();
 
 foreach($calendars AS $currCal) {

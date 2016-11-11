@@ -15,7 +15,7 @@
 		<noscript id="noscript">
 			<div id="noscriptBox">
 				<?php displayString('noscript')?>
-				<a href="<?php echo PROTO.HOME?>/impressum"><?php displayString('common disclaimer')?></a>
+				<p><a href="<?php echo PROTO.HOME?>/impressum"><?php displayString('common disclaimer')?></a></p>
 			</div>
 		</noscript>
 		<script>

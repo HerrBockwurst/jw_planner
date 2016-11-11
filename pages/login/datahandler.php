@@ -15,7 +15,7 @@ if(!$mysql->delete('loginfails')) returnErrorJSON(getString('errors sql'));
 
 $mysql->where('ip', $_SERVER['REMOTE_ADDR']);
 $mysql->select('loginfails', array('ip'));
-if($mysql->countResult() > LOGINTRY) returnErrorJSON(getString('login banned'));
+if($mysql->countResult() > LOGINTRY) returnErrorJSON(getString('errors banned'));
 
 /*
  * Login

@@ -272,7 +272,7 @@ class MySQL {
 		$limitstring = '';
 		if($limit != null) $limitstring = " LIMIT ".$limit;
 		
-		$qry = "SELECT $fieldstring FROM `$table` $join ".$where[1].$limitstring.$this->order;
+		$qry = "SELECT $fieldstring FROM `$table` $join ".$where[1].$this->order.$limitstring;
 		$this->order = "";
 		
 		$this->lastQuery = $qry;

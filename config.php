@@ -6,7 +6,7 @@ define('MYSQL_PASSWD', '6TPhHjEYZQCmyEKz');
 
 
 define('PROTO', 'http://');
-define('HOME', 'jw.herrbockwurst.de');
+define('HOME', 'localhost:90');
 define('SESSIONTIME', 30);
 define('BANTIME', 10);
 define('LOGINTRY', 3);

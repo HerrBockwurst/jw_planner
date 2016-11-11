@@ -74,7 +74,12 @@
 		<feedback>Feedback</feedback>
 		<donate>Spenden</donate>
 		<about>Über uns</about>
+		<dashboard>Übersicht</dashboard>
 	</menu>
+	<dashboard>
+		<sysmsg>Systemnachricht</sysmsg>
+		<pubmsg>Nachrichten</pubmsg>
+	</dashboard>
 	<about>
 		<intro>Lieber Bruder, liebe Schwester, lieber Besucher,</intro>
 		<text>
@@ -156,5 +161,6 @@
 		<admin.message>Nachrichten senden</admin.message>
 		<calendar.entry>Kalender nutzen</calendar.entry>
 		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
+		<dashboard.admin>Dashboard verwalten</dashboard.admin>
 	</permissions>
 </language>

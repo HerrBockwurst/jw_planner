@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<page>
+	<id>dashboard</id>
+	<type>module</type>
+	<pages>
+		<index>index.php</index>
+	</pages>
+	<permission></permission>
+	<handlers>
+		<addcal>handlers/addCal.php</addcal>
+		<addpattern>handlers/addPattern.php</addpattern>
+		<generateposts>handlers/genPosts.php</generateposts>
+		<delpost>handlers/delPost.php</delpost>
+		<delcal>handlers/delCal.php</delcal>
+	</handlers>
+	<css>style.css</css>
+	<js></js>
+</page>

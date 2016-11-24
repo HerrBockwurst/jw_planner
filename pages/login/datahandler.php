@@ -4,7 +4,7 @@ if(!isset($_POST['username']) || !isset($_POST['password']))
 
 global $mysql;
 $username = $_POST['username'];
-$password = hash('sha512', $_POST['password']);
+$password = hash('sha512', $_POST['password'].SALT);
 
 /*
  * Loginfails

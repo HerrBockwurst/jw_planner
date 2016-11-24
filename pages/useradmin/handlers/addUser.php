@@ -5,7 +5,7 @@ global $user, $mysql;
  */
 
 $name = $_POST['name'];
-$password = hash('sha512', $_POST['password']);
+$password = hash('sha512', $_POST['password'].SALT);
 $email = $_POST['email'];
 $active = intval($_POST['active']);
 $vsid = empty($_POST['vsid']) ? null : $_POST['vsid'];

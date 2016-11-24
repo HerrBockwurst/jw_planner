@@ -15,3 +15,4 @@ define('TITLE', 'JWPlanner');
 define('MAIL_HEADER', '');
 define('MAIL_BETR', 'FEEDBACK: ');
 define('MAIL_CONTACT', 'kontakt@jwplanner.de');
+define('SALT', '9Ex47WmIOFPi4UVoBsUhgZrVLC9TwwzzGE02Uc6fUAIlHegFzxTPjKUAE39yvPEM97Fi7H6Hfj9o1bOq');

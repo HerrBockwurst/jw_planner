@@ -20,7 +20,7 @@ $mysql->select('posts');
 
 ?>
 <div id="daycontainer">
-	<div><?php displayString('common '.strtolower(date('l', $starttime))) ?>, <?php echo date("d.m.Y")?></div>
+	<div><?php displayString('common '.strtolower(date('l', $starttime))) ?>, <?php echo date("d.m.Y", $starttime)?></div>
 	<div id="c_d_postcontainer">
 		<div id="postcontainer_left">
 <?php 

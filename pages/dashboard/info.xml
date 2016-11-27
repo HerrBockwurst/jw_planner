@@ -6,13 +6,10 @@
 	<pages>
 		<index>index.php</index>
 	</pages>
-	<permission></permission>
+	<permission>test</permission>
 	<handlers>
-		<addcal>handlers/addCal.php</addcal>
-		<addpattern>handlers/addPattern.php</addpattern>
-		<generateposts>handlers/genPosts.php</generateposts>
-		<delpost>handlers/delPost.php</delpost>
-		<delcal>handlers/delCal.php</delcal>
+		<addMsg>handlers/addMsg.php</addMsg>
+		<delMsg>handlers/delMsg.php</delMsg>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

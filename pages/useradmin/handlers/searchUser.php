@@ -36,6 +36,7 @@ $('.searchentry').click(function() {
 	$('#edituser_selectbox').fadeOut(100);
 
 	$.post('<?php echo PROTO.HOME?>/datahandler/useradmin/getuserdata', {uid: $(this).attr('data-uid')}, function(data) {
+		console.log(data);
 		var jdata = JSON.parse(data);
 
 		if(typeof jdata.error !== "undefined") {

@@ -5,8 +5,28 @@
 	-moz-border-radius: 5px;
 }
 .msg {
-	padding: 10px;
-	background-color: rgba(255,255,255,0.3);
+	padding: 5px;
+	background-color: rgba(255,255,255,0);
 	border-radius: 5px;
 	-moz-border-radius: 5px;
+	clear: both;
+}
+#pubmessage {
+	background-color: rgba(255,255,255,0.2);
+}
+.msg > div {
+	float: left;
+	padding: 5px;
+	overflow: hidden;
+}
+.msg > div:first-of-type {
+	width: 130px;
+}
+.msg > div:first-of-type > p {
+	font-size: 9px;
+}
+.msg > div:last-of-type {
+	max-width: 439px;
+	min-height: 33px;
+	border-left: 1px solid rgba(0,0,0,0.4)
 }

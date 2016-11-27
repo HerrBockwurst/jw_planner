@@ -78,7 +78,8 @@
 	</menu>
 	<dashboard>
 		<sysmsg>Systemnachricht</sysmsg>
-		<pubmsg>Nachrichten</pubmsg>
+		<pubmsg>Nachrichten</pubmsg>		
+		<newMsg>Schreiben</newMsg>
 	</dashboard>
 	<about>
 		<intro>Lieber Bruder, liebe Schwester, lieber Besucher,</intro>
@@ -162,5 +163,6 @@
 		<calendar.entry>Kalender nutzen</calendar.entry>
 		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
 		<dashboard.admin>Dashboard verwalten</dashboard.admin>
+		<dashboard.msg>Dashboard-Nachrichten schreiben</dashboard.msg>
 	</permissions>
 </language>

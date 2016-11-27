@@ -91,6 +91,7 @@ foreach($groups2check AS $currGrp)
 	if(strpos($currGrp['members'], $uid) && !in_array($currGrp['gid'], $groups)) {
 		$members = json_decode($currGrp['members']);
 		unset($members[array_search($uid, $members)]);
+		$members = array_values($members);
 		
 		$mysql->where('gid', $currGrp['gid']);		
 		if(!$mysql->update('groups', array('members' => json_encode($members)))) returnErrorJSON(getString('errors sql'));
@@ -98,6 +99,7 @@ foreach($groups2check AS $currGrp)
 	} elseif(in_array($currGrp['gid'], $groups) && strpos($currGrp['members'], $uid) === false) {
 		$members = json_decode($currGrp['members']);
 		$members[] = $uid;
+		$members = array_values($members);
 		
 		$mysql->where('gid', $currGrp['gid']);
 		if(!$mysql->update('groups', array('members' => json_encode($members)))) returnErrorJSON(getString('errors sql'));

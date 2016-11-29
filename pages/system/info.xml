@@ -8,6 +8,7 @@
 	</pages>	
 	<permission></permission>
 	<handlers>
+		<delchangelog>handlers/delLog.php</delchangelog>
 		<addchangelog>handlers/submitLog.php</addchangelog>
 	</handlers>
 	<css>style.css</css>

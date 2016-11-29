@@ -1,6 +1,6 @@
 <div class="fieldset" id="fs_changelog">
 	<div class="headline"><?php displayString('menu changelog')?></div>
-	<div id="c_changelog">
+	<div id="c_changelog" style="display:none">
 		<div style="margin-right: 20px;"><input type="text" id="c_changelog_release" /><div><a id="c_changelog_delbutton"><?php displayString('system delete')?></a></div></div>
 		<div>
 			<span>Deutsch</span>
@@ -32,6 +32,9 @@
 </div>
 <script>
 
+$('#fs_changelog').children('.headline').click(function() {
+	$('#c_changelog').slideDown(500);
+});
 
 function submitChangelog() {
 	$.post('<?php echo PROTO.HOME ?>/datahandler/system/addchangelog',
@@ -44,8 +47,10 @@ function submitChangelog() {
 						return;
 					}
 					
-					if($('#c_createdLogs').find("div[data-release='"+$('#c_changelog_release').val()+"']").length == 0)
+					if($('#c_createdLogs').find("div[data-release='"+$('#c_changelog_release').val()+"']").length == 0) {
 						$(jdata.div).appendTo('#c_createdLogs').slideDown(300);
+						$('#c_createdLogs').find('div.clickable').bind('click', forBindingClickList);
+					}
 					else {
 						var div = $(jdata.div);
 						$('#c_createdLogs').find("div[data-release='"+$('#c_changelog_release').val()+"']").html(div.html());
@@ -59,9 +64,8 @@ function submitChangelog() {
 				}
 	});
 }
-$('#b_submitChangelog').click(submitChangelog);
 
-$('#c_createdLogs').children('div.clickable').click(function() {
+function forBindingClickList() {
 	if($(this).attr('data-active') == 1) {
 		$('#c_changelog_release').val('').attr('value', '');
 		$('#c_changelog_text_de').html('');
@@ -73,9 +77,37 @@ $('#c_createdLogs').children('div.clickable').click(function() {
 	$('#c_changelog_text_de').html($(this).children("div[data-lang='de']").html());
 	$('#b_submitChangelog').text('<?php displayString('system editChangelog')?>');
 	$('#c_changelog_delbutton').slideDown(300);
-	
+		
 	$('#c_createdLogs').children('div.clickable').attr('data-active', 0);
 	$(this).attr('data-active', 1);
+}
+
+$('#b_submitChangelog').click(submitChangelog);
+
+$('#c_createdLogs').children('div.clickable').click(forBindingClickList);
+
+$("#c_changelog_delbutton").click(function() {
+	var rel = $('#c_changelog_release').val();
+	$.post('<?php echo PROTO.HOME ?>/datahandler/system/delchangelog', {rel: rel}, function(data) {
+		if(testJSON(data)){
+			jdata = JSON.parse(data);
+			if(typeof jdata.error !== "undefined") {
+				alert(jdata.error);
+				return;
+			}
+			
+			$('#c_changelog_release').val('').attr('value', '');
+			$('#c_changelog_text_de').html('');
+			$('#c_createdLogs').children('div.clickable').attr('data-active', 0);
+			$('#c_changelog_delbutton').slideUp(300);
+			$("div[data-release='"+rel+"']").slideUp(100);
+
+			setTimeout(function() {
+				$("div[data-release='"+rel+"']").remove();
+			}, 150);
+		}
+	});
+	
 });
 
 if(!$("#c_changelog_text_de").hasClass('trumbowyg-editor'))

@@ -62,7 +62,7 @@ while(true) {
 		break;
 	}
 }
-if(substr($username, -1, 1) == '-') $username = substr($username, 0, strlen($username) - 1);
+while(substr($username, -1, 1) == '-') $username = substr($username, 0, strlen($username) - 1);
 
 /*
  * Daten eintragen

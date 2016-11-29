@@ -1,0 +1,30 @@
+#fs_changelog input {
+	margin: 0px;
+	width: 70px;
+	float: none;
+}
+#c_changelog_text_de {
+	background-color: rgb(250,250,250);
+	width: 650px;
+}
+#c_changelog > div {
+	float: left;
+}
+#c_changelog > div > span {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+#c_createdLogs {
+	margin-left: 20px;
+}
+#c_createdLogs > div {
+	padding: 5px 10px;
+	float: left;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	background-color: rgba(255,255,255,0.5);
+}
+#c_createdLogs > div[data-active="1"] {
+	background-color: rgba(0,179,9,0.8);
+}

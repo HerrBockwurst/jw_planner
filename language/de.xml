@@ -26,6 +26,10 @@
 		<to>bis</to>
 		<disclaimer>Impressum / Datenschutzerklärung</disclaimer>
 	</common>
+	<system>
+		<addChangelog>Changelog hinzufügen</addChangelog>
+		<editChangelog>Changelog bearbeiten</editChangelog>
+	</system>
 	<donate>
 		<info>Ziel dieser Software ist es, dass Versammlungen ihren Dienst besser, einfacher und schneller organisieren können. Damit dies für jeden attraktiv ist und jeder diese Software nutzen kann, steht sie allen kostenlos zur Verfügung.</info>
 		<cost>Für den Betrieb dieser Seite entstehen Kosten, welche durch freiwillige Spenden finanziert werden. Dadurch erhält jeder die Gelegenheit, diese Software so zu unterstützen, wie er es in seinem Herzen beschlossen hat, nicht widerwillig oder aus Zwang (2. Korinther 9:7).</cost>
@@ -75,11 +79,14 @@
 		<donate>Spenden</donate>
 		<about>Über uns</about>
 		<dashboard>Übersicht</dashboard>
+		<changelog>Änderungen</changelog>
+		<system>Systemverwaltung</system>
 	</menu>
 	<dashboard>
 		<sysmsg>Systemnachricht</sysmsg>
 		<pubmsg>Nachrichten</pubmsg>		
 		<newMsg>Schreiben</newMsg>
+		<more>Weitere Nachrichten anzeigen...</more>
 	</dashboard>
 	<about>
 		<intro>Lieber Bruder, liebe Schwester, lieber Besucher,</intro>
@@ -89,6 +96,10 @@
 		natürlichen Person betrieben.
 		</text>
 	</about>
+	<changelog>
+		<release>Stand</release>
+		<changelog>Änderungen</changelog>
+	</changelog>
 	<feedback>
 		<infos>Die Entwickler dieser Seite sind auf euer Feedback angewiese. Deshalb kontaktiert uns, insbesondere bei Problemen oder Änderungswünschen.</infos>
 		<type>Grund für das Feedback</type>

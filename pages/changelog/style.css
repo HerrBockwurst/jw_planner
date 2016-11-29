@@ -1,0 +1,14 @@
+#changelog > div > div {
+	float: left;
+	margin-right: 10px;
+}
+#changelog > div > div:first-of-type {
+	width: 70px;
+}
+#changelog > div {
+	margin: 10px 0px;
+}
+#changelog > div:first-of-type {
+	font-weight: bold;
+	margin-top: 0px;
+}

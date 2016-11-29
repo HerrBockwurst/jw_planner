@@ -13,4 +13,4 @@ $betr = repUmlaute(MAIL_BETR.$type);
 $msg = repUmlaute("Name: $name \nTel: $tel \n".$msg);
 echo repUmlaute($msg);
 
-if(!@mail('chef@herrbockwurst.de', $betr, $msg, MAIL_HEADER.'From: '.$name.' <'.$mail.'>')) returnErrorJSON(getString('feedback mailproblem'));
+if(!@mail(MAIL_CONTACT, $betr, $msg, MAIL_HEADER.'From: '.$name.' <'.$mail.'>')) returnErrorJSON(getString('feedback mailproblem'));

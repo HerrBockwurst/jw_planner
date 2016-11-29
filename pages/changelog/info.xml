@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<page>
+	<id>changelog</id>
+	<type>page</type>
+	<pages>
+		<index>index.php</index>
+	</pages>	
+	<permission></permission>
+	<handlers>		
+	</handlers>
+	<css>style.css</css>
+	<js></js>
+</page>

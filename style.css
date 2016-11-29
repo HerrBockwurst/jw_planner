@@ -12,7 +12,9 @@ a {
 a:hover {
 	text-decoration: underline;
 }
-strong { font-weight: bold}
+strong, b { font-weight: bold}
+i { font-style: italic; }
+u { text-decoration: underline}
 fieldset {
 	border: 1px solid #777;
 	padding: 5px;

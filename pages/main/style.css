@@ -58,6 +58,12 @@
 	margin-left: 200px;
 	padding: 10px;
 	font-size: 14px;
+	overflow: auto;
+	-moz-scrollbars-none;
+	height: calc(100% - 50px);
+}
+#thecontent::-webkit-scrollbar { 
+    display: none; 
 }
 #sidebar li {
 	font-size: 1.1em;

@@ -6,10 +6,10 @@
 	<pages>
 		<index>index.php</index>
 	</pages>
-	<permission>test</permission>
+	<permission>dashboard.msg</permission>
 	<handlers>
-		<addMsg>handlers/addMsg.php</addMsg>
-		<delMsg>handlers/delMsg.php</delMsg>
+		<addmsg>handlers/addMsg.php</addmsg>
+		<delmsg>handlers/delMsg.php</delmsg>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

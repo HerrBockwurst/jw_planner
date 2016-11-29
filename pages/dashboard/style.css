@@ -21,12 +21,21 @@
 }
 .msg > div:first-of-type {
 	width: 130px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .msg > div:first-of-type > p {
 	font-size: 9px;
 }
 .msg > div:last-of-type {
-	max-width: 439px;
+	position: relative;
+	width: 439px;
 	min-height: 33px;
-	border-left: 1px solid rgba(0,0,0,0.4)
+	border-left: 1px solid rgba(0,0,0,0.4);	
+}
+.msg img {
+	float: right;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	cursor: pointer;
 }

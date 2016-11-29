@@ -10,6 +10,7 @@
 		<ul>
 			<li data-id="donate"><a><?php displayString('menu donate')?></a></li>
 			<li data-id="about"><a><?php displayString('menu about')?></a></li>
+			<li data-id="changelog"><a><?php displayString('menu changelog')?></a></li>
 			<li data-notab="true"><a target="_blank" href="<?php echo PROTO.HOME?>/impressum"><?php displayString('common disclaimer')?></a></li>
 		</ul>
 	</div>

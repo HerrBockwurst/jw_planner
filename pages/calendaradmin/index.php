@@ -129,12 +129,13 @@ $("#b_addPost").click(function() {
 	postdata.day = $('#day').val();
 	
 	$.post('<?php echo PROTO.HOME?>/datahandler/calendaradmin/addpattern', postdata, function(data) {
+		console.log(data);
 		if(testJSON(data)) {
 			jdata = JSON.parse(data);			
 			$('.tooltip').find('.error').stop().fadeOut(0).text(jdata.error).fadeIn(100).delay(3000).fadeOut(100);
 			return;
 		}
-		
+		return;
 		$(".tooltip").fadeOut(100);
 		console.log(data);
 		loadContent('<?php echo PROTO.HOME?>/load/calendaradmin/getposts', '#postmanager', {cid: $('#hidden_cid').val()});

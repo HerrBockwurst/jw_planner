@@ -17,6 +17,7 @@
 }
 #c_createdLogs {
 	margin-left: 20px;
+	max-width: 200px; 
 }
 #c_createdLogs > div {
 	padding: 5px 10px;
@@ -28,3 +29,8 @@
 #c_createdLogs > div[data-active="1"] {
 	background-color: rgba(0,179,9,0.8);
 }
+#c_changelog_delbutton {
+	display: block;
+	padding: 3px;
+	display: none;
+} 

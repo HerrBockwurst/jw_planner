@@ -29,6 +29,7 @@
 	<system>
 		<addChangelog>Changelog hinzufügen</addChangelog>
 		<editChangelog>Changelog bearbeiten</editChangelog>
+		<delete>Löschen?</delete>
 	</system>
 	<donate>
 		<info>Ziel dieser Software ist es, dass Versammlungen ihren Dienst besser, einfacher und schneller organisieren können. Damit dies für jeden attraktiv ist und jeder diese Software nutzen kann, steht sie allen kostenlos zur Verfügung.</info>

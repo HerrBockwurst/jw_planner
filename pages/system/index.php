@@ -1,7 +1,7 @@
 <div class="fieldset" id="fs_changelog">
 	<div class="headline"><?php displayString('menu changelog')?></div>
 	<div id="c_changelog">
-		<div style="margin-right: 20px;"><input type="text" id="c_changelog_release" /></div>
+		<div style="margin-right: 20px;"><input type="text" id="c_changelog_release" /><div><a id="c_changelog_delbutton"><?php displayString('system delete')?></a></div></div>
 		<div>
 			<span>Deutsch</span>
 			<div id="c_changelog_text_de"></div>
@@ -31,7 +31,9 @@
 	</div>
 </div>
 <script>
-$('#b_submitChangelog').click(function() {
+
+
+function submitChangelog() {
 	$.post('<?php echo PROTO.HOME ?>/datahandler/system/addchangelog',
 			{id: $('#c_changelog_release').val(), lang_de: $('#c_changelog_text_de').html()},
 			function(data) {
@@ -41,24 +43,36 @@ $('#b_submitChangelog').click(function() {
 						alert(jdata.error);
 						return;
 					}
-
+					
+					if($('#c_createdLogs').find("div[data-release='"+$('#c_changelog_release').val()+"']").length == 0)
+						$(jdata.div).appendTo('#c_createdLogs').slideDown(300);
+					else {
+						var div = $(jdata.div);
+						$('#c_createdLogs').find("div[data-release='"+$('#c_changelog_release').val()+"']").html(div.html());
+					}
+					
+					
 					$('#c_changelog_release').val('').attr('value', '');
 					$('#c_changelog_text_de').html('');
-					$('#c_createdLogs').children('div.clickable').attr('data-active', 0);					
+					$('#c_createdLogs').children('div.clickable').attr('data-active', 0);
+					$('#c_changelog_delbutton').slideUp(300);
 				}
 	});
-});
+}
+$('#b_submitChangelog').click(submitChangelog);
 
 $('#c_createdLogs').children('div.clickable').click(function() {
 	if($(this).attr('data-active') == 1) {
 		$('#c_changelog_release').val('').attr('value', '');
 		$('#c_changelog_text_de').html('');
-		$(this).attr('data-active', 0);	
+		$(this).attr('data-active', 0);
+		$('#c_changelog_delbutton').slideUp(300);	
 		return;
 	}
 	$('#c_changelog_release').val($(this).attr('data-release')).attr('value', $(this).attr('data-release'));
 	$('#c_changelog_text_de').html($(this).children("div[data-lang='de']").html());
 	$('#b_submitChangelog').text('<?php displayString('system editChangelog')?>');
+	$('#c_changelog_delbutton').slideDown(300);
 	
 	$('#c_createdLogs').children('div.clickable').attr('data-active', 0);
 	$(this).attr('data-active', 1);

@@ -24,6 +24,11 @@
 	var opentabs = {};
 	var currOpen = '';
 
+	$(function() {
+		//Autoload Dashboard
+		$('#sidebar').find("li[data-id='dashboard']").trigger('click');
+	});
+
 	function switchTab(e) {
 		if(e.target.nodeName == 'IMG') { return; }
 		var TabId = $(this).attr('data-id');

@@ -6,7 +6,7 @@
 	<pages>
 		<index>index.php</index>
 	</pages>
-	<permission>dashboard.msg</permission>
+	<permission></permission>
 	<handlers>
 		<addmsg>handlers/addMsg.php</addmsg>
 		<delmsg>handlers/delMsg.php</delmsg>

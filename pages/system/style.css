@@ -2,10 +2,13 @@
 	margin: 0px;
 	width: 70px;
 	float: none;
+	position: relative;
+	top: initial;
 }
-#c_changelog_text_de {
+#c_changelog_text_de, #s_sysmsg_editor {
 	background-color: rgb(250,250,250);
 	width: 650px;
+	min-height: 200px;
 }
 #c_changelog > div {
 	float: left;
@@ -33,4 +36,19 @@
 	display: block;
 	padding: 3px;
 	display: none;
-} 
+}
+.headline > img {
+	-moz-transform: rotate(270deg);
+	-ms-transform: rotate(270deg);
+	-o-transform: rotate(270deg);
+	-webkit-transform: rotate(270deg);
+	
+	transform: rotate(270deg);
+}
+#s_sysmsg_headline {
+	background-color: rgb(250,250,250);
+	width: 650px;
+	min-height: 30px !important;
+	font-size: 20px;
+	line-height: 30px;
+}

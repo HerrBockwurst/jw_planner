@@ -5,11 +5,13 @@
 	<type>module</type>
 	<pages>
 		<index>index.php</index>
+		<messages>messages.php</messages>
 	</pages>	
 	<permission></permission>
 	<handlers>
 		<delchangelog>handlers/delLog.php</delchangelog>
 		<addchangelog>handlers/submitLog.php</addchangelog>
+		<setmsg>handlers/setMsg.php</setmsg>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

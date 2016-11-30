@@ -3,9 +3,9 @@
 	<head>
 		<title><?php echo TITLE;?></title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/reset.css"></link>
+		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/reset.css"></link>		
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/style.css"></link>
-		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/js/trumbowyg/ui/trumbowyg.min.css"></link>
+		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/js/trumbowyg/ui/trumbowyg.min.css"></link>		
 		<?php $content->displayAll('css')?>
 		
 		<script src="<?php echo PROTO.HOME; ?>/js/jquery-3.1.1.min.js"></script>

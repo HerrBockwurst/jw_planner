@@ -5,9 +5,8 @@
 	<type>module</type>
 	<pages>
 		<index>index.php</index>
-		<messages>messages.php</messages>
 	</pages>	
-	<permission></permission>
+	<permission>system</permission>
 	<handlers>
 		<delchangelog>handlers/delLog.php</delchangelog>
 		<addchangelog>handlers/submitLog.php</addchangelog>

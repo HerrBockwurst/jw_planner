@@ -177,5 +177,6 @@
 		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
 		<dashboard.admin>Dashboard verwalten</dashboard.admin>
 		<dashboard.msg>Dashboard-Nachrichten schreiben</dashboard.msg>
+		<system>Systemverwaltung</system>
 	</permissions>
 </language>

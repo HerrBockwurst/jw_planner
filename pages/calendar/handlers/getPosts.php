@@ -26,7 +26,7 @@ $mysql->select('posts');
 <?php 
 foreach($mysql->fetchAll() AS $currPost) {
 	$shader = count(json_decode($currPost['entrys'])) >= intval($currPost['count']) ? "\" style=\"background-color: rgba(200,200,200,0.5); border-color: rgba(0,0,0,0.4)" : "";
-	$shader = count(json_decode($currPost['entrys'])) > 0 && count(json_decode($currPost['entrys'])) < intval($currPost['count']) ? "\" style=\"background-image: background-image: linear-gradient(-15deg, rgba(0,179,9,0.5) 40%, rgba(0,179,9,0.0) 60%);" : $shader;
+	$shader = count(json_decode($currPost['entrys'])) > 0 && count(json_decode($currPost['entrys'])) < intval($currPost['count']) ? "\" style=\"background-image: linear-gradient(-15deg, rgba(0,179,9,0.5) 40%, rgba(0,179,9,0.0) 60%);" : $shader;
 	
 	echo "<div data-pid=\"".$currPost['pid']."\" class=\"clickable $shader\">".date('H:i', $currPost['start'])." - ".date('H:i', $currPost['end'])."</div>";
 }

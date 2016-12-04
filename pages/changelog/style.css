@@ -8,6 +8,9 @@
 #changelog > div {
 	margin: 10px 0px;
 }
+#changelog > div > div:last-of-type {
+	width: calc(100% - 90px);
+}
 #changelog > div:first-of-type {
 	font-weight: bold;
 	margin-top: 0px;

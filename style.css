@@ -128,6 +128,10 @@ h2 {
 	font-weight: bold;
 	margin-bottom: 10px;
 }
+.headline img {
+	cursor: pointer;
+	margin-right: 5px;
+}
 .scrollable {
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -170,4 +174,7 @@ h2 {
 }
 .highlight {
 	background-color: rgba(0,179,9,0.5);
+}
+.trumbowyg-box {
+	min-height: 200px !important;
 }

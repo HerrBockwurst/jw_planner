@@ -15,7 +15,7 @@ $msg = $mysql->fetchRow();
 	<div class="headline" style="text-align: center"><?php displayString('dashboard sysmsg')?></div>
 	<div id="sysmsg">
 		<p><strong><?php echo $msg->title?></strong></p>
-		<p><?php $msg->content?></p>
+		<p><?php echo $msg->content?></p>
 	</div>
 </div>
 <?php endif;?>

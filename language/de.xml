@@ -30,6 +30,7 @@
 		<addChangelog>Changelog hinzufügen</addChangelog>
 		<editChangelog>Changelog bearbeiten</editChangelog>
 		<delete>Löschen?</delete>
+		<setMsg>Systemnachricht aktualisieren</setMsg>
 	</system>
 	<donate>
 		<info>Ziel dieser Software ist es, dass Versammlungen ihren Dienst besser, einfacher und schneller organisieren können. Damit dies für jeden attraktiv ist und jeder diese Software nutzen kann, steht sie allen kostenlos zur Verfügung.</info>
@@ -176,5 +177,6 @@
 		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
 		<dashboard.admin>Dashboard verwalten</dashboard.admin>
 		<dashboard.msg>Dashboard-Nachrichten schreiben</dashboard.msg>
+		<system>Systemverwaltung</system>
 	</permissions>
 </language>

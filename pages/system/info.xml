@@ -6,10 +6,11 @@
 	<pages>
 		<index>index.php</index>
 	</pages>	
-	<permission></permission>
+	<permission>system</permission>
 	<handlers>
 		<delchangelog>handlers/delLog.php</delchangelog>
 		<addchangelog>handlers/submitLog.php</addchangelog>
+		<setmsg>handlers/setMsg.php</setmsg>
 	</handlers>
 	<css>style.css</css>
 	<js></js>

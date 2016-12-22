@@ -1,5 +1,5 @@
 <?php
-
+/*
 require_once 'config.php';
 require_once 'oop/mysql.php';
 
@@ -15,3 +15,4 @@ foreach($users AS $user) {
 	$mysql->where('uid', $user['uid']);
 	$mysql->update('users', array('perms' => json_encode($perms)));
 }
+*/

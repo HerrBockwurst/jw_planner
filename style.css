@@ -1,0 +1,22 @@
+body {
+	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, Arial Unicode MS, sans-serif;
+	background: rgb(240,240,240) linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+	min-height: 100vh;
+	font-size: 16px;
+}
+label {
+	line-height: 22px;
+	display: block;
+	margin: 5px 0px;
+	position: relative;
+	text-align: left;
+}
+input {
+	height: 16px;
+	padding: 2px;
+	border: 1px solid rgb(100,100,100);
+	border-radius: 5px;
+	margin-left: 20px;
+	float: right;
+	width: 200px;
+}

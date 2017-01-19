@@ -20,7 +20,12 @@
 		</noscript>
 		<script>
 			$(function() {
-				loadContent('<?php echo PROTO.HOME?>/load/login', 'body');
+				var Login = <?php echo isLoggedIn() ? 'true' : 'false' ?>;
+
+				if(Login)
+					loadContent('<?php echo PROTO.HOME?>/load/frameset', 'body');
+				else
+					loadContent('<?php echo PROTO.HOME?>/load/login', 'body');
 			});
 		</script>
 	</body>

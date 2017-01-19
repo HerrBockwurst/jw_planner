@@ -36,13 +36,15 @@ class ContentHandler {
 	}
 	
 	private function isStatic() {
+		//Gibt im Erfolg den String (Pfad) zur PHP Seite zurück
 		$URL = !getURL(1) ? 'index' : getURL(1);
 		return isset($this->StaticPages[$URL]) ? $this->StaticPages[$URL] : false;
 	}
 	
 	private function isModule() {
+		//Gibt im Erfolg das Objekt (erzeugt) zurück
 		if(!getURL(1)) return false;
-		return isset($this->Modules[getURL(1)]) ? $this->Modules[getURL(1)] : false;
+		return isset($this->Modules[getURL(1)]) ? new $this->Modules[getURL(1)] : false;
 	}
 	
 	public function getCSS() {
@@ -56,17 +58,17 @@ class ContentHandler {
 	
 	public function performDataHandler() {
 		if($this->isStatic()) require_once $this->isStatic();
-		else if($this->isModule()) (new $this->isModule())->DataHandler();
+		elseif($this->isModule()) $this->isModule()->DataHandler();
 	}
 	
 	public function performSite() {
 		if($this->isStatic()) require_once $this->isStatic();
-		else if($this->isModule()) (new $this->isModule())->ActionSite();
+		elseif($this->isModule()) $this->isModule()->ActionSite();
 	}
 	
 	public function performLoad() {
 		if($this->isStatic()) require_once $this->isStatic();
-		else if($this->isModule()) (new $this->isModule())->ActionLoad();
+		elseif($this->isModule()) $this->isModule()->ActionLoad();
 	}
 	
 }

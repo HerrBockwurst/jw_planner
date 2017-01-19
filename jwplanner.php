@@ -3,6 +3,8 @@ class JWPlanner {
 	private $content;
 	
 	function __construct() {
+		global $MySQL, $User, $Lang;
+		
 		require_once 'config.php';
 		require_once 'classes/mysql.php';
 		require_once 'classes/ContentHandler.php';
@@ -10,17 +12,20 @@ class JWPlanner {
 		require_once 'classes/Language.php';
 		require_once 'functions.php';
 		
-		$GLOBALS['mysql'] = new MySQL(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB);
+		$MySQL = new MySQL(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB);
 		$this->content = new ContentHandler();
-		$GLOBALS['user']  = new User();
-		$GLOBALS['lang'] = new Language();
+		$User  = new User();
+		$Lang = new Language();
 		
 	}
 	
 	public function deliverContent() {
-		
-		global $user;
-		$user->Auth();
+		/*
+		 * Aktuell werden /load und /site gleich behandelt. Sollten Änderungen nötig sein, müssen die Skripte im ContentHandler angepasst werden.
+		 * Aktuell wird nur /load genutzt. 
+		 */
+		global $User;
+		$User->Auth();
 		
 		switch(getURL(0)) {
 			case 'load':
@@ -30,7 +35,8 @@ class JWPlanner {
 				$this->content->performDatahandler();
 				break;
 			default: 
-				$this->content->performSite();
+				//Hier evtl. bei Bedarf performSite draus machen.
+				$this->content->performLoad();
 				break;				
 		}
 	}

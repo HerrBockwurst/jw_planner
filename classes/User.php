@@ -2,9 +2,9 @@
 class User {
 	
 	private $mysql;
+	public $UID, $Clearname, $Mail, $IsLoggedIn = false;
 	
-	function __construct() {
-		$this->mysql = &$GLOBALS['mysql'];
+	function __construct() { 
 	}
 	
 	public function Auth() {
@@ -13,18 +13,17 @@ class User {
 		$this->loadUserData();
 	}
 	
-	private function loadUserData() {
-		
+	private function loadUserData() {		
 	}
 	
 	private function isAuth(): bool {
-		$mysql =& $this->mysql;
+		global $MySQL;
 		//Alte Session löschen
-		$mysql->where('expire', time(), '<');
-		$mysql->delete('sessions');
+		$MySQL->where('expire', time(), '<');
+		$MySQL->delete('sessions');
 	
 		//Session abfragen
-		$mysql->where('sid', session_id());
-		return $mysql->count('sessions') > 0 ? true : false;
+		$MySQL->where('sid', session_id());
+		return $MySQL->count('sessions') > 0 ? true : false;
 	}
 }

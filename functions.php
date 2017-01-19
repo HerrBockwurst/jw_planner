@@ -1,7 +1,7 @@
 <?php
 function getString($tree) {
-	global $lang;
-	return $lang->getValue($tree);
+	global $Lang;
+	return $Lang->getValue($tree);
 }
 
 function displayString($tree) {
@@ -11,6 +11,10 @@ function displayString($tree) {
 function returnErrorJSON($string) {
 	echo json_encode(array('error' => $string));
 	exit;
+}
+function isLoggedIn() {
+	global $User;
+	return $User->IsLoggedIn;
 }
 function stringToColorCode($str) {
 	$code = dechex(crc32($str));

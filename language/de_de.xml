@@ -4,5 +4,11 @@
 	<common>
 		<username>Benutzername</username>
 		<password>Passwort</password>
+		<login>Login</login>
 	</common>
+	<errors>
+		<WrongFields>Bitte fülle alle Felder vollständig aus!</WrongFields>
+		<AuthFail>Falscher Benutzername und/oder Passwort!</AuthFail>
+		<LoginBan>Du hast zuviele Anmeldeversuche unternommen. Daher ist die Anmeldung für dich {R} Minuten gesperrt.</LoginBan>
+	</errors>
 </language>

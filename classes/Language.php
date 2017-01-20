@@ -2,9 +2,16 @@
 class Language {
 	private $lang;
 	
-	function __construct() {
+	private function __construct() {
 		//TODO Sprache unterscheiden
 		$this->lang = simplexml_load_file("language/de_de.xml");
+	}
+	
+	public static function getInstance() {
+		static $Instance = NULL;
+		if($Instance === NULL)
+			$Instance = new Language();
+		return $Instance;
 	}
 	
 	public function getValue($tree) {
@@ -18,5 +25,3 @@ class Language {
 		return strval($tmpObj);
 	}
 }
-
-$lang = new Language();

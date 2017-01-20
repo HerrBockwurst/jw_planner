@@ -3,7 +3,7 @@ class MySQL {
 	private $con, $result, $attr;
 	public $lastQuery;
 
-	function __construct($host, $user, $pw, $db, $port = 3306) {
+	private function __construct($host, $user, $pw, $db, $port = 3306) {
 		$this->con = new mysqli($host, $user, $pw, $db);
 
 		if ($this->con->connect_error) {
@@ -11,6 +11,13 @@ class MySQL {
 					. $this->con->connect_error);
 		}
 		$this->attr = array();
+	}
+	
+	public static function getInstance() {
+		static $Instance = NULL;
+		if($Instance === NULL)
+			$Instance = new MySQL(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB);
+			return $Instance;
 	}
 
 	function __destruct() {

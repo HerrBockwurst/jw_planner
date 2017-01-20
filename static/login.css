@@ -3,7 +3,7 @@
 	padding: 30px;
 	position: absolute;
 	width: 500px;
-	height: 200px;
+	min-height: 200px;
 	left: calc(50vw - 250px);
 	top: calc(40vh - 100px);
 	border-radius: 20px;

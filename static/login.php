@@ -4,7 +4,7 @@ if(!empty($_POST)) {
 	 * Loginskript
 	 */
 	
-	global $MySQL;
+	$MySQL = MySQL::getInstance();
 	
 	if(empty($_POST['username']) || empty($_POST['password'])) returnErrorJSON(getString('errors WrongFields')); //Ein Feld leergelassen
 	
@@ -23,12 +23,19 @@ if(!empty($_POST)) {
 	$iPasswort = hash('sha512', $_POST['password'].SALT); 
 		if($iPasswort != $Result->password) returnErrorJSON(getString('errors AuthFail'));
 	
+	//Account gesperrt
+	if($Result->active != 1) returnErrorJSON(getString('errors AccountLocked'));
+	
+	//Ab hier Auth erfolgreich, Session setzen
+	$MySQL->insert('sessions', array('sid' => session_id(), 'uid' => strval($Result->uid), 'expire' => time() + (60*SESSIONTIME)));
+		
 	exit;
 }
 ?>
 <div id="dLogin">
 	<div class="logo">JW<span>Planner</span></div>
 	<form id="fLogin">
+		<div class="error"></div>
 		<label>
 			<?php displayString('common username')?>
 			<input id="iUsername" type="text" />
@@ -45,7 +52,11 @@ if(!empty($_POST)) {
 		var pass = $('#iPassword').val();
 
 		$.post('<?php echo PROTO.HOME?>/site/login', {username: user, password: pass}, function(data) {
-			console.log(data);
+			if(testJSON(data)) {
+				displayError($('#fLogin').children('.error'), data);
+				return;
+			}
+			loadContent('<?php echo PROTO.HOME?>/load/frameset', 'body');
 		});
 	}
 	$('#fLogin').submit(function (e) {

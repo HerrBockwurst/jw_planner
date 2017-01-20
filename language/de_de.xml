@@ -10,5 +10,6 @@
 		<WrongFields>Bitte fülle alle Felder vollständig aus!</WrongFields>
 		<AuthFail>Falscher Benutzername und/oder Passwort!</AuthFail>
 		<LoginBan>Du hast zuviele Anmeldeversuche unternommen. Daher ist die Anmeldung für dich {R} Minuten gesperrt.</LoginBan>
+		<AccountLocked>Dein Account wurde von einem Administrator gesperrt.</AccountLocked>
 	</errors>
 </language>

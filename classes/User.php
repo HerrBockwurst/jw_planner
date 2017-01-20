@@ -4,7 +4,14 @@ class User {
 	private $mysql;
 	public $UID, $Clearname, $Mail, $IsLoggedIn = false;
 	
-	function __construct() { 
+	private function __construct() {
+	}
+	
+	public static function getInstance() {
+		static $Instance = NULL;
+		if($Instance === NULL)
+			$Instance = new User();
+			return $Instance;
 	}
 	
 	public function Auth() {
@@ -13,11 +20,12 @@ class User {
 		$this->loadUserData();
 	}
 	
-	private function loadUserData() {		
+	private function loadUserData() {
+		$this->IsLoggedIn = true;
 	}
 	
 	private function isAuth(): bool {
-		global $MySQL;
+		$MySQL = MySQL::getInstance();
 		//Alte Session löschen
 		$MySQL->where('expire', time(), '<');
 		$MySQL->delete('sessions');

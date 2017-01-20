@@ -47,6 +47,10 @@ class ContentHandler {
 		return isset($this->Modules[getURL(1)]) ? new $this->Modules[getURL(1)] : false;
 	}
 	
+	public function getModulesByProperty() {
+		
+	}
+	
 	public function getCSS() {
 		$static = scandir('static');
 		foreach($static AS $cStatic) 

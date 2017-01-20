@@ -6,6 +6,8 @@ interface IModule {
 	public function PrintCSSLink();
 }
 abstract class Module implements IModule {
+	public $NoLoginRequired = FALSE;
+	
 	public final function getModulePath() {
 		if(!isset($this->ClassPath)) return false;
 		return $this->ClassPath;
@@ -21,6 +23,13 @@ abstract class Module implements IModule {
 	public final function DataHandler() {
 		//Redirect wenn kein Login vorhanden, Ansonsten parsen
 		$this->ActionDataHandler();
+	}
+	public final function Load() {
+		//Redirect wenn kein Login
+		if(!User::getInstance()->IsLoggedIn && !$this->NoLoginRequired) {
+			echo json_encode(array("redirect" => PROTO.HOME));
+			exit;
+		}
 	}
 }
 abstract class StaticPage {

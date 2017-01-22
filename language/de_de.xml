@@ -6,6 +6,14 @@
 		<password>Passwort</password>
 		<login>Login</login>
 	</common>
+	<menu>
+		<UserEdit>Benutzerverwaltung</UserEdit>
+		<Calendar>Kalender</Calendar>
+		<Dashboard>Dashboard</Dashboard>
+	</menu>
+	<dashboard>
+		<Welcome>Willkommen, </Welcome>
+	</dashboard>
 	<errors>
 		<WrongFields>Bitte fülle alle Felder vollständig aus!</WrongFields>
 		<AuthFail>Falscher Benutzername und/oder Passwort!</AuthFail>

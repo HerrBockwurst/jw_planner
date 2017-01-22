@@ -1,28 +1,28 @@
 <?php
-class UserEdit extends Module {
-	 // = 'useredit';
-	
+class Calendar extends Module {
 	private function __construct() {
 		$this->Permission = "";
 		$this->CSSFiles = "style.css";
-		$this->ClassPath = 'useredit';
-		$this->MenuItem = new MenuItem("menu UserEdit", 50, $this->ClassPath, $this->Permission);
+		$this->ClassPath = 'calendar';
+		$this->MenuItem = new MenuItem("menu Calendar", 10, $this->ClassPath, $this->Permission);
 	}
 	
 	public static function getInstance() {
 		static $Instance = NULL;
 		if($Instance === NULL)
-			$Instance = new UserEdit();
+			$Instance = new Calendar();
 		return $Instance;
 	}
 	
 	public function ActionLoad() {
 		
 	}
+	
 	public function ActionSite() {
-		
+	
 	}
+	
 	public function ActionDataHandler() {
-		
+	
 	}
 }

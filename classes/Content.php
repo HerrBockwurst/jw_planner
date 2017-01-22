@@ -4,14 +4,19 @@ interface IModule {
 	public function ActionSite();
 	public function ActionDataHandler();
 	public function PrintCSSLink();
+	public static function getInstance();
 }
 abstract class Module implements IModule {
-	public $NoLoginRequired = FALSE;
+	public $isPublic = FALSE;
+	protected $MenuItem = NULL;
+	protected $Permission = "";
+	protected $ClassPath, $CSSFiles;
 	
 	public final function getModulePath() {
 		if(!isset($this->ClassPath)) return false;
 		return $this->ClassPath;
 	}
+	
 	public final function PrintCSSLink() {
 		if(!isset($this->CSSFiles)) return;
 		$css =& $this->CSSFiles;
@@ -20,62 +25,24 @@ abstract class Module implements IModule {
 				echo "<link rel=\"stylesheet\" href=\"".PROTO.HOME."/modules/".$this->ClassPath."/".$cCSS."\"></link>";
 		else if(is_string($css)) echo "<link rel=\"stylesheet\" href=\"".PROTO.HOME."/modules/".$this->ClassPath."/".$css."\"></link>";
 	}
+	
 	public final function DataHandler() {
 		//Redirect wenn kein Login vorhanden, Ansonsten parsen
 		$this->ActionDataHandler();
 	}
+	
+	public final function getMenu($Menu = MENU_ITEM_POS_MAIN) {
+		if(!$this->MenuItem instanceof MenuItem) return NULL;
+		if($this->MenuItem->getMenuPos() != $Menu) return NULL;
+		return $this->MenuItem;
+	}
+	
 	public final function Load() {
 		//Redirect wenn kein Login
-		if(!User::getInstance()->IsLoggedIn && !$this->NoLoginRequired) {
+		if(!User::getInstance()->IsLoggedIn && !$this->isPublic) {
 			echo json_encode(array("redirect" => PROTO.HOME));
 			exit;
 		}
+		$this->ActionLoad();
 	}
 }
-abstract class StaticPage {
-	
-}
-/*
-class Module {
-	private $permission, $pages = array(), $datahandler = array(), $menuEntry = array(), $css;
-	
-	/**
- 	 * @param SimpleXMLElement $XMLObj
- 	 * @param SimpleXMLElement $cPage
- 	 *//*
-	function __construct($XMLObj, $mod_id) {
-		$this->permission = $XMLObj->Permission;
-		
-		foreach($XMLObj->Pages->children() AS $cPage) 
-			$this->pages[$cPage->getName()] = $cPage->__toString();
-		
-		foreach($XMLObj->Datahandler->children() AS $cHandler) 
-			$this->datahandler[$cHandler->getName()] = $cHandler->__toString();
-		
-		$this->menuEntry['prio'] = intval($XMLObj->MenuString['prio']);
-		$this->menuEntry['string'] = $XMLObj->MenuString->__toString();
-		
-		$this->css = empty($XMLObj->Style) ? null : PROTO.HOME."/modules/$mod_id/".$XMLObj->Style->__toString();
-	}
-	
-	function getMenuEntry() {
-		return $this->menuEntry;
-	}
-	
-	function getPermission() {
-		return $this->permission;
-	}
-	
-	function getPage(&$id = 'index') {
-		return isset($this->pages[$id]) ? $this->pages[$id] : null;
-	}
-	
-	function getHandler(&$id) {
-		return isset($this->datahandler[$id]) ? $this->datahandler[$id] : null;
-	}
-	
-	function getCSS() {
-		if($this->css == null) return;
-		echo "<link rel=\"stylesheet\" href=\"".$this->css."\">";
-	}
-}*/

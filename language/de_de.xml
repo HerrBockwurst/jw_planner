@@ -5,12 +5,19 @@
 		<username>Benutzername</username>
 		<password>Passwort</password>
 		<login>Login</login>
+		<name>Name</name>
+		<versammlung>Versammlung</versammlung>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
 		<Calendar>Kalender</Calendar>
 		<Dashboard>Dashboard</Dashboard>
 	</menu>
+	<useredit>
+		<Headline>Benutzerverwaltung</Headline>
+		<search>Suchen</search>
+		<new>Neuer Benutzer</new>
+	</useredit>
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>
 	</dashboard>

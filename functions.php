@@ -1,4 +1,14 @@
 <?php
+
+function replaceLangTags($String) {
+	$Matches;
+	preg_match_all('/\{(.*?)\}/', $String, $Matches);
+	foreach($Matches[0] AS $Match) 
+		$String = str_replace($Match, getString(substr($Match, 1, strlen($Match) - 2)), $String);
+	
+	return $String;
+}
+
 function getString($tree) {
 	return Language::getInstance()->getValue($tree);
 }

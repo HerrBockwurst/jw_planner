@@ -19,6 +19,6 @@
 </div>
 <script>
 $('#lMainMenu').children('li').click(function() {
-	loadContent('<?php echo PROTO.HOME?>/load/' + this.attr('data-link'), '#Content');
+	loadContent('<?php echo PROTO.HOME?>/load/' + $(this).attr('data-link'), '#Content');
 });
 </script>

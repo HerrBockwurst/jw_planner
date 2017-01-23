@@ -43,6 +43,7 @@ class User {
 		$Userdata = $MySQL->fetchRow();
 		
 		$this->Clearname = $Userdata->name;
+		//Todo
 		
 	}
 	

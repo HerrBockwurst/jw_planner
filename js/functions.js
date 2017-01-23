@@ -1,3 +1,18 @@
+jQuery.fn.extend({
+  loadingWheel: function() {
+    return this.each(function() {
+    	Obj = $(this);
+    	$.get('loading.html', function(data) {
+    		Obj.html(data);
+    	});      
+    });
+  }
+});
+
+function loadingWheel(Container) {
+	
+}
+
 function testJSON(str) {
 	try {
 		JSON.parse(str);			

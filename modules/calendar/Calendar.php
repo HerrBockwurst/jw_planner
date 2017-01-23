@@ -15,7 +15,7 @@ class Calendar extends Module {
 	}
 	
 	public function ActionLoad() {
-		
+		Calendar_Overview::print();
 	}
 	
 	public function ActionSite() {

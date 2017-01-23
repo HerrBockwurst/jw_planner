@@ -40,3 +40,11 @@ button {
 	padding: 3px;
 	margin: 5px;
 }
+.headline {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.loadingimg {
+	margin: 20px auto;
+}

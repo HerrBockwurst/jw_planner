@@ -24,17 +24,18 @@ class MySQL {
 		$this->con->close();
 	}
 
-	public function where($field, $cond, $op = '=', $type = 'AND') {
-		$this->attr['where'][] = array('field' => $field, 'cond' => $cond, 'op' => $op, 'type' => $type);
+	public function where($field, $cond, $op = '=', $type = 'AND', $table = NULL) {
+		$this->attr['where'][] = array('field' => $field, 'cond' => $cond, 'op' => $op, 'type' => $type, 'table' => $table);
 	}
 
-	private function whereString(): string {
+	private function whereString($table): string {
 		if(!isset($this->attr['where']) || empty($this->attr['where'])) return '';
 
 		$str = '';
 
 		foreach($this->attr['where'] AS $cWhere) {
-			$str .= $cWhere['type']." `".$cWhere['field']."` ".$cWhere['op']." ? ";
+			$cTable = is_null($cWhere['table']) ? $table : $cWhere['table']; 
+			$str .= $cWhere['type']." `$cTable`.`".$cWhere['field']."` ".$cWhere['op']." ? ";
 			$this->attr['cond'][] = $cWhere['cond'];
 		}
 
@@ -50,25 +51,27 @@ class MySQL {
 		$str = '';
 
 		foreach($this->attr['join'] AS $cJoin)
-			$str .= $cJoin['type']." JOIN ".$cJoin['tB']." ON `".$cJoin['tA']."`.`".$cJoin['fA']."` = `".$cJoin['tB']."`.`".$cJoin['fB']."` ";
-			$str = substr($str, 0, strlen($str) - 1);
-			unset($this->attr['join']);
-			return $str;
+			$str .= $cJoin['type']." JOIN ".$cJoin['tB']." ON (`".$cJoin['tA']."`.`".$cJoin['fA']."` = `".$cJoin['tB']."`.`".$cJoin['fB']."`) ";
+		$str = substr($str, 0, strlen($str) - 1);
+		unset($this->attr['join']);
+		return $str;
 	}
 
-	private function orderString(): string {
+	private function orderString($table): string {
 		if(!isset($this->attr['order']) || empty($this->attr['order'])) return '';
 
 		$str = ' ORDER BY ';
-		foreach($this->attr['order'] AS $cOrder)
-			$str .= "`".$cOrder['field']."` ".$cOrder['sort'].", ";
-			unset($this->attr['order']);
-			$str = substr($str, 0, strlen($str) - 2);
-			return $str;
+		foreach($this->attr['order'] AS $cOrder) {
+			$cTable = is_null($cOrder['table']) ? $table : $cOrder['table'];
+			$str .= "`$cTable`.".$cOrder['field']."` ".$cOrder['sort'].", ";
+		}
+		unset($this->attr['order']);
+		$str = substr($str, 0, strlen($str) - 2);
+		return $str;
 	}
 
-	public function orderBy($field, $sort = 'ASC') {
-		$this->attr['order'][] = array('field' => $field, 'sort' => $sort);
+	public function orderBy($field, $sort = 'ASC', $table) {
+		$this->attr['order'][] = array('field' => $field, 'sort' => $sort, 'table' => $table);
 	}
 
 	public function join($tableA, $fieldA, $tableB, $fieldB, $type = 'INNER') {
@@ -103,7 +106,7 @@ class MySQL {
 
 	public function count($table, $field = '*'): int {
 		$query = "SELECT COUNT(`$field`) AS `count` FROM `$table`";
-		$query .= " ".$this->whereString();
+		$query .= " ".$this->whereString($table);
 		$query = preg_replace('/`\*`/', '*', $query);
 		$this->execute($query);
 		$val = $this->fetchRow(TRUE);
@@ -119,7 +122,7 @@ class MySQL {
 		}
 
 		$query = substr($query, 0, -2).' ';
-		$query .= $this->whereString();
+		$query .= $this->whereString($table);
 
 		return $this->execute($query);
 
@@ -188,7 +191,7 @@ class MySQL {
 
 	public function delete($table) {
 		$query = 'DELETE FROM `'.$table.'` ';
-		$query .= $this->whereString();
+		$query .= $this->whereString($table);
 		return $this->execute($query);
 	}
 
@@ -211,8 +214,8 @@ class MySQL {
 
 		$query .= ' FROM '.$table.' ';
 		$query .= $this->joinString();
-		$query .= $this->whereString();
-		$query .= $this->orderString();
+		$query .= $this->whereString($table);
+		$query .= $this->orderString($table);
 
 		if(!is_null($limit)) $query .= ' LIMIT '.$limit;
 

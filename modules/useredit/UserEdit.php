@@ -19,7 +19,7 @@ class UserEdit extends Module {
 	public function ActionLoad() {
 		switch(getURL(2)) {
 			case 'searchUser':
-				var_dump($_POST);
+				UserEdit_UserList::print();
 				break;
 			default:
 				UserEdit_Overview::print();

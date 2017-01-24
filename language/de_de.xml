@@ -7,6 +7,8 @@
 		<login>Login</login>
 		<name>Name</name>
 		<versammlung>Versammlung</versammlung>
+		<yes>Ja</yes>
+		<no>Nein</no>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
@@ -17,6 +19,9 @@
 		<Headline>Benutzerverwaltung</Headline>
 		<search>Suchen</search>
 		<new>Neuer Benutzer</new>
+		<active>Aktiv</active>
+		<role>Rolle</role>
+		<groups>Gruppen</groups>
 	</useredit>
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>

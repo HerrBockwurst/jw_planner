@@ -4,3 +4,37 @@
 	background-color: rgba(255,255,255,0.6);
 	background-image: linear-gradient(to top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%);
 }
+#UserEdit_UserList {
+	border: 0px;
+	cursor: pointer;
+	width: 100%;
+}
+#UserEdit_UserList td {
+	padding: 3px 2px;
+}
+#UserEdit_UserList td:not(:last-of-type) {
+	border-right: 1px solid rgba(0,0,0,0.5)
+	
+}
+#UserEdit_UserList tr:first-of-type:hover {
+	cursor:initial;
+}
+#UserEdit_UserList tr:first-of-type {
+	font-weight: bold;
+}
+#UserEdit_UserList tr:not(:first-of-type):hover {
+	background-color: rgba(0,180,20,0.8);
+	color: rgb(240,240,240);
+}
+
+#useredit_editusercontent {
+	position: fixed;
+	z-index: 2;
+	background-color: #ffffff;
+	top: 0px;
+	width: 100%;
+	left: -100%;
+}
+#useredit_searchcontent {
+	position: fixed;
+}

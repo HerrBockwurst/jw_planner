@@ -1,9 +1,13 @@
 body {
 	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, Arial Unicode MS, sans-serif;
 	background: rgb(240,240,240) linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+	background-attachment: fixed;
 	min-height: 100vh;
 	font-size: 16px;
 	color: rgb(10,10,10);
+}
+::-webkit-scrollbar { 
+    display: none; 
 }
 label {
 	line-height: 22px;
@@ -47,4 +51,7 @@ button {
 }
 .loadingimg {
 	margin: 20px auto;
+}
+.shader {
+	background-color: rgba(0,0,0,0.15);
 }

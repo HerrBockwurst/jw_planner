@@ -28,7 +28,7 @@
 }
 
 #useredit_editusercontent {
-	position: fixed;
+	position: absolute;
 	z-index: 2;
 	background-color: #ffffff;
 	top: 0px;
@@ -36,5 +36,6 @@
 	left: -100%;
 }
 #useredit_searchcontent {
-	position: fixed;
+	position: relative;
+	width: 100%;
 }

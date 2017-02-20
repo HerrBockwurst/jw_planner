@@ -1,5 +1,9 @@
 <?php
 class UserEdit_EditUser {
+	static function loadUserData($UID) {
+		
+	}
+	
 	static function get() {
 		$String = '
 		<div id="useredit_editusercontent">

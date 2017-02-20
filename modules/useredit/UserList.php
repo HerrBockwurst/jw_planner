@@ -53,8 +53,10 @@ class UserEdit_UserList {
 			<script>
 				$('#UserEdit_UserList').find('tr').click(function() {
 					console.log(this);
+					$('#Content').stop().animate({scrollTop: 0}, 200);
 					$('#useredit_searchcontent').animate({left: \"100%\"}, 1000);
 					$('#useredit_editusercontent').animate({left: \"0%\"}, 1000);
+					
 				});
 			</script>";
 		

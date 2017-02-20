@@ -1,6 +1,5 @@
 <?php
 class UserEdit extends Module {
-	 // = 'useredit';
 	
 	private function __construct() {
 		$this->Permission = "";

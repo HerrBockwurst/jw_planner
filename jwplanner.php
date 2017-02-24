@@ -9,6 +9,11 @@ class JWPlanner {
 		require_once 'classes/User.php';
 		require_once 'classes/Language.php';
 		require_once 'classes/MenuItem.php';
+		require_once 'classes/PermissionManager.php';
+		require_once 'classes/RoleManager.php';
+		require_once 'classes/Foreigner.php';
+		require_once 'classes/VersManager.php';
+		require_once 'classes/GroupManager.php';
 		require_once 'functions.php';
 		
 		/*

@@ -30,6 +30,7 @@ class UserEdit extends Module {
 		
 	}
 	public function ActionDataHandler() {
-		
+		if(!isset($_POST['uid'])) return;
+		UserEdit_EditUser::loadUserData($_POST['uid']);		
 	}
 }

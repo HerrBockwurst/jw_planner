@@ -30,7 +30,7 @@
 #useredit_editusercontent {
 	position: absolute;
 	z-index: 2;
-	background-color: #ffffff;
+	padding: 10px;
 	top: 0px;
 	width: 100%;
 	left: -100%;

@@ -5,7 +5,7 @@
 		<title><?php echo TITLE;?></title>
 		<meta charset="utf-8">
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/reset.css"></link>		
+		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/reset.css"></link>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/style.css"></link>
 		<?php $this->getCSS();?>	
 		<script src="<?php echo PROTO.HOME; ?>/js/jquery-3.1.1.min.js"></script>

@@ -16,7 +16,7 @@ label {
 	position: relative;
 	text-align: left;
 }
-input {
+input, select {
 	height: 16px;
 	padding: 2px;
 	border: 1px solid rgb(100,100,100);
@@ -26,15 +26,40 @@ input {
 	width: 200px;
 	color: rgb(30,30,30);
 }
+input[type="checkbox"] {
+	float: left;
+	width: auto;
+	margin-left: 5px;
+	margin-right: 5px;
+	padding: 0px;
+}
+select {
+	height: 22px;
+	width: 206px;
+}
 button {
 	background-color: rgb(0,180,20);
 	border: 1px solid rgb(0,90,10);
 	color: rgb(240,240,240);
 	padding: 5px 40px;
 	border-radius: 5px;
+	cursor: pointer;
+}
+fieldset {
+	border: 1px solid rgb(10,10,10);
+}
+legend {
+	margin-left: 5px;
+	padding: 5px;
+	font-size: 0.9em;
+	font-weight: bold;
 }
 .smallspacer {
 	margin-top: 10px;
+}
+.redbutton {
+	border-color: rgb(170,0,0);
+	background-color: rgb(170,50,50);
 }
 .error {
 	border: 1px solid rgb(170,0,0);
@@ -54,4 +79,7 @@ button {
 }
 .shader {
 	background-color: rgba(0,0,0,0.15);
+}
+.floatbreak {
+	clear: both;
 }

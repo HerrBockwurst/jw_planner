@@ -23,7 +23,7 @@ class UserEdit_Overview {
 			</div>
 EOF;
 		$String .= UserEdit_EditUser::get();
-		echo replaceLangTags($String).<<<EOF
+		echo replaceLangTags($String)."
 			<script>				
 				$('#useredit_findlist').loadingWheel();
 
@@ -31,7 +31,7 @@ EOF;
 					var name = $('#iName').val();
 					var vs = $('#iVS').val();
 			
-					loadContent('http://jw.localhost:90/load/useredit/searchUser', '#useredit_findlist', {name: name, vs: vs});
+					loadContent('".PROTO.HOME."/load/useredit/searchUser', '#useredit_findlist', {name: name, vs: vs});
 				}
 			
 				$('#usersearch').submit(function (e) {
@@ -41,8 +41,7 @@ EOF;
 				$(function() {
 					searchUser();
 				});
-			</script>	
-EOF;
+			</script>";
 	}
 }
 ?>

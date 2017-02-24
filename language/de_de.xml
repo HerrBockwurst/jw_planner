@@ -9,6 +9,7 @@
 		<versammlung>Versammlung</versammlung>
 		<yes>Ja</yes>
 		<no>Nein</no>
+		<back>Zurück</back>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
@@ -19,9 +20,13 @@
 		<Headline>Benutzerverwaltung</Headline>
 		<search>Suchen</search>
 		<new>Neuer Benutzer</new>
+		<edit>Benutzer bearbeiten</edit>
 		<active>Aktiv</active>
 		<role>Rolle</role>
 		<groups>Gruppen</groups>
+		<noRole>Keine Rolle</noRole>
+		<specialPerms>Spezialberechtigung</specialPerms>
+		<updateUser>Speichern</updateUser>
 	</useredit>
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>
@@ -31,5 +36,18 @@
 		<AuthFail>Falscher Benutzername und/oder Passwort!</AuthFail>
 		<LoginBan>Du hast zuviele Anmeldeversuche unternommen. Daher ist die Anmeldung für dich {R} Minuten gesperrt.</LoginBan>
 		<AccountLocked>Dein Account wurde von einem Administrator gesperrt.</AccountLocked>
+		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
 	</errors>
+	<permissions>
+		<admin.useredit>Benutzer verwalten</admin.useredit>
+		<admin.groups>Gruppen verwalten</admin.groups>
+		<admin.calendar>Kalender verwalten</admin.calendar>
+		<admin.message>Nachrichten senden</admin.message>
+		<calendar.entry>Kalender nutzen</calendar.entry>
+		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
+		<dashboard.admin>Dashboard verwalten</dashboard.admin>
+		<dashboard.msg>Dashboard-Nachrichten schreiben</dashboard.msg>
+		<system>Systemverwaltung</system>
+		<specialperm>Test</specialperm>
+	</permissions>
 </language>

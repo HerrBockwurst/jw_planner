@@ -52,10 +52,9 @@ class UserEdit_UserList {
 		echo "
 			<script>
 				$('#UserEdit_UserList').find('tr').click(function() {
-					console.log(this);
 					$.post('".PROTO.HOME."/datahandler/useredit/updateFields', {uid : $(this).attr('data-uid')}, function(data) {
 						testRedirect(data);
-						console.log(data);
+						if(testError(data, true, true)) return;
 						jdata = JSON.parse(data);
 						
 						$('#iEditRole').html(jdata.fRoles).val(jdata.role);
@@ -66,7 +65,8 @@ class UserEdit_UserList {
 						$('#iEditUsername').val(jdata.uid);
 						$('#iEditName').val(jdata.name);
 						$('#iEditVers').val(jdata.vsid);
-												
+						if(jdata.active == 1) $('#iEditActive').attr('checked', 'checked');
+						else $('#iEditActive').attr('checked', false);
 							
 						$('#Content').stop().animate({scrollTop: 0}, 200);
 						$('#useredit_searchcontent').animate({left: \"100%\"}, 1000);

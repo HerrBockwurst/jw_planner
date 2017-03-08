@@ -136,12 +136,12 @@ class MySQL {
 		$stmt = $this->con->prepare($query);
 		if(!$stmt) {
 			echo "Fehler beim Erstellen des Statements: ".$this->con->error."\n Query: ".$query;
-			return false;
+			return FALSE;
 		}
 
 		if(isset($this->attr['cond'])) {
 			$types = '';
-			while(current($this->attr['cond'])) {
+			while(current($this->attr['cond']) !== FALSE) {
 				if(is_int(current($this->attr['cond']))) $types .= 'i';
 				elseif(is_numeric(current($this->attr['cond']))) $types .= 'd';
 				else $types .= 's';
@@ -150,11 +150,10 @@ class MySQL {
 				
 			$toInvoke = array($types);
 			reset($this->attr['cond']);
-			while(current($this->attr['cond'])) {
+			while(current($this->attr['cond']) !== FALSE) {
 				$toInvoke[] = &$this->attr['cond'][key($this->attr['cond'])];
 				next($this->attr['cond']);
 			}
-
 			$ref = new ReflectionClass('mysqli_stmt');
 			$method = $ref->getMethod("bind_param");
 			$method->invokeArgs($stmt,$toInvoke);

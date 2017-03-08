@@ -19,6 +19,23 @@ function testJSON(str) {
 	return true;
 }
 
+function testError(str, MsgBox, Redirect) {
+	try {
+		jdata = JSON.parse(str);
+		if(typeof jdata.error !== "undefined") {
+			if(MsgBox == true) {
+				Redirect = Redirect == true ? true : false;
+				displayMessageBox(jdata.error, Redirect);
+				return true;
+			} else {
+				return true;
+			}
+		}
+	} catch (e) {
+		return false;
+	}
+}
+
 function displayError(field, data) {
 	field.stop().hide(100);
 	setTimeout(function() { field.html(JSON.parse(data).error); }, 150);

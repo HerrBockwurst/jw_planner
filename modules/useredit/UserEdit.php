@@ -30,7 +30,16 @@ class UserEdit extends Module {
 		
 	}
 	public function ActionDataHandler() {
-		if(!isset($_POST['uid'])) return;
-		UserEdit_EditUser::loadUserData($_POST['uid']);		
+		switch(getURL(2)) {
+			case 'updateFields':
+				if(!isset($_POST['uid'])) return;
+				UserEdit_EditUser::loadUserData($_POST['uid']);
+				break;
+			case 'updateUser':
+				UserEdit_EditUser::updateUser($_POST);
+				break;
+			default:
+				break;
+		}
 	}
 }

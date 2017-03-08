@@ -26,6 +26,10 @@ function isLoggedIn() {
 	return User::getInstance()->IsLoggedIn;
 }
 
+function getSaltedPassword($Pass) {
+	return $Pass.SALT;
+}
+
 function needAuth() {
 	if(!isLoggedIn()) exit;
 }

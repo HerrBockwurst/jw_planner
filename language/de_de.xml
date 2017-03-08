@@ -10,6 +10,7 @@
 		<yes>Ja</yes>
 		<no>Nein</no>
 		<back>Zurück</back>
+		<okay>Ok</okay>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
@@ -37,6 +38,8 @@
 		<LoginBan>Du hast zuviele Anmeldeversuche unternommen. Daher ist die Anmeldung für dich {R} Minuten gesperrt.</LoginBan>
 		<AccountLocked>Dein Account wurde von einem Administrator gesperrt.</AccountLocked>
 		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
+		<formSubmit>Fehler bei der Formularübermittlung. Aktualisiere die Seite. Falls der Fehler wieder auftritt, kontaktiere uns.</formSubmit>
+		<sql>Es ist ein Datenbankfehler aufgetreten. Bitte kontaktiere uns über das Kontaktformular.</sql>
 	</errors>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

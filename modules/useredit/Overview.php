@@ -42,6 +42,7 @@ EOF;
 					searchUser();
 				});
 			</script>";
+		echo UserEdit_EditUser::getScript();
 	}
 }
 ?>

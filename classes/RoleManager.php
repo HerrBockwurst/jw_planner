@@ -9,4 +9,11 @@ class RoleManager {
 		
 		return $MySQL->fetchAll();		
 	}
+	
+	public static function getRole($rid) {		
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('rid', $rid);
+		$MySQL->select('roles', NULL, 1);
+		return $MySQL->fetchRow();
+	}
 }

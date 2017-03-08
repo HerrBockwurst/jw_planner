@@ -1,12 +1,25 @@
 <?php
 
+function loadHtml($FileName, $ModulFolder) {
+	return file_exists('modules/'.$ModulFolder.'/'.$FileName) ? file_get_contents('modules/'.$ModulFolder.'/'.$FileName) : "";
+}
+
 function replaceLangTags($String) {
 	$Matches;
-	preg_match_all('/\{(.*?)\}/', $String, $Matches);
+	preg_match_all('/==(.*?)==/', $String, $Matches);	
 	foreach($Matches[0] AS $Match) 
-		$String = str_replace($Match, getString(substr($Match, 1, strlen($Match) - 2)), $String);
+		$String = str_replace($Match, getString(substr($Match, 2, strlen($Match) - 4)), $String);
+	
+	preg_match_all('/\^(.*?)\^/', $String, $Matches);
+	foreach($Matches[0] AS $Match)
+		if(defined(substr($Match, 1, strlen($Match) - 2)))
+			$String = str_replace($Match, constant(substr($Match, 1, strlen($Match) - 2)), $String);
 	
 	return $String;
+}
+
+function printHtml($FileName, $ModulFolder) {
+	echo replaceLangTags(loadHtml($FileName, $ModulFolder));
 }
 
 function getString($tree) {

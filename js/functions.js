@@ -54,9 +54,10 @@ function testRedirect(data) {
 	return false;
 }
 
-function loadContent(url, container, postdata) {
+function loadContent(url, container, postdata, callback) {
 	
 	if(typeof postdata === "undefined") postdata = {};
+	if(typeof callback !== "function") callback = function() {};
 	
 	$.post(url, postdata, function(data) {
 		if(testJSON(data)) {
@@ -69,6 +70,7 @@ function loadContent(url, container, postdata) {
 			setTimeout(function() {
 				$(container).html(data);				
 			}, 100);
+			callback();
 		}
 	});
 }

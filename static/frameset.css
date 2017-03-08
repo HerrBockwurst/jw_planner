@@ -1,4 +1,4 @@
-#MessageBox {
+#MessageBox, #LoadingBox {
 	display: none;
 	width: 100vw;
 	height: 100vh;
@@ -6,7 +6,7 @@
 	z-index: 100;
 	background-color: rgba(0,0,0,0.1);
 }
-#MessageBoxContent {
+#MessageBoxContent, #LoadingBoxContent {
 	margin: 0 auto;
 	min-width: 20vw;
 	max-width: 30vw;
@@ -14,6 +14,17 @@
 	padding: 20px;
 	border-radius: 20px;
 	background-color: rgb(250,250,250); 
+}
+#LoadingBox {
+	text-align: center;
+	background-color: rgba(0,0,0,0.25);
+}
+#LoadingBoxContent {
+	display: inline-block;
+	padding: 0px;
+	min-width: 0px;
+	max-width: none;
+	background-color: rgba(250,250,250,0.5);
 }
 #MainMenu {
 	min-width: 220px;

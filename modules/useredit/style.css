@@ -32,9 +32,19 @@
 	z-index: 2;
 	padding: 10px;
 	top: 0px;
-	width: 100%;
+	width: calc(100% - 20px);
 	left: -100%;
 }
+
+#useredit_newusercontent {
+	position: absolute;
+	z-index: 2;
+	padding: 10px;
+	top: 0px;
+	width: calc(100% - 20px);
+	left: 100%;
+}
+
 #useredit_searchcontent {
 	position: relative;
 	width: 100%;

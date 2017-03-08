@@ -1,0 +1,92 @@
+<div id="useredit_editusercontent">
+	<div style="font-weight: bold;">==useredit edit==</div>
+	<form id="fEditUser" class="smallspacer">				
+		<div style="width: 400px; float: left; margin-right: 20px;">
+			<label>==common username== <input type="text" id="iEditUsername" disabled/></label>
+			<label>==common name== <input type="text" id="iEditName" /></label>
+			<label>==common password== <input type="text" id="iEditPassword" /></label>
+		</div>
+		<div style="width: 400px; float: left;">
+			<label>==useredit role== 
+				<select id="iEditRole">
+				</select>
+		
+			</label>
+			<label>==common versammlung==
+				<select id="iEditVers">
+				</select>	
+			</label>
+			<label>==useredit active== <input type="checkbox" id="iEditActive" style="float: right;"/></label>
+		</div>
+		<br class="floatbreak" />
+		<div style="width: 400px; float: left; margin-right: 20px;">
+			<fieldset>
+				<legend>==useredit groups==</legend>
+				<div id="dEditGroups">
+				</div>						
+			</fieldset>
+		</div>
+		<div style="width: 400px; float: left; margin-right: 20px;">
+			<fieldset>
+				<legend>==useredit specialPerms==</legend>
+				<div id="dEditPerms">
+				</div>
+			</fieldset>
+		</div>
+		<br class="floatbreak" />
+		<button>==useredit updateUser==</button>
+		<button class="redbutton">==common back==</button>
+	</form>
+</div>
+<script>
+	function UpdateUser() {
+		var groups = {};
+	
+		$('#dEditGroups').children('label').each(function() {
+			var input = $(this).children('input');
+			groups[input.val()] = input.is(':checked') ? true : false;
+		});
+	
+		var perms = {};
+	
+		$('#dEditPerms').children('label').each(function() {
+			var input = $(this).children('input');
+			perms[input.val()] = input.is(':checked') ? true : false;
+		});
+	
+		var active = $('#iEditActive').is(':checked') ? 1 : 0;
+	
+		var data = {
+			uid : $('#iEditUsername').val(),
+			name : $('#iEditName').val(),
+			password : $('#iEditPassword').val(),
+			role : $('#iEditRole').val(),
+			vers : $('#iEditVers').val(),
+			active : active,
+			groups : groups,
+			perms : perms
+		}
+		
+		$.post('^PROTO^^HOME^/datahandler/useredit/updateUser', data, function(data) {
+			displayLoadingBox();
+			testError(data, true);
+			UserEdit_SearchUser(hideLoadingBox);
+			EditGoBack();
+		});
+	}
+
+	function EditGoBack() {
+		$('#Content').stop().animate({scrollTop: 0}, 200);
+		$('#useredit_searchcontent').animate({left: "0%"}, 1000);
+		$('#useredit_editusercontent').animate({left: "-100%"}, 1000);
+	}
+
+	$('#fEditUser').submit(function (e) {
+		e.preventDefault();
+	});
+
+	$('#fEditUser').children('button').click(function() {
+		if($(this).hasClass('redbutton')) EditGoBack();
+		else UpdateUser();
+	});
+</script>

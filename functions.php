@@ -4,6 +4,34 @@ function loadHtml($FileName, $ModulFolder) {
 	return file_exists('modules/'.$ModulFolder.'/'.$FileName) ? file_get_contents('modules/'.$ModulFolder.'/'.$FileName) : "";
 }
 
+function validateEmail($mail) {
+	$Pattern = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+	return empty(preg_grep($Pattern, array($mail))) ? FALSE : TRUE;	
+}
+
+function parseUsername($name) {
+	$username = str_replace(' ', '-', $name); // Replaces all spaces with hyphens.
+	$username = str_replace('ä', 'ae', $username);
+	$username = str_replace('ö', 'oe', $username);
+	$username = str_replace('ü', 'ue', $username);
+	$username = str_replace('ß', 'ss', $username);
+	$username = preg_replace('/[^A-Za-z\-]/', '', $username);
+	$username = strtolower($username);
+	
+	$Counter = 2;
+	$MySQL = MySQL::getInstance();
+	$NewUsername = $username;
+	
+	$MySQL->where('uid', $NewUsername);
+	while($MySQL->count('users', 'uid') !== 0) {
+		$NewUsername = $username.'-'.$Counter;
+		$Counter++;
+		$MySQL->where('uid', $NewUsername);
+	}
+	
+	return $NewUsername;
+}
+
 function replaceLangTags($String) {
 	$Matches;
 	preg_match_all('/==(.*?)==/', $String, $Matches);	

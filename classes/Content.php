@@ -28,6 +28,17 @@ abstract class Module implements IModule {
 	
 	public final function DataHandler() {
 		//Redirect wenn kein Login vorhanden, Ansonsten parsen
+		if(!User::getInstance()->IsLoggedIn && !$this->isPublic) {
+			echo json_encode(array("redirect" => PROTO.HOME));
+			exit;
+		}
+		
+		//Teste Permission
+		if($this->Permission != "" && !User::getInstance()->hasPerm($this->Permission)) {
+			returnErrorJSON(getString('errors noPerm'));
+			exit;
+		}	
+		
 		$this->ActionDataHandler();
 	}
 	
@@ -43,6 +54,13 @@ abstract class Module implements IModule {
 			echo json_encode(array("redirect" => PROTO.HOME));
 			exit;
 		}
+		
+		//Teste Permission
+		if($this->Permission != "" && !User::getInstance()->hasPerm($this->Permission)) {
+			returnErrorJSON(getString('errors noPerm'));
+			exit;
+		}
+		
 		$this->ActionLoad();
 	}
 }

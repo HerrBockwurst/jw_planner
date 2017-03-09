@@ -7,10 +7,12 @@
 		<login>Login</login>
 		<name>Name</name>
 		<versammlung>Versammlung</versammlung>
+		<email>EMail</email>
 		<yes>Ja</yes>
 		<no>Nein</no>
 		<back>Zurück</back>
 		<okay>Ok</okay>
+		<plsSelect>Auswählen...</plsSelect>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
@@ -28,6 +30,9 @@
 		<noRole>Keine Rolle</noRole>
 		<specialPerms>Spezialberechtigung</specialPerms>
 		<updateUser>Speichern</updateUser>
+		<GroupsNoVersSelected>Bitte wähle zuerst eine Versammlung aus.</GroupsNoVersSelected>
+		<noGroupsAssigned>Es wurden noch keine Gruppen angelegt.</noGroupsAssigned>
+		<addSuccess>Benutzer erfolgreich angelegt.</addSuccess>
 	</useredit>
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>
@@ -40,6 +45,7 @@
 		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
 		<formSubmit>Fehler bei der Formularübermittlung. Aktualisiere die Seite. Falls der Fehler wieder auftritt, kontaktiere uns.</formSubmit>
 		<sql>Es ist ein Datenbankfehler aufgetreten. Bitte kontaktiere uns über das Kontaktformular.</sql>
+		<EmailSyntax>Dies ist keine gültige EMail Adresse.</EmailSyntax>
 	</errors>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

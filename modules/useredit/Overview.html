@@ -29,9 +29,30 @@
 	
 	$('#bNewUser').click(function(e) {
 		e.preventDefault();
-		$('#Content').stop().animate({scrollTop: 0}, 200);
-		$('#useredit_searchcontent').animate({left: "-100%"}, 1000);
-		$('#useredit_newusercontent').animate({left: "0%"}, 1000);
+		
+		displayLoadingBox();
+		
+		$.post('^PROTO^^HOME^/datahandler/useredit/getNewUser', {}, function (data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			
+			jdata = JSON.parse(data);
+			
+			$('#iNewRole').html(jdata.fRoles);
+			$('#iNewVers').html(jdata.fVers);
+			$('#dNewPerms').html(jdata.fPerms);
+			
+			hideLoadingBox();			
+			$('#Content').stop().animate({scrollTop: 0}, 200);
+			$('#useredit_searchcontent').animate({left: "-100%"}, 1000);
+			$('#useredit_newusercontent').animate({left: "0%"}, 1000);
+		});
+		
+		
 	});
 
 	$('#usersearch').submit(function (e) {

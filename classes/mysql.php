@@ -63,7 +63,7 @@ class MySQL {
 		$str = ' ORDER BY ';
 		foreach($this->attr['order'] AS $cOrder) {
 			$cTable = is_null($cOrder['table']) ? $table : $cOrder['table'];
-			$str .= "`$cTable`.".$cOrder['field']."` ".$cOrder['sort'].", ";
+			$str .= "`$cTable`.`".$cOrder['field']."` ".$cOrder['sort'].", ";
 		}
 		unset($this->attr['order']);
 		$str = substr($str, 0, strlen($str) - 2);

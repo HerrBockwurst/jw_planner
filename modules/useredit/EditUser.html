@@ -4,7 +4,8 @@
 		<div style="width: 400px; float: left; margin-right: 20px;">
 			<label>==common username== <input type="text" id="iEditUsername" disabled/></label>
 			<label>==common name== <input type="text" id="iEditName" /></label>
-			<label>==common password== <input type="text" id="iEditPassword" /></label>
+			<label>==common password== <input type="password" id="iEditPassword" /></label>
+			<label>==common email== <input type="text" id="iEditEmail" /></label>
 		</div>
 		<div style="width: 400px; float: left;">
 			<label>==useredit role== 
@@ -62,6 +63,7 @@
 			password : $('#iEditPassword').val(),
 			role : $('#iEditRole').val(),
 			vers : $('#iEditVers').val(),
+			email: $('#iEditEmail').val(),
 			active : active,
 			groups : groups,
 			perms : perms

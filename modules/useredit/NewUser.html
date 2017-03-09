@@ -1,9 +1,10 @@
 <div id="useredit_newusercontent">
-	<div style="font-weight: bold;">==useredit edit==</div>
+	<div style="font-weight: bold;">==useredit new==</div>
 	<form id="fNewUser" class="smallspacer">				
 		<div style="width: 400px; float: left; margin-right: 20px;">
 			<label>==common name== <input type="text" id="iNewName" /></label>
-			<label>==common password== <input type="text" id="iNewPassword" /></label>
+			<label>==common password== <input type="password" id="iNewPassword" /></label>
+			<label>==common email== <input type="text" id="iNewEmail" /></label>
 		</div>
 		<div style="width: 400px; float: left;">
 			<label>==useredit role== 
@@ -15,13 +16,14 @@
 				<select id="iNewVers">
 				</select>	
 			</label>
-			<label>==useredit active== <input type="checkbox" id="iNewActive" style="float: right;"/></label>
+			<label>==useredit active== <input type="checkbox" id="iNewActive" style="float: right;" checked /></label>
 		</div>
 		<br class="floatbreak" />
 		<div style="width: 400px; float: left; margin-right: 20px;">
 			<fieldset>
 				<legend>==useredit groups==</legend>
 				<div id="dNewGroups">
+					<div style="text-align: center; padding: 5px;">==useredit GroupsNoVersSelected==</div>
 				</div>						
 			</fieldset>
 		</div>
@@ -37,3 +39,93 @@
 		<button class="redbutton">==common back==</button>
 	</form>
 </div>
+<script>
+function NewGoBack() {
+	$('#Content').stop().animate({scrollTop: 0}, 200);
+	$('#useredit_searchcontent').animate({left: "0%"}, 1000);
+	$('#useredit_newusercontent').animate({left: "100%"}, 1000);
+}
+
+function AddUser() {
+	var groups = {};
+	
+	$('#dNewGroups').children('label').each(function() {
+		var input = $(this).children('input');
+		groups[input.val()] = input.is(':checked') ? true : false;
+	});
+
+	var perms = {};
+
+	$('#dNewPerms').children('label').each(function() {
+		var input = $(this).children('input');
+		perms[input.val()] = input.is(':checked') ? true : false;
+	});
+	
+	var active = $('#iNewActive').is(':checked') ? 1 : 0;
+	
+	var data = {
+			name : $('#iNewName').val(),
+			password : $('#iNewPassword').val(),
+			role : $('#iNewRole').val(),
+			vers : $('#iNewVers').val(),
+			email : $('#iNewEmail').val(),
+			groups : groups,
+			perms : perms,
+			active : active
+	}
+	
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/useredit/addUser', data, function (data) {
+		hideLoadingBox();
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) return;
+		
+		displayMessageBox('==useredit addSuccess==');
+		UserEdit_SearchUser(function() {
+			NewGoBack();
+			$('#iNewName').val('');
+			$('#iNewPassword').val('');
+			$('#iNewEmail').val('');
+		});		
+		
+		
+	})
+}
+
+$('#iNewEmail').change(function() {
+	if(!validateEmail($(this).val()) && $(this).val() != "") {
+		$(this).focus();
+		alert('==errors EmailSyntax==');
+	}
+})
+
+$('#fNewUser').children('button').click(function(e) {
+	e.preventDefault();
+	if($(this).hasClass('redbutton')) NewGoBack();
+	else AddUser();
+});
+
+$('#iNewVers').change(function() {
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/useredit/getDataByVers', {vsid : $('#iNewVers').val()}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, true)) return;
+		
+		jdata = JSON.parse(data);
+		
+		$('#dNewGroups').html(jdata.fGroups);
+		$('#iNewRole').html(jdata.fRoles);
+		
+		hideLoadingBox();		
+	})
+});
+</script>

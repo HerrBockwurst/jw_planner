@@ -18,6 +18,7 @@
 		<UserEdit>Benutzerverwaltung</UserEdit>
 		<Calendar>Kalender</Calendar>
 		<Dashboard>Dashboard</Dashboard>
+		<RoleAdmin>Rollenverwaltung</RoleAdmin>
 	</menu>
 	<useredit>
 		<Headline>Benutzerverwaltung</Headline>
@@ -33,7 +34,18 @@
 		<GroupsNoVersSelected>Bitte wähle zuerst eine Versammlung aus.</GroupsNoVersSelected>
 		<noGroupsAssigned>Es wurden noch keine Gruppen angelegt.</noGroupsAssigned>
 		<addSuccess>Benutzer erfolgreich angelegt.</addSuccess>
+		<DeleteUser>Benutzer löschen</DeleteUser>
+		<confirmDelete>Willst du den Benutzer wirklich löschen?</confirmDelete>
+		<invalidUID>Ungültiger Benutzer</invalidUID>
 	</useredit>
+	<roleadmin>
+		<selectRoleFirst>Wähle zuerst eine Rolle aus.</selectRoleFirst>
+		<headline>Rollenverwaltung</headline>
+		<noRolesAssigned>Es wurden noch keine Rollen angelegt.</noRolesAssigned>
+		<NewRole>Neue Rolle</NewRole>
+		<SaveRole>Speichern</SaveRole>
+		<confirmDelete>Möchtest du die Rolle wirklich löschen? Die Benutzer in der Rolle verlieren alle Berechtigungen.</confirmDelete>
+	</roleadmin>
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>
 	</dashboard>
@@ -52,6 +64,7 @@
 		<admin.groups>Gruppen verwalten</admin.groups>
 		<admin.calendar>Kalender verwalten</admin.calendar>
 		<admin.message>Nachrichten senden</admin.message>
+		<admin.rolemanager>Rollen verwalten</admin.rolemanager>
 		<calendar.entry>Kalender nutzen</calendar.entry>
 		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
 		<dashboard.admin>Dashboard verwalten</dashboard.admin>

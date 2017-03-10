@@ -2,7 +2,6 @@
 class Calendar extends Module {
 	private function __construct() {
 		$this->Permission = "";
-		$this->CSSFiles = "style.css";
 		$this->ClassPath = 'calendar';
 		$this->MenuItem = new MenuItem("menu Calendar", 10, $this->ClassPath, $this->Permission);
 	}

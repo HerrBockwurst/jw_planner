@@ -36,6 +36,7 @@
 		</div>
 		<br class="floatbreak" />
 		<button>==useredit updateUser==</button>
+		<button class="redbutton">==useredit DeleteUser==</button>
 		<button class="redbutton">==common back==</button>
 	</form>
 </div>
@@ -76,6 +77,29 @@
 			EditGoBack();
 		});
 	}
+	
+	function ConfirmedDelete() {
+		displayLoadingBox();
+		$.post('^PROTO^^HOME^/datahandler/useredit/deleteUser', {uid: $('#iEditUsername').val()}, function() {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, false)) return;
+			
+			UserEdit_SearchUser(hideLoadingBox);
+			EditGoBack();
+		});
+	}
+	
+	function DeleteUser() {
+		displayMessageBox('==useredit confirmDelete==', false,
+		   {yes: '==common yes==',
+			no: '==common no==',
+			callback: ConfirmedDelete
+			});
+	}
 
 	function EditGoBack() {
 		$('#Content').stop().animate({scrollTop: 0}, 200);
@@ -88,7 +112,27 @@
 	});
 
 	$('#fEditUser').children('button').click(function() {
-		if($(this).hasClass('redbutton')) EditGoBack();
+		if($(this).hasClass('redbutton') && $(this).is(':last-of-type')) EditGoBack();
+		else if($(this).hasClass('redbutton')) DeleteUser();
 		else UpdateUser();
+	});
+	
+	$('#iEditVers').change(function() {
+		displayLoadingBox();
+		$.post('^PROTO^^HOME^/datahandler/useredit/getDataByVers', {vsid : $('#iEditVers').val()}, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			
+			jdata = JSON.parse(data);
+			
+			$('#dEditGroups').html(jdata.fGroups);
+			$('#iEditRole').html(jdata.fRoles);
+			
+			hideLoadingBox();		
+		})
 	});
 </script>

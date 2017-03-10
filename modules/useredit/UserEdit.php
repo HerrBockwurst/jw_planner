@@ -72,6 +72,10 @@ class UserEdit extends Module {
 			if($Checked != "true") continue;
 			$NewPermArray[] = $cPerm;
 		}
+		//Permission anhängen, die er zu bearbeitende Nutzer hat, aber der bearbeiter nicht
+		foreach($User->getFilteredPerms(User::getInstance()->getClearedPerms()) AS $cPerm)
+			$NewPermArray[] = $cPerm;
+			
 		$perms = $NewPermArray;
 	
 		foreach($perms AS $cPerm)
@@ -92,10 +96,11 @@ class UserEdit extends Module {
 		
 		if(!empty($password)) $UserData['password'] = hash('sha512', getSaltedPassword($password));
 
-		if(!$User->updateMe($UserData)) returnErrorJSON(getString('errors sql'));
+		GroupManager::unsetUser($User->UID); //Zuerst aus allen Gruppen der alten Versammlung entfernen
 		
-		GroupManager::unsetUser($User->UID);
-		GroupManager::addUser($User->UID, $GroupsToAdd);
+		if(!$User->updateMe($UserData)) returnErrorJSON(getString('errors sql')); //Dann User Updaten
+				
+		GroupManager::addUser($User->UID, $GroupsToAdd); //Dann in alle Gruppen eintragen
 		
 		echo json_encode(array());
 		
@@ -363,6 +368,28 @@ class UserEdit extends Module {
 		echo json_encode(array());
 	}
 	
+	private function Handler_DelUser() {
+		$User = new Foreigner($_POST['uid']);
+		
+		//Prüfe Berechtigung
+		if(!$User->Valid) returnErrorJSON(getString('errors invalidUID')); //Keine gültige UID
+		if(!array_key_exists($User->VSID, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für Versammlung
+		
+		//Nutzer aus Gruppen entfernen
+		GroupManager::unsetUser($User->UID);
+		
+		//Nutzer aus Einträgen entfernen
+		CalendarManager::removeUser($User->UID);
+		
+		//Nachrichten des Nutzers löschen
+		//TODO
+		
+		//Nutzer löschen
+		$User->deleteMe();
+		
+		echo json_encode(array());		
+	}
+	
 	public function ActionSite() {
 		
 	}
@@ -397,6 +424,9 @@ class UserEdit extends Module {
 				break;
 			case 'addUser':
 				$this->Handler_AddUser();
+				break;
+			case 'deleteUser':
+				$this->Handler_DelUser();
 				break;
 			default:
 				break;

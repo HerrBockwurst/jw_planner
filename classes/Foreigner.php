@@ -4,6 +4,15 @@ class Foreigner {
 	
 	private $Permissions;
 	
+	public function getFilteredPerms($Filter)  {
+		$RetVal = array();
+		foreach($this->Permissions AS $cPerm)
+			if(!in_array($cPerm, $Filter))
+				$RetVal[] = $cPerm;
+				
+		return $RetVal;
+	}
+	
 	public function  __construct($uid) {
 		$this->Valid = FALSE;
 		$MySQL = MySQL::getInstance();
@@ -39,6 +48,12 @@ class Foreigner {
 		
 		$MySQL->where('uid', $this->UID);
 		return $MySQL->update('users', $UpdateData);		
+	}
+	
+	public function deleteMe() {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('uid', $this->UID);
+		if(!$MySQL->delete('users')) returnErrorJSON(getString('errors sql'));
 	}
 	
 }

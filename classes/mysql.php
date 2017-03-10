@@ -211,7 +211,7 @@ class MySQL {
 			$query = substr($query, 0, strlen($query) - 2);
 		}
 
-		$query .= ' FROM '.$table.' ';
+		$query .= ' FROM `'.$table.'` ';
 		$query .= $this->joinString();
 		$query .= $this->whereString($table);
 		$query .= $this->orderString($table);

@@ -1,0 +1,96 @@
+<div id="RoleAdmin_Overview">
+	<div class="headline">==roleadmin headline==</div>
+	<div id="Role_List">
+		<label>
+			==common versammlung==
+			<select id="RoleAdmin_VSSelector"></select>			
+		</label>
+		<div id="RoleAdmin_ListContainer"></div>
+	</div>
+	<div id="Role_Permissions">==roleadmin selectRoleFirst==</div>
+</div>
+<script>
+	
+	var CurrClickedRole;
+	
+	function savePerms() {
+		
+	}
+
+	function updateRoleList() {
+		displayLoadingBox();
+		
+		var data = $('#RoleAdmin_VSSelector').val() != null ? {vsid: $('#RoleAdmin_VSSelector').val()} : {};
+		
+		$.post('^PROTO^^HOME^/datahandler/roleadmin/loadRoles', data, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			
+			
+			var jdata = JSON.parse(data);
+			
+			$('#RoleAdmin_VSSelector').html(jdata.verslist);
+			$('#RoleAdmin_ListContainer').html(jdata.rolelist);
+			$('#Role_Permissions').html('==roleadmin selectRoleFirst==');
+			
+			$('#RoleAdmin_ListContainer').children('.RoleAdmin_RoleEntry').each(function() {
+				$(this).unbind().bind('click', updatePermList);
+				$(this).children('span').unbind().bind('click', delRole);
+			});
+			
+			hideLoadingBox();
+		})
+	}
+	
+	function delRole() {
+		CurrClickedRole = $(this).parent().attr('data-rid');
+		displayMessageBox('==roleadmin confirmDelete==', false, {yes: '==common yes==', no: '==common no==', callback: confirmedDelRole});
+	}
+	
+	function confirmedDelRole() {
+		displayLoadingBox();
+		$.post('^PROTO^^HOME^/datahandler/roleadmin/delRole', {rid: CurrClickedRole}, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			hideLoadingBox();
+			updateRoleList();	
+		});
+	}
+	
+	function updatePermList(e) {
+		if($(e.target).is('span')) return;
+		displayLoadingBox();
+		
+		var data = {rid: $(this).attr('data-rid')};
+		
+		$.post('^PROTO^^HOME^/datahandler/roleadmin/loadRoles', data, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			
+			
+			var jdata = JSON.parse(data);
+			
+			$('#Role_Permissions').html(jdata.permlist);
+			
+			hideLoadingBox();
+		})
+	}
+	
+	$('#RoleAdmin_VSSelector').change(updateRoleList);
+
+	$(function() {
+		updateRoleList();		
+	});
+</script>

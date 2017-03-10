@@ -14,6 +14,7 @@ class JWPlanner {
 		require_once 'classes/Foreigner.php';
 		require_once 'classes/VersManager.php';
 		require_once 'classes/GroupManager.php';
+		require_once 'classes/CalendarManager.php';
 		require_once 'functions.php';
 		
 		/*

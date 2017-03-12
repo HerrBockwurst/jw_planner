@@ -47,7 +47,7 @@ class UserEdit extends Module {
 		if($role != 0) {
 			$MySQL->where('rid', $role);
 			$MySQL->select('roles', NULL, 1);
-			if($MySQL->countResult() != 0 && $MySQL->fetchRow()->vsid != $vers) returnErrorJSON(getString('errors formSubmit')); //Rolle nicht in VS vorhanden
+			if($MySQL->countResult() == 0 || ($MySQL->countResult() != 0 && $MySQL->fetchRow()->vsid != $vers)) returnErrorJSON(getString('errors formSubmit')); //Rolle nicht in VS vorhanden
 		}
 	
 		//Prüfe Gruppen
@@ -129,9 +129,11 @@ class UserEdit extends Module {
 		echo "<tr class=\"shader\">
 				<td>".getString('common username')."</td>
 				<td>".getString('common name')."</td>
+				<td>".getString('common email')."</td>
 				<td>".getString('useredit active')."?</td>
 				<td>".getString('useredit role')."</td>
 				<td>".getString('common versammlung')."</td>
+				<td><span style=\"display:inline-block; min-width: 1000px;\"></span></td>
 			</tr>";
 		
 		$c = 0;
@@ -139,6 +141,7 @@ class UserEdit extends Module {
 			$Shader = $c%2 != 0 ? 'class="shader"' : '';
 			$Name = $cUser['name'];
 			$UID = $cUser['uid'];
+			$Email = $cUser['email'];
 			$Aktiv = $cUser['active'] == 1 ? getString('common yes') : getString('common no');
 			$Versammlung = $cUser['vs_name'];
 			$Rolle = $cUser['role_name'] == '' ? getString('useredit noRole') : $cUser['role_name'];
@@ -146,9 +149,11 @@ class UserEdit extends Module {
 			echo "<tr data-uid=\"$UID\" $Shader >
 			<td>$UID</td>
 			<td>$Name</td>
+			<td>$Email</td>
 			<td>$Aktiv</td>
 			<td>$Rolle</td>
 			<td>$Versammlung</td>
+			<td></td>
 			</tr>";
 				
 			$c++;

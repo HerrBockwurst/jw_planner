@@ -13,8 +13,29 @@
 	
 	var CurrClickedRole;
 	
+	function showRoleAdd() {
+		$('#RoleAdmin_NewOverlay').fadeIn(100);
+	}
+	
 	function savePerms() {
+		displayLoadingBox();
 		
+		var perms = [];
+		
+		$('#Role_Permissions').find('input').each(function() {
+			if (!$(this).is(':checked')) return;
+			perms.push($(this).val());
+		});
+		
+		var data = {
+			rid: $('#RoleAdmin_PermHeadline').attr('data-rid'),
+			perms: perms			
+		}
+		
+		$.post('^PROTO^^HOME^/datahandler/roleadmin/updateRole', data, function(data) {
+			console.log(data);
+			hideLoadingBox();
+		});
 	}
 
 	function updateRoleList() {
@@ -41,6 +62,7 @@
 				$(this).unbind().bind('click', updatePermList);
 				$(this).children('span').unbind().bind('click', delRole);
 			});
+			$('#RoleAdmin_bNewRole').unbind().bind('click', showRoleAdd);
 			
 			hideLoadingBox();
 		})
@@ -83,7 +105,7 @@
 			var jdata = JSON.parse(data);
 			
 			$('#Role_Permissions').html(jdata.permlist);
-			
+			$('#Role_Permissions').find('button').unbind().bind('click', savePerms);
 			hideLoadingBox();
 		})
 	}

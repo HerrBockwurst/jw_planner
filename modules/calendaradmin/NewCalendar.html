@@ -1,0 +1,57 @@
+<div id="CalendarAdmin_Overlay">
+	<div id="CalendarAdmin_OverlayInner">
+		<div class="headline">==calendaradmin NewCal==</div>
+		<label>
+			==calendaradmin NewCalName==
+			<input type="text" id="iCalendarAdmin_NewCal" />
+		</label>
+		<div style="text-align: center; margin-top:20px">
+			<button>==calendaradmin SaveCal==</button>
+			<button class="redbutton">==common back==</button>
+		</div>
+	</div>
+</div>
+<script>
+
+	function CalendarAdmin_NewCalBack() {
+		$('#CalendarAdmin_Overlay').fadeOut(100);
+		$('#iCalendarAdmin_NewCal').val('');
+	}
+	
+	function CalendarAdmin_NewCalAdd() {
+		var CalName = $('#iCalendarAdmin_NewCal').val();
+		
+		if(!/\S/.test(CalName)) {
+			displayMessageBox('==errors WrongFields==');
+			return;
+		}
+		
+		displayLoadingBox();
+		
+		$.post('^PROTO^^HOME^/datahandler/calendaradmin/addCalendar', {cname: CalName, vsid: $('#CalendarAdmin_VSSelect').val()}, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				CalendarAdmin_NewCalBack();
+				CalendarAdmin_updateHeadline();
+				displayMessageBox('==errors formSubmit==', false);
+				return;
+			}
+			if(testError(data, true, false)) {
+				CalendarAdmin_NewCalBack();
+				return;
+			}
+			
+			displayMessageBox('==errors CalendarAdded==', false);
+			
+			CalendarAdmin_NewCalBack();
+			CalendarAdmin_updateHeadline();
+			hideLoadingBox();
+		});
+		hideLoadingBox();
+	}
+
+	$('#CalendarAdmin_Overlay').find('button').click(function() {
+		if($(this).hasClass('redbutton')) CalendarAdmin_NewCalBack();
+		else CalendarAdmin_NewCalAdd();
+	})
+</script>

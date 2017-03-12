@@ -16,4 +16,23 @@ class RoleManager {
 		$MySQL->select('roles', NULL, 1);
 		return $MySQL->fetchRow();
 	}
+	
+	public static function getFilteredPerms($RID, $Filter) {
+		$MySQL = MySQL::getInstance();
+		
+		if(!is_array($Filter)) $Filter = array($Filter);
+		
+		$MySQL->where('rid', $RID);
+		$MySQL->select('roles', array('entry'), 1);
+		
+		if($MySQL->countResult() == 0) return array();
+		
+		$Perms = json_decode($MySQL->fetchRow()->entry);
+		
+		foreach($Filter AS $cFilter)
+			if(array_search($cFilter, $Perms))
+				unset($Perms[array_search($cFilter, $Filter)]);
+		
+		return $Perms;
+	}
 }

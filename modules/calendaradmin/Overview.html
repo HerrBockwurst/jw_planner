@@ -1,0 +1,65 @@
+<div id="CalendarAdmin_Selectbar">
+	<div class="headline">==calendaradmin Headline==</div>
+	<label style="float:left;">
+		==common versammlung==
+		<select id="CalendarAdmin_VSSelect">
+		</select>
+	</label>
+	<label style="float:left; padding-left: 20px">
+		==menu Calendar==
+		<select id="CalendarAdmin_CalSelect">
+		</select>
+	</label>
+	<button id="CalendarAdmin_bAddCal" style="padding: 3px 40px; margin: 5px 0px 5px 40px;">==calendaradmin NewCal==</button>
+	<br class="floatbreak" />
+</div>
+<div id="CalendarAdmin_CalContent">
+</div>
+
+<script>
+	function CalendarAdmin_updateHeadline() {
+		displayLoadingBox();
+		
+		$.post('^PROTO^^HOME^/datahandler/calendaradmin/getHeadline', {vsid: $('#CalendarAdmin_VSSelect').val()}, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			
+			jdata = JSON.parse(data);
+			$('#CalendarAdmin_VSSelect').html(jdata.vs);
+			$('#CalendarAdmin_CalSelect').html(jdata.cal);
+			$('#CalendarAdmin_CalContent').html('');
+			
+			hideLoadingBox();
+		});
+	}
+	
+	$('#CalendarAdmin_CalSelect').change(function() {
+		if($(this).val() == 0) return;
+		
+		displayLoadingBox();
+		
+		$.post('^PROTO^^HOME^/datahandler/calendaradmin/getCalendar', {cid: $(this).val()}, function(data) {
+			console.log(data);
+			jdata = JSON.parse(data);
+			
+			$('#CalendarAdmin_CalContent').html(jdata.html);
+			hideLoadingBox();
+		});
+	});
+	
+	$('#CalendarAdmin_bAddCal').click(function() {
+		$('#CalendarAdmin_Overlay').fadeIn(100);
+	})
+	
+	$('#CalendarAdmin_VSSelect').change(function() {
+		CalendarAdmin_updateHeadline();
+	});
+	
+	$(function() {
+		CalendarAdmin_updateHeadline();
+	});
+</script>

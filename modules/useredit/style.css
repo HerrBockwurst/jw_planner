@@ -16,7 +16,8 @@
 	overflow-x: hidden;
 }
 #UserEdit_UserList td {
-	padding: 3px 2px;
+	padding: 3px 10px 3px 2px;
+	white-space: nowrap;
 }
 #UserEdit_UserList td:not(:last-of-type) {
 	border-right: 1px solid rgba(0,0,0,0.5)
@@ -31,8 +32,10 @@
 #UserEdit_UserList tr:not(:first-of-type):hover {
 	background-color: rgba(0,180,20,0.8);
 	color: rgb(240,240,240);
+} 
+#UserEdit_UserList td:last-of-type {
+	overflow: hidden;
 }
-
 #useredit_editusercontent {
 	position: absolute;
 	z-index: 2;

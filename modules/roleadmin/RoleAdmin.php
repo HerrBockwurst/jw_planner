@@ -95,6 +95,44 @@ class RoleAdmin extends Module {
 		echo json_encode(array());
 	}
 	
+	private function Handler_updateRole() {
+		if(!isset($_POST['rid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$RID = $_POST['rid'];		
+		$Perms = isset($_POST['perms']) ? $_POST['perms'] : array();
+		
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('rid', $RID);
+		$MySQL->select('roles', array('vsid'), 1);
+		if($MySQL->countResult() == 0 || !array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) 
+			returnErrorJSON(getString('errors noPerm')); //Rolle nicht in Versammlung
+		
+		foreach($Perms AS $cPerm) 
+			if(array_search($cPerm, User::getInstance()->getClearedPerms()) === FALSE) returnErrorJSON(getString('errors noPerm')); //Test ob er Perms für alle Perms hat
+		
+		
+		$FilteredPerms = RoleManager::getFilteredPerms($RID, User::getInstance()->getClearedPerms());
+		
+		$MySQL->where('rid', $RID);
+		if(!$MySQL->update('roles', array('entry' => json_encode(array_merge($Perms, $FilteredPerms))))) returnErrorJSON(getString('errors sql'));
+		
+		echo json_encode(array());
+	}
+	
+	private function Handler_addRole() {
+		$VSID = isset($_POST['vsid']) ? $_POST['vsid'] : '';
+		$RoleName = isset($_POST['rolename']) ? $_POST['rolename'] : '';
+		
+		if(empty($RoleName) || empty($VSID)) returnErrorJSON(getString('errors formSubmit'));
+		if(!array_key_exists($VSID, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
+		
+		$MySQL = MySQL::getInstance();
+		
+		if(!$MySQL->insert('roles', array('vsid' => $VSID, 'name' => $RoleName, 'entry' => json_encode(array())))) returnErrorJSON(getString('errors sql'));
+		
+		echo json_encode(array());
+	}
+	
 	public function ActionDataHandler() {
 		switch(getURL(2)) {
 			case 'loadRoles':
@@ -102,6 +140,12 @@ class RoleAdmin extends Module {
 				break;
 			case 'delRole':
 				$this->Handler_delRole();
+				break;
+			case 'updateRole':
+				$this->Handler_updateRole();
+				break;
+			case 'addRole':
+				$this->Handler_addRole();
 				break;
 			default:
 				break;
@@ -112,6 +156,7 @@ class RoleAdmin extends Module {
 		switch(getURL(2)) {
 			default:
 				printHtml('Overview.html', $this->ClassPath);
+				printHtml('NewRole.html', $this->ClassPath);
 				break;
 		}
 	}

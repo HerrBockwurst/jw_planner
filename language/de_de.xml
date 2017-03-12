@@ -13,13 +13,30 @@
 		<back>Zurück</back>
 		<okay>Ok</okay>
 		<plsSelect>Auswählen...</plsSelect>
+		<close>Schließen</close>
+		<monday>Montag</monday>
+		<tuesday>Dienstag</tuesday>
+		<wednesday>Mittwoch</wednesday>
+		<thursday>Donnerstag</thursday>
+		<friday>Freitag</friday>
+		<saturday>Samstag</saturday>
+		<sunday>Sonntag</sunday>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
 		<Calendar>Kalender</Calendar>
 		<Dashboard>Dashboard</Dashboard>
 		<RoleAdmin>Rollenverwaltung</RoleAdmin>
+		<CalendarAdmin>Kalenderverwaltung</CalendarAdmin>
 	</menu>
+	<calendaradmin>
+		<Headline>Kalenderverwaltung</Headline>
+		<NewCal>Neuer Kalender</NewCal>
+		<NewCalName>Kalendername</NewCalName>
+		<SaveCal>Kalender Speichern</SaveCal>
+		<CalendarAdded>Kalender erfolgreich angelegt.</CalendarAdded>
+		<addPost>Neuer Termin</addPost>
+	</calendaradmin>
 	<useredit>
 		<Headline>Benutzerverwaltung</Headline>
 		<search>Suchen</search>
@@ -45,6 +62,7 @@
 		<NewRole>Neue Rolle</NewRole>
 		<SaveRole>Speichern</SaveRole>
 		<confirmDelete>Möchtest du die Rolle wirklich löschen? Die Benutzer in der Rolle verlieren alle Berechtigungen.</confirmDelete>
+		<NewRoleName>Rollenname</NewRoleName>
 	</roleadmin>
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>

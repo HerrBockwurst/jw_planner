@@ -4,6 +4,10 @@ function loadHtml($FileName, $ModulFolder) {
 	return file_exists('modules/'.$ModulFolder.'/'.$FileName) ? file_get_contents('modules/'.$ModulFolder.'/'.$FileName) : "";
 }
 
+function removeWhiteSpace($String, $Space = '/\\t|\\n|\\r/') {
+	return preg_replace("/\\t|\\n|\\r/", "", $String);
+}
+
 function validateEmail($mail) {
 	$Pattern = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 	return empty(preg_grep($Pattern, array($mail))) ? FALSE : TRUE;	

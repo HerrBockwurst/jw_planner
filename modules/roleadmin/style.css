@@ -1,3 +1,22 @@
+#RoleAdmin_NewOverlay {
+	display: none;
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	left: -220px; /* Main Menu */
+	top: 0px;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.1);
+}
+#RoleAdmin_NewOverlayInner {
+	margin: 0 auto;
+	min-width: 20vw;
+	max-width: 30vw;
+	margin-top: 40vh;
+	padding: 20px;
+	border-radius: 20px;
+	background-color: rgb(250,250,250); 
+}
 #RoleAdmin_Overview {
 	padding: 10px;
 }

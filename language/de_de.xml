@@ -21,6 +21,11 @@
 		<friday>Freitag</friday>
 		<saturday>Samstag</saturday>
 		<sunday>Sonntag</sunday>
+		<From>Von</From>
+		<from>von</from>
+		<To>Bis</To>
+		<to>bis</to>
+		<count>Personen</count>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
@@ -36,6 +41,9 @@
 		<SaveCal>Kalender Speichern</SaveCal>
 		<CalendarAdded>Kalender erfolgreich angelegt.</CalendarAdded>
 		<addPost>Neuer Termin</addPost>
+		<GenPosts>Einträge generieren</GenPosts>
+		<NewPattern>Neue Vorlage</NewPattern>
+		<AddPattern>Vorlage speichern</AddPattern>
 	</calendaradmin>
 	<useredit>
 		<Headline>Benutzerverwaltung</Headline>

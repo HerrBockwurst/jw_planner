@@ -26,7 +26,7 @@
 				displayMessageBox('==errors formSubmit==', true);
 				return;
 			}
-			if(testError(data, true, true)) return;
+			if(testError(data, true, false)) return;
 			
 			jdata = JSON.parse(data);
 			$('#CalendarAdmin_VSSelect').html(jdata.vs);
@@ -43,7 +43,12 @@
 		displayLoadingBox();
 		
 		$.post('^PROTO^^HOME^/datahandler/calendaradmin/getCalendar', {cid: $(this).val()}, function(data) {
-			console.log(data);
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, false)) return;
 			jdata = JSON.parse(data);
 			
 			$('#CalendarAdmin_CalContent').html(jdata.html);

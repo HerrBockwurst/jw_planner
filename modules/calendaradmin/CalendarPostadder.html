@@ -1,0 +1,29 @@
+<div id="CalendarAdmin_Postadder">
+	<div class="headline">==calendaradmin GenPosts==</div>
+	<label>
+		==common From==
+		<input type="text" id="iPostAdderFrom" style="width: 70px; text-align: center"/>
+	</label>
+	<label>
+		==common To==
+		<input type="text" id="iPostAdderTo"  style="width: 70px; text-align: center"/>
+	</label>
+	<button>==calendaradmin GenPosts==</button>
+</div>
+<script>
+$(function() {
+	var FromDate = new Date(),
+		FromDay = ('0' + FromDate.getDate()).slice(-2),
+		FromMonth = ('0' + (FromDate.getMonth() + 1)).slice(-2),
+		From = FromDay + '.' + FromMonth + '.' + FromDate.getFullYear();
+	
+	var ToDate = new Date(FromDate.getFullYear(), FromDate.getMonth() + 1, 0, 23, 59, 59);
+		
+	var ToDay = ('0' + ToDate.getDate()).slice(-2);
+	var ToMonth = ('0' + (ToDate.getMonth() + 1)).slice(-2);
+	var To = ToDay + '.' + ToMonth + '.' + ToDate.getFullYear();
+	
+	$('#iPostAdderFrom').val(From);
+	$('#iPostAdderTo').val(To);
+})
+</script>

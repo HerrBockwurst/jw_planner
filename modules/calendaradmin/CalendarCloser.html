@@ -1,2 +1,31 @@
 	</tr>
 </table>
+<script>
+function deletePattern(pattid) {
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/calendaradmin/deletePattern', {pattid : pattid}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) return;
+		
+		$('#CalendarAdmin_CalSelect').trigger('change');
+		
+		hideLoadingBox();
+	});
+}
+
+function showNewPatternOverlay() {
+	$('#CalendarAdmin_PatternAdder').fadeIn();
+}
+
+$('.CalendarAdmin_PatternEntry').click(function() {
+	if(typeof $(this).attr('data-patternid') !== "undefined")
+		deletePattern($(this).attr('data-patternid'));
+	else 
+		showNewPatternOverlay();
+});
+</script>

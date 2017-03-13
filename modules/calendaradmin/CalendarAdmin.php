@@ -5,7 +5,7 @@ class CalendarAdmin extends Module {
 		$this->Permission = "admin.calendar";
 		$this->CSSFiles = "style.css";
 		$this->ClassPath = 'calendaradmin';
-		$this->MenuItem = new MenuItem("menu CalendarAdmin", 70, $this->ClassPath, $this->Permission);
+		$this->MenuItem = new MenuItem("menu CalendarAdmin", 40, $this->ClassPath, $this->Permission);
 	}
 	
 	public static function getInstance() {
@@ -56,7 +56,8 @@ class CalendarAdmin extends Module {
 			$Output .= '<td>'.$this->getCalendarPattern($i, $CID).'</td>';
 		}
 		
-		$Output .= loadHtml('CalendarCloser.html', $this->ClassPath);
+		$Output .= replaceLangTags(loadHtml('CalendarCloser.html', $this->ClassPath));
+		$Output .= replaceLangTags(loadHtml('CalendarPostadder.html', $this->ClassPath));
 		
 		echo json_encode(array('html' => removeWhiteSpace($Output)));
 	}
@@ -115,6 +116,30 @@ class CalendarAdmin extends Module {
 		echo json_encode(array());
 	}
 	
+	private function Handler_deletePattern() {
+		if(!isset($_POST['pattid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$PattId = $_POST['pattid'];
+		
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('patt_id', $PattId);
+		$MySQL->join('pattern', 'cid', 'calendar', 'cid');
+		$MySQL->select('pattern', array('calendar.vsid'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //Ungültiges Pattern
+		
+		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für VS
+		
+		$MySQL->where('patt_id', $PattId);
+		if(!$MySQL->delete('pattern')) returnErrorJSON(getString('errors sql'));
+		
+		echo json_encode(array());
+	}
+
+	private function Handler_addPattern() {
+		
+	}
+	
 	public function ActionDataHandler() {
 		switch(getURL(2)) {
 			case 'getHeadline':
@@ -126,6 +151,12 @@ class CalendarAdmin extends Module {
 			case 'addCalendar': 
 				$this->Handler_addCalendar();
 				break;
+			case 'deletePattern':
+				$this->Handler_deletePattern();
+				break;
+			case 'addPattern':
+				$this->Handler_addPattern();
+				break;
 			default:
 				break;
 		}
@@ -134,6 +165,7 @@ class CalendarAdmin extends Module {
 	public function ActionLoad() {
 		switch(getURL(2)) {
 			default:
+				printHtml('CalendarPatternAdder.html', $this->ClassPath);
 				printHtml('Overview.html', $this->ClassPath);
 				printHtml('NewCalendar.html', $this->ClassPath);
 				break;

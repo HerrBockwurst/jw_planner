@@ -1,5 +1,6 @@
 	</tr>
 </table>
+<input type="hidden" id="CalendarAdmin_CurrDay" value="" />
 <script>
 function deletePattern(pattid) {
 	displayLoadingBox();
@@ -18,7 +19,8 @@ function deletePattern(pattid) {
 	});
 }
 
-function showNewPatternOverlay() {
+function showNewPatternOverlay(Day) {
+	$('#CalendarAdmin_CurrDay').val(Day);
 	$('#CalendarAdmin_PatternAdder').fadeIn();
 }
 
@@ -26,6 +28,6 @@ $('.CalendarAdmin_PatternEntry').click(function() {
 	if(typeof $(this).attr('data-patternid') !== "undefined")
 		deletePattern($(this).attr('data-patternid'));
 	else 
-		showNewPatternOverlay();
+		showNewPatternOverlay($(this).attr('data-day'));
 });
 </script>

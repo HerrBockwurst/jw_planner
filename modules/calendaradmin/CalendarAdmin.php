@@ -86,7 +86,7 @@ class CalendarAdmin extends Module {
 		}
 		
 		$RetVal .= '
-				<div class="CalendarAdmin_PatternEntry clickable">
+				<div class="CalendarAdmin_PatternEntry clickable" data-day="'.$Day.'">
 					'.getString('calendaradmin addPost').'
 				</div>';
 		return $RetVal;

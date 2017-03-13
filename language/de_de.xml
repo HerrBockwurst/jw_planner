@@ -84,6 +84,7 @@
 		<formSubmit>Fehler bei der Formularübermittlung. Aktualisiere die Seite. Falls der Fehler wieder auftritt, kontaktiere uns.</formSubmit>
 		<sql>Es ist ein Datenbankfehler aufgetreten. Bitte kontaktiere uns über das Kontaktformular.</sql>
 		<EmailSyntax>Dies ist keine gültige EMail Adresse.</EmailSyntax>
+		<TimeFormat>Das Zeitformat ist nicht korrekt. Bitte überprüfe deine Eingabe.</TimeFormat>
 	</errors>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

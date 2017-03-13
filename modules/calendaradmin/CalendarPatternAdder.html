@@ -52,3 +52,43 @@
 		</div>
 	</div>
 </div>
+<script>
+function CalendarAdmin_AddPattern() {
+	var data = {
+			fH : parseInt($('#iCalendarAdminFromH').text()),
+			fM : parseInt($('#iCalendarAdminFromM').text()),
+			tH : parseInt($('#iCalendarAdminToH').text()),
+			tM : parseInt($('#iCalendarAdminToM').text()),
+			count : parseInt($('#iCalendarAdminCount').text()),
+			day : parseInt($('#CalendarAdmin_CurrDay').val())
+	};
+	
+	if(	data.fM%15 != 0 ||
+		data.fM > 59 ||
+		data.tM%15 != 0 ||
+		data.tM > 59 ||
+		data.fH > 23 ||
+		data.tH > 23 ||
+		data.fH < 0 ||
+		data.tH < 0 ||
+		isNaN(data.fH) || isNaN(data.fM) || isNaN(data.tH) || isNaN(data.tM) || isNaN(data.count) || isNaN(data.day) ) {
+			displayMessageBox('==errors TimeFormat==');
+			return;
+	}
+	
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/calendaradmin/addPattern', data, function(data) {
+		hideLoadingBox();
+	});
+}
+
+function CalendarAdmin_CloseOverlay() {
+	$('#CalendarAdmin_PatternAdder').fadeOut();
+}
+
+$('#CalendarAdmin_PatternAdder').find('button').click(function() {
+	if($(this).hasClass('redbutton')) CalendarAdmin_CloseOverlay();
+	else CalendarAdmin_AddPattern();
+})
+</script>

@@ -3,11 +3,11 @@
 	width: 100vw;
 	height: 100vh;
 	position: absolute;
-	z-index: 100;
+	z-index: 150;
 	background-color: rgba(0,0,0,0.1);
 }
 #MessageBox {
-	z-index: 110;
+	z-index: 160;
 }
 #MessageBoxContent, #LoadingBoxContent {
 	margin: 0 auto;
@@ -36,7 +36,7 @@
 	min-height: 100vh;
 	max-height: 100vh;
 	position: fixed;
-	z-index: 99;
+	z-index: 20;
 }
 #Content {
 	position: absolute;

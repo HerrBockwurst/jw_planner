@@ -38,7 +38,7 @@
 			</div>
 			<div class="CalendarAdmin_PatternRow" style="margin-left: 60px;"><!-- From Time H -->
 				<div style="width: 60px;">+</div>
-				<div style="width: 60px;" contentEditable="true" id="iCalendarAdminCount">2</div>
+				<div style="width: 60px;" contentEditable="true" id="iCalendarAdminCount">002</div>
 				<div style="width: 60px;">-</div>
 			</div>
 			<div class="CalendarAdmin_PatternSpacer" style="margin-left:10px">
@@ -53,6 +53,87 @@
 	</div>
 </div>
 <script>
+var toFocus;
+var curDay;
+
+$('.CalendarAdmin_PatternRow').children('div:not(:first-of-type):not(:last-of-type)').focusin(function(){
+	var cell = this;
+	var range, selection;
+	if (document.body.createTextRange) {
+		range = document.body.createTextRange();
+		range.moveToElementText(cell);
+		range.select();
+	} else if (window.getSelection) {
+		selection = window.getSelection();
+		range = document.createRange();
+		range.selectNodeContents(cell);
+		selection.removeAllRanges();
+		selection.addRange(range);
+	}
+});
+
+$('.CalendarAdmin_PatternRow').children('div:first-of-type').click(function () {
+	var Container = $(this).next();
+	var Add = Container.is('#iCalendarAdminFromM') || Container.is('#iCalendarAdminToM') ? 15 : 1;
+	var Limit = Container.is('#iCalendarAdminFromM') || Container.is('#iCalendarAdminToM') ? 59 : 23;
+	var Int = parseInt(Container.text());
+	
+	if(Container.is('#iCalendarAdminCount')) Limit = 999;
+	
+	Int = Int + Add;
+	
+	if(Int > Limit) Int = 0;
+	var NewText = Container.is('#iCalendarAdminCount') ? ("00" + Int).slice(-3) : ("0" + Int).slice(-2); 
+	Container.text(NewText);
+});
+
+$('.CalendarAdmin_PatternRow').children('div:last-of-type').click(function() {
+	var Container = $(this).prev();
+	var Sub = Container.is('#iCalendarAdminFromM') || Container.is('#iCalendarAdminToM') ? 15 : 1;
+	var Limit = Container.is('#iCalendarAdminCount') ? 1 : 0;
+	var Int = parseInt(Container.text());
+	var UnderZero = Container.is('#iCalendarAdminFromM') || Container.is('#iCalendarAdminToM') ? 45 : 23
+	
+	if(Container.is('#iCalendarAdminCount')) UnderZero = 1;
+			
+	Int = Int - Sub;
+	
+	
+	if(Int < Limit) Int = UnderZero;
+	var NewText = Container.is('#iCalendarAdminCount') ? ("00" + Int).slice(-3) : ("0" + Int).slice(-2); 
+	Container.text(NewText);
+});
+
+$('.CalendarAdmin_PatternRow').children('div:not(:first-of-type):not(:last-of-type)').focusout(function(){
+	  if($(this).is('#iCalendarAdminFromH') || $(this).is('#iCalendarAdminToH')) {
+		  var Int = parseInt($(this).text());
+		  if(isNaN(Int) || Int < 0 || Int > 23) {
+			  toFocus = $(this);
+			  displayMessageBox('==errors TimeFormat==', false, {}, function() {
+				  toFocus.focus();
+			  });
+			  return;
+		  }		 
+		  $(this).text(('0' + Int).slice(-2));
+	  } else if($(this).is('#iCalendarAdminFromM') || $(this).is('#iCalendarAdminToM')) {
+		  var Int = parseInt($(this).text());
+		  if(isNaN(Int) || Int < 0 || Int > 59) {
+			  toFocus = $(this);
+			  displayMessageBox('==errors TimeFormat==', false, {}, function() {
+				  toFocus.focus();
+			  });
+			  return;
+		  }
+		  if(Int%15 != 0) {
+			  if(Int < 8) Int = 0;
+			  else if(Int >= 8 && Int < 23) Int = 15;
+			  else if(Int >= 23 && Int < 38) Int = 30;
+			  else Int = 45;
+		  }
+		  $(this).text(('0' + Int).slice(-2));
+	  }
+});
+
 function CalendarAdmin_AddPattern() {
 	var data = {
 			fH : parseInt($('#iCalendarAdminFromH').text()),
@@ -60,8 +141,11 @@ function CalendarAdmin_AddPattern() {
 			tH : parseInt($('#iCalendarAdminToH').text()),
 			tM : parseInt($('#iCalendarAdminToM').text()),
 			count : parseInt($('#iCalendarAdminCount').text()),
-			day : parseInt($('#CalendarAdmin_CurrDay').val())
+			day : curDay,
+			cid : $('#CalendarAdmin_CalSelect').val()
 	};
+	
+	console.log(data);
 	
 	if(	data.fM%15 != 0 ||
 		data.fM > 59 ||
@@ -78,13 +162,25 @@ function CalendarAdmin_AddPattern() {
 	
 	displayLoadingBox();
 	
-	$.post('^PROTO^^HOME^/datahandler/calendaradmin/addPattern', data, function(data) {
-		hideLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendaradmin/addPattern', data, function(data) {		
+		testRedirect(data);
+		if(!testJSON(data)) {
+			hideLoadingBox();
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) {
+			hideLoadingBox();
+			return;
+		}
+		
+		$('#CalendarAdmin_CalSelect').trigger('change');	
+		hideLoadingBox();		
 	});
 }
 
-function CalendarAdmin_CloseOverlay() {
-	$('#CalendarAdmin_PatternAdder').fadeOut();
+function CalendarAdmin_CloseOverlay() {	
+	$('#CalendarAdmin_PatternAdder').fadeOut(100);
 }
 
 $('#CalendarAdmin_PatternAdder').find('button').click(function() {

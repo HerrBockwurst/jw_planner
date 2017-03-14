@@ -67,6 +67,7 @@ class CalendarAdmin extends Module {
 		
 		$MySQL->where('day', $Day);
 		$MySQL->where('cid', $CID);
+		$MySQL->orderBy('start');
 		$MySQL->select('pattern');
 		
 		$RetVal = '';
@@ -137,7 +138,140 @@ class CalendarAdmin extends Module {
 	}
 
 	private function Handler_addPattern() {
+		$NeededDatas = array('fH', 'fM', 'tH', 'tM', 'count', 'day', 'cid');
+		foreach($NeededDatas AS $NeededData)
+			if(!array_key_exists($NeededData, $_POST)) returnErrorJSON(getString('errors formSubmit')); //Nicht alle Daten Übergeben
 		
+		$CID = $_POST['cid'];
+		$Day = $_POST['day'];
+		$Count = $_POST['count'];
+		$Start = (intval($_POST['fH']) * 60 ) + intval($_POST['fM']);
+		$End = (intval($_POST['tH']) * 60 ) + intval($_POST['tM']);
+		
+		
+		//Rechte Prüfen
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('vsid'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //Falscher CID
+		
+		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für VS
+		
+		//Werte prüfen
+		if($End > 1425 || $Start > 1410 || $End < 30 || $Start < 15) returnErrorJSON(getString('errors TimeFormat')); //Zeiten außer Bereich
+		if($Start >= $End) returnErrorJSON(getString('errors TimeFormat')); //Zeiten außer Bereich
+		
+		//Andere Einträge zu dem Tag holen
+		$MySQL->where('day', $Day);
+		$MySQL->where('cid', $CID);
+		$MySQL->select('pattern');
+		
+		foreach($MySQL->fetchAll() AS $cPattern) {
+			//Prüfen ob Zeiten schon vorhanden
+			if($cPattern['start'] == $Start || $cPattern['end'] == $End) returnErrorJSON(getString('errors TimeBlocked'));	//Zeit vorhanden		
+			if($Start >= $cPattern['start'] && $End <= $cPattern['end']) returnErrorJSON(getString('errors TimeBlocked')); //Zeit zwischen Zeit
+			if($Start >= $cPattern['start'] && $Start < $cPattern['end']) returnErrorJSON(getString('errors TimeBlocked')); //Start zwischen Zeit
+			if($End > $cPattern['start'] && $End <= $cPattern['end']) returnErrorJSON(getString('errors TimeBlocked')); //End zwischen Zeit
+		}
+		
+		//Alles OK, eintragen
+		if(!$MySQL->insert('pattern', array(
+			'start' => $Start,
+			'end' => $End,
+			'cid' => $CID,
+			'day' => $Day,
+			'count' => $Count
+		))) returnErrorJSON(getString('errors sql'));
+		
+		echo json_encode(array());
+		
+	}
+	
+	private function Handler_delCalendar() {
+		if(!isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$CID = $_POST['cid'];
+		
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('vsid'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit'));
+		
+		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
+		
+		//Alles OK, löschen
+		$MySQL->where('cid', $CID);
+		if(!$MySQL->delete('calendar')) returnErrorJSON(getString('errors sql'));
+		
+		$MySQL->where('cid', $CID);
+		if(!$MySQL->delete('posts')) returnErrorJSON(getString('errors sql'));
+		
+		$MySQL->where('cid', $CID);
+		if(!$MySQL->delete('pattern')) returnErrorJSON(getString('errors sql'));
+		
+		echo json_encode(array());
+	}
+
+	private function Handler_genPosts() {
+		$NeededDatas = array('from', 'to', 'cid');
+		foreach($NeededDatas AS $NeededData)
+			if(!array_key_exists($NeededData, $_POST)) returnErrorJSON(getString('errors formSubmit')); //Nicht alle Daten Übergeben
+		
+		$From = strtotime($_POST['from']);
+		$To = strtotime($_POST['to']);
+		$CID = $_POST['cid'];
+		
+		if(!$From || !$To) returnErrorJSON(getString('errors TimeFormat')); //Zeit nicht lesbar
+		$To = $To + (24*60*60-1);
+		if($From > $To) returnErrorJSON(getString('errors TimeFormat'));
+			
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('vsid'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit'));		
+		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für VS
+		
+		$MySQL->where('cid', $CID);
+		$MySQL->where('start', $From, '>=');
+		$MySQL->where('end', $To, '<=');
+		$MySQL->select('posts');
+		$Posts = array();
+		
+		foreach($MySQL->fetchAll() AS $cPost)
+			$Posts[$cPost['start']] = $cPost['end'];
+		
+		$MySQL->where('cid', $CID);
+		$MySQL->select('pattern');
+				
+		foreach($MySQL->fetchAll() AS $cPattern) {
+			$CurrDay = $From;
+			$InsertData = array();
+			while($CurrDay < $To) {
+				$Start = $CurrDay + ($cPattern['start']*60);
+				$End = $CurrDay + ($cPattern['end']*60);
+				
+				if(isset($Posts[$Start]) && $Posts[$Start] == $End) {
+					$CurrDay = $CurrDay + (24*60*60);
+					continue; //Posts existiert schon
+				}
+				
+				$InsertData[] = array(
+					'cid' => $CID,
+					'start' => $Start,
+					'end' => $End,
+					'count' => $cPattern['count'],
+					'entrys' => '[]'
+				);
+				
+				$CurrDay = $CurrDay + (24*60*60);				
+			}			
+			if(!$MySQL->insert('posts', $InsertData)) returnErrorJSON(getString('errors sql'));
+		}
+		
+		echo json_encode(array());
 	}
 	
 	public function ActionDataHandler() {
@@ -156,6 +290,12 @@ class CalendarAdmin extends Module {
 				break;
 			case 'addPattern':
 				$this->Handler_addPattern();
+				break;
+			case 'delCalendar':
+				$this->Handler_delCalendar();
+				break;
+			case 'genPosts':
+				$this->Handler_genPosts();
 				break;
 			default:
 				break;

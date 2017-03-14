@@ -44,6 +44,11 @@
 		<GenPosts>Einträge generieren</GenPosts>
 		<NewPattern>Neue Vorlage</NewPattern>
 		<AddPattern>Vorlage speichern</AddPattern>
+		<DeleteCalendar>Kalender löschen</DeleteCalendar>
+		<ConfirmCalDel>Willst du den Kalender wirklich löschen?</ConfirmCalDel>
+		<CalendarAdded>Kalender erfolgreich hinzugefügt.</CalendarAdded>
+		<ConfirmCreatePosts>Willst du die Termine generieren?\n\nDies kann nicht rückgängig gemacht werden.</ConfirmCreatePosts>
+		<PostsAdded>Termine erfolgreich erstellt.</PostsAdded>
 	</calendaradmin>
 	<useredit>
 		<Headline>Benutzerverwaltung</Headline>
@@ -85,6 +90,7 @@
 		<sql>Es ist ein Datenbankfehler aufgetreten. Bitte kontaktiere uns über das Kontaktformular.</sql>
 		<EmailSyntax>Dies ist keine gültige EMail Adresse.</EmailSyntax>
 		<TimeFormat>Das Zeitformat ist nicht korrekt. Bitte überprüfe deine Eingabe.</TimeFormat>
+		<TimeBlocked>Es existiert schon eine Vorlage für diese Zeit.</TimeBlocked>
 	</errors>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>

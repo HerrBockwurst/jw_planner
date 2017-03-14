@@ -47,6 +47,8 @@ function replaceLangTags($String) {
 		if(defined(substr($Match, 1, strlen($Match) - 2)))
 			$String = str_replace($Match, constant(substr($Match, 1, strlen($Match) - 2)), $String);
 	
+	$String = str_replace('\n', '<br />', $String);
+			
 	return $String;
 }
 

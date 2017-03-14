@@ -24,7 +24,7 @@
 	<?php ContentHandler::getInstance()->performLoad('dashboard')?>
 </div>
 <script>
-	function displayMessageBox(Text, Reload, DoubleButton) {
+	function displayMessageBox(Text, Reload, DoubleButton, callback) {
 		if(typeof Reload === "undefined") var Reload = false;
 
 		if(	typeof DoubleButton !== "undefined" &&
@@ -45,7 +45,10 @@
 				$(this).bind('click', {cb : DoubleButton.callback}, MsgBoxButtonAction )
 			}
 			else {
-				$(this).bind('click', MsgBoxButtonAction )
+				if(typeof callback === "function") 
+					$(this).bind('click', {cb: callback}, MsgBoxButtonAction )
+				else
+					$(this).bind('click', MsgBoxButtonAction )
 			}
 		});
 		$('#MessageBox').fadeIn(100);
@@ -65,7 +68,11 @@
 		} else {
 			//Keine 2 Button abfrage
 			if($(this).attr('data-redirect') == "true") window.location.replace('<?php echo PROTO.HOME?>');
-			else $('#MessageBox').fadeOut(100);
+			else {
+				$('#MessageBox').fadeOut(100);
+				if(typeof callback === "function") callback.data.cb();
+			}
+			
 		}
 	}
 	

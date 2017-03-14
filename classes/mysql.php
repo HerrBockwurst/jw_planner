@@ -70,7 +70,7 @@ class MySQL {
 		return $str;
 	}
 
-	public function orderBy($field, $sort = 'ASC', $table) {
+	public function orderBy($field, $sort = 'ASC', $table = NULL) {
 		$this->attr['order'][] = array('field' => $field, 'sort' => $sort, 'table' => $table);
 	}
 
@@ -170,12 +170,16 @@ class MySQL {
 	public function insert($table, $data) {
 		$query = "INSERT INTO `$table` (";
 
+		if(key($data) === NULL)	return true;
+		
 		$toStep = !is_array($data[key($data)]) ? $toStep = array($data) : $toStep = $data;
+		$FieldsFinished = FALSE;
 		foreach($toStep AS $currInsert) {
 			foreach($currInsert AS $field => $val) {
-				$query .= "`$field`, ";
+				if(!$FieldsFinished) $query .= "`$field`, ";
 				$this->attr['cond'][] = $val;
 			}
+			$FieldsFinished = TRUE;
 		}
 		$query = substr($query, 0, -2).") VALUES ";
 		foreach($toStep AS $currStep) {

@@ -1,0 +1,27 @@
+<div id="Calendar_Selectbar">
+	<div class="headline">==calendar Headline==</div>
+	<label style="float:left;">
+		==common versammlung==
+		<select id="Calendar_VSSelect">
+		</select>
+	</label>
+	<label style="float:left; padding-left: 20px">
+		==common calendar==
+		<select id="Calendar_CalSelect">
+		</select>
+	</label>
+	<br class="floatbreak" />
+</div>
+<div id="Calendar_CalContent">
+</div>
+<script>
+
+function Calendar_updateHeadline() {
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendar/getHeadline', {}, function(data) {
+		hideLoadingBox();
+	});
+}
+
+$(Calendar_updateHeadline);
+</script>

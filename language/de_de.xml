@@ -26,6 +26,7 @@
 		<To>Bis</To>
 		<to>bis</to>
 		<count>Personen</count>
+		<calendar>Kalender</calendar>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
@@ -80,6 +81,9 @@
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>
 	</dashboard>
+	<calendar>
+		<Headline>Kalender</Headline>
+	</calendar>
 	<errors>
 		<WrongFields>Bitte fülle alle Felder vollständig aus!</WrongFields>
 		<AuthFail>Falscher Benutzername und/oder Passwort!</AuthFail>

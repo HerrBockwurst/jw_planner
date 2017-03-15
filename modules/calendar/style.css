@@ -1,0 +1,7 @@
+#Calendar_Selectbar {
+	padding: 20px;
+	border-bottom: 1px solid rgb(100,100,100);
+	background-color: rgba(255,255,255,0.6);
+	background-image: linear-gradient(to top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%);
+	height: 60px;
+}

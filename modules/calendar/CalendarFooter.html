@@ -9,7 +9,7 @@ function updateCalendar() {
 	if(Container.is(':first-of-type')) {
 		Year = Month == 1 ? Year = Year - 1 : Year;
 		Month = Month == 1 ? Month = 12 : Month - 1;
-	} else {
+	} else if(Container.is(':last-of-type')) {
 		Year = Month == 12 ? Year = Year + 1 : Year;
 		Month = Month == 12 ? Month = 1 : Month + 1;
 	}
@@ -38,8 +38,19 @@ $('#Calendar_Calendar').find('td.clickable').click(function () {
 	var Time = $(this).attr('data-timestamp');
 	
 	displayLoadingBox();
-	$.post('^PROTO^^HOME^/datahandler/calendar/getPosts', {time : Time}, function (data) {
+	$.post('^PROTO^^HOME^/datahandler/calendar/getPosts', {cid: $('#Calendar_CalSelect').val(), time : Time}, function (data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) return;
+		jdata = JSON.parse(data);
 		
+		$('#Calendar_DayContent').html(jdata.html);
+		$('#Calendar_CalContent').animate({left: "100%"}, 1000);
+		$('#Calendar_DayContent').animate({left: "0%"}, 1000);
+				
 		hideLoadingBox();
 	});
 })

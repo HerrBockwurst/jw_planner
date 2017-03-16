@@ -118,6 +118,38 @@ class Calendar extends Module {
 	}
 	
 	private function Handler_getPosts() {
+		if(!isset($_POST['time']) || !isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$Start = $_POST['time'];
+		$End = $Start + (24*60*60) - 1;
+		
+		//Permission prüfen
+		$CID = $_POST['cid'];
+		$MySQL = MySQL::getInstance();
+		
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('vsid'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //ungültige CID
+		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));		
+		
+		//Alles OK, Auslesen
+		$Posts = $this->getPostsInTime($CID, $Start, $End);
+		$PostList = '';
+		
+		foreach($Posts->getPosts() AS $cPost) {
+			$Classes = '';
+			if(count($cPost->Entrys) > 0 && $cPost->Count > count($cPost->Entrys)) $Classes .= ' notFull';
+			if($cPost->Count == count($cPost->Entrys)) $Classes .= ' Full';
+			if(count($cPost->Requests) > 0 && $cPost->Count != count($cPost->Entrys)) $Classes .= ' hasRequest';
+			
+			$PostList .= '<div data-pid="'.$cPost->PID.'" class="Calendar_Post clickable'.$Classes.'">'.date('H:i', $cPost->Start).' - '.date('H:i', $cPost->End).'</div>';
+		}
+		
+		$HTML = loadHtml('PostList.html', $this->ClassPath);
+		$HTML = replacer($HTML, array("POSTLIST" => $PostList));
+		
+		echo json_encode(array('html' => replaceLangTags($HTML)));
 		
 	}
 	

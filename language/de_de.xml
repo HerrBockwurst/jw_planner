@@ -102,6 +102,7 @@
 	</dashboard>
 	<calendar>
 		<Headline>Kalender</Headline>
+		<SelectPostFirst>Wähle zuerst eine Uhrzeit aus.</SelectPostFirst>
 	</calendar>
 	<errors>
 		<WrongFields>Bitte fülle alle Felder vollständig aus!</WrongFields>

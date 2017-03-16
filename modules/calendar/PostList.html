@@ -1,0 +1,17 @@
+<div id="Calendar_Postlist">
+(POSTLIST)
+</div>
+<div id="Calendar_Postdetailes">
+	<div style="text-align: center">==calendar SelectPostFirst==</div>
+</div>
+<div id="Calendar_ButtonArea" class="clickable">
+	&#187;	
+</div>
+<br class="floatbreak" />
+<script>
+$('#Calendar_ButtonArea').click(function() {
+	updateCalendar();
+	$('#Calendar_CalContent').animate({left: "0%"}, 1000);
+	$('#Calendar_DayContent').animate({left: "-100%"}, 1000);
+})
+</script>

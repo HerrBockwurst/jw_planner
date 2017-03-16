@@ -11,7 +11,7 @@ class Posts {
 		$MySQL->select('posts');
 		
 		foreach($MySQL->fetchAll() AS $cPost) 
-			$this->Posts[] = new Post($cPost['pid'], $cPost['start'], $cPost['end'], $cPost['count'], $cPost['entrys']);
+			$this->Posts[] = new Post($cPost['pid'], $cPost['start'], $cPost['end'], $cPost['count'], $cPost['entrys'], $cPost['req']);
 		
 	}
 	
@@ -25,16 +25,20 @@ class Posts {
 		return $RetVal;
 	}
 	
+	public function getPosts() {
+		return $this->Posts;
+	}
 }
 
 class Post {
-	public $PID, $Start, $End, $Count, $Entrys;
+	public $PID, $Start, $End, $Count, $Entrys, $Requests;
 	
-	public function __construct($PID, $Start, $End, $Count, $Entrys) {
+	public function __construct($PID, $Start, $End, $Count, $Entrys, $Requests) {
 		$this->PID = $PID;
 		$this->Start = $Start;
 		$this->End = $End;
 		$this->Count = $Count;
 		$this->Entrys = json_decode($Entrys);
+		$this->Requests = json_decode($Requests);
 	}
 }

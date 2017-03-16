@@ -1,0 +1,46 @@
+	</table>
+</div>
+<script>
+function updateCalendar() {
+	var Container = $(this);
+	var Month = parseInt($('#Calendar_DateSelectbar').attr('data-month'));
+	var Year = parseInt($('#Calendar_DateSelectbar').attr('data-year'));
+	
+	if(Container.is(':first-of-type')) {
+		Year = Month == 1 ? Year = Year - 1 : Year;
+		Month = Month == 1 ? Month = 12 : Month - 1;
+	} else {
+		Year = Month == 12 ? Year = Year + 1 : Year;
+		Month = Month == 12 ? Month = 1 : Month + 1;
+	}
+	
+	var Date = Month + "." + Year;
+	
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/calendar/getCalendar', {cid: $('#Calendar_CalSelect').val(), date : Date}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) return;
+		jdata = JSON.parse(data);
+		
+		$('#Calendar_CalContent').html(jdata.html);
+		hideLoadingBox();
+	});
+}
+
+$('#Calendar_DateSelectbar').find('.clickable').click(updateCalendar);
+
+$('#Calendar_Calendar').find('td.clickable').click(function () {
+	var Time = $(this).attr('data-timestamp');
+	
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendar/getPosts', {time : Time}, function (data) {
+		
+		hideLoadingBox();
+	});
+})
+</script>

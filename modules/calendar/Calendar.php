@@ -14,6 +14,113 @@ class Calendar extends Module {
 		return $Instance;
 	}
 	
+	private function Handler_getHeadline() {
+		$MySQL = MySQL::getInstance();
+		$VersString = '';
+		$CalString = '<option value="0">'.getString('common plsSelect').'</option>';
+		
+		foreach(User::getInstance()->getAccessableVers() AS $VSID => $VSName) {
+			$Selected = (empty($_POST['vsid']) && $VSID == User::getInstance()->VSID) || (!empty($_POST['vsid']) && $_POST['vsid'] == $VSID) ? 'selected' : '';
+			$VersString .= '<option value="'.$VSID.'" '.$Selected.'>'.$VSName.'</option>';
+		}
+		
+		$SVers = empty($_POST['vsid']) ? User::getInstance()->VSID : $_POST['vsid'];
+		
+		if(!array_key_exists($SVers, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
+		
+		$MySQL->where('vsid', $SVers);
+		$MySQL->select('calendar');
+		
+		foreach($MySQL->fetchAll() AS $cCal)
+			$CalString .= '<option value="'.$cCal['cid'].'">'.$cCal['name'].'</option>';
+		
+		echo json_encode(array('vs' => $VersString, 'cal' => $CalString));
+	}
+
+	private function getPostsInTime($CID, $Start, $End) {
+		return new Posts($CID, $Start, $End);
+	}
+	
+	private function Handler_getCalendar() {
+		
+		if(!isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		//Berechtigung prüfen
+		$CID = $_POST['cid'];
+		$MySQL = MySQL::getInstance();
+		
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('vsid'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //ungültige CID
+		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
+		
+		//Rechte Ok, Daten verarbeiten		
+		$Date = isset($_POST['date']) ? $_POST['date'] : date('n.Y');
+		$Date = explode('.', $Date);
+		
+		$TimestampFirst = DateTime::createFromFormat('!j.n.Y', '1.'.$Date[0].'.'.$Date[1]);		
+		if(!$TimestampFirst) returnErrorJSON(getString('errors formSubmit')); //ungültiges Datum übergeben		
+		
+		$MaxDaysInMonth = cal_days_in_month(CAL_GREGORIAN, $Date[0], $Date[1]);
+		$cDay = 1;
+		$cWeekday = 1;
+		
+		//Posts laden
+		$Posts = $this->getPostsInTime($CID, $TimestampFirst->getTimestamp(), ($TimestampFirst->getTimestamp() + ($MaxDaysInMonth * 24 * 60 * 60) - 1));
+		
+		//Kalender erstellen
+		
+		$Calendar = loadHtml('CalendarHeader.html', $this->ClassPath);
+		
+		while($cDay <= $MaxDaysInMonth) {
+			$cTimestamp = (DateTime::createFromFormat('!j.n.Y', $cDay.'.'.$Date[0].'.'.$Date[1]))->getTimestamp();
+			
+			if($cWeekday == 1) $Calendar .= '<tr>';			
+			
+			if($cWeekday == date('N', $cTimestamp)) {
+				$Class = !empty($Posts->getPostsByDay($cTimestamp)) ? 'class="clickable withPosts"' : '';
+				$Calendar .= '<td '.$Class.' data-timestamp="'.$cTimestamp.'">'.$cDay.'</td>';
+				$cDay++;
+			} else {
+				$Calendar .= '<td class="grayed"></td>';
+			}
+			
+			$cWeekday++;
+			
+			while(($cDay > $MaxDaysInMonth) && $cWeekday != 8) {
+				$Calendar .= '<td class="grayed"></td>';
+				$cWeekday++;
+			}
+			
+			if($cWeekday == 8) {
+				$Calendar .= '</tr>';
+				$cWeekday = 1;
+			}
+		}
+		
+		$Calendar .= loadHtml('CalendarFooter.html', $this->ClassPath);
+		$Switch = replacer(loadHtml('CalendarSwitch.html', $this->ClassPath), //Switch erstellen
+				array(
+					"NMONTH" => $TimestampFirst->format("n"),
+					"NYEAR" => $TimestampFirst->format("Y"),
+					"MONTH" => getString("common ".$TimestampFirst->format("F")),
+					"YEAR" => $TimestampFirst->format('Y')
+				));
+		
+		
+		$Calendar = replacer($Calendar, array( //Switch einfügen
+				"SWITCH" => $Switch
+		));
+		
+		echo json_encode(array('html' => replaceLangTags($Calendar)));
+		
+	}
+	
+	private function Handler_getPosts() {
+		
+	}
+	
 	public function ActionLoad() {
 		switch(getUrl(2)) {
 			default:
@@ -29,6 +136,13 @@ class Calendar extends Module {
 	public function ActionDataHandler() {
 		switch(getURL(2)) {
 			case 'getHeadline':
+				$this->Handler_getHeadline();
+				break;
+			case 'getCalendar':
+				$this->Handler_getCalendar();
+				break;
+			case 'getPosts': 
+				$this->Handler_getPosts();
 				break;
 			default:
 				break;

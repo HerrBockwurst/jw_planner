@@ -5,3 +5,67 @@
 	background-image: linear-gradient(to top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%);
 	height: 60px;
 }
+#Calendar_CalContent {
+	width: 100%;
+	height: calc(100vh - 101px);
+	position: absolute;
+}
+#Calendar_DayContent {
+	width: 100%;
+	height: calc(100vh - 101px);
+	position: absolute;
+	left: -100%;	
+}
+#Calendar_CalendarHolder {
+	float: left; 
+	padding: 20px;
+}
+#Calendar_DateSelectbar {
+	width: 100%;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+#Calendar_DateSelectbar > div {
+	float: left;
+	border: 1px solid rgb(100,100,100);
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+	width: calc(100% - 84px);
+	text-align: center;
+	background-color: rgb(240,240,240);
+}
+#Calendar_DateSelectbar > div:first-of-type {
+	border-radius: 15px 0px 0px 15px;
+	border-right: 0px;
+	width: 40px;
+	background-color: rgb(200,200,200);
+}
+#Calendar_DateSelectbar > div:last-of-type {
+	border-radius: 0px 15px 15px 0px;
+	border-left: 0px;
+	width: 40px;
+	background-color: rgb(200,200,200);
+}
+#Calendar_CalendarHolder tr, #Calendar_CalendarHolder td, #Calendar_CalendarHolder th {
+	border: 1px solid rgb(100,100,100);
+}
+#Calendar_CalendarHolder td, #Calendar_CalendarHolder th {
+	padding: 5px;
+	min-width: 60px;
+	height: 50px;
+	background-color: rgb(240,240,240)
+}
+#Calendar_CalendarHolder th {
+	height: 30px;
+	background-color: rgba(0,0,0,0.1) !important;
+	font-size: 20px;
+	line-height: 30px;
+	font-weight: bold; 
+}
+.withPosts {
+	background-color: rgb(170,210,170) !important;
+}
+.grayed {
+	background-color: rgba(0,0,0,0.1) !important;
+}

@@ -25,7 +25,9 @@ class CalendarAdmin extends Module {
 			$VersString .= '<option value="'.$VSID.'" '.$Selected.'>'.$VSName.'</option>';
 		}
 		
-		$SVers = empty($_POST['vsid']) ? User::getInstance()->VSID : $_POST['vsid']; 
+		$SVers = empty($_POST['vsid']) ? User::getInstance()->VSID : $_POST['vsid'];
+		
+		if(!array_key_exists($SVers, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
 		
 		$MySQL->where('vsid', $SVers);
 		$MySQL->select('calendar');
@@ -245,31 +247,37 @@ class CalendarAdmin extends Module {
 		
 		$MySQL->where('cid', $CID);
 		$MySQL->select('pattern');
-				
+			
+		$InsertData = array();
+		
 		foreach($MySQL->fetchAll() AS $cPattern) {
-			$CurrDay = $From;
-			$InsertData = array();
+			$CurrDay = $From;			
+			
 			while($CurrDay < $To) {
-				$Start = $CurrDay + ($cPattern['start']*60);
-				$End = $CurrDay + ($cPattern['end']*60);
-				
-				if(isset($Posts[$Start]) && $Posts[$Start] == $End) {
-					$CurrDay = $CurrDay + (24*60*60);
-					continue; //Posts existiert schon
+				if(date('N', $CurrDay) == $cPattern['day']) {
+					$Start = $CurrDay + ($cPattern['start']*60);
+					$End = $CurrDay + ($cPattern['end']*60);
+					
+					
+					
+					if(isset($Posts[$Start]) && $Posts[$Start] == $End) {
+						$CurrDay = $CurrDay + (24*60*60);
+						continue; //Posts existiert schon
+					}
+					
+					$InsertData[] = array(
+						'cid' => $CID,
+						'start' => $Start,
+						'end' => $End,
+						'count' => $cPattern['count'],
+						'entrys' => '[]'
+					);
 				}
 				
-				$InsertData[] = array(
-					'cid' => $CID,
-					'start' => $Start,
-					'end' => $End,
-					'count' => $cPattern['count'],
-					'entrys' => '[]'
-				);
-				
 				$CurrDay = $CurrDay + (24*60*60);				
-			}			
-			if(!$MySQL->insert('posts', $InsertData)) returnErrorJSON(getString('errors sql'));
+			}						
 		}
+		if(!$MySQL->insert('posts', $InsertData)) returnErrorJSON(getString('errors sql'));
 		
 		echo json_encode(array());
 	}

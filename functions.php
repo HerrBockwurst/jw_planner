@@ -8,6 +8,17 @@ function removeWhiteSpace($String, $Space = '/\\t|\\n|\\r/') {
 	return preg_replace("/\\t|\\n|\\r/", "", $String);
 }
 
+function replacer($String, $Data) {
+	$Needle = array();
+	$Replacements = array();
+	foreach($Data AS $PlaceHolder => $Replacement) { 
+		$Needle[] = "(".$PlaceHolder.")";
+		$Replacements[] = $Replacement;
+	}
+	
+	return str_replace($Needle, $Replacements, $String);
+}
+
 function validateEmail($mail) {
 	$Pattern = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 	return empty(preg_grep($Pattern, array($mail))) ? FALSE : TRUE;	

@@ -21,12 +21,31 @@
 		<friday>Freitag</friday>
 		<saturday>Samstag</saturday>
 		<sunday>Sonntag</sunday>
+		<Smonday>Mo</Smonday>
+		<Stuesday>Di</Stuesday>
+		<Swednesday>Mi</Swednesday>
+		<Sthursday>Do</Sthursday>
+		<Sfriday>Fr</Sfriday>
+		<Ssaturday>Sa</Ssaturday>
+		<Ssunday>So</Ssunday>
 		<From>Von</From>
 		<from>von</from>
 		<To>Bis</To>
 		<to>bis</to>
 		<count>Personen</count>
 		<calendar>Kalender</calendar>
+		<January>Januar</January>
+		<February>Februar</February>
+		<March>März</March>
+		<April>April</April>
+		<May>Mai</May>
+		<June>Juni</June>
+		<July>Juli</July>
+		<August>August</August>
+		<September>September</September>
+		<October>Oktober</October>
+		<November>November</November>
+		<December>Dezember</December>
 	</common>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>

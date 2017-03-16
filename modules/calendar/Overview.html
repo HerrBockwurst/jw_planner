@@ -14,14 +14,51 @@
 </div>
 <div id="Calendar_CalContent">
 </div>
+<div id="Calendar_DayContent">
+</div>
 <script>
 
 function Calendar_updateHeadline() {
 	displayLoadingBox();
-	$.post('^PROTO^^HOME^/datahandler/calendar/getHeadline', {}, function(data) {
+	$.post('^PROTO^^HOME^/datahandler/calendar/getHeadline', {vsid: $('#Calendar_VSSelect').val()}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) return;
+		
+		jdata = JSON.parse(data);
+		$('#Calendar_VSSelect').html(jdata.vs);
+		$('#Calendar_CalSelect').html(jdata.cal);
+		$('#Calendar_CalContent').html('');
+		
 		hideLoadingBox();
 	});
 }
+
+$('#Calendar_CalSelect').change(function() {
+	if($(this).val() == 0) return;
+	
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/calendar/getCalendar', {cid: $(this).val()}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) return;
+		jdata = JSON.parse(data);
+		
+		$('#Calendar_CalContent').html(jdata.html);
+		hideLoadingBox();
+	});
+});
+
+$('#Calendar_VSSelect').change(function() {
+	Calendar_updateHeadline();
+});
 
 $(Calendar_updateHeadline);
 </script>

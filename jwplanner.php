@@ -4,17 +4,10 @@ class JWPlanner {
 	private function __construct() {
 		
 		require_once 'config.php';
-		require_once 'classes/mysql.php';
-		require_once 'classes/ContentHandler.php';
-		require_once 'classes/User.php';
-		require_once 'classes/Language.php';
-		require_once 'classes/MenuItem.php';
-		require_once 'classes/PermissionManager.php';
-		require_once 'classes/RoleManager.php';
-		require_once 'classes/Foreigner.php';
-		require_once 'classes/VersManager.php';
-		require_once 'classes/GroupManager.php';
-		require_once 'classes/CalendarManager.php';
+		foreach(scandir('classes') AS $cFile) {
+			if($cFile == '.' || $cFile == '..') continue;
+			require_once 'classes/'.$cFile;
+		}		
 		require_once 'functions.php';
 		
 		/*

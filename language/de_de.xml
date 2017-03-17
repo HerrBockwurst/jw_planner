@@ -103,6 +103,15 @@
 	<calendar>
 		<Headline>Kalender</Headline>
 		<SelectPostFirst>Wähle zuerst eine Uhrzeit aus.</SelectPostFirst>
+		<Entrys>Einträge</Entrys>
+		<noEntrys>Es sind noch keine Enträge vorhanden.</noEntrys>
+		<deleteUser>Entfernen</deleteUser>
+		<max>max.</max>
+		<doEntry>Eintragen</doEntry>
+		<doUnentry>Austragen</doUnentry>
+		<bRequest>Dienstpartner gesucht!</bRequest>
+		<delPost>Termin löschen</delPost>
+		<addOther>Fremdeintrag</addOther>
 	</calendar>
 	<errors>
 		<WrongFields>Bitte fülle alle Felder vollständig aus!</WrongFields>
@@ -115,6 +124,7 @@
 		<EmailSyntax>Dies ist keine gültige EMail Adresse.</EmailSyntax>
 		<TimeFormat>Das Zeitformat ist nicht korrekt. Bitte überprüfe deine Eingabe.</TimeFormat>
 		<TimeBlocked>Es existiert schon eine Vorlage für diese Zeit.</TimeBlocked>
+		<PostFull>Der Termin ist bereits voll!</PostFull>
 	</errors>
 	<permissions>
 		<admin.useredit>Benutzer verwalten</admin.useredit>
@@ -123,7 +133,7 @@
 		<admin.message>Nachrichten senden</admin.message>
 		<admin.rolemanager>Rollen verwalten</admin.rolemanager>
 		<calendar.entry>Kalender nutzen</calendar.entry>
-		<calender.entry.other>Einträge anderer Benutzer löschen</calender.entry.other>
+		<calendar.entry.other>Einträge anderer Benutzer löschen</calendar.entry.other>
 		<dashboard.admin>Dashboard verwalten</dashboard.admin>
 		<dashboard.msg>Dashboard-Nachrichten schreiben</dashboard.msg>
 		<system>Systemverwaltung</system>

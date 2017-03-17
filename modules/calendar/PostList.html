@@ -13,5 +13,23 @@ $('#Calendar_ButtonArea').click(function() {
 	updateCalendar();
 	$('#Calendar_CalContent').animate({left: "0%"}, 1000);
 	$('#Calendar_DayContent').animate({left: "-100%"}, 1000);
-})
+});
+
+$('.Calendar_Post').click(function () {
+	var PID = $(this).attr('data-pid');
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/calendar/getPostDetailes', {pid: PID}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, true)) return;
+		jdata = JSON.parse(data);
+		
+		$('#Calendar_Postdetailes').html(jdata.html).attr('data-pid', PID);
+		hideLoadingBox();
+	});
+});
 </script>

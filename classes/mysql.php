@@ -51,7 +51,7 @@ class MySQL {
 		$str = '';
 
 		foreach($this->attr['join'] AS $cJoin)
-			$str .= $cJoin['type']." JOIN ".$cJoin['tB']." ON (`".$cJoin['tA']."`.`".$cJoin['fA']."` = `".$cJoin['tB']."`.`".$cJoin['fB']."`) ";
+			$str .= $cJoin['type']." JOIN `".$cJoin['tB']."` ON (`".$cJoin['tA']."`.`".$cJoin['fA']."` = `".$cJoin['tB']."`.`".$cJoin['fB']."`) ";
 		$str = substr($str, 0, strlen($str) - 1);
 		unset($this->attr['join']);
 		return $str;

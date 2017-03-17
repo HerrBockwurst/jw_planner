@@ -95,7 +95,7 @@ function needAuth() {
 function stringToColorCode($str) {
 	$code = dechex(crc32($str));
 	$code = substr($code, 0, 6);
-	$code = hexdec(substr($code ,0,2)).",".hexdec(substr($code ,2,2)).",".hexdec(substr($code ,4,2)).",0.5";
+	$code = hexdec(substr($code ,0,2)).",".hexdec(substr($code ,2,2)).",".hexdec(substr($code ,4,2));
 
 	return $code;
 }

@@ -270,7 +270,8 @@ class CalendarAdmin extends Module {
 						'start' => $Start,
 						'end' => $End,
 						'count' => $cPattern['count'],
-						'entrys' => '[]'
+						'entrys' => '[]',
+						'req' => '[]'
 					);
 				}
 				

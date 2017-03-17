@@ -31,7 +31,8 @@ function Calendar_updateHeadline() {
 		jdata = JSON.parse(data);
 		$('#Calendar_VSSelect').html(jdata.vs);
 		$('#Calendar_CalSelect').html(jdata.cal);
-		$('#Calendar_CalContent').html('');
+		$('#Calendar_CalContent').html('').removeAttr('style');
+		$('#Calendar_DayContent').html('').removeAttr('style');
 		
 		hideLoadingBox();
 	});

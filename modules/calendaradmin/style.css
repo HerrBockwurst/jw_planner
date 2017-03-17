@@ -74,9 +74,9 @@
 }
 #CalendarAdmin_Overlay {
 	display: none;
-	width: 100vw;
+	width: calc(100vw + 220px);
 	height: 100vh;
-	position: absolute;
+	position: fixed;
 	left: -220px; /* Main Menu */
 	top: 0px;
 	z-index: 99;
@@ -84,7 +84,7 @@
 }
 #CalendarAdmin_OverlayInner {
 	margin: 0 auto;
-	min-width: 15vw;
+	min-width: 350px;
 	max-width: 25vw;
 	margin-top: 30vh;
 	padding: 20px;

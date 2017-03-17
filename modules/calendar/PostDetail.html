@@ -1,0 +1,34 @@
+<script>
+$('#bCalendar_EntrySwitch').click(function() {
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendar/toggleMe', {pid: $('#Calendar_Postdetailes').attr('data-pid')}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, true)) return;
+		$('#Calendar_Calendar').find("td[data-timestamp='"+LastClickedDay+"']").trigger('click');
+		$(".Calendar_Post[data-pid='"+$('#Calendar_Postdetailes').attr('data-pid')+"']").trigger('click');
+		
+		hideLoadingBox();
+	})
+})
+
+$('#bCalendar_RequestSwitch').click(function() {
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendar/toggleReq', {pid: $('#Calendar_Postdetailes').attr('data-pid')}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, true)) return;
+		
+		$('#Calendar_Calendar').find("td[data-timestamp='"+LastClickedDay+"']").trigger('click');
+		$(".Calendar_Post[data-pid='"+$('#Calendar_Postdetailes').attr('data-pid')+"']").trigger('click');
+		
+		hideLoadingBox();
+	})
+})
+</script>

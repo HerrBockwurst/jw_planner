@@ -65,7 +65,8 @@ class User {
 		$this->VSID = $Userdata->vsid;
 		$this->Permissions = PermissionManager::getPermsByRole($Userdata->role);
 		foreach(json_decode($Userdata->perms) AS $Perm)
-			$this->Permissions[] = $Perm;
+			if(!in_array($Perm, $this->Permissions))
+				$this->Permissions[] = $Perm;
 		$this->RoleName = $Userdata->role_name;
 		$this->RoleID = $Userdata->role;
 		//Todo

@@ -1,6 +1,8 @@
 	</table>
 </div>
 <script>
+var LastClickedDay; /* Zugriff nach Updaten der Nutzer in einem Post zum Neuladen der Postliste */
+
 function updateCalendar() {
 	var Container = $(this);
 	var Month = parseInt($('#Calendar_DateSelectbar').attr('data-month'));
@@ -36,6 +38,7 @@ $('#Calendar_DateSelectbar').find('.clickable').click(updateCalendar);
 
 $('#Calendar_Calendar').find('td.clickable').click(function () {
 	var Time = $(this).attr('data-timestamp');
+	LastClickedDay = $(this).attr('data-timestamp');
 	
 	displayLoadingBox();
 	$.post('^PROTO^^HOME^/datahandler/calendar/getPosts', {cid: $('#Calendar_CalSelect').val(), time : Time}, function (data) {

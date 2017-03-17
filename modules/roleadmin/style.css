@@ -1,8 +1,8 @@
 #RoleAdmin_NewOverlay {
 	display: none;
-	width: 100vw;
+	width: calc(100vw + 220px); /* Main Menu */
 	height: 100vh;
-	position: absolute;
+	position: fixed;
 	left: -220px; /* Main Menu */
 	top: 0px;
 	z-index: 99;
@@ -10,7 +10,7 @@
 }
 #RoleAdmin_NewOverlayInner {
 	margin: 0 auto;
-	min-width: 20vw;
+	min-width: 350px;
 	max-width: 30vw;
 	margin-top: 40vh;
 	padding: 20px;

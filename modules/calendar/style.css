@@ -9,6 +9,8 @@
 	width: 100%;
 	height: calc(100vh - 101px);
 	position: absolute;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 #Calendar_DayContent {
 	width: calc(100% - 40px);
@@ -60,7 +62,8 @@
 	padding: 5px;
 	min-width: 60px;
 	height: 50px;
-	background-color: rgb(240,240,240)
+	background-color: rgb(240,240,240);
+	position: relative;
 }
 #Calendar_CalendarHolder th {
 	height: 30px;
@@ -73,8 +76,10 @@
 	background-color: rgba(240,240,240,0.8);
 	border: 1px solid rgb(100,100,100);
 	padding: 20px;
-	width: 300px;
+	width: 350px;
 	min-height: 250px;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 #Calendar_ButtonArea {
     line-height: 40px;
@@ -88,6 +93,57 @@
     text-align: center;
     margin-left: 20px;
     border-radius: 10px;
+}
+#Calendar_PostEntryList > span {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 10px;
+}
+#Calendar_PostDetailButtonContainer button {
+	margin-top: 10px;
+	width: 170px;
+	float: left;
+	padding: 4px 10px;		
+}
+#Calendar_PostDetailButtonContainer button:first-of-type {
+	margin-right: 10px;
+}
+.Calendar_PostEntry {
+	margin-bottom: 4px;
+	position: relative;
+}
+.Calendar_PostEntry > div:first-of-type {
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 30px;
+	position: relative;
+}
+.Calendar_PostEntry > div:first-of-type::after {
+	position: absolute;
+    height: 14px;
+    bottom: -5px !important;
+    top: inherit;
+    right: -5px;
+    line-height: 14px;
+    font-size: 10px;
+}
+.Calendar_PostEntry > div:last-of-type {
+	line-height: 40px;
+	margin-left: 50px;
+}
+.Calendar_PostEntry > button {
+	position: absolute;
+	right: 0px;
+	border-color: rgb(170,0,0);
+	background-color: rgb(170,50,50);
+	padding: 2px 10px;
+	height: 22px;
+	top: 8px;
 }
 .withPosts {
 	background-color: rgb(170,210,170) !important;
@@ -105,25 +161,40 @@
 	position: relative;
 	height: 16px;
 	border-radius: 5px;
+	line-height: 18px;
 }
 .notFull {
-	color: rgb(100, 100, 100) !important;
+	color: rgb(40, 40, 40) !important;
 	border-color: rgb(120, 170, 0) !important;
 	background-color: rgb(230, 255, 180) !important;
 }
 .Full {
 	border-color: rgb(170,0,0) !important;
 	background-color: rgb(170,50,50) !important;
-	color: rgb(40,40,40) !important;
+	color: rgb(200,200,200) !important;
 }
-.hasRequest::after {
+.hasRequest::after { /* Für Anzeige in der Postliste */
 	Content: 'R';
 	position: relative;
 	right: -3px;
-	top: -1px;
+	top: -2px;
 	background-color: rgb(170,50,50) !important;
-	color: rgb(40,40,40) !important;
+	color: rgb(200,200,200) !important;
 	padding: 2px 4px;
 	border-radius: 5px;
 	font-size: 12px;
+	margin-right: 3px;
+}
+.withReq::after { /* Für Anzeige im Kalender */
+    Content: 'R';
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgb(170,50,50) !important;
+    color: rgb(200,200,200) !important;
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 3px;
+    margin-bottom: 3px;
 }

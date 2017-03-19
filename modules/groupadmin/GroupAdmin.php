@@ -53,7 +53,7 @@ class GroupAdmin extends Module {
 		$User = $MySQL->fetchAll();
 		
 		foreach($Groups AS $cGroup) {
-			$GroupList .= '<div class="GroupAdmin_GroupEntry clickable" data-rid="'.$cGroup['gid'].'">'.$cGroup['name'].'<span class="GroupAdmin_GroupDelete"></span></div>';			
+			$GroupList .= '<div class="GroupAdmin_GroupEntry clickable" data-gid="'.$cGroup['gid'].'">'.$cGroup['name'].'<span class="GroupAdmin_GroupDelete"></span></div>';			
 			
 			$SelectedUsers = json_decode($cGroup['members']);
 			
@@ -61,7 +61,7 @@ class GroupAdmin extends Module {
 				if($UserList == '')
 					$UserList .= '<div id="GroupAdmin_UserHeadline" data-gid="'.$cGroup['gid'].'">'.$cGroup['name'].'</div>';
 									
-				$Checked = in_array($cUser, $SelectedUsers) ? 'checked' : '';
+				$Checked = in_array($cUser['uid'], $SelectedUsers) ? 'checked' : '';
 				$UserList .= '<label><input type="checkbox" value="'.$cUser['uid'].'" '.$Checked.'>'.$cUser['name'].'</label>';
 			}			
 		}
@@ -72,66 +72,80 @@ class GroupAdmin extends Module {
 		echo json_encode(array('verslist' => $VSListe, 'grouplist' => $GroupList, 'userlist' => $UserList));
 	}
 	
-	private function Handler_delRole() {
-		if(!isset($_POST['rid'])) returnErrorJSON(getString('errors formSubmit'));
-		$RID = $_POST['rid'];
+	private function Handler_delGroup() {
+		if(!isset($_POST['gid'])) returnErrorJSON(getString('errors formSubmit'));
+		$GID = $_POST['gid'];
 		
 		$MySQL = MySQL::getInstance();
 		
-		$MySQL->where('rid', $RID);
-		$MySQL->select('roles', NULL, 1);
+		$MySQL->where('gid', $GID);
+		$MySQL->select('groups', NULL, 1);
 		
 		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit'));
 		
-		$Role = $MySQL->fetchRow();
+		$Group = $MySQL->fetchRow();
 		
-		if(!array_key_exists($Role->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors formSubmit')); //Keine Rechte
+		if(!array_key_exists($Group->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors formSubmit')); //Keine Rechte
 		
-		//Rolle löschen
-		$MySQL->where('rid', $RID);
-		if(!$MySQL->delete('roles')) returnErrorJSON(getString('errors sql'));
+		//Gruppe löschen
+		$MySQL->where('gid', $GID);
+		if(!$MySQL->delete('groups')) returnErrorJSON(getString('errors sql'));
 		
-		//Rolle bei Benutzern entfernen
-		$MySQL->where('role', $RID);
-		if(!$MySQL->update('users', array('role' => 0))) returnErrorJSON(getString('errors sql'));
+		//Gruppe aus Kalender löschen
+		
+		$MySQL->where('vsid', $Group->vsid);
+		$MySQL->select('calendar', array('cid', 'blacklist', 'whitelist'));
+		
+		foreach($MySQL->fetchAll() AS $cCalendar) {
+			$Blacklist = json_decode($cCalendar['blacklist']);
+			$Whitelist = json_decode($cCalendar['whitelist']);
+			
+			if(in_array($GID, $Blacklist)) {
+				unset($Blacklist[array_search($GID, $Blacklist)]);
+				$Blacklist = array_values($Blacklist);
+				$MySQL->where('cid', $cCalendar['cid']);
+				if(!$MySQL->update('calendar', array('blacklist' => json_encode($Blacklist)))) returnErrorJSON(getString('errors sql'));
+			}
+			
+			if(in_array($GID, $Whitelist)) {
+				unset($Whitelist[array_search($GID, $Whitelist)]);
+				$Whitelist = array_values($Whitelist);
+				$MySQL->where('cid', $cCalendar['cid']);
+				if(!$MySQL->update('calendar', array('whitelist' => json_encode($Whitelist)))) returnErrorJSON(getString('errors sql'));
+			}
+				
+		}
 		
 		echo json_encode(array());
 	}
 	
-	private function Handler_updateRole() {
-		if(!isset($_POST['rid'])) returnErrorJSON(getString('errors formSubmit'));
-		
-		$RID = $_POST['rid'];		
-		$Perms = isset($_POST['perms']) ? $_POST['perms'] : array();
+	private function Handler_updateGroup() {
+		if(!isset($_POST['gid'])) returnErrorJSON(getString('errors formSubmit'));
+		$GID = $_POST['gid'];		
+		$Users = isset($_POST['users']) ? $_POST['users'] : array();
 		
 		$MySQL = MySQL::getInstance();
-		$MySQL->where('rid', $RID);
-		$MySQL->select('roles', array('vsid'), 1);
+		$MySQL->where('gid', $GID);
+		$MySQL->select('groups', array('vsid'), 1);
 		if($MySQL->countResult() == 0 || !array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) 
-			returnErrorJSON(getString('errors noPerm')); //Rolle nicht in Versammlung
+			returnErrorJSON(getString('errors noPerm')); //Gruppe nicht in Versammlung
 		
-		foreach($Perms AS $cPerm) 
-			if(array_search($cPerm, User::getInstance()->getClearedPerms()) === FALSE) returnErrorJSON(getString('errors noPerm')); //Test ob er Perms für alle Perms hat
-		
-		
-		$FilteredPerms = RoleManager::getFilteredPerms($RID, User::getInstance()->getClearedPerms());
-		
-		$MySQL->where('rid', $RID);
-		if(!$MySQL->update('roles', array('entry' => json_encode(array_merge($Perms, $FilteredPerms))))) returnErrorJSON(getString('errors sql'));
+		$MySQL->where('gid', $GID);
+		if(!$MySQL->update('groups', array('members' => json_encode($Users)))) returnErrorJSON(getString('errors sql'));
 		
 		echo json_encode(array());
 	}
 	
-	private function Handler_addRole() {
+	private function Handler_addGroup() {
 		$VSID = isset($_POST['vsid']) ? $_POST['vsid'] : '';
-		$RoleName = isset($_POST['rolename']) ? $_POST['rolename'] : '';
+		$GroupName = isset($_POST['groupname']) ? $_POST['groupname'] : '';
 		
-		if(empty($RoleName) || empty($VSID)) returnErrorJSON(getString('errors formSubmit'));
+		if(empty($GroupName) || empty($VSID)) returnErrorJSON(getString('errors formSubmit'));
 		if(!array_key_exists($VSID, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
 		
 		$MySQL = MySQL::getInstance();
 		
-		if(!$MySQL->insert('roles', array('vsid' => $VSID, 'name' => $RoleName, 'entry' => json_encode(array())))) returnErrorJSON(getString('errors sql'));
+		if(!$MySQL->insert('groups', array('vsid' => $VSID, 'name' => $GroupName, 'members' => json_encode(array())))) returnErrorJSON(getString('errors sql'));
 		
 		echo json_encode(array());
 	}
@@ -142,14 +156,14 @@ class GroupAdmin extends Module {
 			case 'loadGroups':
 				$this->Handler_loadGroups();
 				break;
-			case 'delRole':
-				$this->Handler_delRole();
+			case 'delGroup':
+				$this->Handler_delGroup();
 				break;
-			case 'updateRole':
-				$this->Handler_updateRole();
+			case 'updateGroup':
+				$this->Handler_updateGroup();
 				break;
-			case 'addRole':
-				$this->Handler_addRole();
+			case 'addGroup':
+				$this->Handler_addGroup();
 				break;
 			default:
 				break;

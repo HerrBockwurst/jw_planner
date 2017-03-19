@@ -16,6 +16,21 @@ class GroupManager {
 		return $MySQL->fetchAll();
 	}
 	
+	public static function isValidGroup($Set, $VS = NULL) {
+		$MySQL = MySQL::getInstance();
+		$GIDs = array();
+		
+		
+		foreach($this->getGroups($VS) AS $cGroup)
+			$GIDs[] = $cGroup['gid'];
+		
+		foreach($Set AS $cGroup) 
+			if(!in_array($cGroup, $GIDs)) return FALSE;
+		
+		return TRUE;
+		
+	}
+	
 	public static function unsetUser($UID, $Group = NULL) {
 		$MySQL = MySQL::getInstance();
 		$User = new Foreigner($UID);

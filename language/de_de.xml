@@ -54,13 +54,16 @@
 		<RoleAdmin>Rollenverwaltung</RoleAdmin>
 		<CalendarAdmin>Kalenderverwaltung</CalendarAdmin>
 		<GroupAdmin>Gruppenverwaltung</GroupAdmin>
+		<Logout>Ausloggen</Logout>
 	</menu>
 	<groupadmin>
 		<Headline>Gruppenverwaltung</Headline>
 		<selectGroupFirst>Wähle zuerst eine Gruppe aus.</selectGroupFirst>
 		<noGroupsAssigned>Es wurden noch keine Gruppen angelegt.</noGroupsAssigned>
 		<NewGroup>Neue Gruppe</NewGroup>
+		<NewGroupName>Gruppenname</NewGroupName>
 		<SaveGroup>Gruppe speichern</SaveGroup>
+		<confirmDelete>Willst du die Gruppe wirklich löschen?</confirmDelete>
 	</groupadmin>
 	<calendaradmin>
 		<Headline>Kalenderverwaltung</Headline>
@@ -77,6 +80,11 @@
 		<CalendarAdded>Kalender erfolgreich hinzugefügt.</CalendarAdded>
 		<ConfirmCreatePosts>Willst du die Termine generieren?\n\nDies kann nicht rückgängig gemacht werden.</ConfirmCreatePosts>
 		<PostsAdded>Termine erfolgreich erstellt.</PostsAdded>
+		<blacklist>Ausschließen</blacklist>
+		<whitelist>Einschließen</whitelist>
+		<ListMode>Listenmodus</ListMode>
+		<EditList>Liste bearbeiten</EditList>
+		<SaveList>Listen speichern</SaveList>
 	</calendaradmin>
 	<useredit>
 		<Headline>Benutzerverwaltung</Headline>

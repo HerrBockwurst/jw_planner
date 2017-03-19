@@ -14,4 +14,34 @@ class CalendarManager {
 			if(!$MySQL->update('posts', array('entrys' => $Entrys))) returnErrorJSON(getString('errors sql'));
 		}
 	}
+	
+	public static function toggleListMode($CID) {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('listmode'), 1);
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit'));
+	
+		$NewMode = $MySQL->fetchRow()->listmode == "blacklist" ? "whitelist" : "blacklist";
+		$MySQL->where('cid', $CID);
+		if(!$MySQL->update('calendar', array('listmode' => $NewMode))) returnErrorJSON(getString('errors sql'));
+	}
+	
+	public static function updateLists($Blacklist, $Whitelist, $CID) {
+		$MySQL = MySQL::getInstance();
+	
+		$MySQL->where('cid', $CID);
+		if(!$MySQL->update('groups', array(
+				"blacklist" => json_encode($Blacklist),
+				"whitelist" => json_encode($Whitelist)
+		))) returnErrorJSON(getString('errors sql'));
+	}
+	
+	public static function getCalendarData($CID) {
+		$MySQL = MySQL::getInstance();
+		
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', NULL, 1);
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit'));
+		return $MySQL->fetchRow();
+	}
 }

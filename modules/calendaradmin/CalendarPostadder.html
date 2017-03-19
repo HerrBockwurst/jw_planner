@@ -10,6 +10,9 @@
 	</label>
 	<button style="width: 100%">==calendaradmin GenPosts==</button><br />
 	<button style="margin-top: 20px; width: 100%" class="redbutton">==calendaradmin DeleteCalendar==</button>
+	
+	(LIST)
+	
 </div>
 <script>
 $(function() {
@@ -80,7 +83,7 @@ function CalendarAdmin_DeleteCal() {
 	});
 }
 
-$('#CalendarAdmin_Postadder').find('button').click(function() {
+$('#CalendarAdmin_Postadder').children('button').click(function() {
 	if($(this).hasClass('redbutton')) displayMessageBox('==calendaradmin ConfirmCalDel==', false, {yes: '==common yes==', no: '==common no==', callback: CalendarAdmin_DeleteCal});
 	else displayMessageBox('==calendaradmin ConfirmCreatePosts==', false, {yes: '==common yes==', no: '==common no==', callback: CalendarAdmin_GenPosts});
 })

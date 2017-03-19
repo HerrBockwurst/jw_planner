@@ -1,52 +1,52 @@
-<div id="RoleAdmin_NewOverlay">
-	<div id="RoleAdmin_NewOverlayInner">
-		<div class="headline">==roleadmin NewRole==</div>
+<div id="GroupAdmin_NewOverlay">
+	<div id="GroupAdmin_NewOverlayInner">
+		<div class="headline">==groupadmin NewGroup==</div>
 		<label style="margin-bottom: 20px;">
-			==roleadmin NewRoleName==
-			<input type="text" id="iNewRoleName" />			
+			==groupadmin NewGroupName==
+			<input type="text" id="iNewGroupName" />			
 		</label>
 		<div style="text-align: center">
-			<button>==roleadmin SaveRole==</button>
+			<button>==groupadmin SaveGroup==</button>
 			<button class="redbutton">==common close==</button>
 		</div>
 	</div>
 </div>
 <script>
 
-function addRole() {
-	var RoleName = $('#iNewRoleName').val();
+function addGroup() {
+	var GroupName = $('#iNewGroupName').val();
 	
-	if(!/\S/.test(RoleName)) {
+	if(!/\S/.test(GroupName)) {
 		displayMessageBox('==errors WrongFields==');
 		return;
 	}
 	
 	displayLoadingBox();
-	$.post('^PROTO^^HOME^/datahandler/roleadmin/addRole', {rolename: RoleName, vsid: $('#RoleAdmin_VSSelector').val()}, function(data) {
+	$.post('^PROTO^^HOME^/datahandler/groupadmin/addGroup', {groupname: GroupName, vsid: $('#GroupAdmin_VSSelector').val()}, function(data) {
 		testRedirect(data);
 		if(!testJSON(data)) {
-			closeRoleOverlay();
-			updateRoleList();
+			closeGroupOverlay();
+			updateGroupList();
 			displayMessageBox('==errors formSubmit==', false);
 			return;
 		}
 		if(testError(data, true, false)) {
-			closeRoleOverlay();
+			closeGroupOverlay();
 			return;
 		}
 		
-		$('#iNewRoleName').val('');
-		closeRoleOverlay();
-		updateRoleList();
+		$('#iNewGroupName').val('');
+		closeGroupOverlay();
+		updateGroupList();
 	});
 }
 
-function closeRoleOverlay() {
-	$('#RoleAdmin_NewOverlay').fadeOut(100);
+function closeGroupOverlay() {
+	$('#GroupAdmin_NewOverlay').fadeOut(100);
 }
 
-$('#RoleAdmin_NewOverlayInner').find('button').click(function() {
-	if($(this).hasClass('redbutton')) closeRoleOverlay();
-	else addRole();	
+$('#GroupAdmin_NewOverlayInner').find('button').click(function() {
+	if($(this).hasClass('redbutton')) closeGroupOverlay();
+	else addGroup();	
 });
 </script>

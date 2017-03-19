@@ -1,0 +1,101 @@
+<div id="CalendarAdmin_ListManagerOverlay">
+	<div id="CalendarAdmin_ListManagerOverlayInner">
+		<div id="CalendarAdmin_ListManagerBlacklist"></div>
+		<div id="CalendarAdmin_ListManagerWhitelist"></div>
+		<br class="floatbreak">
+		<button style="margin-right: 10px">==calendaradmin SaveList==</button>
+		<button class="redbutton">==common close==</button>
+	</div>
+</div>
+<div id="CalendarAdmin_ListManager">
+	<div class="headline" style="color: rgb(10,10,10); text-align: left;">==calendaradmin ListMode==</div>
+	<div id="CalendarAdmin_ListModeSwitch" class="clickable" data-mode="(LISTMODE)">==calendaradmin (LISTMODE)==</div>
+	<span class="clickable">==calendaradmin EditList==</span>
+</div>
+<script>
+function closeListManager() {
+	$('#CalendarAdmin_ListManagerOverlay').fadeOut(100);
+}
+
+function updateList() {
+	var Blacklist, Whitelist;
+	var CID = $('#CalendarAdmin_CalSelect').val();
+	
+	$('#CalendarAdmin_ListManagerBlacklist').find('input').each(function() {
+		if(!$(this).is(':checked')) return;
+		Blacklist.push($(this).val());
+	});
+	
+	$('#CalendarAdmin_ListManagerWhitelist').find('input').each(function() {
+		if(!$(this).is(':checked')) return;
+		Whitelist.push($(this).val());
+	});
+	
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/calendaradmin/updateList', {cid: CID, bl: Blacklist, wl: Whitelist}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			hideLoadingBox();
+			displayMessageBox('==errors formSubmit==', false);
+			return;
+		}
+		if(testError(data, true, false)) {
+			hideLoadingBox();
+			return;
+		}	
+		hideLoadingBox();
+		closeListManager();
+	})
+}
+
+$('#CalendarAdmin_ListManagerOverlayInner').children('button').click(function() {
+	if($(this).hasClass('redbutton')) closeListManager();
+	else updateList();
+});
+
+$('#CalendarAdmin_ListModeSwitch').click(function() {
+	var NewMode = $(this).attr('data-mode') == "blacklist" ? "whitelist" : "blacklist";
+	var ModeString = $(this).attr('data-mode') == "blacklist" ?
+			"==calendaradmin whitelist==" : "==calendaradmin blacklist==";
+	
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendaradmin/switchList', {cid: $('#CalendarAdmin_CalSelect').val()}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			hideLoadingBox();
+			displayMessageBox('==errors formSubmit==', false);
+			return;
+		}
+		if(testError(data, true, false)) {
+			hideLoadingBox();
+			return;
+		}
+		hideLoadingBox();
+	})
+	
+	$(this).attr('data-mode', NewMode);	
+	$(this).html(ModeString);
+});
+$('#CalendarAdmin_ListManager').children('span').click(function() {
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendaradmin/getLists', {cid: $('#CalendarAdmin_CalSelect').val()}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			hideLoadingBox();
+			displayMessageBox('==errors formSubmit==', false);
+			return;
+		}
+		if(testError(data, true, false)) {
+			hideLoadingBox();
+			return;
+		}
+		jdata = JSON.parse(data);
+		
+		$('#CalendarAdmin_ListManagerBlacklist').html(jdata.blacklist);
+		$('#CalendarAdmin_ListManagerWhitelist').html(jdata.whitelist);
+		$('#CalendarAdmin_ListManagerOverlay').fadeIn(100);
+		hideLoadingBox();
+	});
+});
+</script>

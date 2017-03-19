@@ -33,6 +33,13 @@
 		}
 		
 		$.post('^PROTO^^HOME^/datahandler/roleadmin/updateRole', data, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				updateRoleList();
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			testError(data, true, false);
 			hideLoadingBox();
 		});
 	}

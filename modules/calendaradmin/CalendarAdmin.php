@@ -50,7 +50,8 @@ class CalendarAdmin extends Module {
 		$MySQL->where('cid', $CID);
 		$MySQL->select('calendar', NULL, 1);
 		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //Kalender existiert nicht
-		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für Kalender
+		$Calendar = $MySQL->fetchRow();
+		if(!array_key_exists($Calendar->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für Kalender
 		
 		$Output = replaceLangTags(loadHtml('CalendarHeadline.html', $this->ClassPath));
 		
@@ -60,6 +61,12 @@ class CalendarAdmin extends Module {
 		
 		$Output .= replaceLangTags(loadHtml('CalendarCloser.html', $this->ClassPath));
 		$Output .= replaceLangTags(loadHtml('CalendarPostadder.html', $this->ClassPath));
+		
+		$ToReplace = array(
+			'LISTMODE' => $Calendar->listmode
+		);
+		
+		$Output = replacer($Output, array('LIST' => replaceLangTags(replacer(loadHtml('List.html', $this->ClassPath), $ToReplace))));
 		
 		echo json_encode(array('html' => removeWhiteSpace($Output)));
 	}
@@ -283,6 +290,61 @@ class CalendarAdmin extends Module {
 		echo json_encode(array());
 	}
 	
+	private function Handler_getLists() {
+		if(!isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$CID = $_POST['cid'];
+		
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('vsid','blacklist', 'whitelist', 'listmode'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //ungültige CID
+		$Calendar = $MySQL->fetchRow();
+		$Blacklist = json_decode($Calendar->blacklist);
+		$Whitelist = json_decode($Calendar->whitelist);
+		$Groups = GroupManager::getGroups($Calendar->vsid);
+		
+		$StringBlacklist = "<div>".getString('calendaradmin blacklist')."</div>";
+		$StringWhitelist = "<div>".getString('calendaradmin whitelist')."</div>";
+		
+		foreach($Groups AS $cGroup) {
+			$Checked = in_array($cGroup['gid'], $Blacklist) ? "checked" : "";
+			$StringBlacklist .= '<label><input type="checkbox" value="'.$cGroup['gid'].'" '.$Checked.'>'.$cGroup['name'].'</label>';
+			
+			$Checked = in_array($cGroup['gid'], $Whitelist) ? "checked" : "";
+			$StringWhitelist .= '<label><input type="checkbox" value="'.$cGroup['gid'].'" '.$Checked.'>'.$cGroup['name'].'</label>';
+		}
+		
+		echo json_encode(array('blacklist' => $StringBlacklist, 'whitelist' => $StringWhitelist));
+	}
+	
+	private function Handler_updateList() {
+		if(!isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$CID = $_POST['cid'];
+		$Blacklist = isset($_POST['bl']) ? $_POST['bl'] : array();
+		$Whitelist = isset($_POST['wl']) ? $_POST['wl'] : array();
+		
+		$Calendar = CalendarManager::getCalendarData($CID);		
+		$Groups = GroupManager::getGroups($Calendar->vsid);
+		
+		if(!GroupManager::isValidGroup($Blacklist, $Calendar->vsid) || !GroupManager::isValidGroup($Whitelist, $Calendar->vsid))
+			returnErrorJSON(getString('errors formSubmit'));
+		
+		CalendarManager::updateLists($Blacklist, $Whitelist, $CID);
+		
+		echo json_encode(array());
+		
+	}
+	
+	private function Handler_updateListMode() {
+		if(!isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$MySQL = MySQL::getInstance();
+		
+	}
+	
 	public function ActionDataHandler() {
 		switch(getURL(2)) {
 			case 'getHeadline':
@@ -306,6 +368,16 @@ class CalendarAdmin extends Module {
 			case 'genPosts':
 				$this->Handler_genPosts();
 				break;
+			case 'getLists':
+				$this->Handler_getLists();
+				break;
+			case 'updateList':
+				$this->Handler_updateList();
+				break;
+			case 'updateListMode':
+				$this->Handler_updateListMode();
+				break;
+			
 			default:
 				break;
 		}

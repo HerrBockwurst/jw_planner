@@ -20,19 +20,27 @@
 	function saveUsers() {
 		displayLoadingBox();
 		
-		var perms = [];
+		var users = [];
 		
-		$('#Group_Permissions').find('input').each(function() {
+		$('#Group_Users').find('input').each(function() {
 			if (!$(this).is(':checked')) return;
-			perms.push($(this).val());
+			users.push($(this).val());
 		});
 		
 		var data = {
-			rid: $('#GroupAdmin_PermHeadline').attr('data-rid'),
-			perms: perms			
+			gid: $('#GroupAdmin_UserHeadline').attr('data-gid'),
+			users: users			
 		}
 		
 		$.post('^PROTO^^HOME^/datahandler/groupadmin/updateGroup', data, function(data) {
+			console.log(data)
+			testRedirect(data);
+			if(!testJSON(data)) {
+				updateGroupList();
+				displayMessageBox('==errors formSubmit==', false);
+				return;
+			}
+			testError(data, true, false);
 			hideLoadingBox();
 		});
 	}
@@ -55,10 +63,9 @@
 			
 			$('#GroupAdmin_VSSelector').html(jdata.verslist);
 			$('#GroupAdmin_ListContainer').html(jdata.grouplist);
-			$('#Group_Users').html('==GroupAdmin selectGroupFirst==');
-			console.log(jdata)
+			$('#Group_Users').html('==groupadmin selectGroupFirst==');
 			$('#GroupAdmin_ListContainer').children('.GroupAdmin_GroupEntry').each(function() {
-				$(this).unbind().bind('click', updateGroupList);
+				$(this).unbind().bind('click', updateUserList);
 				$(this).children('span').unbind().bind('click', delGroup);
 			});
 			$('#GroupAdmin_bNewGroup').unbind().bind('click', showGroupAdd);
@@ -68,13 +75,13 @@
 	}
 	
 	function delGroup() {
-		CurrClickedGroup = $(this).parent().attr('data-rid');
-		displayMessageBox('==GroupAdmin confirmDelete==', false, {yes: '==common yes==', no: '==common no==', callback: confirmedDelGroup});
+		CurrClickedGroup = $(this).parent().attr('data-gid');
+		displayMessageBox('==groupadmin confirmDelete==', false, {yes: '==common yes==', no: '==common no==', callback: confirmedDelGroup});
 	}
 	
 	function confirmedDelGroup() {
 		displayLoadingBox();
-		$.post('^PROTO^^HOME^/datahandler/groupadmin/delGroup', {rid: CurrClickedGroup}, function(data) {
+		$.post('^PROTO^^HOME^/datahandler/groupadmin/delGroup', {gid: CurrClickedGroup}, function(data) {
 			testRedirect(data);
 			if(!testJSON(data)) {
 				displayMessageBox('==errors formSubmit==', true);

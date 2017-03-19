@@ -1,3 +1,14 @@
+<div id="Calendar_EntryOtherOverlay">
+	<div id="Calendar_EntryOtherOverlayInner">
+		<div class="headline">==calendar UserSearch==</div>
+		<label>			
+			<input value="==common name==" type="text" id="iCalendar_UserSearch" />
+		</label>
+		<div id="Calendar_EntryOtherList"></div>
+		<button class="redbutton" style="margin-top: 10px">==common back==</button>
+	</div>
+</div>
+<div class="headline" style="float:none;">(DATESTRING)</div>
 <div id="Calendar_Postlist">
 (POSTLIST)
 </div>
@@ -9,6 +20,60 @@
 </div>
 <br class="floatbreak" />
 <script>
+
+var UserList;
+var Pattern = "";
+
+$('#iCalendar_UserSearch').focus(function() {
+	if(Pattern == "") $(this).val('');
+})
+
+$('#iCalendar_UserSearch').keyup(function () {
+	Pattern = $(this).val();
+	Calendar_updateUserList();
+})
+
+function toggleForeignUser(uid) {
+	var UID = typeof uid !== "string" ? $(this).attr('data-uid') : uid;	
+	var PID = $('#Calendar_Postdetailes').attr('data-pid');
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/calendar/toggleUser', {uid: UID, pid: PID}, function (data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		testError(data, true, false) 
+		hideLoadingBox();
+		$('#Calendar_Calendar').find("td[data-timestamp='"+LastClickedDay+"']").trigger('click');
+		$(".Calendar_Post[data-pid='"+$('#Calendar_Postdetailes').attr('data-pid')+"']").trigger('click');
+		$('#Calendar_EntryOtherOverlay').find('button').trigger('click');
+	});
+}
+
+function Calendar_updateUserList() {
+	var HTML = "";
+	var Marker = 0
+	for(var i = 0; i < UserList.length; i++) {
+		if(UserList[i].uid.toLowerCase().indexOf(Pattern.toLowerCase()) == -1 &&
+			UserList[i].name.toLowerCase().indexOf(Pattern.toLowerCase()) == -1)
+			continue;
+		var Shader = Marker%2 == 0 ? 'shader' : ''; 
+		HTML = HTML + '<div class="Calendar_UserlistEntry clickable ' + Shader + '" data-uid="' + UserList[i].uid + '">' + UserList[i].name + '</div>';
+		Marker++;
+		if(Marker == 21)
+			break;
+	}
+	
+	$('#Calendar_EntryOtherList').html(HTML + '<br class="floatbreak" />');
+	$('.Calendar_UserlistEntry').unbind().bind('click', toggleForeignUser)
+}
+
+$('#Calendar_EntryOtherOverlay').find('button').click(function() {
+	$('#Calendar_EntryOtherOverlay').fadeOut(100);
+})
+
 $('#Calendar_ButtonArea').click(function() {
 	updateCalendar();
 	$('#Calendar_CalContent').animate({left: "0%"}, 1000);

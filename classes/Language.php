@@ -16,10 +16,10 @@ class Language {
 	
 	public function getValue($tree) {
 		$exTree = explode(" ", $tree);
-		$retval = false;
 		$tmpObj = $this->lang;		
 		
 		foreach($exTree AS $currObj) {
+			if(!property_exists($tmpObj, $currObj)) return "";
 			$tmpObj = $tmpObj->$currObj;
 		}
 		return strval($tmpObj);

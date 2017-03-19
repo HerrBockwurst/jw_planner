@@ -1,0 +1,52 @@
+<div id="RoleAdmin_NewOverlay">
+	<div id="RoleAdmin_NewOverlayInner">
+		<div class="headline">==roleadmin NewRole==</div>
+		<label style="margin-bottom: 20px;">
+			==roleadmin NewRoleName==
+			<input type="text" id="iNewRoleName" />			
+		</label>
+		<div style="text-align: center">
+			<button>==roleadmin SaveRole==</button>
+			<button class="redbutton">==common close==</button>
+		</div>
+	</div>
+</div>
+<script>
+
+function addRole() {
+	var RoleName = $('#iNewRoleName').val();
+	
+	if(!/\S/.test(RoleName)) {
+		displayMessageBox('==errors WrongFields==');
+		return;
+	}
+	
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/roleadmin/addRole', {rolename: RoleName, vsid: $('#RoleAdmin_VSSelector').val()}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			closeRoleOverlay();
+			updateRoleList();
+			displayMessageBox('==errors formSubmit==', false);
+			return;
+		}
+		if(testError(data, true, false)) {
+			closeRoleOverlay();
+			return;
+		}
+		
+		$('#iNewRoleName').val('');
+		closeRoleOverlay();
+		updateRoleList();
+	});
+}
+
+function closeRoleOverlay() {
+	$('#RoleAdmin_NewOverlay').fadeOut(100);
+}
+
+$('#RoleAdmin_NewOverlayInner').find('button').click(function() {
+	if($(this).hasClass('redbutton')) closeRoleOverlay();
+	else addRole();	
+});
+</script>

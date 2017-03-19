@@ -53,6 +53,8 @@ $('#Calendar_CalSelect').change(function() {
 		jdata = JSON.parse(data);
 		
 		$('#Calendar_CalContent').html(jdata.html);
+		$('#Calendar_CalContent').removeAttr('style');
+		$('#Calendar_DayContent').html('').removeAttr('style');
 		hideLoadingBox();
 	});
 });

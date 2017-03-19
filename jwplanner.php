@@ -24,6 +24,10 @@ class JWPlanner {
 			case 'datahandler':
 				$ContentHandler->performDatahandler();
 				break;
+			case 'api':
+				require_once 'api/apis.php';
+				new APIHandler();
+				break;
 			default:
 				//Hier evtl. bei Bedarf performSite draus machen.
 				$ContentHandler->performLoad();

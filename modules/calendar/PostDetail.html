@@ -1,4 +1,9 @@
 <script>
+$('.Calendar_PostEntry').children('button').click(function() {
+	UID = $(this).parent().attr('data-uid');
+	
+	toggleForeignUser(UID);
+});
 $('#bCalendar_EntrySwitch').click(function() {
 	displayLoadingBox();
 	$.post('^PROTO^^HOME^/datahandler/calendar/toggleMe', {pid: $('#Calendar_Postdetailes').attr('data-pid')}, function(data) {
@@ -31,4 +36,45 @@ $('#bCalendar_RequestSwitch').click(function() {
 		hideLoadingBox();
 	})
 })
+
+$('#bCalendar_DelPost').click(function() {
+	displayLoadingBox();
+	
+	displayMessageBox('==calendar ConfirmPostDelete==', false, {yes: '==common yes==', no: '==common no==', callback: function() {	
+			$.post('^PROTO^^HOME^/datahandler/calendar/delPost', {pid: $('#Calendar_Postdetailes').attr('data-pid')}, function(data) {
+				testRedirect(data);
+				if(!testJSON(data)) {
+					displayMessageBox('==errors formSubmit==', true);
+					return;
+				}
+				if(testError(data, true, true)) return;
+				
+				$('#Calendar_Calendar').find("td[data-timestamp='"+LastClickedDay+"']").trigger('click');
+				/*$(".Calendar_Post[data-pid='"+$('#Calendar_Postdetailes').attr('data-pid')+"']").trigger('click');*/
+				
+				hideLoadingBox();
+			});
+		}
+	});
+	
+	hideLoadingBox();
+});
+
+$('#bCalendar_EntryOther').click(function() {
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/calendar/getUserList', {cid: $('#Calendar_CalSelect').val()}, function (data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, true)) return;
+		
+		UserList = JSON.parse(data);
+		
+		Calendar_updateUserList();		
+		$('#Calendar_EntryOtherOverlay').fadeIn(100);
+		hideLoadingBox();
+	});
+});
 </script>

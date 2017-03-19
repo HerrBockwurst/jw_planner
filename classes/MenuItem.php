@@ -8,7 +8,7 @@ class MenuItem {
 	
 	function __construct($Tree, $Order, $URL, $Permission = "", $Position = MENU_ITEM_POS_MAIN) {
 		
-		if(!is_int($Order) || !is_int($Position)) unset($this);
+		//if(!is_int($Order) || !is_int($Position)) return;
 		
 		$this->String = getString($Tree);
 		$this->Order = $Order;

@@ -53,7 +53,15 @@
 		<Dashboard>Dashboard</Dashboard>
 		<RoleAdmin>Rollenverwaltung</RoleAdmin>
 		<CalendarAdmin>Kalenderverwaltung</CalendarAdmin>
+		<GroupAdmin>Gruppenverwaltung</GroupAdmin>
 	</menu>
+	<groupadmin>
+		<Headline>Gruppenverwaltung</Headline>
+		<selectGroupFirst>Wähle zuerst eine Gruppe aus.</selectGroupFirst>
+		<noGroupsAssigned>Es wurden noch keine Gruppen angelegt.</noGroupsAssigned>
+		<NewGroup>Neue Gruppe</NewGroup>
+		<SaveGroup>Gruppe speichern</SaveGroup>
+	</groupadmin>
 	<calendaradmin>
 		<Headline>Kalenderverwaltung</Headline>
 		<NewCal>Neuer Kalender</NewCal>
@@ -112,6 +120,8 @@
 		<bRequest>Dienstpartner gesucht!</bRequest>
 		<delPost>Termin löschen</delPost>
 		<addOther>Fremdeintrag</addOther>
+		<ConfirmPostDelete>Willst du diesen Eintrag wirklich löschen?</ConfirmPostDelete>
+		<UserSearch>Benutzer suchen</UserSearch>
 	</calendar>
 	<errors>
 		<WrongFields>Bitte fülle alle Felder vollständig aus!</WrongFields>

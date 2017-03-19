@@ -1,0 +1,118 @@
+<div id="GroupAdmin_Overview">
+	<div class="headline">==GroupAdmin Headline==</div>
+	<div id="Group_List">
+		<label>
+			==common versammlung==
+			<select id="GroupAdmin_VSSelector"></select>			
+		</label>
+		<div id="GroupAdmin_ListContainer"></div>
+	</div>
+	<div id="Group_Users">==GroupAdmin selectGroupFirst==</div>
+</div>
+<script>
+	
+	var CurrClickedGroup;
+	
+	function showGroupAdd() {
+		$('#GroupAdmin_NewOverlay').fadeIn(100);
+	}
+	
+	function saveUsers() {
+		displayLoadingBox();
+		
+		var perms = [];
+		
+		$('#Group_Permissions').find('input').each(function() {
+			if (!$(this).is(':checked')) return;
+			perms.push($(this).val());
+		});
+		
+		var data = {
+			rid: $('#GroupAdmin_PermHeadline').attr('data-rid'),
+			perms: perms			
+		}
+		
+		$.post('^PROTO^^HOME^/datahandler/groupadmin/updateGroup', data, function(data) {
+			hideLoadingBox();
+		});
+	}
+
+	function updateGroupList() {
+		displayLoadingBox();
+		
+		var data = $('#GroupAdmin_VSSelector').val() != null ? {vsid: $('#GroupAdmin_VSSelector').val()} : {};
+		
+		$.post('^PROTO^^HOME^/datahandler/groupadmin/loadGroups', data, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			
+			
+			var jdata = JSON.parse(data);
+			
+			$('#GroupAdmin_VSSelector').html(jdata.verslist);
+			$('#GroupAdmin_ListContainer').html(jdata.grouplist);
+			$('#Group_Users').html('==GroupAdmin selectGroupFirst==');
+			console.log(jdata)
+			$('#GroupAdmin_ListContainer').children('.GroupAdmin_GroupEntry').each(function() {
+				$(this).unbind().bind('click', updateGroupList);
+				$(this).children('span').unbind().bind('click', delGroup);
+			});
+			$('#GroupAdmin_bNewGroup').unbind().bind('click', showGroupAdd);
+			
+			hideLoadingBox();
+		})
+	}
+	
+	function delGroup() {
+		CurrClickedGroup = $(this).parent().attr('data-rid');
+		displayMessageBox('==GroupAdmin confirmDelete==', false, {yes: '==common yes==', no: '==common no==', callback: confirmedDelGroup});
+	}
+	
+	function confirmedDelGroup() {
+		displayLoadingBox();
+		$.post('^PROTO^^HOME^/datahandler/groupadmin/delGroup', {rid: CurrClickedGroup}, function(data) {
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			hideLoadingBox();
+			updateGroupList();	
+		});
+	}
+	
+	function updateUserList(e) {
+		if($(e.target).is('span')) return;
+		displayLoadingBox();
+		
+		var data = {gid: $(this).attr('data-gid')};
+		
+		$.post('^PROTO^^HOME^/datahandler/groupadmin/loadGroups', data, function(data) {
+			console.log(data);
+			testRedirect(data);
+			if(!testJSON(data)) {
+				displayMessageBox('==errors formSubmit==', true);
+				return;
+			}
+			if(testError(data, true, true)) return;
+			
+			
+			var jdata = JSON.parse(data);
+			
+			$('#Group_Users').html(jdata.userlist);
+			$('#Group_Users').find('button').unbind().bind('click', saveUsers);
+			hideLoadingBox();
+		})
+	}
+	
+	$('#GroupAdmin_VSSelector').change(updateGroupList);
+
+	$(function() {
+		updateGroupList();		
+	});
+</script>

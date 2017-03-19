@@ -149,7 +149,8 @@ class Calendar extends Module {
 		}
 		
 		$HTML = loadHtml('PostList.html', $this->ClassPath);
-		$HTML = replacer($HTML, array("POSTLIST" => $PostList));
+		$DateString = getString("common ".strtolower(date("l", $Start))).", ".date("d.m.Y", $Start);
+		$HTML = replacer($HTML, array("POSTLIST" => $PostList, "DATESTRING" => $DateString));
 		
 		echo json_encode(array('html' => replaceLangTags($HTML)));
 		
@@ -214,7 +215,7 @@ class Calendar extends Module {
 		if(User::getInstance()->hasPerm('admin.calendar'))
 			$String .= '<button id="bCalendar_DelPost" class="redbutton">==calendar delPost==</button>';
 		
-		if(User::getInstance()->hasPerm('calendar.entry.other'))
+		if(User::getInstance()->hasPerm('calendar.entry.other') && (!$Full))
 			$String .= '<button id="bCalendar_EntryOther">==calendar addOther==</button>';
 		
 		$String .= '</div>';
@@ -245,16 +246,16 @@ class Calendar extends Module {
 		
 		if($P_VSID != $MySQL->fetchRow()->vsid) returnErrorJSON(getString('errors noPerm')); //User VSID != Post VSID
 		
-		if(in_array(User::getInstance()->UID, $Post->Entrys)) {
+		if(in_array($UID, $Post->Entrys)) {
 			//Benutzer austragen
 			$NewUsers = $Post->Entrys;
-			if(array_search(User::getInstance()->UID, $NewUsers) !== FALSE)
-				unset($NewUsers[array_search(User::getInstance()->UID, $NewUsers)]);
+			if(array_search($UID, $NewUsers) !== FALSE)
+				unset($NewUsers[array_search($UID, $NewUsers)]);
 			
 			//Requests austragen
 			$NewReq = $Post->Requests;
-			if(array_search(User::getInstance()->UID, $NewReq) !== FALSE)
-				unset($NewReq[array_search(User::getInstance()->UID, $NewReq)]);
+			if(array_search($UID, $NewReq) !== FALSE)
+				unset($NewReq[array_search($UID, $NewReq)]);
 			
 			//SQL
 			$MySQL->where('pid', $PID);
@@ -267,7 +268,7 @@ class Calendar extends Module {
 			if($Post->Count <= count($Post->Entrys)) returnErrorJSON(getString('errors PostFull'));
 			
 			$NewUsers = $Post->Entrys;
-			$NewUsers[] = User::getInstance()->UID;
+			$NewUsers[] = $UID;
 			
 			$MySQL->where('pid', $PID);
 			if(!$MySQL->update('posts', array('entrys' => json_encode(array_values($NewUsers))))) returnErrorJSON(getString('errors sql'));			
@@ -279,6 +280,11 @@ class Calendar extends Module {
 	
 	private function Handler_toggleMe() {
 		$this->toggleUser(User::getInstance()->UID);
+	}
+	
+	private function Handler_toggleUser() {
+		if(!isset($_POST['uid'])) returnErrorJSON(getString('errors formSubmit'));
+		$this->toggleUser($_POST['uid']);
 	}
 	
 	private function Handler_toggleReq() {
@@ -329,6 +335,62 @@ class Calendar extends Module {
 		
 	}
 	
+	private function Handler_delPost() {
+		if(!User::getInstance()->hasPerm('admin.calendar')) returnErrorJSON(getString('errors noPerm'));
+		if(!isset($_POST['pid'])) returnErrorJSON(getString('errors formSubmit'));
+		
+		$PID = $_POST['pid'];
+		
+		//Teste Versammlung
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('pid', $PID);
+		$MySQL->join('posts', 'cid', 'calendar', 'cid');
+		$MySQL->select('posts', array('*', 'calendar.vsid'), 1);
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //Ungültige PID
+		
+		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
+		
+		//Alles ok, löschen
+		$MySQL->where('pid', $PID);
+		if(!$MySQL->delete('posts')) returnErrorJSON(getString('errors sql'));
+		
+		echo json_encode(array());
+		
+	}
+	
+	private function Handler_getUserList() {
+		
+		if(!isset($_POST['cid']) || $_POST['cid'] == 0) returnErrorJSON(getString('errors formSubmit'));
+		$CID = $_POST['cid'];
+		
+		$MySQL = MySQL::getInstance();
+		
+		$MySQL->where('cid', $CID);
+		$MySQL->select('calendar', array('vsid', 'blacklist'), 1);
+		
+		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //ungültige CID
+		
+		$Calendar = $MySQL->fetchRow();
+		if(!array_key_exists($Calendar->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für Kalender
+		
+		$Blacklist = json_decode($Calendar->blacklist);
+		
+		$MySQL->where('vsid', $Calendar->vsid);
+		$MySQL->select('users');
+		
+		$RetVal = array();
+		
+		foreach($MySQL->fetchAll() AS $cUser) {
+			if(in_array($cUser['uid'], $Blacklist)) continue;
+			
+			$RetVal[] = array(
+					"uid" => $cUser['uid'],
+					"name" => $cUser['name']
+			);
+		}
+		
+		echo json_encode($RetVal);
+	}
 	
 	public function ActionLoad() {
 		switch(getUrl(2)) {
@@ -359,8 +421,17 @@ class Calendar extends Module {
 			case 'toggleMe':
 				$this->Handler_toggleMe();
 				break;
+			case 'toggleUser':
+				$this->Handler_toggleUser();
+				break;
 			case 'toggleReq':
 				$this->Handler_toggleReq();
+				break;
+			case 'delPost': 
+				$this->Handler_delPost();
+				break;
+			case 'getUserList':
+				$this->Handler_getUserList();
 				break;
 			default:
 				break;

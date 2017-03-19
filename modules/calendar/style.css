@@ -1,3 +1,38 @@
+#Calendar_EntryOtherOverlay {
+	display: none;
+	width: calc(100vw + 220px); /* Main Menu */
+	height: 100vh;
+	position: fixed;
+	left: -220px; /* Main Menu */
+	top: 0px;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.1);
+	float: none;
+}
+#Calendar_EntryOtherOverlayInner {
+	margin: 0 auto;
+	min-width: 500px;
+	max-width: 520px;
+	width: 520px;
+	margin-top: 20vh;
+	padding: 20px;
+	border-radius: 20px;
+	background-color: rgb(250,250,250); 
+}
+#Calendar_EntryOtherList {
+	padding: 2px;
+	width: 510px;
+	border: 1px solid rgb(100,100,100);
+}
+#Calendar_EntryOtherOverlay label {
+	margin: 0px
+}
+#Calendar_EntryOtherOverlay input {
+	float: none;
+	margin: 0px;
+	border-radius: 5px 5px 0px 0px;
+	border-bottom: 0px;
+}
 #Calendar_Selectbar {
 	padding: 20px;
 	border-bottom: 1px solid rgb(100,100,100);
@@ -107,6 +142,15 @@
 }
 #Calendar_PostDetailButtonContainer button:first-of-type {
 	margin-right: 10px;
+}
+.Calendar_UserlistEntry {
+	float: left;
+	width: 158px;
+	padding: 2px;
+	padding-right: 10px;
+}
+.Calendar_UserlistEntry:hover {
+	background-color: rgb(170,210,170);
 }
 .Calendar_PostEntry {
 	margin-bottom: 4px;

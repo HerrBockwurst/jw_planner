@@ -61,6 +61,10 @@ class Dashboard extends Module {
 		echo replaceLangTags(replacer(loadHtml('Overview.html', $this->ClassPath), $ToReplace));
 	}
 	
+	private function Handler_sendMessage() {
+		
+	}
+	
 	public function ActionLoad() {
 		switch(getURL(2)) {
 			default:
@@ -72,6 +76,12 @@ class Dashboard extends Module {
 	
 	}
 	public function ActionDataHandler() {
-	
+		switch(getURL(2)) {
+			case 'sendMessage':
+				$this->Handler_sendMessage();
+				break;
+			default:
+				break;
+		}	
 	}
 }

@@ -7,5 +7,13 @@
 $('#Dashboard_Messagebox').find('a').click(function() {
 	$(this).css({position: "absolute"}).slideUp(500);
 	$(this).next().slideDown(500);
+});
+
+$('#Dashboard_Messagebox').find('button').click(function() {
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/dashboard/sendMessage', {text: $('#Dashboard_MessageText').html()}, function(data) {
+		console.log(data);
+	});
 })
 </script>

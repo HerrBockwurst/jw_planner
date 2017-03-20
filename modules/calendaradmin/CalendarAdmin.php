@@ -329,8 +329,10 @@ class CalendarAdmin extends Module {
 		$Calendar = CalendarManager::getCalendarData($CID);		
 		$Groups = GroupManager::getGroups($Calendar->vsid);
 		
+		User::getInstance()->checkVSAccess($Calendar->vsid);
+		
 		if(!GroupManager::isValidGroup($Blacklist, $Calendar->vsid) || !GroupManager::isValidGroup($Whitelist, $Calendar->vsid))
-			returnErrorJSON(getString('errors formSubmit'));
+			returnErrorJSON(getString('errors formSubmit')); //Gruppen sind nicht in der VS
 		
 		CalendarManager::updateLists($Blacklist, $Whitelist, $CID);
 		
@@ -341,7 +343,10 @@ class CalendarAdmin extends Module {
 	private function Handler_updateListMode() {
 		if(!isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
 		
-		$MySQL = MySQL::getInstance();
+		$CID = $_POST['cid'];
+		CalendarManager::toggleListMode($CID);
+		
+		echo json_encode(array());		
 		
 	}
 	
@@ -374,10 +379,9 @@ class CalendarAdmin extends Module {
 			case 'updateList':
 				$this->Handler_updateList();
 				break;
-			case 'updateListMode':
+			case 'switchList':
 				$this->Handler_updateListMode();
 				break;
-			
 			default:
 				break;
 		}

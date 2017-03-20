@@ -115,6 +115,8 @@
 	</roleadmin>
 	<dashboard>
 		<Welcome>Willkommen, </Welcome>
+		<write>Schreiben</write>
+		<getMore>Mehr Nachrichten anzeigen...</getMore>
 	</dashboard>
 	<calendar>
 		<Headline>Kalender</Headline>

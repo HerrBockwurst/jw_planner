@@ -1,0 +1,11 @@
+<div id="WelcomeTXT">==dashboard Welcome== (USER)</div>
+<div id="Dashboard_Sysmessage">(SYSMESSAGE)</div>
+<br class="floatbreak" />
+<div id="Dashboard_Messagebox">(MESSAGEBOX)</div>
+<div id="Dashboard_Infotab">(INFOTAB)</div>
+<script>
+$('#Dashboard_Messagebox').find('a').click(function() {
+	$(this).css({position: "absolute"}).slideUp(500);
+	$(this).next().slideDown(500);
+})
+</script>

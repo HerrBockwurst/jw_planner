@@ -80,7 +80,7 @@
 	
 	function ConfirmedDelete() {
 		displayLoadingBox();
-		$.post('^PROTO^^HOME^/datahandler/useredit/deleteUser', {uid: $('#iEditUsername').val()}, function() {
+		$.post('^PROTO^^HOME^/datahandler/useredit/deleteUser', {uid: $('#iEditUsername').val()}, function(data) {
 			testRedirect(data);
 			if(!testJSON(data)) {
 				displayMessageBox('==errors formSubmit==', true);

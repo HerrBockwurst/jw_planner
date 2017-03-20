@@ -3,5 +3,66 @@
 	font-style: oblique;
 	font-family: Georgia, serif;
 	border-bottom: 1px solid black;
+	display: inline-block;
+	margin: 20px;
+	width: 400px;
+}
+#Dashboard_Sysmessage {
+	margin-left: 20%;
+	margin-right: 10%;
+	width: calc(70% - 40px); 
+	padding: 20px;
+	background-color: rgb(240,240,240);
+	border-radius: 10px;
+}
+#Dashboard_Sysmessage > span:first-of-type {
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#Dashboard_Messagebox {
+	width: 500px;	
 	float: left;
+	padding: 10px;
+	margin-left: 10px;
+	font-size: 14px;
+}
+.Dashboard_MessageRow > div {
+	float: left;
+	padding: 3px;
+	margin: 5px 0px;
+}
+.Dashboard_MessageRow > div:first-of-type {
+	width: 100px;
+	overflow-x: hidden;
+	height: 100%;
+	white-space: nowrap;
+}
+.Dashboard_MessageRow > div:first-of-type > span {
+	display: block;
+	font-size: 12px;
+	margin-top: 3px;
+}
+#Dashboard_Messagebox textarea {
+	width: calc(100% - 8px);
+	padding: 3px;
+	border: 1px solid rgb(100,100,100);
+	min-height: 50px;
+}
+.Dashboard_MessageRow > div:last-of-type {
+	border-left: 1px solid rgb(100,100,100);
+	width: calc(100% - 115px);
+	overflow-x: hidden;
+}
+#Dashboard_Infotab {
+	width: 300px;
+	float: left;
+	padding: 10px;
+	margin-left: 50px;
+	border: 1px solid rgb(100,100,100);
+	background-color: rgb(240,240,240);
+	font-size: 12px;
+	border-radius: 20px;
 }

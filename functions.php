@@ -24,7 +24,7 @@ function validateEmail($mail) {
 	return empty(preg_grep($Pattern, array($mail))) ? FALSE : TRUE;	
 }
 
-function parseUsername($name) {
+function parseUsername($name, $Reserved) {
 	$username = str_replace(' ', '-', $name); // Replaces all spaces with hyphens.
 	$username = str_replace('ä', 'ae', $username);
 	$username = str_replace('ö', 'oe', $username);
@@ -38,7 +38,7 @@ function parseUsername($name) {
 	$NewUsername = $username;
 	
 	$MySQL->where('uid', $NewUsername);
-	while($MySQL->count('users', 'uid') !== 0) {
+	while($MySQL->count('users', 'uid') !== 0 || in_array($NewUsername, $Reserved)) {
 		$NewUsername = $username.'-'.$Counter;
 		$Counter++;
 		$MySQL->where('uid', $NewUsername);

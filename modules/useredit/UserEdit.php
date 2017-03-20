@@ -1,6 +1,8 @@
 <?php
 class UserEdit extends Module {
 	
+	private $ReservedUsernames = array('system', 'all');
+	
 	private function __construct() {
 		$this->Permission = "admin.useredit";
 		$this->CSSFiles = "style.css";
@@ -138,6 +140,7 @@ class UserEdit extends Module {
 		
 		$c = 0;
 		foreach($mysql->fetchAll() AS $cUser) {
+			if(!User::getInstance()->hasVSAccess($cUser['vsid'])) continue;
 			$Shader = $c%2 != 0 ? 'class="shader"' : '';
 			$Name = $cUser['name'];
 			$UID = $cUser['uid'];
@@ -296,7 +299,7 @@ class UserEdit extends Module {
 		$perms 		= isset($_POST['perms']) ? $_POST['perms'] : array();
 		$groups		= isset($_POST['groups']) ? $_POST['groups'] : array();
 		$email		= $_POST['email'];
-		$username 	= parseUsername($name);
+		$username 	= parseUsername($name, $this->ReservedUsernames);
 		
 		$MySQL = MySQL::getInstance();
 			

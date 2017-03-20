@@ -6,7 +6,11 @@ body {
 	font-size: 16px;
 	color: rgb(10,10,10);
 }
-
+a {
+	color: rgb(0,120,0);
+	cursor: pointer; 
+}
+a:hover {text-decoration: underline}
 label {
 	line-height: 22px;
 	display: block;
@@ -51,6 +55,9 @@ legend {
 	padding: 5px;
 	font-size: 0.9em;
 	font-weight: bold;
+}
+textarea {
+	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, Arial Unicode MS, sans-serif;
 }
 .smallspacer {
 	margin-top: 10px;

@@ -31,8 +31,11 @@ class Calendar extends Module {
 		$MySQL->where('vsid', $SVers);
 		$MySQL->select('calendar');
 		
-		foreach($MySQL->fetchAll() AS $cCal)
+		foreach($MySQL->fetchAll() AS $cCal) {
+			if(!User::getInstance()->hasCalendarAccess($cCal['cid'])) continue;
 			$CalString .= '<option value="'.$cCal['cid'].'">'.$cCal['name'].'</option>';
+		}
+			
 		
 		echo json_encode(array('vs' => $VersString, 'cal' => $CalString));
 	}
@@ -44,9 +47,10 @@ class Calendar extends Module {
 	private function Handler_getCalendar() {
 		
 		if(!isset($_POST['cid'])) returnErrorJSON(getString('errors formSubmit'));
-		
 		//Berechtigung prüfen
 		$CID = $_POST['cid'];
+		if(!User::getInstance()->hasCalendarAccess($CID)) returnErrorJSON(getString('errors noPerm')); //Auf Blacklist
+		
 		$MySQL = MySQL::getInstance();
 		
 		$MySQL->where('cid', $CID);
@@ -127,6 +131,7 @@ class Calendar extends Module {
 		
 		//Permission prüfen
 		$CID = $_POST['cid'];
+		if(!User::getInstance()->hasCalendarAccess($CID)) returnErrorJSON(getString('errors noPerm')); //Auf Blacklist
 		$MySQL = MySQL::getInstance();
 		
 		$MySQL->where('cid', $CID);
@@ -167,6 +172,7 @@ class Calendar extends Module {
 		$MySQL->select('posts', array('*', 'calendar.vsid'), 1);
 		
 		$RPost = $MySQL->fetchRow();
+		if(!User::getInstance()->hasCalendarAccess($RPost->cid)) returnErrorJSON(getString('errors noPerm')); //Auf Blacklist
 		
 		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //Kein PID gefunden
 		if(!array_key_exists($RPost->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte
@@ -237,6 +243,7 @@ class Calendar extends Module {
 		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //Ungültige PID
 		
 		$Row = $MySQL->fetchRow();
+		if(!User::getInstance()->hasCalendarAccess($Row->cid)) returnErrorJSON(getString('errors noPerm')); //Auf Blacklist
 		$P_VSID = $Row->vsid;
 		$Post = new Post($Row->pid, $Row->start, $Row->end, $Row->count, $Row->entrys, $Row->req, $Row->cid);
 		
@@ -302,6 +309,7 @@ class Calendar extends Module {
 		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit')); //Ungültige PID
 		
 		$Row = $MySQL->fetchRow();
+		if(!User::getInstance()->hasCalendarAccess($Row->cid)) returnErrorJSON(getString('errors noPerm')); //Auf Blacklist
 		$P_VSID = $Row->vsid;
 		$Post = new Post($Row->pid, $Row->start, $Row->end, $Row->count, $Row->entrys, $Row->req, $Row->cid);
 		
@@ -381,11 +389,12 @@ class Calendar extends Module {
 		$RetVal = array();
 		
 		foreach($MySQL->fetchAll() AS $cUser) {
-			if(in_array($cUser['uid'], $Blacklist)) continue;
+			$User = new Foreigner($cUser['uid']);
+			if(!$User->hasCalendarAccess($CID)) continue;
 			
 			$RetVal[] = array(
-					"uid" => $cUser['uid'],
-					"name" => $cUser['name']
+					"uid" => $User->UID,
+					"name" => $User->Clearname
 			);
 		}
 		

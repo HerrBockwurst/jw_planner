@@ -21,7 +21,7 @@ class GroupManager {
 		$GIDs = array();
 		
 		
-		foreach($this->getGroups($VS) AS $cGroup)
+		foreach(self::getGroups($VS) AS $cGroup)
 			$GIDs[] = $cGroup['gid'];
 		
 		foreach($Set AS $cGroup) 
@@ -69,5 +69,15 @@ class GroupManager {
 			$MySQL->where('gid', $cGroup);
 			if(!$MySQL->update('groups', array('members' => $Members)));
 		}
+	}
+	
+	public static function getUsers($GID) {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('gid', $GID);
+		$MySQL->select('groups', array('members'), 1);
+		
+		if($MySQL->countResult() == 0) return array();
+		
+		return json_decode($MySQL->fetchRow()->members);
 	}
 }

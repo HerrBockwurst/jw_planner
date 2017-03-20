@@ -14,6 +14,25 @@ class User {
 		return $Instance;
 	}
 	
+	public function hasCalendarAccess($CID) {
+		if($this->hasPerm('admin.calendar')) return TRUE; //Überspringe anfrage für Admin
+		$Calendar = CalendarManager::getCalendarData($CID);
+		
+		$Blacklist = json_decode($Calendar->blacklist);
+		$Whitelist = json_decode($Calendar->whitelist);
+		$Mode = $Calendar->listmode;
+		
+		if($Mode == "blacklist") {
+			foreach($Blacklist AS $cGroup)
+				if(in_array($this->UID, GroupManager::getUsers($cGroup))) return FALSE;
+				return TRUE;
+		} else {
+			foreach($Whitelist AS $cGroup)
+				if(in_array($this->UID, GroupManager::getUsers($cGroup))) return TRUE;
+				return FALSE;
+		}
+	}
+	
 	public function Auth() {
 		if(!$this->isAuth()) return false;
 		
@@ -22,6 +41,15 @@ class User {
 	
 	public function hasPerm($Perm) {
 		return in_array($Perm, $this->Permissions);
+	}
+	
+	public function hasVSAccess($VSID) {
+		if(array_key_exists($VSID, $this->getAccessableVers())) return TRUE;
+		return FALSE;
+	}
+	
+	public function checkVSAccess($VSID) {
+		if(!$this->hasVSAccess($VSID)) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für VS
 	}
 	
 	public function getClearedPerms() {
@@ -58,7 +86,8 @@ class User {
 		//Benutzerdaten speichern
 		$MySQL->where('uid', $this->UID);
 		$MySQL->join('users', 'role', 'roles', 'rid', 'LEFT');
-		$MySQL->select('users', array('*', 'role_name' => 'roles.name'), 1);
+		$MySQL->join('users', 'vsid', 'versammlungen', 'vsid', 'LEFT');
+		$MySQL->select('users', array('*', 'role_name' => 'roles.name', 'vs_name' => 'versammlungen.name'), 1);
 		$Userdata = $MySQL->fetchRow();
 		
 		$this->Clearname = $Userdata->name;
@@ -69,6 +98,7 @@ class User {
 				$this->Permissions[] = $Perm;
 		$this->RoleName = $Userdata->role_name;
 		$this->RoleID = $Userdata->role;
+		$this->Vers = $Userdata->vs_name;
 		//Todo
 	}
 	

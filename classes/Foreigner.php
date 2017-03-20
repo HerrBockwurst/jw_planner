@@ -37,7 +37,26 @@ class Foreigner {
 		
 		$this->Valid = TRUE;
 	}
+
+	public function hasCalendarAccess($CID) {
+		if($this->hasPerm('admin.calendar')) return TRUE; //Überspringe anfrage für Admin
+		$Calendar = CalendarManager::getCalendarData($CID);
 	
+		$Blacklist = json_decode($Calendar->blacklist);
+		$Whitelist = json_decode($Calendar->whitelist);
+		$Mode = $Calendar->listmode;
+	
+		if($Mode == "blacklist") {
+			foreach($Blacklist AS $cGroup)
+				if(in_array($this->UID, GroupManager::getUsers($cGroup))) return FALSE;
+			return TRUE;
+		} else {
+			foreach($Whitelist AS $cGroup) 
+				if(in_array($this->UID, GroupManager::getUsers($cGroup))) return TRUE;
+			return FALSE;
+		}
+	}
+
 	public function hasPerm($Perm) {
 		return array_search($Perm, $this->Permissions) !== FALSE ? TRUE : FALSE;
 	}

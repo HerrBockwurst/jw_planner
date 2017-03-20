@@ -18,10 +18,13 @@ class CalendarManager {
 	public static function toggleListMode($CID) {
 		$MySQL = MySQL::getInstance();
 		$MySQL->where('cid', $CID);
-		$MySQL->select('calendar', array('listmode'), 1);
+		$MySQL->select('calendar', array('vsid', 'listmode'), 1);
 		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit'));
 	
-		$NewMode = $MySQL->fetchRow()->listmode == "blacklist" ? "whitelist" : "blacklist";
+		$Calendar = $MySQL->fetchRow();
+		User::getInstance()->checkVSAccess($Calendar->vsid);
+		
+		$NewMode = $Calendar->listmode == "blacklist" ? "whitelist" : "blacklist";
 		$MySQL->where('cid', $CID);
 		if(!$MySQL->update('calendar', array('listmode' => $NewMode))) returnErrorJSON(getString('errors sql'));
 	}
@@ -30,7 +33,7 @@ class CalendarManager {
 		$MySQL = MySQL::getInstance();
 	
 		$MySQL->where('cid', $CID);
-		if(!$MySQL->update('groups', array(
+		if(!$MySQL->update('calendar', array(
 				"blacklist" => json_encode($Blacklist),
 				"whitelist" => json_encode($Whitelist)
 		))) returnErrorJSON(getString('errors sql'));

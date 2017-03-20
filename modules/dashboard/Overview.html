@@ -9,11 +9,53 @@ $('#Dashboard_Messagebox').find('a').click(function() {
 	$(this).next().slideDown(500);
 });
 
-$('#Dashboard_Messagebox').find('button').click(function() {
+$(function() {
+	if($('#Dashboard_Messagebox').html() == '')
+		$('#Dashboard_Messagebox').fadeOut(0);
+})
+
+function delMessage() {
 	displayLoadingBox();
 	
-	$.post('^PROTO^^HOME^/datahandler/dashboard/sendMessage', {text: $('#Dashboard_MessageText').html()}, function(data) {
+	$.post('^PROTO^^HOME^/datahandler/dashboard/delMessage', {mid: $(this).attr('data-msgid')}, function(data) {
 		console.log(data);
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', false);
+			return;
+		}
+		testError(data, true, false);
+		jdata = JSON.parse(data);
+		
+		$('#Dashboard_Messagebox').html(jdata.html);
+		$('#Dashboard_Messagebox').find('button').unbind().bind('click', submitMessage);
+		$('.Dashboard_Delbutton').unbind().bind('click', delMessage);
+		hideLoadingBox();
+		
 	});
-})
+}
+
+$('.Dashboard_Delbutton').click(delMessage);
+
+function submitMessage() {
+	displayLoadingBox();
+	
+	$.post('^PROTO^^HOME^/datahandler/dashboard/sendMessage', {text: $('#Dashboard_MessageText').val()}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', false);
+			return;
+		}
+		testError(data, true, false);
+		jdata = JSON.parse(data);
+		
+		$('#Dashboard_Messagebox').html(jdata.html);
+		$('#Dashboard_Messagebox').find('button').unbind().bind('click', submitMessage);
+		$('.Dashboard_Delbutton').unbind().bind('click', delMessage);
+		hideLoadingBox();
+		
+	});
+}
+
+$('#Dashboard_Messagebox').find('button').click(submitMessage)
 </script>

@@ -27,7 +27,39 @@
 	float: left;
 	padding: 10px;
 	margin-left: 10px;
+	margin-right: 50px;
 	font-size: 14px;
+	margin-top: -18px;
+}
+.Dashboard_Delbutton:before {
+	content: '';
+	display:block;
+	width: 4px;
+	height: 20px;
+	background-color: rgb(170,50,50);
+	position: absolute;
+	left: calc(50% - 2px);	
+}
+.Dashboard_Delbutton {
+	width: 20px;
+	height: 20px;
+	-ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    right: 0px;
+    top: 0px;	
+}
+.Dashboard_Delbutton:after {
+	content: '';
+	width: 20px;
+	height: 4px;
+	background-color: rgb(170,50,50);
+	top: calc(50% - 2px);
+	position: absolute;
+}
+.Dashboard_MessageRow {
+	position: relative;
 }
 .Dashboard_MessageRow > div {
 	float: left;
@@ -53,16 +85,17 @@
 }
 .Dashboard_MessageRow > div:last-of-type {
 	border-left: 1px solid rgb(100,100,100);
-	width: calc(100% - 115px);
+	width: calc(100% - 135px);
 	overflow-x: hidden;
+	min-height: 2em;
 }
 #Dashboard_Infotab {
 	width: 300px;
 	float: left;
 	padding: 10px;
-	margin-left: 50px;
 	border: 1px solid rgb(100,100,100);
 	background-color: rgb(240,240,240);
 	font-size: 12px;
 	border-radius: 20px;
+	margin-left: 10px;
 }

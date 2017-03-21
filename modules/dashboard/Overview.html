@@ -12,6 +12,8 @@ $('#Dashboard_Messagebox').find('a').click(function() {
 $(function() {
 	if($('#Dashboard_Messagebox').html() == '')
 		$('#Dashboard_Messagebox').fadeOut(0);
+	if($('#Dashboard_Sysmessage').html() == '')
+		$('#Dashboard_Sysmessage').fadeOut(0);
 })
 
 function delMessage() {

@@ -1,0 +1,55 @@
+<div id="LoginOverlay">
+	<div id="LoginOverlayInner">
+		<div></div>
+	</div>
+</div>
+<div id="dLogin">
+	<div class="logo">JW<span>Planner</span></div>
+	<form id="fLogin">
+		<div class="error"></div>
+		<label>
+			==common username==
+			<input id="iUsername" type="text" />
+		</label>
+		<label>
+			==common password==
+			<input id="iPassword" type="password" />
+		</label>
+		<button class="smallspacer">==common login==</button>
+	</form>
+	<div id="Login_Footerline">
+		<a data-sid="impressum">==common impressum==</a>
+		<a data-sid="usePlanner">==common usePlanner==</a>
+	</div>
+	<script>
+	function Login_closeOverlay() {
+		$('#LoginOverlay').fadeOut();
+	}
+	
+	$('#Login_Footerline').find('a').click(function() {
+		SID = $(this).attr('data-sid');
+		$.post('^PROTO^^HOME^/site/' + SID, {}, function (data) {
+			$('#LoginOverlayInner').children('div').html(data);
+			$('#LoginOverlay').fadeIn(100);
+			$('#LoginOverlayInner').find('#CloseOverlay').unbind().bind('click', Login_closeOverlay)
+		});
+	});
+	
+	function login() {
+		var user = $('#iUsername').val();
+		var pass = $('#iPassword').val();
+
+		$.post('^PROTO^^HOME^/datahandler/login', {username: user, password: pass}, function(data) {
+			if(testJSON(data)) {
+				displayError($('#fLogin').children('.error'), data);
+				return;
+			}
+			loadContent('^PROTO^^HOME^/load/frameset', 'body');
+		});
+	}
+	$('#fLogin').submit(function (e) {
+		e.preventDefault();
+		login();
+	});
+	</script>
+</div>

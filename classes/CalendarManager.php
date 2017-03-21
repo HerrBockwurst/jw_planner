@@ -15,6 +15,43 @@ class CalendarManager {
 		}
 	}
 	
+	public static function getCalendars($VSID) {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('vsid', $VSID);
+		$MySQL->select('calendar');
+		return $MySQL->fetchAll();
+	}
+	
+	public static function getOpenSearches($VSID = NULL, $CID = NULL) {
+		if(is_null($VSID) && is_nan($CID)) return 0;
+		$Searches = 0;
+		$MySQL = MySQL::getInstance();
+		
+		$Continue = FALSE;
+		
+		$CIDs = is_null($CID) ? self::getCalendars($VSID) : array(self::getCalendarData($CID, TRUE)); 		
+		foreach($CIDs AS $cCalendar)  {			
+			if(!User::getInstance()->hasCalendarAccess($cCalendar['cid'])) continue;			
+			$MySQL->where('cid', $cCalendar['cid'], '=', 'OR');
+			$Continue = TRUE;
+		}			
+		if(!$Continue) return 0; //Hat keinen Zugriff auf Kalender
+		
+		$MySQL->where('entrys', '[]', '<>');
+		$MySQL->where('req', '[]', '<>');
+		$MySQL->select('posts');
+		foreach($MySQL->fetchAll() AS $cPost)
+			if(count(json_decode($cPost['req'])) > 0 && count(json_decode($cPost['entrys'])) != $cPost['count'] && $cPost['start'] > time())
+				$Searches++;
+		return $Searches;
+	}
+	
+	public static function cleanUpPosts() {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('end', time() - (POST_STORE_TIME *30*24*60*60), '<');
+		$MySQL->delete('posts'); //Todo Log
+	}
+	
 	public static function toggleListMode($CID) {
 		$MySQL = MySQL::getInstance();
 		$MySQL->where('cid', $CID);
@@ -39,12 +76,12 @@ class CalendarManager {
 		))) returnErrorJSON(getString('errors sql'));
 	}
 	
-	public static function getCalendarData($CID) {
+	public static function getCalendarData($CID, $ASSOC = FALSE) {
 		$MySQL = MySQL::getInstance();
 		
 		$MySQL->where('cid', $CID);
 		$MySQL->select('calendar', NULL, 1);
 		if($MySQL->countResult() == 0) returnErrorJSON(getString('errors formSubmit'));
-		return $MySQL->fetchRow();
+		return $MySQL->fetchRow($ASSOC);
 	}
 }

@@ -1,17 +1,21 @@
 <!DOCTYPE xml>
 <language>
-	<noscript></noscript>
+	<noscript>Diese Seite benötigt JavaScript um zu funktionieren. Bitte aktiviere JavaScript in deinem Browser und lade die Seite erneut.</noscript>
+	<wannaUse>Deine Versammlung möchte JWPlanner nutzen?</wannaUse>
 	<common>
 		<username>Benutzername</username>
 		<password>Passwort</password>
 		<login>Login</login>
 		<name>Name</name>
 		<versammlung>Versammlung</versammlung>
+		<impressum>Impressum / Datenschutz</impressum>
+		<usePlanner>JWPlanner nutzen</usePlanner>
 		<email>EMail</email>
 		<yes>Ja</yes>
 		<no>Nein</no>
 		<back>Zurück</back>
 		<okay>Ok</okay>
+		<new>Neu</new>
 		<plsSelect>Auswählen...</plsSelect>
 		<close>Schließen</close>
 		<monday>Montag</monday>
@@ -117,7 +121,12 @@
 		<Welcome>Willkommen, </Welcome>
 		<write>Schreiben</write>
 		<getMore>Mehr Nachrichten anzeigen...</getMore>
+		<searchedPartners>Gesuchte Partner</searchedPartners>
+		<messages>Nachrichten</messages>
 	</dashboard>
+	<messages>
+		<Headline>Nachrichten</Headline>
+	</messages>
 	<calendar>
 		<Headline>Kalender</Headline>
 		<SelectPostFirst>Wähle zuerst eine Uhrzeit aus.</SelectPostFirst>

@@ -1,0 +1,93 @@
+#LoginOverlay {
+	display: none;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.1);
+}
+#LoginOverlayInner {
+	margin: 0 auto;
+	min-width: 350px;
+	max-width: 50vw;
+	margin-top: 20vh;
+	padding: 20px;
+	border-radius: 20px;
+	background-color: rgb(250,250,250); 
+	position: relative;
+}
+#LoginOverlayInner > div {
+	max-height: calc(100vh - 40vh);
+	overflow-y: auto;
+}
+#CloseOverlay:before {
+	content: '';
+	display:block;
+	width: 4px;
+	height: 26px;
+	background-color: rgb(170,50,50);
+	position: absolute;
+	left: calc(50% - 2px);	
+}
+#CloseOverlay {
+	width: 26px;
+	height: 26px;
+	-ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    right: 40px;
+    top: 10px;	
+    cursor: pointer;
+}
+#CloseOverlay:after {
+	content: '';
+	width: 26px;
+	height: 4px;
+	background-color: rgb(170,50,50);
+	top: calc(50% - 2px);
+	position: absolute;
+}
+#dLogin {
+	background-color: rgba(240,240,240,0.95);
+	padding: 30px;
+	position: absolute;
+	width: 500px;
+	min-height: 200px;
+	left: calc(50vw - 250px);
+	top: calc(40vh - 100px);
+	border-radius: 20px;
+	text-align: center;
+}
+#dLogin > .logo {
+	background-color: rgb(0,180,20);
+	padding: 20px;
+	font-size: 50px;
+	display: inline-block;
+	height: 50px;
+	color: rgb(250,250,250);
+	border-radius: 10px;
+}
+#dLogin > .logo > span {
+	font-size: 20px; 
+}
+#dLogin > #fLogin {
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 400px;
+}
+#Login_Footerline {
+	margin-top: 20px;
+	font-size: 14px;
+}
+#Login_Footerline > a:not(:last-of-type):after {
+	content: '';
+	margin: 0px 5px 0px 10px;
+	padding: 0px;
+	width: 1px;
+	height: 1em;	
+	border-left: 1px solid rgb(10,10,10);
+}

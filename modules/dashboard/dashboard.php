@@ -15,7 +15,44 @@ class Dashboard extends Module {
 	}
 	
 	private function getInfoTab() {
-		$String = '';
+		$RetVal = '';
+		/*
+		 * Rolle
+		 * Versammlung
+		 * Gesuche
+		 * Nachrichten
+		 * Nachrichten gesamt
+		 */
+		
+		$RetVal .= '<div>
+						<div>'.getString('useredit role').'</div>
+						<div>'.User::getInstance()->RoleName.'</div>
+						<br class="floatbreak" />
+					</div>';
+		
+		$RetVal .= '<div>
+						<div>'.getString('common versammlung').'</div>
+						<div>'.User::getInstance()->Vers.'</div>
+						<br class="floatbreak" />
+					</div>';
+		
+		$RetVal .= '<div>
+						<div>'.getString('dashboard searchedPartners').'</div>
+						<div>'.CalendarManager::getOpenSearches(User::getInstance()->VSID).'</div>
+						<br class="floatbreak" />
+					</div>';
+		
+		$Messages = MessageManager::countMessages(User::getInstance()->UID);
+		$NewString = $Messages['new'] > 0 ? '<span data-new="'.$Messages['new'].'">('.getString('common new').': '.$Messages['new'].')</span> ' : ''; 
+		
+		$RetVal .= '<div>
+						<div>'.getString('dashboard messages').'</div>
+						<div>'.$NewString.$Messages['msg'].'</div>
+						<br class="floatbreak" />
+					</div>';
+		
+		
+		return $RetVal;
 	}
 	
 	private function getMessageBox() {
@@ -47,9 +84,13 @@ class Dashboard extends Module {
 					';	
 			$Count++;
 		}
-		
-		for($i = 0; $i < floor($Count/5); $i++) 
+		$Count--;
+		while($Count%5 == 0) {
 			$RetVal .= '</div>';
+			$Count--;
+			if($Count <= 1) break;
+		}
+			
 		
 		return $RetVal;
 	}

@@ -99,3 +99,19 @@
 	border-radius: 20px;
 	margin-left: 10px;
 }
+#Dashboard_Infotab > div > div:first-of-type {
+	float: left;
+	font-weight: bold;
+}
+#Dashboard_Infotab > div > div:last-of-type {
+	float: right;
+}
+#Dashboard_Infotab > div {
+	padding: 3px 0px;
+}
+#Dashboard_Infotab span[data-new]:not([data-new="0"]) {
+	font-weight: bold;
+}
+#Dashboard_Infotab > div:not(:last-of-type) {
+	border-bottom: 1px solid rgb(100,100,100);
+}

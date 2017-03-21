@@ -228,14 +228,13 @@ class CalendarAdmin extends Module {
 		foreach($NeededDatas AS $NeededData)
 			if(!array_key_exists($NeededData, $_POST)) returnErrorJSON(getString('errors formSubmit')); //Nicht alle Daten Übergeben
 		
-		$From = strtotime($_POST['from']);
-		$To = strtotime($_POST['to']);
+		$From = DateTime::createFromFormat("!j.n.Y", $_POST['from']);
+		$To = DateTime::createFromFormat("!j.n.Y", $_POST['to'])->setTime(23,59,59);
 		$CID = $_POST['cid'];
 		
 		if(!$From || !$To) returnErrorJSON(getString('errors TimeFormat')); //Zeit nicht lesbar
-		$To = $To + (24*60*60-1);
-		if($From > $To) returnErrorJSON(getString('errors TimeFormat'));
-			
+		if(($From->diff($To))->format("%r") == "-") returnErrorJSON(getString('errors TimeFormat')); //From > To
+		
 		$MySQL = MySQL::getInstance();
 		$MySQL->where('cid', $CID);
 		$MySQL->select('calendar', array('vsid'), 1);
@@ -244,8 +243,8 @@ class CalendarAdmin extends Module {
 		if(!array_key_exists($MySQL->fetchRow()->vsid, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für VS
 		
 		$MySQL->where('cid', $CID);
-		$MySQL->where('start', $From, '>=');
-		$MySQL->where('end', $To, '<=');
+		$MySQL->where('start', $From->getTimestamp(), '>=');
+		$MySQL->where('end', $To->getTimestamp(), '<=');
 		$MySQL->select('posts');
 		$Posts = array();
 		
@@ -255,34 +254,33 @@ class CalendarAdmin extends Module {
 		$MySQL->where('cid', $CID);
 		$MySQL->select('pattern');
 			
-		$InsertData = array();
+		$InsertData = array();		
 		
 		foreach($MySQL->fetchAll() AS $cPattern) {
-			$CurrDay = $From;			
-			
-			while($CurrDay < $To) {
-				if(date('N', $CurrDay) == $cPattern['day']) {
-					$Start = $CurrDay + ($cPattern['start']*60);
-					$End = $CurrDay + ($cPattern['end']*60);
+			$CurrDay = DateTime::createFromFormat('!j.n.Y', $From->format('j.n.Y'));
+			while(($CurrDay->diff($To))->format("%r") == "") {
+				if(intval($CurrDay->format('N')) == $cPattern['day']) {
+					$Start = DateTime::createFromFormat('!j.n.Y', $CurrDay->format('j.n.Y'));
+					$End = DateTime::createFromFormat('!j.n.Y', $CurrDay->format('j.n.Y'));
 					
-					
-					
-					if(isset($Posts[$Start]) && $Posts[$Start] == $End) {
-						$CurrDay = $CurrDay + (24*60*60);
+					$Start->setTime(floor($cPattern['start']/60), $cPattern['start']%60);					
+					$End->setTime(floor($cPattern['end']/60), $cPattern['end']%60);
+
+					if(isset($Posts[$Start->getTimestamp()])) {
+						$CurrDay->add(new DateInterval('P1D'));
 						continue; //Posts existiert schon
 					}
 					
 					$InsertData[] = array(
 						'cid' => $CID,
-						'start' => $Start,
-						'end' => $End,
+						'start' => $Start->getTimestamp(),
+						'end' => $End->getTimestamp(),
 						'count' => $cPattern['count'],
 						'entrys' => '[]',
 						'req' => '[]'
 					);
 				}
-				
-				$CurrDay = $CurrDay + (24*60*60);				
+				$CurrDay->add(new DateInterval('P1D'));
 			}						
 		}
 		if(!$MySQL->insert('posts', $InsertData)) returnErrorJSON(getString('errors sql'));

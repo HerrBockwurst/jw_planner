@@ -11,6 +11,22 @@ a {
 	cursor: pointer; 
 }
 a:hover {text-decoration: underline}
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+	margin: 20px 0px 20px 0px;
+}
+h2 {
+	font-size: 1.4em;
+	font-weight: bold;
+	margin: 20px 0px 5px 0px;
+}
+p {
+	margin: 15px 0px 5px 0px;
+}
+strong {
+	font-weight: bold;
+}
 label {
 	line-height: 22px;
 	display: block;
@@ -58,6 +74,15 @@ legend {
 }
 textarea {
 	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, Arial Unicode MS, sans-serif;
+}
+#noscriptBox {	
+	left: 25vw;
+	width: 50vw;
+	top: 10vh;
+	position: absolute;
+	padding: 20px;
+	border-radius: 20px;
+	background-color: rgb(240,240,240);
 }
 .smallspacer {
 	margin-top: 10px;

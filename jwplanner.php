@@ -14,6 +14,8 @@ class JWPlanner {
 		 * Aktuell werden /load und /site gleich behandelt. Sollten Änderungen nötig sein, müssen die Skripte im ContentHandler angepasst werden.
 		 * Aktuell wird nur /load genutzt.
 		 */
+		
+		CalendarManager::cleanUpPosts();
 		User::getInstance()->Auth();
 		$ContentHandler = ContentHandler::getInstance();
 		

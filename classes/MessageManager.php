@@ -3,6 +3,18 @@ class MessageManager {
 	private function __construct() {
 	}
 	
+	public static function countMessages($UID) {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('recipient', $UID);
+		$Msg = $MySQL->count('messages');
+		
+		$MySQL->where('recipient', $UID);
+		$MySQL->where('read', 0);
+		$New = $MySQL->count('messages');
+		
+		return array('msg' => $Msg, 'new' => $New); 
+	}
+	
 	public static function sendMessage($Recipient, $Title, $Text, $Expire = PHP_INT_MAX, $Sender = NULL) {
 		if(is_null($Sender)) $Sender =  User::getInstance()->UID;
 		$MySQL = MySQL::getInstance();

@@ -101,7 +101,7 @@ class Dashboard extends Module {
 		$Order = array('created' => 'DESC');
 		
 		$SysMessage = MessageManager::getMessageBy($Filter, $Order, 1);
-		$SysMessage = '<span>'.$SysMessage->title.'</span>'.$SysMessage->content;
+		$SysMessage = empty($SysMessage->content) ? '' : '<span>'.$SysMessage->title.'</span>'.$SysMessage->content;
 		//Namen anzeigen
 		$User = explode(" ", User::getInstance()->Clearname);
 		$ToReplace = array('USER' => $User[0], 'SYSMESSAGE' => $SysMessage, 'MESSAGEBOX' => $this->getMessageBox(), 'INFOTAB' => $this->getInfoTab());

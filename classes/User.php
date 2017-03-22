@@ -39,6 +39,12 @@ class User {
 		$this->loadUserData();
 	}
 	
+	public function updateMe($Data) {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('uid', $this->UID);
+		if(!$MySQL->update('users', $Data)) returnErrorJSON(getString('errors sql'));
+	}
+	
 	public function hasPerm($Perm) {
 		return in_array($Perm, $this->Permissions);
 	}
@@ -99,6 +105,7 @@ class User {
 		$this->RoleName = $Userdata->role_name;
 		$this->RoleID = $Userdata->role;
 		$this->Vers = $Userdata->vs_name;
+		$this->Mail = $Userdata->email;
 		//Todo
 	}
 	

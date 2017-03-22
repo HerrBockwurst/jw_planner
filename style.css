@@ -19,10 +19,15 @@ h1 {
 h2 {
 	font-size: 1.4em;
 	font-weight: bold;
-	margin: 20px 0px 5px 0px;
+	margin: 10px 0px 15px 0px;
+}
+h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 10px 0px 15px 0px;
 }
 p {
-	margin: 15px 0px 5px 0px;
+	margin: 5px 0px 15px 0px;
 }
 strong {
 	font-weight: bold;

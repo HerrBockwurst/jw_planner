@@ -72,6 +72,7 @@ class UserEdit extends Module {
 		$NewPermArray = array();
 		foreach($perms AS $cPerm => $Checked) {
 			if($Checked != "true") continue;
+			if(!User::getInstance()->hasPerm($cPerm)) returnErrorJSON(getString('errors noPerm')); //keine Rechte für Permission
 			$NewPermArray[] = $cPerm;
 		}
 		//Permission anhängen, die er zu bearbeitende Nutzer hat, aber der bearbeiter nicht
@@ -79,9 +80,7 @@ class UserEdit extends Module {
 			$NewPermArray[] = $cPerm;
 			
 		$perms = $NewPermArray;
-	
-		foreach($perms AS $cPerm)
-			if(!User::getInstance()->hasPerm($cPerm)) returnErrorJSON(getString('errors noPerm')); //keine Rechte für Permission
+			
 	
 		/*
 		 * Alle Prüfungen bestanden, Lege nutzer an
@@ -96,7 +95,7 @@ class UserEdit extends Module {
 			'perms' => json_encode($perms)
 		);
 		
-		if(!empty($password)) $UserData['password'] = hash('sha512', getSaltedPassword($password));
+		if(!empty($password)) $UserData['password'] = password_hash($password, PASSWORD_DEFAULT);
 
 		GroupManager::unsetUser($User->UID); //Zuerst aus allen Gruppen der alten Versammlung entfernen
 		
@@ -198,7 +197,7 @@ class UserEdit extends Module {
 		if(!$Foreigner->Valid) returnErrorJSON(getString('errors formSubmit'));
 		
 		$Roles = '<option value="0">==useredit noRole==</option>';
-		foreach(RoleManager::getRoles() AS $Role) {			
+		foreach(RoleManager::getRoles($Foreigner->VSID) AS $Role) {			
 			$Roles .= '<option value="'.$Role['rid'].'">'.$Role['name'].'</option>';
 		}
 		
@@ -352,7 +351,7 @@ class UserEdit extends Module {
 		$UserData = array(
 				'uid' => $username,
 				'name' => $name,
-				'password' => hash('sha512', getSaltedPassword($password)),
+				'password' => password_hash($password, PASSWORD_DEFAULT),
 				'active' => $active,
 				'vsid' => $vers,
 				'role' => $role,

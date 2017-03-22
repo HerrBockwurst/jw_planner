@@ -4,6 +4,7 @@ class JWPlanner {
 	private function __construct() {
 		
 		require_once 'config.php';
+		require_once 'SystemConfig.php';
 		foreach(scandir('classes') AS $cFile) {
 			if($cFile == '.' || $cFile == '..') continue;
 			require_once 'classes/'.$cFile;

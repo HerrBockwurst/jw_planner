@@ -1,7 +1,29 @@
 <!DOCTYPE xml>
 <language>
 	<noscript>Diese Seite benötigt JavaScript um zu funktionieren. Bitte aktiviere JavaScript in deinem Browser und lade die Seite erneut.</noscript>
-	<wannaUse>Deine Versammlung möchte JWPlanner nutzen?</wannaUse>
+	<wannaUse>
+		<First>
+			<Headline>Was ist JWPlanner?</Headline>
+			<Text>
+			JWPlanner ist ein System um den Predigtdienst und andere Dienstzweige (z.B. Trolleydienst, Infostand, etc.) online verwalten zu können.
+			Benutzer können sich dabei einfach für Termine eintragen, welche vorher festgelegt wurden. Zur besonders einfachen Verwaltung der Benutzer und Termine
+			besteht die Möglichkeit, Terminvorlagen zu erstellen sowie die Benutzer in Gruppen zu organisieren.
+			</Text>
+		</First>
+		<Second>
+			<Headline>Deine Versammlung möchte JWPlanner nutzen?</Headline>
+			<Text>
+			Das ist jederzeit kostenlos möglich. Sende dazu einfach eine Email an die unten stehende Email Adresse. Die Nutzung von JWPlanner ist für
+			alle Versammlungen kostenlos, egal wieviele Kalender oder Benutzer benötigt werden. 
+			</Text>
+		</Second>
+		<EMail>Kontakt: </EMail>
+	</wannaUse>
+	<profile>
+		<yourProfile>Dein Profil</yourProfile>
+		<Save>Speichern</Save>
+		<Saved>Änderungen gespeichert.</Saved>
+	</profile>
 	<common>
 		<username>Benutzername</username>
 		<password>Passwort</password>

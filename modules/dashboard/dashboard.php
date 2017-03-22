@@ -56,15 +56,14 @@ class Dashboard extends Module {
 	}
 	
 	private function getMessageBox() {
-		if(!User::getInstance()->hasPerm('dashboard.msg')) return '';
 		$Messages = MessageManager::getDashboardMessages();
-		$RetVal = '
+		$RetVal = User::getInstance()->hasPerm('dashboard.msg') ? '
 				<div class="Dashboard_MessageRow">
 					<div><button style="width: 100px; padding: 5px 0px;">'.getString('dashboard write').'</button></div>
 					<div><textarea id="Dashboard_MessageText"></textarea></div>
 					<br class="floatbreak" />
 				</div>
-				';
+				' : '';
 		$Count = 1;
 		foreach($Messages AS $Message) {
 			if($Count%5 == 0) 

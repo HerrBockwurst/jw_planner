@@ -10,7 +10,9 @@ class MenuItem {
 		
 		//if(!is_int($Order) || !is_int($Position)) return;
 		
-		$this->String = getString($Tree);
+		$String = getString($Tree) == "" ? $Tree : getString($Tree); 
+		
+		$this->String = $String;
 		$this->Order = $Order;
 		$this->MenuPos = $Position;
 		$this->Link = $URL;

@@ -37,8 +37,7 @@ class Login extends Module {
 		}
 		
 		//Passwortcheck
-		$iPasswort = hash('sha512', $_POST['password'].SALT);
-		if($iPasswort != $Result->password) {
+		if(!password_verify($_POST['password'], $Result->password)) {
 			$MySQL->insert('loginfails', array(
 					'ip' => $_SERVER['REMOTE_ADDR'],
 					'time' => time(),

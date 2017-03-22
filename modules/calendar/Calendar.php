@@ -4,7 +4,7 @@ class Calendar extends Module {
 		$this->Permission = "calendar.entry";
 		$this->ClassPath = 'calendar';
 		$this->CSSFiles = 'style.css';
-		$this->MenuItem = new MenuItem("menu Calendar", 10, $this->ClassPath, $this->Permission);
+		$this->MenuItem = new MenuItem("menu Calendar", 20, $this->ClassPath, $this->Permission);
 	}
 	
 	public static function getInstance() {

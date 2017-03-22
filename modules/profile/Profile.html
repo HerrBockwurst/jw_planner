@@ -1,0 +1,40 @@
+<div id="Profile">
+	<div class="headline">==profile yourProfile==</div>
+	<label>
+		==common name==
+		<input type="text" value="(NAME)" disabled />
+	</label>
+	<label>
+		==common email==
+		<input type="text" id="iProfile_Mail" value="(MAIL)" />
+	</label>
+	<label>
+		==common password==
+		<input type="password" id="iProfile_Password" />
+	</label>
+	<button id="bProfile_Save">==profile Save==</button>
+</div>
+<script>
+$('#bProfile_Save').click(function () {
+	Mail = $('#iProfile_Mail').val();
+	PW = $('#iProfile_Password').val();
+	
+	if(!validateEmail(Mail)) {
+		displayMessageBox('==errors EmailSyntax==', false);
+		return;
+	}
+	
+	displayLoadingBox();
+	$.post('^PROTO^^HOME^/datahandler/profile/saveProfile', {mail: Mail, pw: PW}, function(data) {
+		testRedirect(data);
+		if(!testJSON(data)) {
+			displayMessageBox('==errors formSubmit==', true);
+			return;
+		}
+		if(testError(data, true, false)) return;
+		$('#iProfile_Password').val('');
+		displayMessageBox('==profile Saved==');
+		hideLoadingBox();
+	});
+});
+</script>

@@ -43,10 +43,11 @@ class MessageManager {
 		return $MySQL->fetchRow();
 	}
 	
-	public static function getMessageBy($Filter, $Order = array(), $Limit = NULL) {
+	public static function getMessageBy($Filter, $Order = array(), $Limit = NULL, $IgnoreExpire = FALSE) {
 		$MySQL = MySQL::getInstance();
 		foreach($Filter AS $Row => $Value)
 			$MySQL->where($Row, $Value);
+		if(!$IgnoreExpire) $MySQL->where('expire', time(), '>');
 		foreach($Order AS $Row => $Sort)
 			$MySQL->orderBy($Row, $Sort);
 		$MySQL->select('messages', NULL, $Limit);

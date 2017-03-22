@@ -244,11 +244,11 @@ class UserEdit extends Module {
 	
 	private function Handler_loadNewUser() {
 		$Roles = '<option value="0" selected>==useredit noRole==</option>';
-		
+
 		$Versammlungen = '<option value="novs" selected>==common plsSelect==</option>';
 		foreach(User::getInstance()->getAccessableVers() AS $vsid => $name) 
 			$Versammlungen .= '<option value="'.$vsid.'">'.$name.'</option>';
-		
+
 		$Perms = '';
 		foreach(User::getInstance()->getClearedPerms() AS $cPerm) 
 			$Perms .= '<label style="margin: 0px;"><input type="checkbox" value="'.$cPerm.'"> ==permissions '.$cPerm.'==</label>';
@@ -258,6 +258,7 @@ class UserEdit extends Module {
 				'fVers' => replaceLangTags($Versammlungen),
 				'fPerms' => replaceLangTags($Perms)				
 		)); 
+		
 	}
 	
 	private function Handler_loadGroups() {
@@ -287,7 +288,7 @@ class UserEdit extends Module {
 		//Prüfen, ob alle Daten übergeben wurden
 		$NeededFields = array('name', 'password', 'role', 'vers', 'active');
 		foreach($NeededFields AS $cField)
-			if(!array_key_exists($cField, $_POST)) returnErrorJSON(getString('errors formSubmit'));
+			if(!array_key_exists($cField, $_POST)) returnErrorJSON(getString('errors WrongFields'));
 		
 		//Lade Daten
 		$name 		= $_POST['name'];
@@ -303,9 +304,9 @@ class UserEdit extends Module {
 		$MySQL = MySQL::getInstance();
 			
 		//Prüfe Berechtigung
-		if($vers == 'novs') returnErrorJSON(getString('errors formSubmit')); //Keine Versammlung übergeben
+		if($vers == 'novs') returnErrorJSON(getString('errors WrongFields')); //Keine Versammlung übergeben
 		if(!array_key_exists($vers, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm')); //keine Rechte für Versammlung
-		if(empty($password) || empty($name)) returnErrorJSON(getString('errors formSubmit')); //Leere Felder, Falsch ausgefüllte Felder
+		if(empty($password) || empty($name)) returnErrorJSON(getString('errors WrongFields')); //Leere Felder, Falsch ausgefüllte Felder
 		if($active != 1 && $active != 0) returnErrorJSON(getString('errors formSubmit')); //Aktiv falsch
 		if($email != "" && !validateEmail($email))  returnErrorJSON(getString('errors formSubmit')); //Email Falsch
 		

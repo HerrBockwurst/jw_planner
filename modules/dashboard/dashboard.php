@@ -1,7 +1,6 @@
 <?php
 class Dashboard extends Module {
 	private function __construct() {
-		$this->Permission = "";
 		$this->CSSFiles = "style.css";
 		$this->ClassPath = 'dashboard';
 		$this->MenuItem = new MenuItem("menu Dashboard", 0, $this->ClassPath, $this->Permission);
@@ -65,9 +64,12 @@ class Dashboard extends Module {
 				</div>
 				' : '';
 		$Count = 1;
+		$AddedDivs = 0;
 		foreach($Messages AS $Message) {
-			if($Count%5 == 0) 
-				$RetVal .= '<a>'.getString('dashboard getMore').'</a><div style="display: none;">';				
+			if($Count%5 == 0) {
+				$AddedDivs++;
+				$RetVal .= '<a>'.getString('dashboard getMore').'</a><div style="display: none;">';
+			}
 			
 			$DeleteButton = User::getInstance()->hasPerm('dashboard.admin') ?
 				'<span class="Dashboard_Delbutton clickable" data-msgid="'.$Message['msg_id'].'"></span>' : '';
@@ -83,13 +85,9 @@ class Dashboard extends Module {
 					';	
 			$Count++;
 		}
-		$Count--;
-		while($Count%5 == 0) {
-			$RetVal .= '</div>';
-			$Count--;
-			if($Count <= 1) break;
-		}
-			
+		
+		for($i = $AddedDivs; $i > 0; $i--)
+			$RetVal .= '</div>';	
 		
 		return $RetVal;
 	}

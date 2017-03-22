@@ -23,7 +23,7 @@
 }
 
 #Dashboard_Messagebox {
-	width: 500px;	
+	width: 530px;	
 	float: left;
 	padding: 10px;
 	margin-left: 10px;
@@ -67,10 +67,12 @@
 	margin: 5px 0px;
 }
 .Dashboard_MessageRow > div:first-of-type {
-	width: 100px;
+	width: 120px;
+	margin-right: 2px;
 	overflow-x: hidden;
 	height: 100%;
 	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .Dashboard_MessageRow > div:first-of-type > span {
 	display: block;

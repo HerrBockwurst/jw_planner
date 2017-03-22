@@ -1,6 +1,6 @@
 <?php
 class MySQL {
-	private $con, $result, $attr;
+	public $con, $result, $attr;
 	public $lastQuery;
 
 	private function __construct($host, $user, $pw, $db, $port = 3306) {
@@ -10,6 +10,7 @@ class MySQL {
 			die('Connect Error (' . $this->con->connect_errno . ') '
 					. $this->con->connect_error);
 		}
+		$this->con->query("SET NAMES 'utf8'");
 		$this->attr = array();
 	}
 	
@@ -89,7 +90,7 @@ class MySQL {
 	public function fetchRow($asArray = false) {
 		if(gettype($this->result) != 'object') return false;
 		if($asArray) $retval = $this->result->fetch_assoc();
-		else $retval =  $this->result->fetch_object();
+		else $retval = $this->result->fetch_object();
 
 		if($retval == null) {
 			$this->result->free();

@@ -120,7 +120,8 @@ class CalendarAdmin extends Module {
 				'vsid' => $VSID,
 				'name' => $CName,
 				'blacklist' => json_encode(array()),
-				'whitelist' => json_encode(array())
+				'whitelist' => json_encode(array()),
+				'listmode' => 'blacklist'
 		))) returnErrorJSON(getString('errors sql'));
 		
 		echo json_encode(array());

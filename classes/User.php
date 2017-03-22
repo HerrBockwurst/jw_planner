@@ -17,7 +17,7 @@ class User {
 	public function hasCalendarAccess($CID) {
 		if($this->hasPerm('admin.calendar')) return TRUE; //Überspringe anfrage für Admin
 		$Calendar = CalendarManager::getCalendarData($CID);
-		
+
 		$Blacklist = json_decode($Calendar->blacklist);
 		$Whitelist = json_decode($Calendar->whitelist);
 		$Mode = $Calendar->listmode;
@@ -102,7 +102,7 @@ class User {
 		foreach(json_decode($Userdata->perms) AS $Perm)
 			if(!in_array($Perm, $this->Permissions))
 				$this->Permissions[] = $Perm;
-		$this->RoleName = $Userdata->role_name;
+		$this->RoleName = empty($Userdata->role_name) ? getString('useredit noRole') : $Userdata->role_name;
 		$this->RoleID = $Userdata->role;
 		$this->Vers = $Userdata->vs_name;
 		$this->Mail = $Userdata->email;
@@ -110,7 +110,7 @@ class User {
 	}
 	
 	public function getAccessableVers() {
-		$VS = $this->searchPerm('useredit.vs.');
+		$VS = $this->searchPerm('access.vs.');
 		if(empty($VS)) return array($this->VSID => $this->Vers);
 		if(array_search('*', $VS) !== FALSE) return VersManager::getVers();
 		return VersManager::getVers($VS);

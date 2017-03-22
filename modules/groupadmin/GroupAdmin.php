@@ -66,7 +66,7 @@ class GroupAdmin extends Module {
 			}			
 		}
 		$GroupList .= '<button id="GroupAdmin_bNewGroup" style="display: block; margin: 5px auto;">'.getString('groupadmin NewGroup').'</button>';
-		$UserList .= '<button id="GroupAdmin_bSaveGroup">'.getString('groupadmin SaveGroup').'</button>';
+		$UserList .= '<br class="floatbreak" /><button id="GroupAdmin_bSaveGroup">'.getString('groupadmin SaveGroup').'</button>';
 			
 		
 		echo json_encode(array('verslist' => $VSListe, 'grouplist' => $GroupList, 'userlist' => $UserList));

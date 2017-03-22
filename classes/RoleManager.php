@@ -28,11 +28,12 @@ class RoleManager {
 		if($MySQL->countResult() == 0) return array();
 		
 		$Perms = json_decode($MySQL->fetchRow()->entry);
+		$RetVal = array();
 		
-		foreach($Filter AS $cFilter)
-			if(array_search($cFilter, $Perms))
-				unset($Perms[array_search($cFilter, $Filter)]);
-		
-		return $Perms;
+		foreach($Perms AS $cPerm)
+			if(!in_array($cPerm, $Filter))
+				$RetVal[] = $cPerm;
+	
+		return $RetVal;
 	}
 }

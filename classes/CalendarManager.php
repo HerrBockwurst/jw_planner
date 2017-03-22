@@ -23,18 +23,22 @@ class CalendarManager {
 	}
 	
 	public static function getOpenSearches($VSID = NULL, $CID = NULL) {
-		if(is_null($VSID) && is_nan($CID)) return 0;
+		if(is_null($VSID) && is_null($CID)) return 0;
 		$Searches = 0;
 		$MySQL = MySQL::getInstance();
-		
 		$Continue = FALSE;
 		
-		$CIDs = is_null($CID) ? self::getCalendars($VSID) : array(self::getCalendarData($CID, TRUE)); 		
-		foreach($CIDs AS $cCalendar)  {			
-			if(!User::getInstance()->hasCalendarAccess($cCalendar['cid'])) continue;			
-			$MySQL->where('cid', $cCalendar['cid'], '=', 'OR');
+		$CIDs = is_null($CID) ? self::getCalendars($VSID) : array(self::getCalendarData($CID, TRUE));
+		$CIDsToAdd = array(); //Muss Cids erst zwischenspeichern, da sich sonst 2 SQL Anfragen überschneiden
+		
+		foreach($CIDs AS $cCalendar) {
+			if(!User::getInstance()->hasCalendarAccess($cCalendar['cid'])) continue;
+			$CIDsToAdd[] = $cCalendar['cid'];			
 			$Continue = TRUE;
-		}			
+		}
+		foreach($CIDsToAdd AS $cCID)
+			$MySQL->where('cid', $cCID, '=', 'OR');
+		
 		if(!$Continue) return 0; //Hat keinen Zugriff auf Kalender
 		
 		$MySQL->where('entrys', '[]', '<>');

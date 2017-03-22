@@ -21,7 +21,7 @@ class RoleAdmin extends Module {
 		$RoleList = '';
 		$VSListe = '';
 		$PermList = '';
-				
+
 		//Versliste
 		$SelectedVers = isset($_POST['vsid']) ? $_POST['vsid'] : User::getInstance()->VSID ;
 		if(!array_key_exists($SelectedVers, User::getInstance()->getAccessableVers())) returnErrorJSON(getString('errors noPerm'));
@@ -43,7 +43,7 @@ class RoleAdmin extends Module {
 		if(isset($_POST['rid']))
 			$MySQL->where('rid', $_POST['rid']);
 		$MySQL->select('roles', NULL, 500); //TODO Maximal 500 Sätze, erweiterund durch Offset
-			
+		
 		if($MySQL->countResult() == 0) $RoleList = getString('roleadmin noRolesAssigned');
 		
 		foreach($MySQL->fetchAll() AS $cRole) {
@@ -63,7 +63,7 @@ class RoleAdmin extends Module {
 			}
 		}
 		$RoleList .= '<button id="RoleAdmin_bNewRole" style="display: block; margin: 5px auto;">'.getString('roleadmin NewRole').'</button>';
-		$PermList .= '<button id="RoleAdmin_bSaveRole">'.getString('roleadmin SaveRole').'</button>';
+		$PermList .= '<br class="floatbreak" /><button id="RoleAdmin_bSaveRole">'.getString('roleadmin SaveRole').'</button>';
 			
 		
 		echo json_encode(array('verslist' => $VSListe, 'rolelist' => $RoleList, 'permlist' => $PermList));
@@ -110,8 +110,7 @@ class RoleAdmin extends Module {
 		foreach($Perms AS $cPerm) 
 			if(array_search($cPerm, User::getInstance()->getClearedPerms()) === FALSE) returnErrorJSON(getString('errors noPerm')); //Test ob er Perms für alle Perms hat
 		
-		
-		$FilteredPerms = RoleManager::getFilteredPerms($RID, User::getInstance()->getClearedPerms());
+		$FilteredPerms = RoleManager::getFilteredPerms($RID, array_merge(User::getInstance()->getClearedPerms(), $Perms));
 		
 		$MySQL->where('rid', $RID);
 		if(!$MySQL->update('roles', array('entry' => json_encode(array_merge($Perms, $FilteredPerms))))) returnErrorJSON(getString('errors sql'));

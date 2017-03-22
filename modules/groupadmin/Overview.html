@@ -33,7 +33,6 @@
 		}
 		
 		$.post('^PROTO^^HOME^/datahandler/groupadmin/updateGroup', data, function(data) {
-			console.log(data)
 			testRedirect(data);
 			if(!testJSON(data)) {
 				updateGroupList();
@@ -97,10 +96,12 @@
 		if($(e.target).is('span')) return;
 		displayLoadingBox();
 		
-		var data = {gid: $(this).attr('data-gid')};
+		var data = {
+				gid: $(this).attr('data-gid'),
+				vsid: $('#GroupAdmin_VSSelector').val()
+				};
 		
 		$.post('^PROTO^^HOME^/datahandler/groupadmin/loadGroups', data, function(data) {
-			console.log(data);
 			testRedirect(data);
 			if(!testJSON(data)) {
 				displayMessageBox('==errors formSubmit==', true);

@@ -32,7 +32,7 @@
 			perms: perms			
 		}
 		
-		$.post('^PROTO^^HOME^/datahandler/roleadmin/updateRole', data, function(data) {
+		$.post('^PROTO^^HOME^/datahandler/roleadmin/updateRole', data, function(data) {			
 			testRedirect(data);
 			if(!testJSON(data)) {
 				updateRoleList();
@@ -97,9 +97,13 @@
 		if($(e.target).is('span')) return;
 		displayLoadingBox();
 		
-		var data = {rid: $(this).attr('data-rid')};
+		var data = {
+				rid: $(this).attr('data-rid'),
+				vsid: $('#RoleAdmin_VSSelector').val()
+				};
 		
 		$.post('^PROTO^^HOME^/datahandler/roleadmin/loadRoles', data, function(data) {
+			console.log(data);
 			testRedirect(data);
 			if(!testJSON(data)) {
 				displayMessageBox('==errors formSubmit==', true);

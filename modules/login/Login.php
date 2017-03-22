@@ -13,6 +13,12 @@ class Login extends Module {
 			return $Instance;
 	}
 	
+	public static function cleanFails() {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('time', time() - (BANTIME * 60), '<');
+		$MySQL->delete('loginfails');
+	}
+	
 	private function Handler_Login() {
 		$MySQL = MySQL::getInstance();
 		

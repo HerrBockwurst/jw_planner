@@ -20,7 +20,6 @@ function delMessage() {
 	displayLoadingBox();
 	
 	$.post('^PROTO^^HOME^/datahandler/dashboard/delMessage', {mid: $(this).attr('data-msgid')}, function(data) {
-		console.log(data);
 		testRedirect(data);
 		if(!testJSON(data)) {
 			displayMessageBox('==errors formSubmit==', false);

@@ -1,4 +1,12 @@
+<?php if(isset($_POST['isLogin']) && $_POST['isLogin'] == 1): ?>
 <div id="CloseOverlay"></div>
+<?php endif; ?>
+<?php
+if(!isset($_POST['isLogin']))
+	echo '<div style="padding-left: 20px">';
+?>
+
+
 <?php echo utf8_encode(' 
 		<h1>Impressum</h1>
 		<h2>Angaben gemäß § 5 TMG:</h2>
@@ -23,3 +31,7 @@
 		<p><strong>Server-Log-Files</strong></p> <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log Files, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p> <ul> <li>Browsertyp/ Browserversion</li> <li>verwendetes Betriebssystem</li> <li>Referrer URL</li> <li>Hostname des zugreifenden Rechners</li> <li>Uhrzeit der Serveranfrage</li> </ul> <p><br />Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
 		<p><strong>Kontaktformular</strong></p> <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p><p> </p>
 		');
+
+if(!isset($_POST['isLogin']))
+	echo '</div>';
+?>

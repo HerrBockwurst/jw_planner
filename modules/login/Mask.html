@@ -28,7 +28,7 @@
 	
 	$('#Login_Footerline').find('a').click(function() {
 		SID = $(this).attr('data-sid');
-		$.post('^PROTO^^HOME^/site/' + SID, {}, function (data) {
+		$.post('^PROTO^^HOME^/site/' + SID, {isLogin: 1}, function (data) {
 			$('#LoginOverlayInner').children('div').html(data);
 			$('#LoginOverlay').fadeIn(100);
 			$('#LoginOverlayInner').find('#CloseOverlay').unbind().bind('click', Login_closeOverlay)

@@ -19,6 +19,15 @@
 	}
 	echo "</ul>";
 ?>
+
+<?php 
+	echo '<ul id="lSubMenu">';
+	$List = array('impressum', 'donate', 'about');
+	foreach($List AS $cMenuItem) 
+		echo '<li data-link="'.$cMenuItem.'">'.getString('menu '.$cMenuItem).'</li>';
+	echo '</ul>';
+	
+?>
 </div>
 <div id="Content">
 	<?php ContentHandler::getInstance()->performLoad('dashboard')?>
@@ -84,7 +93,7 @@
 		$('#LoadingBox').finish().fadeOut(100);
 	}
 	
-	$('#lMainMenu').children('li').click(function() {
+	$('#MainMenu').find('li').click(function() {
 		loadContent('<?php echo PROTO.HOME?>/load/' + $(this).attr('data-link'), '#Content');
 	});
 	$('#LoadingBoxContent').loadingWheel();

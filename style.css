@@ -39,7 +39,7 @@ label {
 	position: relative;
 	text-align: left;
 }
-input, select {
+input:not([type="image"]), select {
 	height: 16px;
 	padding: 2px;
 	border: 1px solid rgb(100,100,100);

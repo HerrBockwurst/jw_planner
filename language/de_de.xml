@@ -87,6 +87,12 @@
 		<November>November</November>
 		<December>Dezember</December>
 	</common>
+	<messages>
+		<Headline>Nachrichten</Headline>
+		<messages>Nachrichten</messages>
+		<max>gesamt</max>
+		<new>Neue Nachrichten</new>
+	</messages>
 	<menu>
 		<UserEdit>Benutzerverwaltung</UserEdit>
 		<Calendar>Kalender</Calendar>
@@ -98,6 +104,7 @@
 		<impressum>Impressum / Datenschutz</impressum>
 		<donate>Spenden</donate>
 		<about>Über JWPlanner</about>
+		<messages>Nachrichten</messages>
 	</menu>
 	<groupadmin>
 		<Headline>Gruppenverwaltung</Headline>
@@ -198,13 +205,13 @@
 		<admin.useredit>Benutzer verwalten</admin.useredit>
 		<admin.groups>Gruppen verwalten</admin.groups>
 		<admin.calendar>Kalender verwalten</admin.calendar>
-		<admin.message>Nachrichten senden</admin.message>
 		<admin.rolemanager>Rollen verwalten</admin.rolemanager>
 		<calendar.entry>Kalender nutzen</calendar.entry>
 		<calendar.entry.other>Einträge anderer Benutzer löschen</calendar.entry.other>
 		<dashboard.admin>Dashboard verwalten</dashboard.admin>
 		<dashboard.msg>Dashboard-Nachrichten schreiben</dashboard.msg>
 		<system>Systemverwaltung</system>
-		<specialperm>Test</specialperm>
+		<messages.use>Nachrichtensystem nutzen</messages.use>
+		<messages.email>Emails senden</messages.email>
 	</permissions>
 </language>

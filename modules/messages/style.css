@@ -1,0 +1,15 @@
+#Messageboard {
+	padding: 20px;
+}
+.Messages_HeadlineRow > span {
+	margin-left: 50px;
+	font-family: "Lucida Console", Monaco, monospace;
+	text-align: right;
+	background-color: rgb(250,250,250);
+	padding-right: 5px;
+	width: 50px;
+	float: right;
+}
+.Messages_HeadlineRow {
+	line-height: 22px;
+}

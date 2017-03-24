@@ -7,8 +7,10 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/reset.css"></link>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/style.css"></link>
+		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/js/trumbowyg/dist/ui/trumbowyg.min.css"></link>
 		<?php $this->getCSS();?>	
 		<script src="<?php echo PROTO.HOME; ?>/js/jquery-3.1.1.min.js"></script>
+		<script src="<?php echo PROTO.HOME; ?>/js/trumbowyg/dist/trumbowyg.min.js"></script>
 		<script src="<?php echo PROTO.HOME; ?>/js/functions.js"></script>
 	</head>
 	<body>

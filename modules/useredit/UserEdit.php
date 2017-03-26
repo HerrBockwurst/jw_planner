@@ -181,7 +181,7 @@ class UserEdit extends Module {
 						$('#iEditVers').val(jdata.vsid);
 						$('#iEditEmail').val(jdata.mail);
 						if(jdata.active == 1) $('#iEditActive').attr('Checked', 'Checked');
-						else $('#iEditActive').attr('checked', false);
+						else $('#iEditActive').removeAttr('Checked'); 
 				
 						$('#Content').stop().animate({scrollTop: 0}, 200);
 						$('#useredit_searchcontent').animate({left: \"100%\"}, 1000);

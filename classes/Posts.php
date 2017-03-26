@@ -8,6 +8,7 @@ class Posts {
 		$MySQL->where('cid', $CID);
 		$MySQL->where('start', $Start, '>=');
 		$MySQL->where('end', $End, '<=');
+		$MySQL->orderBy('start');
 		$MySQL->select('posts');
 		
 		foreach($MySQL->fetchAll() AS $cPost) 

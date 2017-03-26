@@ -31,7 +31,7 @@ class UserEdit extends Module {
 		$active		= intval($_POST['active']);
 		$perms 		= isset($_POST['perms']) ? $_POST['perms'] : array();
 		$groups		= isset($_POST['groups']) ? $_POST['groups'] : array();
-		$email		= $_POST['email'];
+		$email		= trim($_POST['email']);
 		$username 	= $_POST['uid'];
 	
 		$MySQL = MySQL::getInstance();
@@ -298,7 +298,7 @@ class UserEdit extends Module {
 		$active		= intval($_POST['active']);
 		$perms 		= isset($_POST['perms']) ? $_POST['perms'] : array();
 		$groups		= isset($_POST['groups']) ? $_POST['groups'] : array();
-		$email		= $_POST['email'];
+		$email		= trim($_POST['email']);
 		$username 	= parseUsername($name, $this->ReservedUsernames);
 		
 		$MySQL = MySQL::getInstance();

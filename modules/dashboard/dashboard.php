@@ -71,7 +71,7 @@ class Dashboard extends Module {
 				$RetVal .= '<a>'.getString('dashboard getMore').'</a><div style="display: none;">';
 			}
 			
-			$DeleteButton = User::getInstance()->hasPerm('dashboard.admin') ?
+			$DeleteButton = User::getInstance()->hasPerm('dashboard.admin') || $Message['sender'] == User::getInstance()->UID ?
 				'<span class="Dashboard_Delbutton clickable" data-msgid="'.$Message['msg_id'].'"></span>' : '';
 				
 			
@@ -121,8 +121,7 @@ class Dashboard extends Module {
 
 	}
 	
-	private function Handler_delMessage() {
-		if(!User::getInstance()->hasPerm('dashboard.admin')) returnErrorJSON(getString('errors noPerm'));
+	private function Handler_delMessage() {		
 		if(!isset($_POST['mid'])) returnErrorJSON(getString('errors formSubmit'));
 		
 		$Message = MessageManager::getMessage($_POST['mid']);
@@ -130,6 +129,8 @@ class Dashboard extends Module {
 		
 		$Sender = new Foreigner($Message->sender);
 		if(!$Sender->Valid) returnErrorJSON(getString('errors formSubmit'));
+		
+		if(!User::getInstance()->hasPerm('dashboard.admin') && $Message->sender != $Sender->UID) returnErrorJSON(getString('errors noPerm'));
 		
 		if(!User::getInstance()->hasVSAccess($Sender->VSID) || $Message->recipient != 'all') returnErrorJSON(getString('errors noPerm'));
 		

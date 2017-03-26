@@ -118,7 +118,7 @@ class UserEdit extends Module {
 			$mysql->where('uid',  "%".$User."%", "LIKE", "OR");
 		}
 		
-		if($VS != "") $mysql->where('versammlungen.name', "%".$VS."%", "LIKE");
+		if($VS != "") $mysql->where('name', "%".$VS."%", "LIKE", "AND", "versammlungen");
 		
 		$mysql->join('users', 'vsid', 'versammlungen', 'vsid');
 		$mysql->join('users', 'role', 'roles', 'rid', 'LEFT');

@@ -18,5 +18,3 @@ class Language {
 		return strval($tmpObj);
 	}
 }
-
-$lang = new Language();

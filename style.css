@@ -1,0 +1,13 @@
+body {
+	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, Arial Unicode MS, sans-serif;
+	background: rgb(250,250,250) linear-gradient(0deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 100%);
+	background-attachment: fixed;
+	min-height: 100vh;
+	font-size: 16px;
+	color: rgb(10,10,10);
+}
+a {
+	color: rgb(0,120,0);
+	cursor: pointer; 
+}
+a:hover {text-decoration: underline}

@@ -22,6 +22,19 @@ class JWPlanner {
 			require_once 'pages/planner/'.$File;
 		}
 		
-		ContentManager::initContent();	
+		ContentManager::initContent();
+		
+		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';
+		
+		switch(getURL(0)) {
+			case 'app':
+				var_dump(User::getMyself());
+				
+				break;
+			default:
+				break;
+		}
+		
+		if(!isset($_POST['isAjax'])) include_once 'pages/footer.php';
 	}
 }

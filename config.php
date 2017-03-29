@@ -7,3 +7,5 @@ define('MYSQL_DB', 'jwplanner');
 define('PROTO', 'http://');
 define('HOME', 'jw.localhost:90');
 define('TITLE', 'JWPlanner');
+
+define('SESSIONTIME', 20*60);

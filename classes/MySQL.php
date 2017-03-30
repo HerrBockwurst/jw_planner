@@ -1,7 +1,7 @@
 <?php
 class MySQL {
 	private $con, $result, $attr;
-	public $lastQuery;
+	public $lastQuery, $Error;
 
 	private function __construct($host, $user, $pw, $db, $port = 3306) {
 		$this->con = new mysqli($host, $user, $pw, $db);
@@ -136,7 +136,7 @@ class MySQL {
 
 		$stmt = $this->con->prepare($query);
 		if(!$stmt) {
-			echo "Fehler beim Erstellen des Statements: ".$this->con->error."\n Query: ".$query;
+			$this->Error = "Fehler beim Erstellen des Statements: ".$this->con->error."\n Query: ".$query;
 			return FALSE;
 		}
 

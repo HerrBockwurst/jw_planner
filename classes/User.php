@@ -1,30 +1,42 @@
 <?php
 class User {
-	public $UID, $Name, $VSID, $VSName, $RID, $RoleName, $Active;
+	public $UID, $Name, $VSID, $VSName, $RID, $RoleName, $Active, $IsLoggedIn = FALSE;
 	private $Permissions = array();
 	
 	public function __construct($UID = NULL) {		
-				
+		$UID = is_null($UID) ? $this->getUserBySession() : $UID;
+		
+		if(!$UID) return; //Leeres User Objekt bleibt zurück -> Es existiert keine Session zum Benutzer
+		$this->UID = $UID;
+		
+		$this->getUserData();
+	}
+	
+	private function getUserData() {
+		$mysql = MySQL::getInstance();
+		
+		$mysql->where('uid', $this->UID);
+		$mysql->join('users', 'role', 'roles', 'rid', 'LEFT');
+		$mysql->join('users', 'vsid', 'versammlungen', 'vsid', 'LEFT');
+		$mysql->select('users', array('*', 'role_name' => 'roles.name', 'vs_name' => 'versammlungen.name'), 1);
+		
+		if($mysql->countResult() == 0) {
+			LogManager::Log('UID nicht gefunden.', 'User::gUsrDat');
+			return;
+		}
+		
+		$Data = $mysql->fetchRow();
 	}
 	
 	private function getUserBySession() {
-		$mysql = MySQL::getInstance();
-		
 		//Alte Sessions löschen
-		$mysql->where('expire', time(), '<');
-		$mysql->delete('sessions');
+		SessionManager::removeExpiredSessions();
 		
 		//UID aus Sessions holen
-		$mysql->where('sid', session_id());
-		$mysql->select('sessions', NULL, 1);
+		$Session = SessionManager::getSessionBySID();
 		
-		//Keine UID Vorhanden?
-		if($mysql->countResult() == 0) return FALSE;
-			
-		$Row = $mysql->fetchRow();
-		
-		
-		
+		if(!$Session) return FALSE;
+		return $Session->UID;
 
 	}
 	

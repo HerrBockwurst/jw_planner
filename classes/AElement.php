@@ -30,4 +30,8 @@ abstract class AElement implements IElement {
 		if(!property_exists($this, $Prop)) return FALSE;
 		return $this->$Prop;
 	}
+	
+	public final function getMyContent() {
+		
+	}
 }

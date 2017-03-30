@@ -15,10 +15,43 @@ class ContentManager {
 			
 			self::$Content[] = $Content;
 		}		
-	}	
+	}
+	
+	public static function getCommonPage($PageName) {
+		if(strpos($PageName, '.php') === FALSE) $PageName .= '.php';
+		
+		if(!file_exists('pages/'.$PageName)) return;
+		require_once 'pages/'.$PageName;
+	}
 	
 	public static function getContent() {
-		print_r(self::$Content);
+		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';
+				
+		switch(getURL(0)) {
+			case 'app':				
+				self::getAppContent();
+				break;
+			default:
+				self::getFrontendContent();
+				break;
+		}
+		if(!isset($_POST['isAjax'])) include_once 'pages/footer.php';
+	}
+	
+	private static function getAppContent() {
+		
+	}
+	
+	private static function getFrontendContent() {
+		$ContentID = empty(getURL(0)) ? 'default' : getURL(0);
+		
+		$FrontendContent = $ContentID == 'default' ? 
+			self::getFilteredPages(array('Position' => POS_FRONTEND, 'IsDefaultPage' => TRUE)) : 
+			self::getFilteredPages(array('Position' => POS_FRONTEND, 'PageID' => $ContentID)) ;
+		
+		if(empty($FrontendContent)) $FrontendContent = self::getFilteredPages(array('Position' => POS_FRONTEND, 'IsDefaultPage' => TRUE));  
+		$FrontendContent = $FrontendContent[0];
+		
 	}
 	
 	public static function getCurrentClass() {
@@ -39,11 +72,21 @@ class ContentManager {
 		foreach(self::$Content AS $cPage) {
 			$SkipPage = FALSE;
 			foreach($Filter AS $Prop => $Val) {
+				
+				$Negate = strpos($Val, '!') === 0 ? TRUE : FALSE;				
+				$Val = strpos($Val, '!') === 0 ? substr($Val, 1) : $Val;				
+				
+				if(strcasecmp($Val, 'NULL') == 0) $Val = NULL; //String "NULL" zu NULL -> Wird benötigt um Werte auf Negiertes Null vergleichen zu können
+				
 				if($cPage->getProperty($Prop) === FALSE) {
 					$SkipPage = TRUE;
 					break;
 				}
-				if($cPage->getProperty($Prop) != $Val) {
+				if($cPage->getProperty($Prop) != $Val && $Negate == FALSE) {
+					$SkipPage = TRUE;
+					break;
+				}
+				if($cPage->getProperty($Prop) == $Val && $Negate == TRUE) {
 					$SkipPage = TRUE;
 					break;
 				}

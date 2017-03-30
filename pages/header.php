@@ -9,3 +9,7 @@
 		<script src="<?php echo PROTO.HOME; ?>/js/jquery-3.1.1.min.js"></script>
 	</head>
 	<body>
+	<div id="MenuBar">
+		<?php ContentManager::getCommonPage('MenuFrontend')?>
+	</div>
+	<div id="Content">

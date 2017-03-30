@@ -2,7 +2,7 @@
 class TestPage extends StaticPage {
 	private function __construct() {
 		$this->ClassPath = 'test';
-		$this->PageID = 'FrontendIndex';
+		$this->PageID = 'Testpage';
 		$this->Position = POS_FRONTEND;
 	}
 	

@@ -4,7 +4,7 @@ class Frontend_Index extends StaticPage {
 		$this->ClassPath = 'index';
 		$this->PageID = 'FrontendIndex';
 		$this->Position = POS_FRONTEND;
-		$this->IsDefaultPage = 100;
+		$this->IsDefaultPage = TRUE;
 	}
 	
 	public static function getInstance() {

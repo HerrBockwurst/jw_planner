@@ -12,14 +12,22 @@ class JWPlanner {
 		
 		foreach(scandir('pages/frontend') AS $File) {
 			//Frontend Laden
-			if(strpos($File, '.php') === FALSE) continue;
-			require_once 'pages/frontend/'.$File;
+			if(strpos($File, '.php') !== FALSE) 
+				require_once 'pages/frontend/'.$File;
+			elseif(strpos($File, '.css') !== FALSE)
+				ContentManager::addCSSFile('pages/frontend/'.$File);
 		}
 		
 		foreach(scandir('pages/planner') AS $File) {
 			//Planner Laden
-			if(strpos($File, '.php') === FALSE) continue;
-			require_once 'pages/planner/'.$File;
+			if(strpos($File, '.php') !== FALSE)
+				require_once 'pages/planner/'.$File;
+		}
+		
+		foreach(scandir('pages') AS $File) {
+			//CSS in Pages Laden
+			if(strpos($File, '.css') !== FALSE)
+				ContentManager::addCSSFile('pages/'.$File);
 		}
 		
 		ContentManager::initContent();

@@ -1,20 +1,19 @@
 <?php
-class Frontend_Index extends StaticPage {
+class Frontend_Functions extends StaticPage {
 	private function __construct() {
-		$this->ClassPath = 'index.php';
-		$this->PageID = 'Start';
+		$this->ClassPath = 'Functions.php';
+		$this->PageID = 'Functions';
 		$this->Position = POS_FRONTEND;
-		$this->IsDefaultPage = TRUE;
 	}
 	
 	public static function getInstance() {
 		static $Self = NULL;
 		if($Self === NULL)
-			$Self = new Frontend_Index();
+			$Self = new Frontend_Functions();
 		return $Self;
 	}
 	
 	public function myContent() {
-		echo "HI";
+		echo "Functions";
 	}
 }

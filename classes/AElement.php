@@ -3,7 +3,8 @@ define('POS_FRONTEND', 1);
 define('POS_PLANNER', 2);
 
 interface IElement {
-	public static function getInstance(); 
+	public static function getInstance();
+	public function myContent(); 
 }
 
 abstract class AElement implements IElement {
@@ -29,9 +30,5 @@ abstract class AElement implements IElement {
 	public function getProperty($Prop) {
 		if(!property_exists($this, $Prop)) return FALSE;
 		return $this->$Prop;
-	}
-	
-	public final function getMyContent() {
-		
 	}
 }

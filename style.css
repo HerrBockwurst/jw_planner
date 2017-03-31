@@ -1,16 +1,37 @@
 body {
 	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, Arial Unicode MS, sans-serif;
-	background: rgb(250,250,250) linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
+	background: rgb(250,250,250) linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);
 	background-attachment: fixed;
 	min-height: 100vh;
 	font-size: 16px;
 	color: rgb(10,10,10);
 }
+@media (min-width: 800px) {
+	#MenuBar ul, #Menu_LogoLine, #Content {
+		margin-left: 10vw;
+		padding-left: 0px !important;
+	}
+	#Content { width: calc(100vw - 20vw - 40px) !important; }
+}
 a {
 	color: rgb(0,120,0);
 	cursor: pointer; 
+	text-decoration: none;
 }
 a:hover {text-decoration: underline}
 p {
 	margin: 5px 0px;
+}
+.floatbreak {
+	clear: both;
+}
+.pseudobutton {
+	padding: 5px 40px;
+	color: rgb(250,250,250);
+	border: 1px solid rgb(0,120,0);
+	background-color: rgb(0,180,20);
+	display: inline-block;
+}
+.pseudobutton:hover {
+	text-decoration: none;
 }

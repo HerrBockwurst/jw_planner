@@ -12,4 +12,8 @@ class Dashboard extends AppModule {
 			$Self = new Dashboard();
 		return $Self;
 	}
+	
+	public function myContent() {
+	
+	}
 }

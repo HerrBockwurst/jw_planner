@@ -1,0 +1,13 @@
+<!DOCTYPE xml>
+<Language>
+	<Common>
+		<Login>Login</Login>
+	</Common>
+	<Frontend>
+		<Menu>
+			<Start>Start</Start>
+			<Functions>Funktionen</Functions>
+			<Register>JWPlanner nutzen</Register>
+		</Menu>
+	</Frontend>
+</Language>

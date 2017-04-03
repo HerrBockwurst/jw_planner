@@ -5,11 +5,16 @@ body {
 	min-height: 100vh;
 	font-size: 16px;
 	color: rgb(10,10,10);
+	min-width: 1000px;
 }
-@media (min-width: 800px) {
+@media (min-width: 1200px) {
 	#MenuBar ul, #Menu_LogoLine, #Content {
 		margin-left: 10vw;
 		padding-left: 0px !important;
+		margin-right: 10vw;
+	}
+	#LangSwitch {
+		margin-right: 10vw !important;
 	}
 	#Content { width: calc(100vw - 20vw - 40px) !important; }
 }

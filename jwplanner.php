@@ -3,6 +3,8 @@ class JWPlanner {
 	public function __construct() {
 		require_once 'config.php';
 		require_once 'functions.php';
+		
+		$Dots = array('.', '..');
 				
 		foreach(scandir('classes') AS $File) {
 			//Klassen Laden
@@ -18,9 +20,13 @@ class JWPlanner {
 				ContentManager::addCSSFile('pages/frontend/'.$File);
 		}
 		
-		foreach(scandir('pages/planner') AS $File) {
-			//Planner Laden
-			if(strpos($File, '.php') !== FALSE)
+		foreach(array_diff(scandir('pages/planner'), $Dots) AS $File) {
+			//Planner Laden	
+			if(is_dir('pages/planner/'.$File)) 
+				foreach(array_diff(scandir('pages/planner/'.$File), $Dots) AS $ChildFile) 
+					if(strpos($ChildFile, '.php') !== FALSE)
+						require_once 'pages/planner/'.$File.'/'.$ChildFile;					
+			elseif(strpos($File, '.php') !== FALSE)
 				require_once 'pages/planner/'.$File;
 		}
 		

@@ -15,6 +15,8 @@
 		<?php
 			if(ContentManager::$ContentType == CONTENT_TYPE_FRONTEND)
 				ContentManager::getCommonPage('MenuFrontend');
+			elseif(ContentManager::$ContentType == CONTENT_TYPE_APP)
+				ContentManager::getMenuBar();
 		?>
 	</div>
 	<div id="Content">

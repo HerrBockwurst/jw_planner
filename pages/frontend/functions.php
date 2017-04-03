@@ -14,6 +14,6 @@ class Frontend_Functions extends StaticPage {
 	}
 	
 	public function myContent() {
-		echo "Functions";
+		
 	}
 }

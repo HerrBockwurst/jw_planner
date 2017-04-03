@@ -1,16 +1,12 @@
-#MenuBar {
-	height: 96px;
-}
 #Logo {
-	background-color: rgb(0,180,20);
 	color: rgb(250,250,250);
-	display: inline-block;
 	font-size: 40px;
 	padding: 5px 20px;
 }
 #Logo > span {
 	font-size: 16px;
 }
+
 #Menu_Bar {
 	background-color: rgb(0,150,20);
 }
@@ -20,8 +16,10 @@
 }
 #Menu_Bar li > a {
 	color: rgb(250,250,250);
-	padding: 15px 40px;
+	padding: 17px 40px;
+	line-height: 16px;
 	display: inline-block;
+	text-transform: uppercase;
 }
 #Menu_Bar li > a:hover {
 	background-color: rgba(250,250,250,0.05);
@@ -29,4 +27,27 @@
 }
 #Menu_Bar ul {
 	position: relative;
+}
+#LangSwitch {
+	line-height: 20px;
+	color: rgb(250,250,250);
+	float: right;
+	margin: 10px 0px;
+	margin-right: 10px;
+	padding: 5px;
+	padding-right: 30px;
+	position: relative;
+	border: 1px solid rgb(250,250,250);
+	border-radius: 5px;
+	cursor: pointer;
+}
+#LangSwitch:after {
+	content: '\27B2'; 
+	transform: rotate(90deg);
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	right: 5px;
+	top: 6px;
+	font-size: 20px;
 }

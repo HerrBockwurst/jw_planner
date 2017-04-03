@@ -12,6 +12,10 @@ class User {
 		$this->getUserData();
 	}
 	
+	public function hasPermission() {
+		return FALSE;
+	}
+	
 	private function getUserData() {
 		$mysql = MySQL::getInstance();
 		

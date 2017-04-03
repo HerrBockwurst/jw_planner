@@ -5,16 +5,17 @@ define('CONTENT_TYPE_API', 3);
 
 class ContentManager {
 	private static $Content = array(), $CurrentClass = NULL, $CSSFiles = array();
-	public static $ContentType;
+	public static $ContentType; //Switch ob gerade Frontend oder App oder API aufgerufen wird, wird durch die getXXXContent gesetzt.
 	
 	private function __construct() {		
 	}
 	
 	public static function initContent() {
-		foreach(get_declared_classes() AS $cClass) {
+		foreach(get_declared_classes() AS $cClass) {			
 			if(get_parent_class($cClass) != 'AppModule' && get_parent_class($cClass) != 'StaticPage') continue;
 			
 			$Content = $cClass::getInstance();
+			
 			if(!$Content->isValidContent()) continue;
 			
 			self::$Content[] = $Content;
@@ -30,13 +31,17 @@ class ContentManager {
 	
 	public static function getContent() {
 		switch(strtolower(getURL(0))) {
-			case 'app':
+			case 'app':				
 				self::getAppContent();
 				break;
-			default:
+			default:				
 				self::getFrontendContent();
 				break;
 		}		
+	}
+	
+	public static function getMenuBar() {
+		
 	}
 	
 	public static function addCSSFile($File) {
@@ -47,21 +52,27 @@ class ContentManager {
 		foreach(self::$CSSFiles AS $File)
 			echo '<link rel="stylesheet" href="'.PROTO.HOME.'/'.$File.'"></link>';
 
-		foreach(self::getFilteredPages(array('CSSFile' => '!NULL')) AS $Content)
-			echo '<link rel="stylesheet" href="'.PROTO.HOME.'/'.$Content->ClassPath.'/'.$Content->CSSFile.'"></link>';
+		foreach(self::getFilteredPages(array('CSSFile' => '!NULL')) AS $Content) {
+			if($Content::getInstance()->Position == POS_FRONTEND) $Subdir = 'frontend';
+			elseif($Content::getInstance()->Position == POS_PLANNER) $Subdir = 'planner';
+		}
+			echo '<link rel="stylesheet" href="'.PROTO.HOME.'/pages/'.$Subdir.'/'.$Content->ClassPath.'/'.$Content->CSSFile.'"></link>';
 	}
 	
 	private static function getAppContent() {
 		self::$ContentType = CONTENT_TYPE_APP;
-		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';
+		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';		
+		if(!User::getMyself()->IsLoggedIn) 
+			$AppContent = self::getFilteredPages(array('PageID' => 'login'));
+		else {
+			$ContentID = empty(getURL(1)) ? 'default' : getURL(1);			
+			$AppContent = $ContentID == 'default' ?
+				self::getFilteredPages(array('Position' => POS_PLANNER, 'IsDefaultPage' => TRUE)) :
+				self::getFilteredPages(array('Position' => POS_PLANNER, 'PageID' => $ContentID)) ;		
+			
+			if(empty($AppContent)) $AppContent = self::getFilteredPages(array('Position' => POS_PLANNER, 'IsDefaultPage' => TRUE));
+		}
 		
-		$ContentID = empty(getURL(1)) ? 'default' : getURL(1);
-		
-		$AppContent = $ContentID == 'default' ?
-		self::getFilteredPages(array('Position' => POS_PLANNER, 'IsDefaultPage' => TRUE)) :
-		self::getFilteredPages(array('Position' => POS_PLANNER, 'PageID' => $ContentID)) ;
-		
-		if(empty($AppContent)) $AppContent = self::getFilteredPages(array('Position' => POS_FRONTEND, 'IsDefaultPage' => TRUE));
 		$AppContent = $AppContent[0];
 		
 		$AppContent->getMyContent();

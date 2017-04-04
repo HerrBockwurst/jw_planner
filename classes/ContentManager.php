@@ -61,10 +61,11 @@ class ContentManager {
 	
 	private static function getAppContent() {
 		self::$ContentType = CONTENT_TYPE_APP;
-		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';		
-		if(!User::getMyself()->IsLoggedIn) 
+				
+		if(!User::getMyself()->IsLoggedIn) { 
 			$AppContent = self::getFilteredPages(array('PageID' => 'login'));
-		else {
+			self::$ContentType = CONTENT_TYPE_FRONTEND; //Für Standardmenu bei Login
+		} else {
 			$ContentID = empty(getURL(1)) ? 'default' : getURL(1);			
 			$AppContent = $ContentID == 'default' ?
 				self::getFilteredPages(array('Position' => POS_PLANNER, 'IsDefaultPage' => TRUE)) :
@@ -75,13 +76,15 @@ class ContentManager {
 		
 		$AppContent = $AppContent[0];
 		
+		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';
+		
 		$AppContent->getMyContent();
 		
 		if(!isset($_POST['isAjax'])) include_once 'pages/footer.php';
 	}
 	
 	private static function getFrontendContent() {
-		self::$ContentType = CONTENT_TYPE_FRONTEND;
+		self::$ContentType = User::getMyself()->IsLoggedIn ? CONTENT_TYPE_APP : CONTENT_TYPE_FRONTEND;
 		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';
 		
 		$ContentID = empty(getURL(0)) ? 'default' : getURL(0);
@@ -92,7 +95,7 @@ class ContentManager {
 		
 		if(empty($FrontendContent)) $FrontendContent = self::getFilteredPages(array('Position' => POS_FRONTEND, 'IsDefaultPage' => TRUE));  
 		$FrontendContent = $FrontendContent[0];
-		
+		var_dump($FrontendContent);
 		$FrontendContent->getMyContent();
 		
 		if(!isset($_POST['isAjax'])) include_once 'pages/footer.php';

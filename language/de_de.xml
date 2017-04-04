@@ -1,13 +1,23 @@
 <!DOCTYPE xml>
 <Language>
-	<Common>
-		<Login>Login</Login>
+	<Common>		
+		<Username>Benutzername</Username>
+		<Password>Passwort</Password>
+		<Disclaimer>Impressum / Datenschutz</Disclaimer>
+		<About>Über JWPlanner</About>
+		<Donate>Spenden</Donate>
 	</Common>
 	<Frontend>
 		<Menu>
 			<Start>Start</Start>
 			<Functions>Funktionen</Functions>
 			<Register>JWPlanner nutzen</Register>
+			<Login>Login</Login>
 		</Menu>
 	</Frontend>
+	<Login>
+		<Login>Einloggen</Login>
+		<GreetingsA>Willkommen bei JWPlanner,</GreetingsA>
+		<GreetingsB>bitte melde dich mit deiner Kennung an um die Funktionen nutzen zu können.</GreetingsB>
+	</Login>
 </Language>

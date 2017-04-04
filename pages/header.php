@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/style.css"></link>
 		<?php ContentManager::getCSSFiles()?>
 		<script src="<?php echo PROTO.HOME; ?>/js/jquery-3.1.1.min.js"></script>
+		<script src="<?php echo PROTO.HOME; ?>/js/functions.js"></script>
 	</head>
 	<body>
 	<div id="MenuBar">

@@ -1,0 +1,29 @@
+<div id="LoginFrame">	
+	<form action="/App/Login/doLogin" method="POST" style="display: inline-block; width: 430px">
+		<p style="text-align: left; font-size: 20px">((Login GreetingsA))</p>
+		<p style="text-align: left; margin-bottom: 20px; width: 100%">((Login GreetingsB))</p>
+		<input type="text" name="username" id="iUsername" value="((Common Username))" />
+		<input type="password" name="password" id="iPassword" value="((Common Password))" />
+		<br />		
+		<input type="submit" value="((Login Login))" />
+	</form>
+</div>
+<script>
+var FirstClick = {U: false, P: false};
+
+$(function() {
+	$('#iPassword').attr('type', 'text').css({color: 'rgb(100,100,100)'});
+	$('#iUsername').css({color: 'rgb(100,100,100)'});
+});
+
+$('input:not([type="submit"])').click(function () {
+	if($(this).is('#iUsername') && !FirstClick.U) {
+		$(this).val('').css({color: ''});
+		FirstClick.U = true;
+	} else if($(this).is('#iPassword') && !FirstClick.P) {
+		$(this).val('');
+		$(this).attr('type', 'password').css({color: ''});
+		FirstClick.P = true;
+	}
+});
+</script>

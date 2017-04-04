@@ -16,6 +16,15 @@ class Login extends AppModule {
 	}
 	
 	public function myContent() {
-		
+		switch(getURL(2)) {
+			case 'doLogin':
+				echo 1;
+				break;
+			default:
+				$html = new HTMLContent('Login.html', $this->ClassPath);				
+				$html->replaceLangTags();
+				$html->display();
+				break;
+		}
 	}
 }

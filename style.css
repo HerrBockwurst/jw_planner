@@ -1,10 +1,8 @@
 body {
 	font-family: "Helvetica Light", Helvetica, "Droid Sans", Arial, Arial Unicode MS, sans-serif;
 	background: rgb(250,250,250) linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);
-	background-attachment: fixed;
-	min-height: 100vh;
-	font-size: 16px;
-	color: rgb(10,10,10);
+	font-size: 14px;
+	color: rgb(40,40,40);
 	min-width: 1000px;
 }
 @media (min-width: 1200px) {
@@ -26,6 +24,28 @@ a {
 a:hover {text-decoration: underline}
 p {
 	margin: 5px 0px;
+}
+label {
+	position: relative;
+	text-align: left;
+	font-size: 16px;
+	line-height: 22px;
+	display: block;
+	margin-bottom: 5px;
+	width: 100%;
+}
+label > input, label > select {
+	position: relative;
+	height: 16px;
+	margin-left: 50px;
+	border: 1px solid rgb(230,230,230);
+	background-color: rgb(250,250,250);
+	padding: 2px;
+	float: right;
+	width: 200px;
+}
+form {
+	display: inline-block;
 }
 .floatbreak {
 	clear: both;

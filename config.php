@@ -9,3 +9,5 @@ define('HOME', 'jw.localhost:90');
 define('TITLE', 'JWPlanner');
 
 define('SESSIONTIME', 20*60);
+define('BANTIME', 10);
+define('MAX_LOGIN_TRY', 5);

@@ -5,6 +5,7 @@ class Dashboard extends AppModule {
 		$this->PageID = 'dashboard';
 		$this->Position = POS_PLANNER;
 		$this->IsDefaultPage = TRUE;
+		$this->MenuItem = new MenuItem(getString('Planner Menu DashboardSub'), PROTO.HOME.'/App/Dashboard', 'dashboard', 0);
 	}
 	
 	public static function getInstance() {
@@ -15,6 +16,6 @@ class Dashboard extends AppModule {
 	}
 	
 	public function myContent() {
-		echo 'Hi';
+		echo 'Dashboard';
 	}
 }

@@ -8,8 +8,7 @@ interface IElement {
 }
 
 abstract class AElement implements IElement {
-	public $ClassPath = NULL, $CSSFile = NULL, $Position = NULL;
-	protected $MenuItem = NULL;
+	public $ClassPath = NULL, $CSSFile = NULL, $Position = NULL, $MenuItem = NULL;
 	protected $PageID = NULL;
 	protected $IsDefaultPage = FALSE;
 	

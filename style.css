@@ -3,10 +3,13 @@ body {
 	background: rgb(250,250,250) linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);
 	font-size: 14px;
 	color: rgb(40,40,40);
-	min-width: 1000px;
+	width: 100vw;
+	min-height: 100vh;
+	min-width: 850px;
+	position: absolute
 }
 @media (min-width: 1200px) {
-	#MenuBar ul, #Menu_LogoLine, #Content {
+	#Menu_Bar ul, #Menu_LogoLine, #Content {
 		margin-left: 10vw;
 		padding-left: 0px !important;
 		margin-right: 10vw;
@@ -24,6 +27,12 @@ a {
 a:hover {text-decoration: underline}
 p {
 	margin: 5px 0px;
+}
+input {
+	border: 1px solid rgb(200,200,200);
+	background-color: rgb(252,252,252);
+	color: rgb(100,100,100);
+	padding: 8px;	
 }
 label {
 	position: relative;
@@ -47,8 +56,16 @@ label > input, label > select {
 form {
 	display: inline-block;
 }
+button, input[type="submit"] {
+	cursor: pointer;
+}
 .floatbreak {
 	clear: both;
+}
+.headline {
+	text-transform: uppercase;
+	margin-bottom: 10px;	
+	font-weight: bold;
 }
 .pseudobutton {
 	padding: 5px 40px;

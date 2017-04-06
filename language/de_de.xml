@@ -2,10 +2,18 @@
 <Language>
 	<Common>		
 		<Username>Benutzername</Username>
+		<Name>Name</Name>
 		<Password>Passwort</Password>
+		<Email>Email</Email>
+		<Active>Aktiv</Active>
+		<Role>Rolle</Role>
+		<Versammlung>Versammlung</Versammlung>
 		<Disclaimer>Impressum / Datenschutz</Disclaimer>
 		<About>Über JWPlanner</About>
 		<Donate>Spenden</Donate>
+		<Yes>Ja</Yes>
+		<No>Nein</No>
+		<Okay>Okay</Okay>
 	</Common>
 	<Frontend>
 		<Menu>
@@ -15,9 +23,30 @@
 			<Login>Login</Login>
 		</Menu>
 	</Frontend>
+	<Planner>
+		<Menu>
+			<Dashboard>Übersicht</Dashboard>
+			<Calendar>Kalender</Calendar>
+			<User>Benutzer</User>
+			<System>System</System>
+			<DashboardSub>Startseite</DashboardSub>
+			<Logout>Ausloggen</Logout>
+			<Useredit>Benutzerverwaltung</Useredit>
+		</Menu>
+	</Planner>
+	<Useredit>
+		<Searchheadline>Benutzer filtern</Searchheadline>
+	</Useredit>
 	<Login>
 		<Login>Einloggen</Login>
 		<GreetingsA>Willkommen bei JWPlanner,</GreetingsA>
 		<GreetingsB>bitte melde dich mit deiner Kennung an um die Funktionen nutzen zu können.</GreetingsB>
+		<GreetingsJava>Es scheint, dass du JavaScript in deinem Browser deaktiviert hast. Der JWPlanner benötigt zur Funtionalität ein aktiviertes JavaScript. Bitte aktiviere diese Funktion in deinem Browser bzw. füge "jwplanner.de" als Ausnahme hinzu.</GreetingsJava>
 	</Login>
+	<Errors>
+		<sql>Ein Datenbankfehler ist aufgetreten. Bitte aktualisiere die Seite. Falls der Fehler erneut auftritt, teile uns dies bitte mit.</sql>
+		<WrongFields>Es wurden nicht alle Felder ausgefüllt. Bitte korrigiere deine Eingabe.</WrongFields>
+		<LoginBan>Du hast zu viele Loginversuche durchgeführt. Bitte warte {R} Minuten bis zum nächsten Login.</LoginBan>
+		<AuthFail>Benutzername und/oder Passwort falsch. Bitte überprüfe deine Eingabe.</AuthFail>
+	</Errors>
 </Language>

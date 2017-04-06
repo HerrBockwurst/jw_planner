@@ -1,8 +1,8 @@
 #MenuBar {
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	width: 100vw;
-	min-width: 1000px;
+	min-width: 850px;
 	height: 52px;
 }
 #Logo {
@@ -23,7 +23,7 @@
 }
 #Menu_Bar li > a {
 	color: rgb(250,250,250);
-	padding: 17px 40px;
+	padding: 17px 30px;
 	line-height: 16px;
 	display: inline-block;
 	text-transform: uppercase;
@@ -37,7 +37,7 @@
 	position: relative;
 }
 #LangSwitch {
-	line-height: 20px;
+	line-height: 18px;
 	color: rgb(250,250,250);
 	float: right;
 	margin: 10px 0px;

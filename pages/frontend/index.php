@@ -15,6 +15,6 @@ class Frontend_Index extends StaticPage {
 	}
 	
 	public function myContent() {
-		echo "HI";
+		echo $_SERVER['HTTP_X_REQUESTED_WITH'];
 	}
 }

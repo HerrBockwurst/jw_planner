@@ -7,13 +7,20 @@ class User {
 		$UID = is_null($UID) ? $this->getUserBySession() : $UID;
 		
 		if(!$UID) return; //Leeres User Objekt bleibt zurück -> Es existiert keine Session zum Benutzer
+		$this->IsLoggedIn = TRUE;
 		$this->UID = $UID;
 		
-		$this->getUserData();
+		$this->getUserData();		
 	}
 	
-	public function hasPermission() {
+	public function hasPermission($Perm) {
+		if(is_null($Perm)) return TRUE;
+		if(in_array($Perm, $this->Permissions)) return TRUE;
 		return FALSE;
+	}
+	
+	private function getUserPerms() {
+		
 	}
 	
 	private function getUserData() {
@@ -30,6 +37,14 @@ class User {
 		}
 		
 		$Data = $mysql->fetchRow();
+		$this->Name = $Data->name;
+		$this->VSID = $Data->vsid;
+		$this->VSName = $Data->vs_name;
+		$this->RID = $Data->role;
+		$this->RoleName = $Data->role_name;
+		$this->Active = $Data->active;
+		
+		$this->getUserPerms();
 	}
 	
 	private function getUserBySession() {
@@ -40,7 +55,7 @@ class User {
 		$Session = SessionManager::getSessionBySID();
 		
 		if(!$Session) return FALSE;
-		return $Session->UID;
+		return $Session->uid;
 
 	}
 	

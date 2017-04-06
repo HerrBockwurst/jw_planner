@@ -41,7 +41,38 @@ class ContentManager {
 	}
 	
 	public static function getMenuBar() {
+		$Categories = array(
+				'dashboard' => getString('Planner Menu Dashboard'),
+				'calendar' => getString('Planner Menu Calendar'),
+				'user' => getString('Planner Menu User'),
+				'system' => getString('Planner Menu System')
+		);
+		$Subitems = array();
+		$ListString = ""; //Kategorien festgelegt
 		
+		foreach(array_keys($Categories) AS $cCat) { //Alle Module mit MenuItems laden
+			$Subitems[$cCat] = array();
+			foreach(self::getFilteredPages(array('Position' => POS_PLANNER, 'MenuItem' => "!NULL")) AS $cModule) {
+				if(!$cModule->getMenuItem($cCat)) continue; //Für die Kategorie gibt es kein Item
+				if(!User::getMyself()->hasPermission($cModule->Permission)) continue; //Nutzer hat keine Rechte
+				$Subitems[$cCat][$cModule->getMenuItemPrio()] = $cModule->getMenuItem($cCat); //Erzeugt [Priority] => array(URL => String)
+			}
+			ksort($Subitems[$cCat]);
+		}
+		
+		foreach($Subitems AS $CatID =>$cCat) { //Liste erzeugen
+			if(empty($cCat)) continue;			
+			$ListString .= '<li><a class="ClickableTopCat">'.$Categories[$CatID].'</a><ul class="Menu_SubMenu">';
+			foreach($cCat AS $cSubPage) {
+				$ListString .= '<li><a href="'.key($cSubPage).'">'.current($cSubPage).'</a></li>';
+			}
+			$ListString .= '</ul></li>';
+		}
+		
+		$html = new HTMLContent('MenuPlanner.html', '');
+		$html->replace(array('ENTRIES' => $ListString));
+		$html->replaceLangTags();
+		$html->display();
 	}
 	
 	public static function addCSSFile($File) {
@@ -55,14 +86,18 @@ class ContentManager {
 		foreach(self::getFilteredPages(array('CSSFile' => '!NULL')) AS $Content) {
 			if($Content::getInstance()->Position == POS_FRONTEND) $Subdir = 'frontend';
 			elseif($Content::getInstance()->Position == POS_PLANNER) $Subdir = 'planner';
-		}
 			echo '<link rel="stylesheet" href="'.PROTO.HOME.'/pages/'.$Subdir.'/'.$Content->ClassPath.'/'.$Content->CSSFile.'"></link>';
+		}			
 	}
 	
 	private static function getAppContent() {
 		self::$ContentType = CONTENT_TYPE_APP;
 				
 		if(!User::getMyself()->IsLoggedIn) { 
+			if(testAjax() && strtolower(getURL(1)) != 'login') {
+				echo json_encode(array('redirect' => PROTO.HOME.'/App'));
+				exit;
+			}
 			$AppContent = self::getFilteredPages(array('PageID' => 'login'));
 			self::$ContentType = CONTENT_TYPE_FRONTEND; //Für Standardmenu bei Login
 		} else {
@@ -76,16 +111,16 @@ class ContentManager {
 		
 		$AppContent = $AppContent[0];
 		
-		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';
+		if(!testAjax()) include_once 'pages/header.php';
 		
 		$AppContent->getMyContent();
 		
-		if(!isset($_POST['isAjax'])) include_once 'pages/footer.php';
+		if(!testAjax()) include_once 'pages/footer.php';
 	}
 	
 	private static function getFrontendContent() {
 		self::$ContentType = User::getMyself()->IsLoggedIn ? CONTENT_TYPE_APP : CONTENT_TYPE_FRONTEND;
-		if(!isset($_POST['isAjax'])) include_once 'pages/header.php';
+		if(!testAjax()) include_once 'pages/header.php';
 		
 		$ContentID = empty(getURL(0)) ? 'default' : getURL(0);
 		
@@ -94,11 +129,10 @@ class ContentManager {
 			self::getFilteredPages(array('Position' => POS_FRONTEND, 'PageID' => $ContentID)) ;
 		
 		if(empty($FrontendContent)) $FrontendContent = self::getFilteredPages(array('Position' => POS_FRONTEND, 'IsDefaultPage' => TRUE));  
-		$FrontendContent = $FrontendContent[0];
-		var_dump($FrontendContent);
+		$FrontendContent = $FrontendContent[0];		
 		$FrontendContent->getMyContent();
 		
-		if(!isset($_POST['isAjax'])) include_once 'pages/footer.php';
+		if(!testAjax()) include_once 'pages/footer.php';
 	}
 	
 	public static function getCurrentClass() {

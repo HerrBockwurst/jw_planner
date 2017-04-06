@@ -1,0 +1,64 @@
+<div id="Planner_Menu_Bar">
+	<ul>
+		<li id="Logo">JW<span>Planner</span></li>
+		(ENTRIES)
+		<li id="Logout"><a href="/App/Logout">((Planner Menu Logout))</a></li>
+	</ul>	
+	<div id="LangSwitch">
+	DE
+	</div>
+	<br class="floatbreak" />
+</div>
+<script>
+	$('.ClickableTopCat').click(function() {
+		var menu = $(this).siblings('ul');
+		if(menu.is(':visible'))	menu.slideUp(100);
+		else menu.slideDown(100);
+	});
+	$('.ClickableTopCat').parent('li').mouseleave(function() {
+		$(this).children('ul').slideUp(100);
+	})
+</script>
+<style>
+#Planner_Menu_Bar {
+	background-color: rgb(0,150,20);
+}
+#Planner_Menu_Bar > ul > li {
+	float: left;
+	position: relative;
+}
+
+#Planner_Menu_Bar > ul > li > a {
+	color: rgb(250,250,250);
+	padding: 17px 30px;
+	line-height: 16px;
+	display: inline-block;
+	text-transform: uppercase;
+	font-weight: lighter;
+}
+#Planner_Menu_Bar > ul > li > a:hover, #Planner_Menu_Bar > ul > li > ul > li > a:hover {
+	background-color: rgba(250,250,250,0.1);
+	text-decoration: none;
+}
+#Planner_Menu_Bar > ul > li > ul {
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 50px;
+	margin: 0px;	
+	min-width: 150px;
+	padding: 0px 50px 50px 0px;
+}
+#Planner_Menu_Bar > ul > li > ul > li {
+	background-color: rgb(0,180,20);
+}
+#Planner_Menu_Bar > ul > li > ul > li > a {
+	color: rgb(250,250,250);
+	padding: 10px;
+	padding-right: 30px;
+	line-height: 16px;
+	display: block;
+	text-transform: uppercase;
+	font-weight: lighter;
+}
+</style>

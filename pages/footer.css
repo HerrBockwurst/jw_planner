@@ -1,6 +1,6 @@
 #Footer {	
 	line-height: 16px;
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	background-color: rgb(0,150,20);
 	color: rgb(240,240,240);

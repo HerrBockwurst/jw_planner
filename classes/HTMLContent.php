@@ -4,7 +4,8 @@ class HTMLContent {
 	public $Valid = FALSE;
 	
 	public function __construct($File, $ClassPath, $IsFrontend = FALSE) {
-		$Path = $IsFrontend ? 'pages/frontend'.$ClassPath.'/'.$File : 'pages/planner/'.$ClassPath.'/'.$File;
+		$FilePath = empty($ClassPath) ? $File : $ClassPath.'/'.$File;
+		$Path = $IsFrontend ? 'pages/frontend/'.$FilePath : 'pages/planner/'.$FilePath;
 		if(!file_exists($Path)) return;
 		
 		$this->HTMLString = file_get_contents($Path);
@@ -15,9 +16,10 @@ class HTMLContent {
 		$Matches;
 		
 		preg_match_all('/\(\((.*?)\)\)/', $this->HTMLString, $Matches); //LangTags
-		foreach($Matches[0] AS $Match)
-			$this->HTMLString = str_replace($Match, getString(substr($Match, 2, strlen($Match) - 4)), $this->HTMLString);
-		
+		foreach($Matches[0] AS $Match) 
+			if(!empty(getString(substr($Match, 2, strlen($Match) - 4))))
+				$this->HTMLString = str_replace($Match, getString(substr($Match, 2, strlen($Match) - 4)), $this->HTMLString);
+							
 		preg_match_all('/\^(.*?)\^/', $this->HTMLString, $Matches); //Konstanten
 		foreach($Matches[0] AS $Match)
 			if(defined(substr($Match, 1, strlen($Match) - 2)))
@@ -34,7 +36,7 @@ class HTMLContent {
 			$Needle[] = "(".$PlaceHolder.")";
 			$Replacements[] = $Replacement;
 		}
-		return str_replace($Needle, $Replacements, $this->HTMLString);
+		$this->HTMLString = str_replace($Needle, $Replacements, $this->HTMLString);
 	}
 	
 	public function display() {

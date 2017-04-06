@@ -7,10 +7,16 @@
 			<?php endif; ?>
 		</div>
 		<script>
+		$(function() {
+			history.replaceState({ url: window.location.href, container: '#Content' }, '');
+			$('#MenuBar').scrollToFixed();			
+		});
 		$('a').click(function (e) {
-			console.log(e.target.href);
+			if(e.target.href == '') return;
+			linkClick(e.target.href);
 			e.preventDefault();
 		});
+		bindInputs();
 		</script>
 	</body>
 </html>

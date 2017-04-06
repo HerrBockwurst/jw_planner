@@ -1,7 +1,8 @@
 <?php
 class SessionManager {
+	
 	public static function removeExpiredSessions() {
-		$mysql = MySQL::getInstance();
+		$mysql = MySQL::getInstance();		
 		$mysql->where('expire', time(), '<');
 		if(!$mysql->delete('sessions')) LogManager::Log('Fehler beim löschen der Sessions.|'.MySQL::getInstance()->Error, 'SM::remExpiredSess', LOG_TYPE_ERR);
 	}

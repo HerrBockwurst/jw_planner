@@ -109,10 +109,12 @@ class ContentManager {
 			if(empty($AppContent)) $AppContent = self::getFilteredPages(array('Position' => POS_PLANNER, 'IsDefaultPage' => TRUE));
 		}
 		
+		SessionManager::updateUserSession();
+		
 		$AppContent = $AppContent[0];
 		
 		if(!testAjax()) include_once 'pages/header.php';
-		
+				
 		$AppContent->getMyContent();
 		
 		if(!testAjax()) include_once 'pages/footer.php';

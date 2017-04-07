@@ -99,3 +99,33 @@ $(window).bind('popstate', function(event) {
     }
     LoadingBox(-1);
 });
+
+jQuery.fn.extend({
+	combobox: function() {
+		return this.each(function() {
+			if(!$(this).is('select')) return;						
+			
+			var options = {}, box = $($.parseHTML('<div class="combobox"></div>'));
+						
+			$(this).find('option').each(function() {
+				options[$(this).val()] = $(this).text();
+			});
+			
+			box.html('<div class="combobox-textfield">Test</div><div class="combobox-triangle"></div><br class="floatbreak" />')
+			box.attr('style', $(this).attr('style')); //Style von select übernehmen
+			
+			$(this).after(box);
+			$(this).hide(0);
+		});
+	},
+	check: function() {
+		return this.each(function() {
+			this.checked = true;
+		});
+	},
+	uncheck: function() {
+		return this.each(function() {
+			this.checked = false;
+		});
+	}
+});

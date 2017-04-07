@@ -1,13 +1,12 @@
 <?php
 class User {
 	public $UID, $Name, $VSID, $VSName, $RID, $RoleName, $Active, $IsLoggedIn = FALSE;
-	private $Permissions = array();
+	public $Permissions = array();
 	
 	public function __construct($UID = NULL) {		
 		$UID = is_null($UID) ? $this->getUserBySession() : $UID;
 		
-		if(!$UID) return; //Leeres User Objekt bleibt zurück -> Es existiert keine Session zum Benutzer
-		$this->IsLoggedIn = TRUE;
+		if(!$UID) return; //Leeres User Objekt bleibt zurück -> Es existiert keine Session zum Benutzer		
 		$this->UID = $UID;
 		
 		$this->getUserData();		
@@ -19,7 +18,34 @@ class User {
 		return FALSE;
 	}
 	
+	public function getAccessableVers() {
+		$VS = $this->searchPerm('access.vs.');
+		if(empty($VS)) return array($this->VSID => $this->VSName);
+		if(array_search('*', $VS) !== FALSE) return VersManager::getVers();
+		return VersManager::getVers($VS);
+	}
+	
+	public function searchPerm($Needle, $FullPerm = FALSE) {
+		$SelectedPerms = array();
+		foreach($this->Permissions AS $Perm) {
+			if(strpos($Perm, $Needle) === FALSE) continue;
+			$SelectedPerms[] = $FullPerm ? $Perm : substr($Perm, strlen($Needle) + strpos($Perm, $Needle));
+		}
+		return $SelectedPerms;
+	}
+	
 	private function getUserPerms() {
+		$mysql = MySQL::getInstance();
+		
+		$mysql->where('uid', $this->UID);
+		$mysql->join('users', 'role', 'roles', 'rid', 'LEFT');
+		$mysql->select('users', array('perms', 'roles.entry'), 1);
+		
+		$Obj = $mysql->fetchRow();
+		$this->Permissions = json_decode($Obj->entry);
+		
+		foreach(json_decode($Obj->perms) AS $SpecialPerm)
+			$this->Permissions[] = $SpecialPerm;
 		
 	}
 	
@@ -55,6 +81,8 @@ class User {
 		$Session = SessionManager::getSessionBySID();
 		
 		if(!$Session) return FALSE;
+		
+		$this->IsLoggedIn = TRUE;
 		return $Session->uid;
 
 	}

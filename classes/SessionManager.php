@@ -19,4 +19,13 @@ class SessionManager {
 			
 		return $mysql->fetchRow();
 	}
+	
+	public static function updateUserSession() {
+		$mysql = MySQL::getInstance();
+		$UID = isset(User::getMyself()->UID) ? User::getMyself()->UID : NULL;
+		if(is_null($UID)) return;
+		
+		$mysql->where('uid', User::getMyself()->UID);
+		if(!$mysql->update('sessions', array('expire' => time() + SESSIONTIME))) LogManager::Log('Konnte Session nicht updaten.', 'SM::updSess');
+	}
 }

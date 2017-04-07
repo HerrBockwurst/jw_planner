@@ -1,6 +1,6 @@
 <div class="headline">((Useredit Searchheadline))</div>
 <table id="UserList">
-	<tr>
+	<tr data-js="nodel">
 		<th>((Common Username))</th>
 		<th>((Common Name))</th>
 		<th>((Common Email))</th>
@@ -8,12 +8,31 @@
 		<th>((Common Role))</th>
 		<th>((Common Versammlung))</th>
 	</tr>
-	<tr>
-		<td><input type="text" /></td>
-		<td><input type="text" /></td>
-		<td><input type="text" /></td>
-		<td><input type="text" /></td>
-		<td><input type="text" /></td>
-		<td><input type="text" /></td>
+	<tr data-js="nodel">
+		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><select id="UserEdit_List_VSSelector">(VERS)</select></td> <!-- <input style="background-color: rgb(200,250,200)" type="text" data-default=" " value="(VERS)"/> -->
 	</tr>
 </table>
+<script>
+	var UserData = [(USERS)];
+	
+	
+	function updateUserTable() {
+		var String = '';
+		for (var i = 0; i < UserData.length; i++) {
+		    String = String + '<tr><td>' + UserData[i].uid + '</td><td>' + UserData[i].name + '</td><td>' + UserData[i].email + '</td><td>' + UserData[i].active + '</td><td>' + UserData[i].role + '</td><td>' + UserData[i].vs + '</td></tr>';
+		}
+		
+		$('#UserList').find("tr:not([data-js='nodel'])").remove();
+		$('#UserList').find('tr:last').after(String);
+	}
+	
+	$(updateUserTable);
+	$(function() {
+		$('#UserEdit_List_VSSelector').scombobox();
+	});
+</script>

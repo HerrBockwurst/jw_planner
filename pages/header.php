@@ -7,10 +7,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/reset.css"></link>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/style.css"></link>
+		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/js/scombobox/scombobox.css"></link>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/spinner.css"></link>
 		<?php ContentManager::getCSSFiles()?>
 		<script src="<?php echo PROTO.HOME; ?>/js/jquery-3.1.1.min.js"></script>
 		<script src="<?php echo PROTO.HOME; ?>/js/scrollToFixed.js"></script>
+		<script src="<?php echo PROTO.HOME; ?>/js/scombobox/scombobox.js"></script>
 		<script src="<?php echo PROTO.HOME; ?>/js/functions.js"></script>
 		<script>
 			var lang = {

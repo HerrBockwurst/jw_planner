@@ -22,3 +22,10 @@ function returnErrorJSON($string) {
 	echo json_encode(array('error' => $string));
 	exit;
 }
+
+function removeFilterInverse($Array, $Filter) {
+	foreach($Array AS $key => $cEntry) 
+		if(!in_array($cEntry, $Filter)) unset($Array[$key]);
+	
+	return $Array;
+}

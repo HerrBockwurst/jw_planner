@@ -61,6 +61,11 @@ class Useredit extends AppModule {
 	
 	public function myContent() {
 		switch(getURL(2)) {
+			case 'adduser':
+				$html = new HTMLContent('NewUser.html', $this->ClassPath);
+				$html->replaceLangTags();
+				$html->display();
+				break;
 			case 'getusersbyvers':
 				$this->getUsersByVers();
 				break;

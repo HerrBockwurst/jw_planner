@@ -1,8 +1,10 @@
 #Content {
 	padding: 10px;
-	width: calc(100vw - 20px);
-	margin-top: 52px;
-	margin-bottom: 20px;
+	position: absolute;
+	left: 0px;
+	right: 0px;	
+	top: 52px;
+	margin-bottom: 40px;
 }
 #LoadingBox, #MessageBox {
 	position: fixed;

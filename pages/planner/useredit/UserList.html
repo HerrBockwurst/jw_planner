@@ -9,30 +9,52 @@
 		<th>((Common Versammlung))</th>
 	</tr>
 	<tr data-js="nodel">
-		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
-		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
-		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
-		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
-		<td class="inputs"><input style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input id="iUID" style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input id="iName" style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input id="iEmail" style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input id="iActive"  style="background-color: rgb(200,250,200)" type="text" /></td>
+		<td class="inputs"><input id="iRole"  style="background-color: rgb(200,250,200)" type="text" /></td>
 		<td class="inputs"><select id="UserEdit_List_VSSelector">(VERS)</select></td> <!-- <input style="background-color: rgb(200,250,200)" type="text" data-default=" " value="(VERS)"/> -->
 	</tr>
 </table>
 <script>
 	var UserData = [(USERS)];
-	
-	
+		
 	function updateUserTable() {
-		var String = '';
+		var String = '',
+			UID = $('#iUID').val(),
+			Name = $('#iName').val(),
+			Email = $('#iEmail').val(),
+			Active = $('#iActive').val(),
+			Role = $('#iRole').val();
+
 		for (var i = 0; i < UserData.length; i++) {
+			if(UserData[i].uid.toLowerCase().indexOf(UID.toLowerCase()) == -1) continue;
+			if(UserData[i].name.toLowerCase().indexOf(Name.toLowerCase()) == -1) continue;
+			if(UserData[i].email.toLowerCase().indexOf(Email.toLowerCase()) == -1) continue;
+			if(UserData[i].active.toLowerCase().indexOf(Active.toLowerCase()) == -1) continue;
+			if(UserData[i].role.toLowerCase().indexOf(Role.toLowerCase()) == -1) continue;
 		    String = String + '<tr><td>' + UserData[i].uid + '</td><td>' + UserData[i].name + '</td><td>' + UserData[i].email + '</td><td>' + UserData[i].active + '</td><td>' + UserData[i].role + '</td><td>' + UserData[i].vs + '</td></tr>';
 		}
 		
 		$('#UserList').find("tr:not([data-js='nodel'])").remove();
 		$('#UserList').find('tr:last').after(String);
+		
+		$('#UserList').find('input[type="text"]').unbind().keyup(updateUserTable);
 	}
 	
 	$(updateUserTable);
 	$(function() {
 		$('#UserEdit_List_VSSelector').scombobox();
+	});
+	
+	$('#UserEdit_List_VSSelector').change(function() {
+		LoadingBox();	
+		$.post('^PROTO^^HOME^/App/Useredit/getUsersByVers', {vsid: $(this).val()}, function(data) {
+			jdata = getJData(data);
+			UserData = jdata;
+			updateUserTable();
+			LoadingBox();
+		});
 	});
 </script>

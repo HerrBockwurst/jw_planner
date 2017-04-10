@@ -15,14 +15,11 @@ class Useredit extends AppModule {
 		return $Self;
 	}
 	
-	private function getUsers() {
-		$Filters = array();
-		if(!isset($_POST['versammlungen.name'])) $_POST['versammlungen.name'] = User::getMyself()->VSName; 
-		removeFilterInverse($_POST, array('uid', 'name', 'email', 'active', 'role', 'versammlungen.name', 'roles.name'));
-
+	private function getUsers() { //Für sofortige Erstellung des UserData Arrays in UserList.html
 		$UserString = '';
+		$VSID = User::getMyself()->VSID;
 		
-		foreach(UserManager::getUsersBy($_POST) AS $cRow) {
+		foreach(UserManager::getUsersBy(array('vsid' => $VSID)) AS $cRow) {
 			$Active = $cRow['active'] == 1 ? getString('Common Yes') : getString('Common No');
 			$UserString .= '{uid: "'.$cRow['uid'].'", name: "'.$cRow['name'].'", email: "'.$cRow['email'].'", active: "'.$Active.'", role: "'.$cRow['role_name'].'", vs: "'.$cRow['vs_name'].'"},';
 		}
@@ -39,8 +36,34 @@ class Useredit extends AppModule {
 		return array('VERS' => $String);
 	}
 	
+	private function getUsersByVers() { //Für nachträgliche Änderung des UserData Arrays in UserList.html
+		$VSID = isset($_POST['vsid']) ? $_POST['vsid'] : User::getMyself()->VSID;
+		if(!User::getMyself()->hasVSAccess($VSID)) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für VS
+		
+		$UserString = array();
+		
+		foreach(UserManager::getUsersBy(array('vsid' => $VSID)) AS $cRow) {
+			$Active = $cRow['active'] == 1 ? getString('Common Yes') : getString('Common No');
+			if(is_null($cRow['role_name'])) $cRow['role_name'] = getString('Useredit NoRole');
+			$UserString[] = array(
+					'uid' => $cRow['uid'],
+					'name' => $cRow['name'],
+					'email' => $cRow['email'],
+					'active' => $Active,
+					'role' => $cRow['role_name'],
+					'vs' => $cRow['vs_name']
+			);			
+		}
+		
+		$UserString = $UserString;
+		echo json_encode($UserString);
+	}
+	
 	public function myContent() {
 		switch(getURL(2)) {
+			case 'getusersbyvers':
+				$this->getUsersByVers();
+				break;
 			default:
 				$html = new HTMLContent('UserList.html', $this->ClassPath);
 				$html->replaceLangTags();

@@ -5,6 +5,13 @@
 	border: 1px solid black;
 	text-align: left;
 	padding: 3px;
+	white-space: nowrap;
+}
+#UserList tr:not([data-js="nodel"]) {
+	cursor: pointer;	
+}
+#UserList tr:not([data-js="nodel"]):hover {
+	background-color: rgb(200,250,200);
 }
 #UserList td.inputs {
 	padding: 0px;

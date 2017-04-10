@@ -36,6 +36,7 @@
 	</Planner>
 	<Useredit>
 		<Searchheadline>Benutzer filtern</Searchheadline>
+		<NoRole>Keine Rolle</NoRole>
 	</Useredit>
 	<Login>
 		<Login>Einloggen</Login>
@@ -48,5 +49,7 @@
 		<WrongFields>Es wurden nicht alle Felder ausgefüllt. Bitte korrigiere deine Eingabe.</WrongFields>
 		<LoginBan>Du hast zu viele Loginversuche durchgeführt. Bitte warte {R} Minuten bis zum nächsten Login.</LoginBan>
 		<AuthFail>Benutzername und/oder Passwort falsch. Bitte überprüfe deine Eingabe.</AuthFail>
+		<invalidInput>Bei der Übermittlung der Daten ist ein Fehler aufgetreten. Bitte lade die Seite erneut und versuch es noch einmal.</invalidInput>
+		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
 	</Errors>
 </Language>

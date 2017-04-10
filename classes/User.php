@@ -34,6 +34,11 @@ class User {
 		return $SelectedPerms;
 	}
 	
+	public function hasVSAccess($VSID) {
+		if(array_key_exists($VSID, $this->getAccessableVers())) return TRUE;
+		return FALSE;
+	}
+	
 	private function getUserPerms() {
 		$mysql = MySQL::getInstance();
 		

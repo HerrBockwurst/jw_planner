@@ -4,8 +4,10 @@
 	bottom: 0px;
 	background-color: rgb(0,150,20);
 	color: rgb(240,240,240);
-	width: 100vw;
+	left: 0px;
+	right: 0px;
 	text-align: center;
+	z-index: 60;
 }
 #Footer > a {
 	font-size: 12px;

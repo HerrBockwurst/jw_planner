@@ -1,4 +1,8 @@
 <?php
+function getDots() {
+	return array('.', '..');
+}
+
 function testAjax(): bool {
 	if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') return FALSE;
 	return TRUE;

@@ -1,0 +1,22 @@
+#Footer {
+	position: fixed;
+	bottom: 0px;
+	text-align: center;
+	width: 100%;
+	background-color: rgb(0,150,20);
+	z-index: 90;
+}
+#Footer a {
+	display: inline-block;	
+	color: rgb(250,250,250);
+	line-height: 20px;
+}
+#Footer a:not(:last-of-type) {
+	margin-right: 16px;
+}
+#Footer a:not(:last-of-type):after {
+	content: "";
+	width: 0px;
+	border-right: 1px solid rgb(250,250,250);
+	margin-left: 20px;
+}

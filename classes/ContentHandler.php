@@ -28,7 +28,11 @@ class ContentHandler {
 	}
 	
 	private static function getFrontendMenu() {
-		
+		$Entrys = array('Start', 'Functions', 'Register', 'Login');
+		$String = "";
+		foreach($Entrys AS $cEntry)
+			$String .= '<li><a href="/'.$cEntry.'">'.getString('Menu '.$cEntry).'</a></li>';
+		echo $String;
 	}
 	
 	private static function getAppMenu() {
@@ -46,10 +50,29 @@ class ContentHandler {
 		}
 	}
 	
+	private static function loadPage() {
+		$ReqPage = getURL(0);
+		$Hit = NULL;
+		
+		foreach(self::$Pages AS $Page) { //Gewünschte Seite anzeigen
+			if($Page->PageID == $ReqPage) {
+				$Hit = $Page;
+				break;
+			} elseif($Page->isDefault == TRUE && $Hit == NULL)
+				$Hit = $Page;
+		}
+		
+		$Page->getMyContent();
+		
+	}
+	
 	public static function deliverContent() {
-		require_once 'serialPages/header.php';
-		require_once 'serialPages/menubar.php';
-		require_once 'serialPages/footer.php';
+		if(!testAjax()) {
+			require_once 'serialPages/header.php';
+			require_once 'serialPages/menubar.php';
+		}		
+		self::loadPage();
+		if(!testAjax()) require_once 'serialPages/footer.php';
 	}
 	
 	public static function setScope($Scope) {

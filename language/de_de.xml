@@ -15,31 +15,16 @@
 		<No>Nein</No>
 		<Okay>Okay</Okay>
 	</Common>
-	<Frontend>
-		<Menu>
-			<Start>Start</Start>
-			<Functions>Funktionen</Functions>
-			<Register>JWPlanner nutzen</Register>
-			<Login>Login</Login>
-		</Menu>
-	</Frontend>
-	<Planner>
-		<Menu>
-			<Dashboard>Übersicht</Dashboard>
-			<Calendar>Kalender</Calendar>
-			<User>Benutzer</User>
-			<System>System</System>
-			<DashboardSub>Startseite</DashboardSub>
-			<Logout>Ausloggen</Logout>
-			<Useredit>Benutzerverwaltung</Useredit>
-		</Menu>
-	</Planner>
-	<Useredit>
-		<Searchheadline>Benutzer filtern</Searchheadline>
-		<NoRole>Keine Rolle</NoRole>
-		<NewUser>Neuen Benutzer anlegen</NewUser>
-		<bNewUser>Neuer Benutzer</bNewUser>
-	</Useredit>
+	<Menu>
+		<Start>Start</Start>
+		<Functions>Funktionen</Functions>
+		<Register>Registrieren</Register>
+		<Login>Anmelden</Login>
+		<Disclaimer>Impressum / Datenschutz</Disclaimer>
+		<About>Über JWPlanner</About>
+		<Contact>Kontakt</Contact>
+		<Donate>Spenden</Donate>
+	</Menu>
 	<Login>
 		<Login>Einloggen</Login>
 		<GreetingsA>Willkommen bei JWPlanner,</GreetingsA>

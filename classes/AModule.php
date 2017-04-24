@@ -4,9 +4,8 @@ interface IModule {
 }
 
 abstract class AModule implements IModule {
-	private $PageID = NULL,
-		$MenuItem = NULL,
-		$Permission = NULL;
+	private $MenuItem = NULL, $Permission = NULL;
+	public $PageID = NULL, $isDefault = FALSE;
 	
 	public final function getMyContent() {
 		//TODO Hier Permission Prüfen

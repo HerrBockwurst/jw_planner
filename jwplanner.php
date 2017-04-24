@@ -13,5 +13,6 @@ class JWPlanner {
 			ContentHandler::setScope(SCOPE_FRONTEND);
 		
 		ContentHandler::loadPages();
+		ContentHandler::deliverContent();
 	}
 }

@@ -24,11 +24,13 @@
 		<About>Über JWPlanner</About>
 		<Contact>Kontakt</Contact>
 		<Donate>Spenden</Donate>
+		<Cat_Dashboard>Übersicht</Cat_Dashboard>
+		<Dashboard>Übersicht</Dashboard>
 	</Menu>
 	<Login>
 		<Login>Einloggen</Login>
-		<GreetingsA>Willkommen bei JWPlanner,</GreetingsA>
-		<GreetingsB>bitte melde dich mit deiner Kennung an um die Funktionen nutzen zu können.</GreetingsB>
+		<GreetingsA>Willkommen bei JWPlanner</GreetingsA>
+		<GreetingsB>Bitte melde dich mit deiner Kennung an um die Funktionen nutzen zu können.</GreetingsB>
 		<GreetingsJava>Es scheint, dass du JavaScript in deinem Browser deaktiviert hast. Der JWPlanner benötigt zur Funtionalität ein aktiviertes JavaScript. Bitte aktiviere diese Funktion in deinem Browser bzw. füge "jwplanner.de" als Ausnahme hinzu.</GreetingsJava>
 	</Login>
 	<Errors>

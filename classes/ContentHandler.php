@@ -11,12 +11,12 @@ class ContentHandler {
 				SCOPE_API => 'api',
 				SCOPE_DESKTOP_APP => 'app',
 				SCOPE_FRONTEND => 'frontend'
-		);
+		);		
 		
-		foreach(array_diff(scandir($Dir[self::$Scope]), getDots()) AS $cFile) 
+		foreach(array_diff(scandir($Dir[self::$Scope]), getDots()) AS $cFile)			
 			if(strpos($cFile, '.php') !== FALSE) 
 				require_once "{$Dir[self::$Scope]}/{$cFile}";
-			elseif(is_dir($cFile))
+			elseif(is_dir("{$Dir[self::$Scope]}/$cFile"))
 				foreach(array_diff(scandir("{$Dir[self::$Scope]}/{$cFile}"), getDots()) AS $cSubFile)
 					if(strpos($cSubFile, '.php'))
 						require_once "{$Dir[self::$Scope]}/{$cFile}/{$cSubFile}";
@@ -36,7 +36,30 @@ class ContentHandler {
 	}
 	
 	private static function getAppMenu() {
+		$String = "";
+		$Cats = array(
+				MENU_DASHBOARD => getString('Menu Cat_Dashboard'),
+				MENU_CALENDAR => getString('Menu Cat_Dashboard'),
+				MENU_USER => getString('Menu Cat_Dashboard'),
+				MENU_SYSTEM => getString('Menu Cat_Dashboard')
+		);
+		$PrintCats = array();
+		foreach($Cats AS $CatKey => $cCat)
+			foreach(self::$Pages AS $cPage)
+				if($cPage->MenuItem != NULL && User::getMyself()->hasPermission($cPage->Permission) && $cPage->MenuItem->Parent == $CatKey)
+					$PrintCats[$CatKey][$cPage->MenuItem->Position] = array('url' => $cPage->MenuItem->URL, 'string' => $cPage->MenuItem->String);
+			
 		
+		foreach($PrintCats AS $CatKey => $cCat) {
+			ksort($cCat);
+			$String .= "<li><a>{$Cats[$CatKey]}</a><ul>";
+			foreach($cCat AS $MenuItem)
+				$String .= "<li><a href=\"{$MenuItem['url']}\">{$MenuItem['string']}</a></li>";
+			$String .= '</ul></li>';
+		}
+		
+		echo $String;
+				
 	}
 	
 	public static function getMenu() {
@@ -58,12 +81,10 @@ class ContentHandler {
 			if($Page->PageID == $ReqPage) {
 				$Hit = $Page;
 				break;
-			} elseif($Page->isDefault == TRUE && $Hit == NULL)
+			} elseif($Page->isDefault == TRUE && $Hit == NULL)				
 				$Hit = $Page;
 		}
-		
-		$Page->getMyContent();
-		
+		$Hit->getMyContent();		
 	}
 	
 	public static function deliverContent() {

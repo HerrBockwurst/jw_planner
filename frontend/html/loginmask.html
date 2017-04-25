@@ -1,0 +1,26 @@
+<div style="margin: 0 auto; margin-top: 10%; width: 30%;">
+	<h2 style="font-style: italic;">[(Login GreetingsA)]</h2>
+	<p>[(Login GreetingsB)]</p>
+	<p class="NoScript" style="font-weight: bold;">[(Login GreetingsJava)]</p>
+	<div style="width: 280px; margin: 0 auto;">
+		<form id="LoginForm" method="POST">
+			<input id="iUsername" class="bigger" type="text" value="[(Common Username)]"/>
+			<input id="iPassword" class="bigger" type="password" value="[(Common Password)]" />
+			<br />
+			<button id="doLogin" class="bigger" style="width: calc(100% - 12px);">[(Login Login)]</button>
+		</form>
+	</div>
+</div>
+<script>
+	$('.NoScript').fadeOut(0);
+	
+	$('#LoginForm').submit(function(e) {
+		e.preventDefault();
+		LoadingBox();
+		
+		$.post('^PROTO^^HOME^/login/dologin', {username: $('#iUsername').val(), password:  $('#iPassword').val()}, function(data) {
+			getJData(data);			
+			LoadingBox();
+		})
+	});
+</script>

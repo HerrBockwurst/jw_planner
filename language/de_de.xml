@@ -25,7 +25,12 @@
 		<Contact>Kontakt</Contact>
 		<Donate>Spenden</Donate>
 		<Cat_Dashboard>Übersicht</Cat_Dashboard>
+		<Cat_Calendar>Kalender</Cat_Calendar>
+		<Cat_User>Benutzer</Cat_User>
+		<Cat_System>System</Cat_System>
 		<Dashboard>Übersicht</Dashboard>
+		<EntryOverview>Deine Einträge</EntryOverview>
+		<UserManagement>Benutzerverwaltung</UserManagement>
 	</Menu>
 	<Login>
 		<Login>Einloggen</Login>

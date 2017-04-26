@@ -27,6 +27,18 @@ class ContentHandler {
 		
 	}
 	
+	public static function printCSS() {
+		$String = "";
+		foreach(self::$Pages AS $cPage) 
+			/**
+			 * @var $cPage AModule
+			 */
+			if(User::getMyself()->hasPermission($cPage->Permission) && $cPage->CSSFile != NULL)
+				$String .= "<link rel=\"stylesheet\" href=\"".PROTO.HOME."/{$cPage->ClassPath}/{$cPage->CSSFile}\"></link>";
+			
+		echo $String;
+	}
+	
 	private static function getFrontendMenu() {
 		$Entrys = array('Start', 'Functions', 'Register', 'Login');
 		$String = "";
@@ -39,20 +51,19 @@ class ContentHandler {
 		$String = "";
 		$Cats = array(
 				MENU_DASHBOARD => getString('Menu Cat_Dashboard'),
-				MENU_CALENDAR => getString('Menu Cat_Dashboard'),
-				MENU_USER => getString('Menu Cat_Dashboard'),
-				MENU_SYSTEM => getString('Menu Cat_Dashboard')
+				MENU_CALENDAR => getString('Menu Cat_Calendar'),
+				MENU_USER => getString('Menu Cat_User'),
+				MENU_SYSTEM => getString('Menu Cat_System')
 		);
 		$PrintCats = array();
 		foreach($Cats AS $CatKey => $cCat)
 			foreach(self::$Pages AS $cPage)
 				if($cPage->MenuItem != NULL && User::getMyself()->hasPermission($cPage->Permission) && $cPage->MenuItem->Parent == $CatKey)
 					$PrintCats[$CatKey][$cPage->MenuItem->Position] = array('url' => $cPage->MenuItem->URL, 'string' => $cPage->MenuItem->String);
-			
-		
+
 		foreach($PrintCats AS $CatKey => $cCat) {
 			ksort($cCat);
-			$String .= "<li><a>{$Cats[$CatKey]}</a><ul>";
+			$String .= "<li><a>{$Cats[$CatKey]}</a><ul>";			
 			foreach($cCat AS $MenuItem)
 				$String .= "<li><a href=\"{$MenuItem['url']}\">{$MenuItem['string']}</a></li>";
 			$String .= '</ul></li>';

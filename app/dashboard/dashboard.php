@@ -7,6 +7,7 @@ class Login extends \AModule {
 		$this->ClassPath = 'app/dashboard';
 		$this->isDefault = TRUE;
 		$this->MenuItem = new \MenuItem($this->PageID, getString('Menu Dashboard'), MENU_DASHBOARD, 0);
+		$this->Scope = SCOPE_DESKTOP_APP;
 	}	
 	
 	function ContentRequest() {

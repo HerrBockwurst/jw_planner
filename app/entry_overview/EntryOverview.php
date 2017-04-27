@@ -6,6 +6,7 @@ class EntryOverview extends \AModule {
 		$this->PageID = 'entryoverview';
 		$this->ClassPath = 'app/entry_overview';
 		$this->MenuItem = new \MenuItem($this->PageID, getString('Menu EntryOverview'), MENU_DASHBOARD, 10);
+		$this->Scope = SCOPE_DESKTOP_APP;
 	}	
 	
 	function ContentRequest() {

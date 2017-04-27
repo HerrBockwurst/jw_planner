@@ -11,15 +11,16 @@ class ContentHandler {
 				SCOPE_API => 'api',
 				SCOPE_DESKTOP_APP => 'app',
 				SCOPE_FRONTEND => 'frontend'
-		);		
+		);
 		
-		foreach(array_diff(scandir($Dir[self::$Scope]), getDots()) AS $cFile)			
-			if(strpos($cFile, '.php') !== FALSE) 
-				require_once "{$Dir[self::$Scope]}/{$cFile}";
-			elseif(is_dir("{$Dir[self::$Scope]}/$cFile"))
-				foreach(array_diff(scandir("{$Dir[self::$Scope]}/{$cFile}"), getDots()) AS $cSubFile)
-					if(strpos($cSubFile, '.php'))
-						require_once "{$Dir[self::$Scope]}/{$cFile}/{$cSubFile}";
+		foreach($Dir AS $cDir)
+			foreach(array_diff(scandir($cDir), getDots()) AS $cFile)			
+				if(strpos($cFile, '.php') !== FALSE) 
+					require_once "{$cDir}/{$cFile}";
+					elseif(is_dir("{$cDir}/$cFile"))
+					foreach(array_diff(scandir("{$cDir}/{$cFile}"), getDots()) AS $cSubFile)
+						if(strpos($cSubFile, '.php'))
+							require_once "{$cDir}/{$cFile}/{$cSubFile}";
 		
 		foreach(get_declared_classes() AS $cClass)
 			if(get_parent_class($cClass) == 'AModule')
@@ -92,9 +93,10 @@ class ContentHandler {
 			if($Page->PageID == $ReqPage) {
 				$Hit = $Page;
 				break;
-			} elseif($Page->isDefault == TRUE && $Hit == NULL)				
+			} elseif($Page->isDefault == TRUE && $Hit == NULL && $Page->Scope == self::$Scope)				
 				$Hit = $Page;
 		}
+		
 		$Hit->getMyContent();		
 	}
 	

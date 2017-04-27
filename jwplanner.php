@@ -12,6 +12,7 @@ class JWPlanner {
 		else
 			ContentHandler::setScope(SCOPE_FRONTEND);
 		
+		SessionManager::removeExpiredSessions();
 		ContentHandler::loadPages();
 		ContentHandler::deliverContent();
 	}

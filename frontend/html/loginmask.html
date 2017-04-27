@@ -19,7 +19,8 @@
 		LoadingBox();
 		
 		$.post('^PROTO^^HOME^/login/dologin', {username: $('#iUsername').val(), password:  $('#iPassword').val()}, function(data) {
-			getJData(data);			
+			getJData(data);
+			console.log(data);
 			LoadingBox();
 		})
 	});

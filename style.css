@@ -71,6 +71,7 @@ main {
 	top: 60px;
 	width: calc(100% - 20px);
 	padding-left: 10px;
+	margin-bottom: 20px;
 }
 
 nav > ul > li:first-of-type {

@@ -8,6 +8,9 @@ class User {
 		$mysql = MySQL::getInstance();
 		$Field = strpos($UID, '@') !== FALSE ? 'email' : 'uid';
 		
+		if(is_null($UID)) $UID = SessionManager::getUserBySession();
+		if(!$UID) return;
+		
 		$mysql->where($Field, "%{$UID}%", 'LIKE');
 		$mysql->join('users', 'role', 'roles', 'rid', 'LEFT');
 		$mysql->join('users', 'vsid', 'versammlungen', 'vsid', 'LEFT');
@@ -30,7 +33,7 @@ class User {
 		$this->Permissions = json_decode($Data->role_perms);
 		foreach(json_decode($Data->perms) AS $cPerm)
 			if(!in_array($cPerm, $this->Permissions))
-					$this->Permissions[] = $cPerm;
+				$this->Permissions[] = $cPerm;
 	}
 	
 	public function hasPermission($Perm) {
@@ -41,6 +44,7 @@ class User {
 	
 	public function getAccessableVers() {
 		$VS = $this->searchPerm('access.vs.');
+		
 		if(empty($VS)) return array($this->VSID => $this->VSName);
 		if(array_search('*', $VS) !== FALSE) return VersManager::getVers();
 		return VersManager::getVers($VS);

@@ -9,7 +9,7 @@ class HTMLTemplate {
 	
 	function replace($Replacer) {
 		foreach($Replacer AS $Find => $Replace)
-			$this->HTML = preg_replace("/({$Find})/", $Replace, $this->HTML);
+			$this->HTML = preg_replace("/\({$Find}\)/", $Replace, $this->HTML);
 	}
 	
 	function replaceLangTag() {

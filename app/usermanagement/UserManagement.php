@@ -23,23 +23,32 @@ class UserManagement extends \AModule {
 	
 	private function getUserCards() {
 		$VSID = isset($_POST['vsid']) ? $_POST['vsid'] : \User::getMyself()->VSID;
-		$String = "";
+		$RetVal = array();
 		foreach(\UserManager::getUserBy(array('vsid' => $VSID)) AS $cUser) {
-			$String .= "
-				<div class=\"UM-Card\">
-					<div>{$cUser->Name}<span>({$cUser->UID})</span></div>
-					<div>[(Common Versammlung)]: <span>{$cUser->VSName}</span></div>
-					<div>[(Common Active)]: <span>{$cUser->Active}</span></div>
-					<div>[(Common Email)]: <span>{$cUser->Email}</span></div>
-					<div>[(Common Role)]: <span>{$cUser->RoleName}</span></div>
-					<div>[(Common Groups)]: <span>3</span></div>
-				</div>";
+			$Active = $cUser->Active == 1 ? getString('Common Yes') : getString('Common No');
+			$RetVal[] = array(
+					'uid' => $cUser->UID,
+					'name' => $cUser->Name,
+					'vsname' => $cUser->VSName,
+					'active' => $Active,
+					'email' => $cUser->Email,
+					'role' => $cUser->RoleName,
+					'groups' => 3
+			);
 		}		
-		return $String;
+		return json_encode($RetVal);
 	}
 	
 	function ContentRequest() {
 		switch(getURL(1)) {
+			case 'updateuserlist':
+				echo $this->getUserCards();
+				break;
+			case 'add':
+				$html = new \HTMLTemplate('AddUser.html', $this->ClassPath);
+				$html->replaceLangTag();
+				$html->display();
+				break;
 			default:
 				$html = new \HTMLTemplate('UserCards.html', $this->ClassPath);
 				$html->replace(array('VERS' => $this->getVersSelect()));

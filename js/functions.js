@@ -21,7 +21,7 @@ function bindInputs() {
 				
 		$(this).attr('data-type', $(this).attr('type')).attr('type', 'text');			
 		
-		$(this).unbind().bind('focus', function() {
+		$(this).bind('focus', function() {
 			if($(this).val() == $(this).attr('data-default'))
 				$(this).val('').attr('type', $(this).attr('data-type'));
 			$(this).removeClass('default');
@@ -36,15 +36,18 @@ function getJData(data) {
 	try {
 		var jdata = JSON.parse(data);
 		
-		if(typeof jdata.redirect !== "undefined")
+		if(typeof jdata.redirect !== "undefined") {
 			window.location.replace(jdata.redirect);
-		else if(typeof jdata.error !== "undefined")
+			return false;
+		} else if(typeof jdata.error !== "undefined") {
 			MessageBox(jdata.error);
-		return false
+			return false;
+		}		
+		return jdata;
 	} catch (e) {
 		return false;
 	}
-	return jdata;
+	
 }
 
 function linkClick(e) {

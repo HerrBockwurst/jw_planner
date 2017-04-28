@@ -15,6 +15,19 @@
 	margin-bottom: 10px;
 	cursor: pointer;
 	position: relative;
+	opacity: 0;
+	left: -10px;
+	transition: all .5s;
+}
+
+.UM-Card a {
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 2;
 }
 
 .UM-Card > div > span {

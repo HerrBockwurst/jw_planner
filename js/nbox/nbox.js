@@ -29,7 +29,6 @@ function nbox(select, param) {
 	
 	select.bind('change', function() { //Input Ändern nach Select Change
 		$(this).siblings('input').val($(this).children(':selected').text());
-		console.log($(this).val());
 	});
 	
 	nbox_dropdown.children('.nbox-entry').bind('click', function() { //Select Change bei Click auf Eintrag
@@ -44,7 +43,7 @@ function nbox(select, param) {
 	});
 	
 	nbox_input.bind('keyup', function(e) { //Filtern der Treffer
-		var regex = new RegExp($(this).val(), "i");		
+		var regex = new RegExp($(this).val(), "i");
 		
 		$(this).parent('.nbox').children('.nbox-dropdown').children('.nbox-entry').each(function() {
 			if(!$(this).text().match(regex)) $(this).slideUp(100);
@@ -52,15 +51,30 @@ function nbox(select, param) {
 		});
 		
 		if(e.keyCode == 13) {
-			$(this).parent('.nbox').children('.nbox-dropdown').children('.nbox-entry:visible:first').trigger('click');
+			if($(this).parent('.nbox').children('.nbox-dropdown').children('.nbox-entry:visible:first').length == 0) {
+				$(this).val($(this).attr('data-last'));
+				$(this).siblings('select').children('option').each(function() {
+					if($(this).text() == $(this).siblings('input').val())
+						$(this).parent('select').val($(this).val());
+				})
+			} else {
+				$(this).parent('.nbox').children('.nbox-dropdown').children('.nbox-entry:visible:first').trigger('click');
+			}
 			$(this).blur();
 		}
 	});
 	
-	nbox_input.bind('blur', function() {
+	nbox_input.bind('focus', function() { //Initval setzen
+		$(this).attr('data-last', $(this).val());
+	});
+	
+	nbox_input.bind('blur', function() { //Feld clearen
 		$(this).parent('.nbox').children('.nbox-dropdown').children('.nbox-entry').each(function() {
 			$(this).slideDown(0);
 		});
+		$(this).parent('.nbox').children('.nbox-dropdown').slideUp(100);
+		$(this).removeAttr('data-last');
+		$(this).siblings('.nbox-arrow').css({transform: ''});
 	});
 	
 	//Build

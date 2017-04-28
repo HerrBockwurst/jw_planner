@@ -104,7 +104,8 @@ class ContentHandler {
 		if(!testAjax()) {
 			require_once 'serialPages/header.php';
 			require_once 'serialPages/menubar.php';
-		}		
+		}
+		if(self::$Scope != SCOPE_FRONTEND) SessionManager::updateMySession();
 		self::loadPage();
 		if(!testAjax()) require_once 'serialPages/footer.php';
 	}

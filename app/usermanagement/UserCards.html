@@ -4,12 +4,58 @@
 	<select id="iVers">(VERS)</select>
 </div>
 <div id="UM-CardContainer">
-	<div class="UM-Card">
+	<div class="UM-Card" id="UM-AddCard">
 		<div></div>
-		<div class="UM-Card-Pluslayer"><div class="UM-Card-Plus"></div></div>		
-	</div>
-	(USER)
+		<div class="UM-Card-Pluslayer"><div class="UM-Card-Plus"></div></div>
+		<a href="^PROTO^^APPHOME^/usermanagement/add"></a>
+	</div>	
 </div>
 <script>
-$('#iVers').nbox({param: "test"});
+var UserList = (USER);
+var Template = '<div class="UM-Card"><div>{name}<span>{uid}</span></div><div>[(Common Versammlung)]<span>{vsname}</span></div><div>[(Common Role)]<span>{role}</span></div><div>[(Common Email)]<span>{email}</span></div><div>[(Common Active)]<span>{active}</span></div><div>[(Common Groups)]<span>{groups}</span></div><a href="^PROTO^^APPHOME^/usermanagement/edit/{uid}"></a></div>';
+
+$('#iVers').change(function() {
+	LoadingBox();
+	$.post('^PROTO^^APPHOME^/usermanagement/updateuserlist', {vsid: $(this).val()}, function(data) {
+		jdata = getJData(data);
+		UserList = jdata;
+		updateUsercards();
+		LoadingBox();
+	})
+});
+
+function updateUsercards() {
+	$('#UM-CardContainer').children('.UM-Card:not(#UM-AddCard)').remove();
+	$.each(UserList, function() {
+		if($('#iName').val() != $('#iName').attr('data-default') && typeof $('#iName').attr('data-default') !== "undefined") {
+			var Regex = new RegExp($('#iName').val(), 'i');
+			if(!this.name.match(Regex)) return true;
+		}
+		
+		if($('#iEmail').val() != $('#iEmail').attr('data-default') && typeof $('#iEmail').attr('data-default') !== "undefined") {
+			var Regex = new RegExp($('#iEmail').val(), 'i');
+			if(!this.email.match(Regex)) return true;
+		}
+		
+		var Temp = Template;
+		$.each(this, function(key, val) {
+			var Regex = new RegExp('\\{' + key + '\\}', 'gi');			
+			Temp = Temp.replace(Regex, val);
+		});
+		$('#UM-CardContainer').append(Temp);
+	});
+	setTimeout(function() {
+		$('.UM-Card').css({left: '0px', opacity: 1});
+	}, 100);
+}
+
+$('#iName, #iEmail').keyup(function() {
+	if(typeof $(this).attr('data-preval') !== "undefined" && $(this).attr('data-preval') != $(this).val())
+		updateUsercards();
+	$(this).attr('data-preval', $(this).val());
+});
+
+$(updateUsercards);
+
+$('#iVers').nbox();
 </script>

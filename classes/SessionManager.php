@@ -26,4 +26,11 @@ class SessionManager {
 		$mysql->where('expire', time(), '<');
 		if(!$mysql->delete('sessions')) returnErrorJSON(getString('Errors sql'));
 	}
+	
+	static function updateMySession() {
+		$mysql = MySQL::getInstance();
+		$mysql->where('sid', session_id());
+		if(!$mysql->update('sessions', array('expire' => time() + SESSIONTIME))) returnErrorJSON(getString('Errors SQL'));
+		//TODO API Session update
+	}
 }

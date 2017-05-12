@@ -7,11 +7,12 @@
 		<script src="<?php echo PROTO.HOME; ?>/js/jquery-3.2.1.min.js"></script>
 		<script src="<?php echo PROTO.HOME; ?>/js/ScrollToFixed.js"></script>
 		<script src="<?php echo PROTO.HOME; ?>/js/functions.js"></script>
-		<script src="<?php echo PROTO.HOME; ?>/js/nbox/nbox.js"></script>
+		<script src="<?php echo PROTO.HOME; ?>/js/jquery-easing.js"></script>
+		<script src="<?php echo PROTO.HOME; ?>/js/scombobox/scombobox.js"></script>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/reset.css"></link>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/style.css"></link>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/spinner.css"></link>
-		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/js/nbox/nbox.css"></link>
+		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/js/scombobox/scombobox.css"></link>
 		<link rel="stylesheet" href="<?php echo PROTO.HOME; ?>/serialPages/footer.css"></link>
 		<?php ContentHandler::printCSS() ?>
 		<script>

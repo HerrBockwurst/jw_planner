@@ -15,6 +15,7 @@
 		<Yes>Ja</Yes>
 		<No>Nein</No>
 		<Okay>Okay</Okay>
+		<Back>Zurück</Back>
 	</Common>
 	<Menu>
 		<Start>Start</Start>
@@ -33,6 +34,20 @@
 		<EntryOverview>Deine Einträge</EntryOverview>
 		<UserManagement>Benutzerverwaltung</UserManagement>
 	</Menu>
+	<Admin>
+		<SelectVersFirst>Zuerst Versammlung wählen.</SelectVersFirst>
+		<SpecialPerm>Sonderberechtigung</SpecialPerm>
+		<Common>Allgemeines</Common>
+		<AdvancedSetting>Erweiterte Einstellungen</AdvancedSetting>
+		<NewUser>Neuen Benutzer anlegen</NewUser>
+		<AddUser>Benutzer erstellen</AddUser>
+		<noRole>Keine Rolle</noRole>
+		<UserAddSuccess>Der Benutzer wurde erfolgreich angelegt.</UserAddSuccess>
+		<UpdateUser>Benutzer aktualisieren</UpdateUser>
+		<UserEditSuccess>Der benutzer wurde erfolgreich aktualisiert.</UserEditSuccess>
+		<EditUser>Benutzer bearbeiten -</EditUser>
+		<DeleteUser>Benutzer löschen</DeleteUser>
+	</Admin>
 	<Login>
 		<Login>Einloggen</Login>
 		<GreetingsA>Willkommen bei JWPlanner</GreetingsA>
@@ -46,5 +61,19 @@
 		<AuthFail>Benutzername und/oder Passwort falsch. Bitte überprüfe deine Eingabe.</AuthFail>
 		<invalidInput>Bei der Übermittlung der Daten ist ein Fehler aufgetreten. Bitte lade die Seite erneut und versuch es noch einmal.</invalidInput>
 		<noPerm>Dafür hast du keine Berechtigung!</noPerm>
+		<invalidUser>Der Benutzername ist ungültig oder du hast nicht die benötigten Rechte für den Benutzer.</invalidUser>
 	</Errors>
+	<Permission>
+		<admin.useredit>Benutzer verwalten</admin.useredit>
+		<admin.groups>Gruppen verwalten</admin.groups>
+		<admin.calendar>Kalender verwalten</admin.calendar>
+		<admin.rolemanager>Rollen verwalten</admin.rolemanager>
+		<calendar.entry>Kalender nutzen</calendar.entry>
+		<calendar.entry.other>Einträge anderer Benutzer löschen</calendar.entry.other>
+		<dashboard.admin>Dashboard verwalten</dashboard.admin>
+		<dashboard.msg>Dashboard-Nachrichten schreiben</dashboard.msg>
+		<system>Systemverwaltung</system>
+		<messages.use>Nachrichtensystem nutzen</messages.use>
+		<messages.email>Emails senden</messages.email>
+	</Permission>
 </Language>

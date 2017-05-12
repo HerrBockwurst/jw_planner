@@ -15,6 +15,7 @@ function getRotationDegrees(obj) {
 
 function bindInputs() {
 	$('body').find('input[type="text"][data-nobind!="true"],input[type="password"][data-nobind!="true"]').each(function() {
+		if($(this).parent().is('.scombobox')) return;
 		
 		if(typeof $(this).attr('data-default') === "undefined")
 			$(this).attr('data-default', $(this).val()).addClass('default');
@@ -45,7 +46,7 @@ function getJData(data) {
 		}		
 		return jdata;
 	} catch (e) {
-		return false;
+		return true;
 	}
 	
 }
@@ -90,9 +91,9 @@ function LoadingBox(Switch) {
 
 function loadPage(url, container) {
 	if(typeof container === "undefined") container = 'main';
-	LoadingBox();
+	LoadingBox(1);
 	$.post(url, {}, function(data) {
-		LoadingBox();
+		LoadingBox(-1);
 		window.history.pushState({url: url, container: container}, "", url);
 		getJData(data);
 		$(container).fadeOut(100);
@@ -103,6 +104,7 @@ function loadPage(url, container) {
 			});
 			bindInputs();
 		}, 150);
+		
 	});
 }
 
@@ -110,13 +112,12 @@ $(window).bind('popstate', function(event) {
 	LoadingBox();
 	
     var state = event.originalEvent.state;
-    console.log(state);
     if (state) {
     	$.post(state.url, {isAjax: true}, function(data) {
     		$(state.container).fadeOut(100);
     		setTimeout(function() {
     			$(state.container).html(data).fadeIn(100);
-    			LoadingBox();
+    			LoadingBox(-1);
     			bindInputs();
     		},100);
     	});

@@ -35,7 +35,7 @@ class ContentHandler {
 			 * @var $cPage AModule
 			 */
 			if(User::getMyself()->hasPermission($cPage->Permission) && $cPage->CSSFile != NULL)
-				$String .= "<link rel=\"stylesheet\" href=\"".PROTO.HOME."/{$cPage->ClassPath}/{$cPage->CSSFile}\"></link>";
+				$String .= "<link rel=\"stylesheet\" href=\"/{$cPage->ClassPath}/{$cPage->CSSFile}\"></link>";
 			
 		echo $String;
 	}
@@ -44,7 +44,7 @@ class ContentHandler {
 		$Entrys = array('Start', 'Functions', 'Register', 'Login');
 		$String = "";
 		foreach($Entrys AS $cEntry)
-			$String .= '<li><a href="/'.$cEntry.'">'.getString('Menu '.$cEntry).'</a></li>';
+			$String .= '<li><a href="'.PROTO.HOME.'/'.$cEntry.'">'.getString('Menu '.$cEntry).'</a></li>';
 		echo $String;
 	}
 	
@@ -66,7 +66,7 @@ class ContentHandler {
 			ksort($cCat);
 			$String .= "<li><a>{$Cats[$CatKey]}</a><ul>";			
 			foreach($cCat AS $MenuItem)
-				$String .= "<li><a href=\"{$MenuItem['url']}\">{$MenuItem['string']}</a></li>";
+				$String .= "<li><a href=\"/{$MenuItem['url']}\">{$MenuItem['string']}</a></li>";
 			$String .= '</ul></li>';
 		}
 		

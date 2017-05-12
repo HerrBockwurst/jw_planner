@@ -1,56 +1,58 @@
-<h3 style="margin-left: 5px; font-style: italic;">[(Admin NewUser)]</h3>
+<h3 style="margin-left: 5px; font-style: italic;">[(Admin EditUser)] (NAME) ((UID))</h3>
 <div style="float: left;">
 	<fieldset>
-		<legend>[(Admin Common)]</legend>	
-		<input type="text" id="iName" value="[(Common Name)]" /><br />
+		<legend>[(Admin Common)]</legend>
+		<input type="hidden" id="iUID" value="(UID)" />
+		<input type="text" id="iName" value="(NAME)" data-default="[(Common Name)]" /><br />
 		<input type="password" id="iPassword" value="[(Common Password)]" /><br />
-		<input type="text" id="iEmail" value="[(Common Email)]" /><br />
+		<input type="text" id="iEmail" value="(EMAIL)" data-default="[(Common Email)]" /><br />
 		<label>
 			[(Common Active)]
-			<input type="checkbox" id="iActive" checked/>
+			<input type="checkbox" id="iActive" />
 		</label>
 	</fieldset>
-	<button id="iSubmit" style="display: block; width: calc(100% - 10px); margin-top: 10px;">[(Admin AddUser)]</button>
+	<button id="iSubmit" style="display: block; width: calc(100% - 10px); margin-top: 10px;">[(Admin UpdateUser)]</button>
+	<button id="iDelete" class="redbutton" style="display: block; width: calc(100% - 10px); margin-top: 10px;">[(Admin DeleteUser)]</button>
 	<button id="iBack" class="redbutton" style="display: block; width: calc(100% - 10px); margin-top: 10px;">[(Common Back)]</button>
 </div>
 <fieldset style="float: left;">
 	<legend>[(Admin AdvancedSetting)]</legend>
 	<div style="margin-left: 5px">[(Common Versammlung)]</div>
 	<select id="VSSelect">
-	(VERS)
+		(VERS)
 	</select>
 	<div style="margin-left: 5px; margin-top: 10px">[(Common Role)]</div>
-	<select id="RoleSelect"><br />
-		<option value="0">[(Admin SelectVersFirst)]</option>
-	</select>
+	<select id="RoleSelect"></select>
 	<div style="margin-left: 5px; margin-top: 10px">[(Common Groups)]</div>
-	<select id="GroupSelect">
-		<option value="0">[(Admin SelectVersFirst)]</option>
-	</select>	
+	<select id="GroupSelect"></select>
 	<div style="margin-left: 5px; margin-top: 10px">[(Admin SpecialPerm)]</div>
 	<select id="SpecialpermSelect">
-		(PERM)
+		(PERMS)
 	</select>	
 </fieldset>
 <script>
-$(function() {
+var PreData = {role : {data : (ROLE), pre : (ROLEPRE)}, groups : {data : (GROUPS), pre : (GROUPSPRE)}, active : (ACTIVE)};
+
+$(function() {	
+	
 	$('#VSSelect').scombobox();
-	$('#RoleSelect').scombobox();
-	$('#GroupSelect').scombobox({mode: 'checkboxes', empty: true});
+	$('#RoleSelect').scombobox({data: PreData.role.data})
+	$('#GroupSelect').scombobox({mode: 'checkboxes', data: PreData.groups.data})
 	$('#SpecialpermSelect').scombobox({mode: 'checkboxes', empty: true});
+	
+	$('#RoleSelect').scombobox('val', PreData.role.pre);
+	$('#GroupSelect').scombobox('val', PreData.groups.pre);
+	if(PreData.active) $('#iActive').trigger('click');
 	
 	$('#VSSelect').scombobox('change', function() {
 		UMupdateRoles();
 		UMupdateGroups();
 	});
-	
-	UMupdateRoles();
-	UMupdateGroups();
 });
 
 function UMupdateRoles() {
 	LoadingBox(1);
-	$.post('^PROTO^^APPHOME^/usermanagement/getRoles', {vs: $('#VSSelect').scombobox('val')}, function(data) {
+	$.post('^PROTO^^APPHOME^/usermanagement/getRoles', {vs: $('#VSSelect').scombobox('val')}, function(data) {		
 		LoadingBox(-1);
 		var jdata = getJData(data);				
 		if(!jdata) return;
@@ -62,9 +64,9 @@ function UMupdateRoles() {
 function UMupdateGroups() {
 	LoadingBox(1);
 	$.post('^PROTO^^APPHOME^/usermanagement/getGroups', {vs: $('#VSSelect').scombobox('val')}, function(data) {
-		LoadingBox(-1);
+		LoadingBox(-1); 
 		var jdata = getJData(data);				
-		if(!jdata) return;		
+		if(!jdata) return;
 			
 		$('#GroupSelect').scombobox({data: jdata, sort: false, mode: 'checkboxes', empty: true}).find('.scombobox-display-div-item').remove();
 	});
@@ -78,6 +80,7 @@ $('#iBack').click(UMgoBack);
 
 $('#iSubmit').click(function() {
 	var data = {
+		uid : $('#iUID').val(),
 		name : $('#iName').val() == $('#iName').attr('data-default') ? null : $('#iName').val(),
 		pass : $('#iPassword').val() == $('#iPassword').attr('data-default') ? null : $('#iPassword').val(),
 		email : $('#iEmail').val() == $('#iEmail').attr('data-default') ? null : $('#iEmail').val(),
@@ -89,11 +92,11 @@ $('#iSubmit').click(function() {
 	};
 
 	LoadingBox(1);
-	$.post('^PROTO^^APPHOME^/usermanagement/adduser', data, function(data) {
+	$.post('^PROTO^^APPHOME^/usermanagement/edituser', data, function(data) {
 		LoadingBox(-1);
 		jdata = getJData(data);		
 		if(!jdata) return;
-		MessageBox('[(Admin UserAddSuccess)]');
+		MessageBox('[(Admin UserEditSuccess)]');
 		UMgoBack();
 	});
 })

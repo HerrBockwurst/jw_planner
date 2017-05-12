@@ -86,3 +86,7 @@
 	left: calc(50% - 30px);
 	top: calc(50% - 8px);
 }
+
+#SpecialpermSelect, #GroupSelect {
+	width: 450px;
+}

@@ -64,6 +64,15 @@ class User {
 		return FALSE;
 	}
 	
+	public function getClearedPerms() {
+		$ReturnVal = array();
+		foreach($this->Permissions AS $cPerm) {
+			if(strpos($cPerm, '.vs.') !== FALSE) continue;
+			$ReturnVal[] = $cPerm;
+		}
+		return $ReturnVal;
+	}
+	
 	public static function getMyself(): User {
 		static $Instance = NULL;
 		if($Instance === NULL)

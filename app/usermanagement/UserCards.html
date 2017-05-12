@@ -13,14 +13,14 @@
 <script>
 var UserList = (USER);
 var Template = '<div class="UM-Card"><div>{name}<span>{uid}</span></div><div>[(Common Versammlung)]<span>{vsname}</span></div><div>[(Common Role)]<span>{role}</span></div><div>[(Common Email)]<span>{email}</span></div><div>[(Common Active)]<span>{active}</span></div><div>[(Common Groups)]<span>{groups}</span></div><a href="^PROTO^^APPHOME^/usermanagement/edit/{uid}"></a></div>';
-
-$('#iVers').change(function() {
-	LoadingBox();
+$('#iVers').scombobox();
+$('#iVers').scombobox('change', function() {
+	LoadingBox(1);
 	$.post('^PROTO^^APPHOME^/usermanagement/updateuserlist', {vsid: $(this).val()}, function(data) {
 		jdata = getJData(data);
 		UserList = jdata;
 		updateUsercards();
-		LoadingBox();
+		LoadingBox(-1);
 	})
 });
 
@@ -46,6 +46,9 @@ function updateUsercards() {
 	});
 	setTimeout(function() {
 		$('.UM-Card').css({left: '0px', opacity: 1});
+		$('.UM-Card').find('a').each(function() {
+			$(this).unbind().bind('click', linkClick);
+		});
 	}, 100);
 }
 
@@ -56,6 +59,4 @@ $('#iName, #iEmail').keyup(function() {
 });
 
 $(updateUsercards);
-
-$('#iVers').nbox();
 </script>

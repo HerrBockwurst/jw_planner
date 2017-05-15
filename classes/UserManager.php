@@ -58,4 +58,11 @@ class UserManager {
 		
 		return TRUE;
 	}
+	
+	public static function delUser($UID) {
+		$mysql = MySQL::getInstance();
+		$mysql->where('uid', $UID);
+		if(!$mysql->delete('users')) returnErrorJSON(getString('Errors sql'));
+		return TRUE;
+	}
 }

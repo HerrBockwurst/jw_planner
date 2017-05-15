@@ -78,6 +78,19 @@ function UMgoBack() {
 
 $('#iBack').click(UMgoBack);
 
+$('#iDelete').click(function() {
+	var data = {uid: $('#iUID').val()};
+	
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/usermanagement/delUser', data, function(data) {		
+		var jdata = getJData(data);				
+		if(!jdata) return;
+		MessageBox('[(Admin UserDelSuccess)]');
+		LoadingBox(-1);
+		UMgoBack();
+	});
+});
+
 $('#iSubmit').click(function() {
 	var data = {
 		uid : $('#iUID').val(),

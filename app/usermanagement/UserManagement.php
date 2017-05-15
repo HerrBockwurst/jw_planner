@@ -90,7 +90,7 @@ class UserManagement extends \AModule {
 		$Groups = isset($_POST['groups']) ? $_POST['groups'] : array();
 		
 		if(empty($Name) || empty($Password) || empty($Vers)) returnErrorJSON(getString('Errors WrongFields')); //Leere Felder		
-		if(!\User::getMyself()->hasVSAccess($Vers)) returnErrorJSON(getString('errors noPerm')); //Keine Rechte für Versammlung
+		if(!\User::getMyself()->hasVSAccess($Vers)) returnErrorJSON(getString('Errors noPerm')); //Keine Rechte für Versammlung
 		
 		\UserManager::addUser($Name, $Password, $Email, $Active, $Vers, $Role, $Groups, $Perms);
 		echo json_encode(array());
@@ -157,8 +157,22 @@ class UserManagement extends \AModule {
 		echo json_encode(array());
 	}
 	
+	private function DelUser() {
+		$User = new \User($_POST['uid']);
+		if(!$User->Valid) returnErrorJSON(getString('Errors invalidUser'));
+		if(!\User::getMyself()->hasVSAccess($User->VSID)) returnErrorJSON(getString('Errors noPerm')); //Keine Rechte für Versammlung
+		
+		\GroupManager::unsetUser($User->UID); //Um ihn aus allen Gruppen der alten Versammlung zu entfernen
+		\UserManager::delUser($User->UID);
+		
+		echo json_encode(array());
+	}
+	
 	function ContentRequest() {
 		switch(getURL(1)) {
+			case 'deluser':
+				$this->DelUser();
+				break;
 			case 'edituser':
 				$this->EditUser();
 				break;

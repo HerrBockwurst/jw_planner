@@ -16,4 +16,11 @@ class VersManager {
 			
 			return $VersList;
 	}
+	
+	public static function getVersMembers($VSID) {
+		$mysql = MySQL::getInstance();
+		$mysql->where('vsid', $VSID);
+		$mysql->select('users');
+		return $mysql->fetchAll();
+	}
 }

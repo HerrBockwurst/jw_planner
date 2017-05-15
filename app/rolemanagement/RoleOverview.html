@@ -1,0 +1,49 @@
+<fieldset>
+	<legend>[(Menu RoleManagement)]</legend>
+	<select id="VersSelect">
+		(VERS)
+	</select>
+</fieldset>
+<div id="RoleManagerContainer">
+	<div id="RoleList">
+		(ROLELIST)
+		<button>[(Admin NewRole)]</button>
+	</div>
+	<div style="float: left; width: calc(100% - 270px); box-shadow: -2px 0px 1px -1px rgb(100,100,100); margin-left: -1px;">
+		<div id="RolePerms" style="width: calc(25% - 22px);">
+			<div style="font-size: 1.2em; margin-bottom: 5px; font-weight: bold;">[(Admin Permissions)]</div>
+			<div id="RolePermContainer">[(Admin SelectRoleFirst)]</div>
+		</div>
+		<div id="RoleMembers" style="width: calc(75% - 22px); box-shadow: -2px 0px 1px -1px rgb(100,100,100);">
+			<div style="font-size: 1.2em; margin-bottom: 5px; font-weight: bold;">[(Admin Members)]</div>
+			<div id="RoleMemberContainer">[(Admin SelectRoleFirst)]</div>
+		</div>
+	</div>
+	<div style="clear: both; margin-left: 268px; padding-top: 10px; box-shadow: 0px -2px 1px -1px rgb(100,100,100)">
+		<button id="iSaveRole">[(Admin Save)]</button>
+	</div>
+</div>
+<script>
+$('#VersSelect').scombobox();
+
+function RoleListClick() {
+	$(this).addClass('selected').siblings('.RoleListEntry').removeClass('selected');
+	LoadingBox(1);
+	var data = {rid: $(this).attr('data-rid')};
+	
+	$.post('^PROTO^^APPHOME^/rolemanagement/getRoleData', data, function(data) {		
+		var jdata = getJData(data);
+		LoadingBox(-1);
+		console.log(jdata);
+		if(!jdata) return;
+		
+		$('#RolePermContainer').css({opacity: '0px'});
+		$('#RoleMemberContainer').css({opacity: '0px'});
+		$('#RoleMemberContainer').html(jdata.users);
+		$('#RolePermContainer').html(jdata.perms);
+		
+	});
+}
+
+$('.RoleListEntry').click(RoleListClick);
+</script>

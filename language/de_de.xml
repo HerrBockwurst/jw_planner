@@ -33,6 +33,7 @@
 		<Dashboard>Übersicht</Dashboard>
 		<EntryOverview>Deine Einträge</EntryOverview>
 		<UserManagement>Benutzerverwaltung</UserManagement>
+		<RoleManagement>Rollenverwaltung</RoleManagement>
 	</Menu>
 	<Admin>
 		<SelectVersFirst>Zuerst Versammlung wählen.</SelectVersFirst>
@@ -44,9 +45,16 @@
 		<noRole>Keine Rolle</noRole>
 		<UserAddSuccess>Der Benutzer wurde erfolgreich angelegt.</UserAddSuccess>
 		<UpdateUser>Benutzer aktualisieren</UpdateUser>
-		<UserEditSuccess>Der benutzer wurde erfolgreich aktualisiert.</UserEditSuccess>
+		<UserEditSuccess>Der Benutzer wurde erfolgreich aktualisiert.</UserEditSuccess>
 		<EditUser>Benutzer bearbeiten -</EditUser>
 		<DeleteUser>Benutzer löschen</DeleteUser>
+		<UserDelSuccess>Der Benutzer wurde erfolgreich gelöscht.</UserDelSuccess>
+		<noRolesAssigned>Es wurden noch keine Rollen angelegt.</noRolesAssigned>
+		<SelectRoleFirst>Wähle zuerst eine Rolle.</SelectRoleFirst>
+		<Members>Mitglieder</Members>
+		<Permissions>Berechtigungen</Permissions>
+		<Save>Speichern</Save>
+		<NewRole>Neue Rolle</NewRole>
 	</Admin>
 	<Login>
 		<Login>Einloggen</Login>

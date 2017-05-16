@@ -7,7 +7,7 @@
 <div id="RoleManagerContainer">
 	<div id="RoleList">
 		(ROLELIST)
-		<button>[(Admin NewRole)]</button>
+		<button id="iNewRole">[(Admin NewRole)]</button>
 	</div>
 	<div style="float: left; width: calc(100% - 270px); box-shadow: -2px 0px 1px -1px rgb(100,100,100); margin-left: -1px;">
 		<div id="RolePerms" style="width: calc(25% - 22px);">
@@ -34,7 +34,6 @@ function RoleListClick() {
 	$.post('^PROTO^^APPHOME^/rolemanagement/getRoleData', data, function(data) {		
 		var jdata = getJData(data);
 		LoadingBox(-1);
-		console.log(jdata);
 		if(!jdata) return;
 		
 		$('#RolePermContainer').css({opacity: '0px'});
@@ -46,4 +45,34 @@ function RoleListClick() {
 }
 
 $('.RoleListEntry').click(RoleListClick);
+
+function saveRole() {
+	var Name = $('#iNewRoleName').val();
+	if(Name == $('#iNewRoleName').attr('data-default')) {
+		$('#MessageBox').fadeOut(100);
+		setTimeout(function() {
+			MessageBox('[(Errors WrongFields)]', {Buttons: [{string: "[(Common Okay)]", callback: function() {$('#iNewRole').trigger('click')}}]});
+		}, 150);
+	}
+	
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/rolemanagement/addRole', {name: Name, vsid: $('#VersSelect').scombobox('val')}, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		$('#RoleList').find('.RoleListEntry').remove();
+		$('#RoleList').prepend(jdata.roles);
+		$('#RoleList').find('.RoleListEntry').bind('click', RoleListClick);
+		$('#MessageBox').fadeOut(100);
+	});
+}
+
+$('#iNewRole').click(function() {
+	$('#MessageBox').fadeOut(100);
+	setTimeout(function() {
+		var html = '<input type="text" id="iNewRoleName" value="[(Admin RoleName)]" />'; 
+		MessageBox(html, {Buttons: [{string: "[(Admin Save)]", callback: saveRole}, {string: "[(Common Back)]", cls: "redbutton"}], after: bindInputs, Head: "[(Admin NewRole)]"});
+	}, 150);	
+});
 </script>

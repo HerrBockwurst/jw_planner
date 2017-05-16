@@ -62,8 +62,21 @@ class RoleManagement extends \AModule {
 		));
 	}
 	
+	private function addRole() {
+		$RoleName = $_POST['name'];
+		$VSID = $_POST['vsid'];
+		
+		if(!\User::getMyself()->hasVSAccess($VSID)) returnErrorJSON(getString('Errors noPerm'));
+		
+		\RoleManager::addRole($RoleName, $VSID);
+		echo json_encode(array('roles' => $this->getRoles($VSID)));
+	}
+	
 	public function ContentRequest() {
 		switch(getURL(1)) {
+			case 'addrole':
+				$this->addRole();
+				break;
 			case 'getroledata':
 				$this->getRoleData();
 				break;

@@ -57,27 +57,37 @@ function linkClick(e) {
 	loadPage(e.target.href);
 }
 
-function MessageBox(html, DoubleButton, Callback) {
+function MessageBox(html, Data) {
 	var box = $('#MessageBox');
-	if(typeof DoubleButton === "undefined") DoubleButton = false;
-	if(typeof Callback === "undefined") Callback = function() {};
+	if(typeof Data === "undefined") Data = {};
+	if(typeof Data.Buttons === "undefined") Data.Buttons = [{string: lang.okay}];
 	
-	var buttons = '<div id="MessageBox_ButtonRow">';
+	var buttonsDiv = $($.parseHTML('<div id="MessageBox_ButtonRow"></div>'));
 	
-	buttons = DoubleButton ? 
-			buttons + '<button id="MessageBox_ButtonYes">' + lang.yes + '</button><button id="MessageBox_ButtonNo">' + lang.no + '</button>' :
-			buttons + '<button id="MessageBox_ButtonOk">' + lang.okay + '</button>';
+	$.each(Data.Buttons, function(key, btn) {
+		var Class = typeof btn.cls !== "undefined" ? btn.cls : "";
+		var Callback = typeof btn.callback !== "undefined" ? btn.callback : function() {$('#MessageBox').fadeOut(100)};
+		
+		button = $($.parseHTML('<button class="' + Class + '">' + btn.string + '</button>'));
+		button.bind('click', Callback);
+		
+		buttonsDiv.append(button);		
+	});
 	
-	buttons = buttons + '</div>';
+	var head = $($.parseHTML('<p style="font-weight: bold; margin: 0px 0px 10px 0px; font-size: 18px; border-bottom: 1px solid rgb(40,40,40)"></p>'));
+	if(typeof Data.Head !== "undefined") head.append(Data.Head);
+	else head.append('JWPlanner');
 	
-	html = '<p style="font-weight: bold; margin: 0px 0px 10px 0px; font-size: 18px; border-bottom: 1px solid rgb(40,40,40)">JWPlanner</p>' + html;
+	box.find('#MessageBox_Inner').html('');
 	
-	box.find('#MessageBox_Inner').html(html + buttons);
-	box.find('button').unbind();
-	box.find('#MessageBox_ButtonYes').bind('click', Callback);
-	box.find('#MessageBox_ButtonNo, #MessageBox_ButtonOk').bind('click', function() {$('#MessageBox').fadeOut(100)});
+	if(typeof Data.noHead === "undefined" || Data.noHead == false)
+		box.find('#MessageBox_Inner').append(head);
+	
+	box.find('#MessageBox_Inner').append(html).append(buttonsDiv);
 	box.fadeIn(100);
 
+	if(typeof Data.after === "function")
+		Data.after();
 }
 
 function LoadingBox(Switch) {

@@ -55,6 +55,7 @@
 		<Permissions>Berechtigungen</Permissions>
 		<Save>Speichern</Save>
 		<NewRole>Neue Rolle</NewRole>
+		<RoleName>Name der Rolle</RoleName>
 	</Admin>
 	<Login>
 		<Login>Einloggen</Login>

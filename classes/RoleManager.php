@@ -1,5 +1,15 @@
 <?php
 class RoleManager {
+	
+	public static function addRole($Name, $VSID) {
+		$mysql = MySQL::getInstance();
+		if(!$mysql->insert('roles', array(
+				'vsid' => $VSID,
+				'name' => $Name,
+				'entry' => "[]"
+		))) returnErrorJSON(getString('Errors sql'));
+	}
+	
 	public static function getRoles($Vers = NULL) {
 		$vs = $Vers == NULL ? User::getMyself()->VSID : $Vers;
 		$MySQL = MySQL::getInstance();

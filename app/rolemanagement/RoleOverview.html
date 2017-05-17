@@ -25,35 +25,89 @@
 </div>
 <script>
 $('#VersSelect').scombobox();
+$('#VersSelect').scombobox('change', updateRoles);
 
-function RoleListClick() {
+var Default = {
+		roleperms: $('#RolePerms').html(),
+		rolemembers: $('#RoleMembers').html()
+};
+
+function updateRoles() {
+	LoadingBox(1);
+	var VSID = $('#VersSelect').scombobox('val');
+	$.post('^PROTO^^APPHOME^/rolemanagement/getRoles', {vsid: VSID}, function(data) {
+		var jdata = getJData(data);
+		LoadingBox(-1);
+		if(!jdata) return;
+		
+		$('#RoleList').find('.RoleListEntry').remove();
+		$('#RoleList').prepend(jdata.roles);
+		$('#RoleList').find('.RoleListEntry').bind('click', RoleListClick);
+		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);		
+	});	
+}
+
+function RoleListClick(e) {
+	if(!$(e.target).is('.RoleListEntry')) return;
 	$(this).addClass('selected').siblings('.RoleListEntry').removeClass('selected');
 	LoadingBox(1);
-	var data = {rid: $(this).attr('data-rid')};
+	var RID = $(this).attr('data-rid')
+	var data = {rid: RID};
+	
 	
 	$.post('^PROTO^^APPHOME^/rolemanagement/getRoleData', data, function(data) {		
 		var jdata = getJData(data);
 		LoadingBox(-1);
 		if(!jdata) return;
 		
+		$('#iSaveRole').attr('data-rid', RID);
 		$('#RolePermContainer').css({opacity: '0px'});
 		$('#RoleMemberContainer').css({opacity: '0px'});
 		$('#RoleMemberContainer').html(jdata.users);
 		$('#RolePermContainer').html(jdata.perms);
-		
+		$(':checkbox').bind('click', setChanged);
 	});
 }
 
 $('.RoleListEntry').click(RoleListClick);
+$('.RoleListEntryDelete').click(RoleListDelete);
+
+function setChanged() {
+	$(this).attr('data-changed', 1);
+}
+
+function RoleListDelete(e) {
+	var RoleName = $(e.target).parent().clone().children().remove().end().text();
+	var RID = $(e.target).parent().attr('data-rid');
+	MessageBox('[(Admin DeleteRoleA)] "' + RoleName + '" [(Admin DeleteRoleB)]', {Head: "[(Menu RoleManagement)]", Buttons: [{string: "[(Common Yes)]", callback: DeleteRole, data: {rid: RID}}, {string: "[(Common No)]", cls: "redbutton"}]});
+}
+
+function DeleteRole(e) {
+	var RID = e.data.rid;
+	$('#MessageBox').fadeOut(100);
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/rolemanagement/delRole', {rid: RID}, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		$('#RoleList').find('.RoleListEntry').remove();
+		$('#RoleList').prepend(jdata.roles);
+		$('#RoleList').find('.RoleListEntry').bind('click', RoleListClick);
+		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);
+		$('#iSaveRole').removeAttr('data-rid');
+		$('#RolePerms').html(Default.roleperms);
+		$('#RoleMembers').html(Default.rolemembers);
+	});
+}
 
 function saveRole() {
+	$('#MessageBox').fadeOut(100);
 	var Name = $('#iNewRoleName').val();
-	if(Name == $('#iNewRoleName').attr('data-default')) {
-		$('#MessageBox').fadeOut(100);
+	if(Name == $('#iNewRoleName').attr('data-default')) 
 		setTimeout(function() {
 			MessageBox('[(Errors WrongFields)]', {Buttons: [{string: "[(Common Okay)]", callback: function() {$('#iNewRole').trigger('click')}}]});
 		}, 150);
-	}
 	
 	LoadingBox(1);
 	$.post('^PROTO^^APPHOME^/rolemanagement/addRole', {name: Name, vsid: $('#VersSelect').scombobox('val')}, function(data) {
@@ -64,9 +118,39 @@ function saveRole() {
 		$('#RoleList').find('.RoleListEntry').remove();
 		$('#RoleList').prepend(jdata.roles);
 		$('#RoleList').find('.RoleListEntry').bind('click', RoleListClick);
-		$('#MessageBox').fadeOut(100);
+		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);
+		$('#iSaveRole').removeAttr('data-rid');
+		$('#RolePerms').html(Default.roleperms);
+		$('#RoleMembers').html(Default.rolemembers);
 	});
 }
+
+$('#iSaveRole').click(function() {
+	if(typeof $(this).attr('data-rid') === "undefined") {
+		MessageBox('[(Admin SelectRoleFirst)]');
+		return;
+	}
+	
+	var RID = $(this).attr('data-rid');
+	var Perms = {}, Users = {};
+	$('#RolePermContainer').find(':checkbox[data-changed="1"]').each(function() { 
+		Perms[$(this).val()] = $(this).is(':checked') ? "1": "0";
+	});
+	
+	$('#RoleMemberContainer').find(':checkbox[data-changed="1"]').each(function() {
+		Users[$(this).val()] = $(this).is(':checked') ? "1": "0";
+	});
+	var Data = {rid: RID, perms: Perms, users: Users};
+	
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/rolemanagement/updateRole', Data, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		MessageBox('[(Admin RoleUpdateSuccess)]')
+	});
+});
 
 $('#iNewRole').click(function() {
 	$('#MessageBox').fadeOut(100);

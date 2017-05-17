@@ -40,4 +40,32 @@ class RoleManager {
 		$Perms = json_decode($MySQL->fetchRow()->entry);
 		return array_diff($Perms, $Filter);
 	}
+	
+	public static function deleteRole($RID) {
+		$MySQL = MySQL::getInstance();
+		$MySQL->where('rid', $RID);
+		if(!$MySQL->delete('roles')) returnErrorJSON(getString('Errors sql'));
+		
+		$MySQL->where('role', $RID);
+		if(!$MySQL->update('users', array('role' => 0))) returnErrorJSON(getString('Errors sql'));
+	}
+	
+	public static function togglePermission($Perms, $RID) {
+		$Perms = is_array($Perms) ? $Perms : array($Perms);
+		$Role = self::getRole($RID);
+		if(!$Role) returnErrorJSON(getString('Errors invalidInput'));
+		$CurrentPerms = json_decode($Role->entry);
+		$NewPerms = array();
+		
+		foreach($CurrentPerms AS $cPerm)
+			if(!in_array($cPerm, $Perms)) $NewPerms[] = $cPerm; //Alle unbetroffenen Permissions übertragen
+		
+		foreach($Perms AS $cPerm) 
+			if(!in_array($cPerm, $CurrentPerms))
+				$NewPerms[] = $cPerm;
+		
+		$mysql = MySQL::getInstance();
+		$mysql->where('rid', $RID);
+		if(!$mysql->update('roles', array('entry' => json_encode($NewPerms)))) returnErrorJSON(getString('Errors sql'));		
+	}
 }

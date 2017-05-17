@@ -37,6 +37,7 @@
 	</Menu>
 	<Admin>
 		<SelectVersFirst>Zuerst Versammlung wählen.</SelectVersFirst>
+		<SelectRoleFirst>Bitte wähle zuerst eine Rolle aus!</SelectRoleFirst>
 		<SpecialPerm>Sonderberechtigung</SpecialPerm>
 		<Common>Allgemeines</Common>
 		<AdvancedSetting>Erweiterte Einstellungen</AdvancedSetting>
@@ -56,6 +57,9 @@
 		<Save>Speichern</Save>
 		<NewRole>Neue Rolle</NewRole>
 		<RoleName>Name der Rolle</RoleName>
+		<DeleteRoleA>Möchtest du wirklich die Rolle</DeleteRoleA>
+		<DeleteRoleB>löschen?</DeleteRoleB>
+		<RoleUpdateSuccess>Die Rolle wurde erfolgreich aktualisiert.</RoleUpdateSuccess>
 	</Admin>
 	<Login>
 		<Login>Einloggen</Login>

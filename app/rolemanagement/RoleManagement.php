@@ -31,7 +31,7 @@ class RoleManagement extends \AModule {
 		$String = "";
 		
 		foreach($Roles AS $cRole) 
-			$String .= '<div class="RoleListEntry" data-rid="'.$cRole['rid'].'">'.$cRole['name'].'</div>';
+			$String .= '<div class="RoleListEntry" data-rid="'.$cRole['rid'].'">'.$cRole['name'].'<span class="RoleListEntryDelete">X</span></div>';
 		
 		return $String;
 	}
@@ -72,8 +72,58 @@ class RoleManagement extends \AModule {
 		echo json_encode(array('roles' => $this->getRoles($VSID)));
 	}
 	
+	private function delRole() {
+		$RID = $_POST['rid'];
+		$Role = \RoleManager::getRole($RID);
+		if(!$Role) returnErrorJSON(getString('Errors invalidInput'));
+		if(!\User::getMyself()->hasVSAccess($Role->vsid)) returnErrorJSON(getString('Errors noPerm'));
+		
+		\RoleManager::deleteRole($RID);
+		echo json_encode(array('roles' => $this->getRoles($Role->vsid)));
+	}
+	
+	private function updateRole() {
+		$RID = $_POST['rid'];
+		$Users = isset($_POST['users']) ? $_POST['users'] : Array();
+		$Perms = isset($_POST['perms']) ? $_POST['perms'] : Array();		
+		
+		$Role = \RoleManager::getRole($RID);
+		if(!$Role) returnErrorJSON(getString('Errors invalidInput'));
+		if(!\User::getMyself()->hasVSAccess($Role->vsid)) returnErrorJSON(getString('Errors noPerm'));
+		
+		$CurrentPerms = json_decode($Role->entry);
+		$PermsToToggle = array();
+		
+		foreach($Perms AS $Perm => $Checked) { //Permissions aussortieren, die zwar im Formular geändert, aber wieder zurück gesetzt wurden
+			if(($Checked == 1 && in_array($Perm, $CurrentPerms)) || ($Checked == 0 && !in_array($Perm, $CurrentPerms))) continue; 
+			$PermsToToggle[] = $Perm;
+		}
+		
+		if(!empty($PermsToToggle)) \RoleManager::togglePermission($PermsToToggle, $RID); //Rollen Toggeln
+		
+		foreach($Users AS $UID => $Checked) {
+			$User = new \User($UID);
+			if(!$User->Valid) returnErrorJSON(getString('Errors invalidUser'));
+			
+			if($Checked == 1)
+				\UserManager::editUser($UID, array('role' => $RID));
+			elseif($Checked == 0 && $User->RID == $RID)
+				\UserManager::editUser($UID, array('role' => 0));
+		}
+		echo json_encode(array());
+	}
+	
 	public function ContentRequest() {
 		switch(getURL(1)) {
+			case 'updaterole':
+				$this->updateRole();
+				break;
+			case 'getroles':
+				echo json_encode(array('roles' => $this->getRoles($_POST['vsid'])));
+				break;				
+			case 'delrole':
+				$this->delRole();
+				break;
 			case 'addrole':
 				$this->addRole();
 				break;

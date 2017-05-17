@@ -67,9 +67,10 @@ function MessageBox(html, Data) {
 	$.each(Data.Buttons, function(key, btn) {
 		var Class = typeof btn.cls !== "undefined" ? btn.cls : "";
 		var Callback = typeof btn.callback !== "undefined" ? btn.callback : function() {$('#MessageBox').fadeOut(100)};
+		var Data = typeof btn.data !== "undefined" ? btn.data : {};
 		
 		button = $($.parseHTML('<button class="' + Class + '">' + btn.string + '</button>'));
-		button.bind('click', Callback);
+		button.bind('click', Data, Callback);
 		
 		buttonsDiv.append(button);		
 	});

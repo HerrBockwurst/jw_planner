@@ -34,6 +34,7 @@
 		<EntryOverview>Deine Einträge</EntryOverview>
 		<UserManagement>Benutzerverwaltung</UserManagement>
 		<RoleManagement>Rollenverwaltung</RoleManagement>
+		<GroupManagement>Gruppenverwaltung</GroupManagement>
 	</Menu>
 	<Admin>
 		<SelectVersFirst>Zuerst Versammlung wählen.</SelectVersFirst>
@@ -60,6 +61,15 @@
 		<DeleteRoleA>Möchtest du wirklich die Rolle</DeleteRoleA>
 		<DeleteRoleB>löschen?</DeleteRoleB>
 		<RoleUpdateSuccess>Die Rolle wurde erfolgreich aktualisiert.</RoleUpdateSuccess>
+		<EditRole>Rolle bearbeiten</EditRole>
+		<NewGroup>Neue Gruppe</NewGroup>
+		<noGroupsAssigned>Es wurden noch keine Gruppen angelegt.</noGroupsAssigned>
+		<SelectGroupFirst>Wähle zuerst eine Gruppe.</SelectGroupFirst>
+		<DeleteGroupA>Möchtest du wirklich die Gruppe</DeleteGroupA>
+		<DeleteGroupB>löschen?</DeleteGroupB>
+		<GroupName>Name der Gruppe</GroupName>
+		<GroupUpdateSuccess>Die Gruppe wurde erfolgreich aktualisiert.</GroupUpdateSuccess>
+		<EditGroup>Gruppe bearbeiten</EditGroup>		
 	</Admin>
 	<Login>
 		<Login>Einloggen</Login>

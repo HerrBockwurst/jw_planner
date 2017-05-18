@@ -1,4 +1,4 @@
-.RoleListEntry {
+.GroupListEntry {
 	padding: 10px;
 	min-width: 250px;
 	max-width: 250px;
@@ -8,11 +8,11 @@
 	position: relative;	
 }
 
-.RoleListEntry:not([data-rid="0"]):hover, .RoleListEntry.selected {
+.GroupListEntry:not([data-gid="0"]):hover, .GroupListEntry.selected {
 	background-color: rgb(150,225,160);
 	cursor: pointer;
 }
-.RoleListEntryEdit {
+.GroupListEntryEdit {
 	position: absolute;
 	width: 13px;
 	height: 13px;
@@ -29,7 +29,7 @@
 	background-repeat: no-repeat;
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAABmJLR0QAwQBVAHgZn29BAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QUSCBcbosluIQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAACJElEQVQozy3OT0tUURiA8ec958zcuY7jiI1jppKWSmYiohJBiEWLMEyI0lW0atGmnZuWQYvoA7hrK7iPCoqCkkgLQigsBUeNRsRy/D927zmnRT5f4PdIsVhk9vkkZvqLCndyWVDV3roKbwHnD7yXkihVKlRad/ruCAMDA5iVlRWC4Dulml+Uw+1MduPkpIhp9DaKwPzQCXPPO7/lAk0YhogIZm11jlLhI67Kp0MThYW6pXPiJd0yd/FAjC75yJdFiWu70EtLSwsAKhvPocSJMlKxn958l0y5CpNwrPVM2+38wm1J+i208/X9ndTU1ABgisvvhdimVYJKHSSq4nIkzhN7Y9ddfmXDC/u9Q+NUNjehtf4vtba3ixid5q+dNpQT3juU94fWcj1W8e5O7bLfb8iQyWQAcM6hurp70rV1dVXWSHbvwCtliCNk3Tt+W8te79VxcicaiaKI+fl5tNao2Kr04OUrb4IgmbRKgZJDrf2wg921jUPvgjbiOCaVSqmOjo4UUKmevf6Wdl6HN26OqQoS1sZqPbZuc2KqED2cWEh0dvWTz+cVkAemgAy3hntOVWfDzfLqY7u39GTz5dPh1rFrDU0izAJngONAE/AW6AZyaC3NRus/QVLvP3owdPbOaF+fQEEpGQVeASPAV2AQyHFUDljTilbgp4h8CgLTB1wCXgD3gQ9HGjMzMwCEgAbqj3bagVrgGHAe+Ax0AGZxcZE4jvkHz1jagngddhcAAAAASUVORK5CYII=')
 }
-.RoleListEntryDelete {
+.GroupListEntryDelete {
 	position: absolute;
 	width: 13px;
 	height: 13px;
@@ -45,26 +45,26 @@
 	font-weight: bold;
 	display: block;
 }
-#RoleList {
+#GroupList {
 	float: left;
 }
-#RoleManagerContainer {
+#GroupManagerContainer {
 	margin-top: 20px;	
 	box-shadow: 0px -2px 1px -1px rgb(100,100,100);
 }
-#RoleManagerContainer:after {
+#GroupManagerContainer:after {
 	content: "";
 	display: block;
 	clear: both;
 }
-#RolePerms, #RoleMembers {
+#GroupMembers {
 	float: left;
 	min-height: 250px;
 	margin-left: 2px;
 	margin-top: -2px;
 	padding: 10px;
 }
-#RoleMemberContainer > label {
+#GroupMemberContainer > label {
 	min-width: 150px;
 	max-width: 150px;
 	overflow: hidden;

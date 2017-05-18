@@ -1,0 +1,192 @@
+<fieldset>
+	<legend>[(Menu GroupManagement)]</legend>
+	<select id="VersSelect">
+		(VERS)
+	</select>
+</fieldset>
+<div id="GroupManagerContainer">
+	<div id="GroupList">
+		(GROUPLIST)
+		<button id="iNewGroup">[(Admin NewGroup)]</button>
+	</div>
+	<div style="float: left; width: calc(100% - 270px); box-shadow: -2px 0px 1px -1px rgb(100,100,100); margin-left: -1px;">		
+		<div id="GroupMembers">
+			<div style="font-size: 1.2em; margin-bottom: 5px; font-weight: bold;">[(Admin Members)]</div>
+			<div id="GroupMemberContainer">[(Admin SelectGroupFirst)]</div>
+		</div>
+	</div>
+	<div style="clear: both; margin-left: 268px; padding-top: 10px; box-shadow: 0px -2px 1px -1px rgb(100,100,100)">
+		<button id="iSaveGroup">[(Admin Save)]</button>
+	</div>
+</div>
+<script>
+$('#VersSelect').scombobox();
+$('#VersSelect').scombobox('change', updateGroups);
+
+var Default = {
+		groupmembers: $('#GroupMembers').html()
+};
+
+function updateGroups() {
+	LoadingBox(1);
+	var VSID = $('#VersSelect').scombobox('val');
+	$.post('^PROTO^^APPHOME^/groupmanagement/getGroups', {vsid: VSID}, function(data) {
+		var jdata = getJData(data);
+		LoadingBox(-1);
+		if(!jdata) return;
+		
+		$('#GroupList').find('.GroupListEntry').remove();
+		$('#GroupList').prepend(jdata.groups);
+		$('#GroupList').find('.GroupListEntry[data-gid!="0"]').bind('click', GroupListClick);
+		$('#GroupList').find('.GroupListEntryDelete').bind('click', GroupListDelete);		
+		$('#GroupList').find('.GroupListEntryEdit').bind('click', changeGroupName);
+		$('#GroupMembers').html(Default.groupmembers);
+	});	
+}
+
+function GroupListClick(e) {
+	if(!$(e.target).is('.GroupListEntry')) return;
+	$(this).addClass('selected').siblings('.GroupListEntry').removeClass('selected');
+	LoadingBox(1);
+	var GID = $(this).attr('data-gid')
+	var data = {gid: GID};
+	
+	
+	$.post('^PROTO^^APPHOME^/groupmanagement/getGroupData', data, function(data) {		
+		var jdata = getJData(data);
+		LoadingBox(-1);
+		if(!jdata) return;
+		
+		$('#iSaveGroup').attr('data-gid', GID);
+		$('#GroupMemberContainer').css({opacity: '0px'});
+		$('#GroupMemberContainer').html(jdata.users);		
+	});
+}
+
+$('.GroupListEntry').click(GroupListClick);
+$('.GroupListEntryDelete').click(GroupListDelete);
+$('.GroupListEntryEdit').click(changeGroupName);
+
+function GroupListDelete(e) {
+	var GroupName = $(e.target).parent().clone().children().remove().end().text();
+	var GID = $(e.target).parent().attr('data-gid');
+	MessageBox('[(Admin DeleteGroupA)] "' + GroupName + '" [(Admin DeleteGroupB)]', {Head: "[(Menu GroupManagement)]", Buttons: [{string: "[(Common Yes)]", callback: DeleteGroup, data: {gid: GID}}, {string: "[(Common No)]", cls: "redbutton"}]});
+}
+
+function DeleteGroup(e) {
+	var GID = e.data.gid;
+	$('#MessageBox').fadeOut(100);
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/groupmanagement/delGroup', {gid: GID}, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		$('#GroupList').find('.GroupListEntry').remove();
+		$('#GroupList').prepend(jdata.groups);
+		$('#GroupList').find('.GroupListEntry[data-gid!="0"]').bind('click', GroupListClick);
+		$('#GroupList').find('.GroupListEntryDelete').bind('click', GroupListDelete);
+		$('#GroupList').find('.GroupListEntryEdit').bind('click', changeGroupName);
+		$('#iSaveGroup').removeAttr('data-gid');
+		$('#GroupMembers').html(Default.groupmembers);
+	});
+}
+
+function changeGroupName() {
+	var GID = $(this).parent().attr('data-gid');
+	var name = $(this).parent().clone().children().remove().end().text();
+	var html = '<input type="text" id="iEditGroupName" data-default="[(Admin GroupName)]" value="' + name + '"/>'; 
+	setTimeout(function() {
+		MessageBox(html, {Buttons: [{string: "[(Admin Save)]", data: {gid : GID, button: $(this)}, callback: editGroup}, {string: "[(Common Back)]", cls: "redbutton"}], after: bindInputs, Head: "[(Admin EditGroup)]"});
+	}, 150);
+}
+
+function editGroup(e) {
+	var GID = e.data.gid;
+	var button = e.data.button;
+	var Name = $('#iEditGroupName').val();
+	$('#MessageBox').fadeOut(100);
+	if(Name == $('#iEditGroupName').attr('data-default')) {		
+		setTimeout(function() {
+			MessageBox('[(Errors WrongFields)]', {Buttons: [{string: "[(Common Okay)]", callback: function() {$('#MessageBox').fadeOut(100); button.trigger('click')}}]});
+		}, 150);
+		return;
+	}
+	
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/groupmanagement/editGroup', {gid: GID, name: Name}, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		$('#GroupList').find('.GroupListEntry').remove();
+		$('#GroupList').prepend(jdata.groups);
+		$('#GroupList').find('.GroupListEntry[data-gid!="0"]').bind('click', GroupListClick);
+		$('#GroupList').find('.GroupListEntryDelete').bind('click', GroupListDelete);
+		$('#GroupList').find('.GroupListEntryEdit').bind('click', changeGroupName);
+		$('#iSaveGroup').removeAttr('data-gid');
+		$('#GroupMembers').html(Default.groupmembers);
+		setTimeout(function() {
+			MessageBox('[(Admin GroupUpdateSuccess)]', {Buttons: [{string: "[(Common Okay)]"}]});
+		}, 150);
+	});
+}
+
+function saveGroup() {
+	$('#MessageBox').fadeOut(100);
+	var Name = $('#iNewGroupName').val();
+	if(Name == $('#iNewGroupName').attr('data-default')) {
+		setTimeout(function() {
+			MessageBox('[(Errors WrongFields)]', {Buttons: [{string: "[(Common Okay)]", callback: function() {$('#iNewGroup').trigger('click')}}]});
+		}, 150);
+		return;
+	}
+	
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/groupmanagement/addGroup', {name: Name, vsid: $('#VersSelect').scombobox('val')}, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		$('#GroupList').find('.GroupListEntry').remove();
+		$('#GroupList').prepend(jdata.groups);
+		$('#GroupList').find('.GroupListEntry[data-gid!="0"]').bind('click', GroupListClick);
+		$('#GroupList').find('.GroupListEntryDelete').bind('click', GroupListDelete);
+		$('#GroupList').find('.GroupListEntryEdit').bind('click', changeGroupName);
+		$('#iSaveGroup').removeAttr('data-gid');
+		$('#GroupMembers').html(Default.groupmembers);
+	});
+}
+
+$('#iSaveGroup').click(function() {
+	if(typeof $(this).attr('data-gid') === "undefined") {
+		MessageBox('[(Admin SelectGroupFirst)]');
+		return;
+	}
+	
+	var GID = $(this).attr('data-gid');
+	var Users = [];
+	
+	$('#GroupMemberContainer').find(':checkbox:checked').each(function() {
+		Users.push($(this).val());
+	});
+	var Data = {gid: GID, users: Users};
+	
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/groupmanagement/updateGroup', Data, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		MessageBox('[(Admin GroupUpdateSuccess)]')
+	});
+});
+
+$('#iNewGroup').click(function() {
+	$('#MessageBox').fadeOut(100);
+	setTimeout(function() {
+		var html = '<input type="text" id="iNewGroupName" value="[(Admin GroupName)]" />'; 
+		MessageBox(html, {Buttons: [{string: "[(Admin Save)]", callback: saveGroup}, {string: "[(Common Back)]", cls: "redbutton"}], after: bindInputs, Head: "[(Admin NewGroup)]"});
+	}, 150);	
+});
+</script>

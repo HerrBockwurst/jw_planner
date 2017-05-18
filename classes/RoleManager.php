@@ -50,6 +50,12 @@ class RoleManager {
 		if(!$MySQL->update('users', array('role' => 0))) returnErrorJSON(getString('Errors sql'));
 	}
 	
+	public static function changeName($RID, $Name) {
+		$mysql = MySQL::getInstance();
+		$mysql->where('rid', $RID);
+		if(!$mysql->update('roles', array('name' => $Name))) returnErrorJSON(getString('Errors sql'));
+	}
+	
 	public static function togglePermission($Perms, $RID) {
 		$Perms = is_array($Perms) ? $Perms : array($Perms);
 		$Role = self::getRole($RID);

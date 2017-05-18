@@ -15,19 +15,26 @@ class GroupManager {
 		return $MySQL->fetchAll();
 	}
 	
-	public static function isValidGroup($Set, $VS = NULL) {
+	public static function getGroup($Gid) {
 		$MySQL = MySQL::getInstance();
-		$GIDs = array();
-		
-		
-		foreach(self::getGroups($VS) AS $cGroup)
-			$GIDs[] = $cGroup['gid'];
-		
-		foreach($Set AS $cGroup) 
-			if(!in_array($cGroup, $GIDs)) return FALSE;
-		
-		return TRUE;
-		
+		$MySQL->where('gid', $Gid);
+		$MySQL->select('groups', NULL, 1);
+		return $MySQL->fetchRow();		
+	}
+	
+	public static function addGroup($GroupName, $VSID) {
+		$mysql = MySQL::getInstance();
+		$mysql->insert('groups', array(
+			'vsid' => $VSID,
+			'name' => $GroupName,
+			'members' => '[]'
+		));
+	}
+	
+	public static function delGroup($GID) {
+		$mysql = MySQL::getInstance();
+		$mysql->where('gid', $GID);
+		if(!$mysql->delete('groups')) returnErrorJSON(getString('Errors sql'));
 	}
 	
 	public static function unsetUser($UID, $Group = NULL) {
@@ -69,6 +76,19 @@ class GroupManager {
 			$MySQL->where('gid', $cGroup);
 			if(!$MySQL->update('groups', array('members' => $Members)));
 		}
+	}
+	
+	public static function setUsers($GID, $Users) {
+		$Users = json_encode(array_values($Users));
+		$mysql = MySQL::getInstance();
+		$mysql->where('gid', $GID);
+		if(!$mysql->update('groups', array('members' => $Users))) returnErrorJSON(getString('Errors sql'));
+	}
+	
+	public static function changeName($GID, $Name) {
+		$mysql = MySQL::getInstance();
+		$mysql->where('gid', $GID);
+		if(!$mysql->update('groups', array('name' => $Name))) returnErrorJSON(getString('Errors sql'));
 	}
 	
 	public static function getUsers($GID) {

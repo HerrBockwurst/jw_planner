@@ -42,8 +42,11 @@ function updateRoles() {
 		
 		$('#RoleList').find('.RoleListEntry').remove();
 		$('#RoleList').prepend(jdata.roles);
-		$('#RoleList').find('.RoleListEntry').bind('click', RoleListClick);
-		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);		
+		$('#RoleList').find('.RoleListEntry[data-rid!="0"]').bind('click', RoleListClick);
+		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);
+		$('#RoleList').find('.RoleListEntryEdit').bind('click', changeRoleName);
+		$('#RolePerms').html(Default.roleperms);
+		$('#RoleMembers').html(Default.rolemembers);
 	});	
 }
 
@@ -71,6 +74,7 @@ function RoleListClick(e) {
 
 $('.RoleListEntry').click(RoleListClick);
 $('.RoleListEntryDelete').click(RoleListDelete);
+$('.RoleListEntryEdit').click(changeRoleName);
 
 function setChanged() {
 	$(this).attr('data-changed', 1);
@@ -93,8 +97,9 @@ function DeleteRole(e) {
 		
 		$('#RoleList').find('.RoleListEntry').remove();
 		$('#RoleList').prepend(jdata.roles);
-		$('#RoleList').find('.RoleListEntry').bind('click', RoleListClick);
+		$('#RoleList').find('.RoleListEntry[data-rid!="0"]').bind('click', RoleListClick);
 		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);
+		$('#RoleList').find('.RoleListEntryEdit').bind('click', changeRoleName);
 		$('#iSaveRole').removeAttr('data-rid');
 		$('#RolePerms').html(Default.roleperms);
 		$('#RoleMembers').html(Default.rolemembers);
@@ -104,10 +109,12 @@ function DeleteRole(e) {
 function saveRole() {
 	$('#MessageBox').fadeOut(100);
 	var Name = $('#iNewRoleName').val();
-	if(Name == $('#iNewRoleName').attr('data-default')) 
+	if(Name == $('#iNewRoleName').attr('data-default')) {
 		setTimeout(function() {
 			MessageBox('[(Errors WrongFields)]', {Buttons: [{string: "[(Common Okay)]", callback: function() {$('#iNewRole').trigger('click')}}]});
 		}, 150);
+		return;
+	}
 	
 	LoadingBox(1);
 	$.post('^PROTO^^APPHOME^/rolemanagement/addRole', {name: Name, vsid: $('#VersSelect').scombobox('val')}, function(data) {
@@ -117,11 +124,52 @@ function saveRole() {
 		
 		$('#RoleList').find('.RoleListEntry').remove();
 		$('#RoleList').prepend(jdata.roles);
-		$('#RoleList').find('.RoleListEntry').bind('click', RoleListClick);
+		$('#RoleList').find('.RoleListEntry[data-rid!="0"]').bind('click', RoleListClick);
 		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);
+		$('#RoleList').find('.RoleListEntryEdit').bind('click', changeRoleName);
 		$('#iSaveRole').removeAttr('data-rid');
 		$('#RolePerms').html(Default.roleperms);
 		$('#RoleMembers').html(Default.rolemembers);
+	});
+}
+function changeRoleName() {
+	var RID = $(this).parent().attr('data-rid');
+	var name = $(this).parent().clone().children().remove().end().text();
+	var html = '<input type="text" id="iEditRoleName" data-default="[(Admin RoleName)]" value="' + name + '"/>'; 
+	setTimeout(function() {
+		MessageBox(html, {Buttons: [{string: "[(Admin Save)]", data: {rid : RID, button: $(this)}, callback: editRole}, {string: "[(Common Back)]", cls: "redbutton"}], after: bindInputs, Head: "[(Admin EditRole)]"});
+	}, 150);
+}
+
+function editRole(e) {
+	var RID = e.data.rid;
+	var button = e.data.button;
+	var Name = $('#iEditRoleName').val();
+	$('#MessageBox').fadeOut(100);
+	if(Name == $('#iEditRoleName').attr('data-default')) {		
+		setTimeout(function() {
+			MessageBox('[(Errors WrongFields)]', {Buttons: [{string: "[(Common Okay)]", callback: function() {$('#MessageBox').fadeOut(100); button.trigger('click')}}]});
+		}, 150);
+		return;
+	}
+	
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/rolemanagement/editRole', {rid: RID, name: Name}, function(data) {
+		LoadingBox(-1);
+		jdata = getJData(data);
+		if(!jdata) return;
+		
+		$('#RoleList').find('.RoleListEntry').remove();
+		$('#RoleList').prepend(jdata.roles);
+		$('#RoleList').find('.RoleListEntry[data-rid!="0"]').bind('click', RoleListClick);
+		$('#RoleList').find('.RoleListEntryDelete').bind('click', RoleListDelete);
+		$('#RoleList').find('.RoleListEntryEdit').bind('click', changeRoleName);
+		$('#iSaveRole').removeAttr('data-rid');
+		$('#RolePerms').html(Default.roleperms);
+		$('#RoleMembers').html(Default.rolemembers);
+		setTimeout(function() {
+			MessageBox('[(Admin RoleUpdateSuccess)]', {Buttons: [{string: "[(Common Okay)]"}]});
+		}, 150);
 	});
 }
 

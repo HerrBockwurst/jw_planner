@@ -26,12 +26,12 @@ class RoleManagement extends \AModule {
 		if(!\User::getMyself()->hasVSAccess($Vers)) returnErrorJSON(getString('Errors noPerm'));
 		
 		$Roles = \RoleManager::getRoles($Vers);
-		if(empty($Roles)) return getString('Admin noRolesAssigned');
+		if(empty($Roles)) return '<div class="RoleListEntry" data-rid="0">'.getString('Admin noRolesAssigned').'</div>';
 		
 		$String = "";
 		
 		foreach($Roles AS $cRole) 
-			$String .= '<div class="RoleListEntry" data-rid="'.$cRole['rid'].'">'.$cRole['name'].'<span class="RoleListEntryDelete">X</span></div>';
+			$String .= '<div class="RoleListEntry" data-rid="'.$cRole['rid'].'">'.$cRole['name'].'<span class="RoleListEntryEdit"></span><span class="RoleListEntryDelete">X</span></div>';
 		
 		return $String;
 	}
@@ -113,8 +113,21 @@ class RoleManagement extends \AModule {
 		echo json_encode(array());
 	}
 	
+	private function changeRoleName() {
+		$Role = \RoleManager::getRole($_POST['rid']);
+		$NewName = $_POST['name'];
+		if(!$Role) returnErrorJSON(getString('Errors invalidInput'));
+		if(!\User::getMyself()->hasVSAccess($Role->vsid)) returnErrorJSON(getString('Errors noPerm'));
+		
+		\RoleManager::changeName($Role->rid, $NewName);
+		echo json_encode(array('roles' => $this->getRoles($Role->vsid)));
+	}
+	
 	public function ContentRequest() {
 		switch(getURL(1)) {
+			case 'editrole':
+				$this->changeRoleName();
+				break;
 			case 'updaterole':
 				$this->updateRole();
 				break;

@@ -16,6 +16,7 @@
 		<No>Nein</No>
 		<Okay>Okay</Okay>
 		<Back>Zurück</Back>
+		<Calendar>Kalender</Calendar>
 	</Common>
 	<Menu>
 		<Start>Start</Start>
@@ -35,6 +36,7 @@
 		<UserManagement>Benutzerverwaltung</UserManagement>
 		<RoleManagement>Rollenverwaltung</RoleManagement>
 		<GroupManagement>Gruppenverwaltung</GroupManagement>
+		<CalendarManagement>Kalenderverwaltung</CalendarManagement>
 	</Menu>
 	<Admin>
 		<SelectVersFirst>Zuerst Versammlung wählen.</SelectVersFirst>
@@ -69,7 +71,9 @@
 		<DeleteGroupB>löschen?</DeleteGroupB>
 		<GroupName>Name der Gruppe</GroupName>
 		<GroupUpdateSuccess>Die Gruppe wurde erfolgreich aktualisiert.</GroupUpdateSuccess>
-		<EditGroup>Gruppe bearbeiten</EditGroup>		
+		<EditGroup>Gruppe bearbeiten</EditGroup>
+		<NewCalendar>Neuer Kalender</NewCalendar>	
+		<noCalendarAssigned>Keine Kalender angelegt.</noCalendarAssigned>	
 	</Admin>
 	<Login>
 		<Login>Einloggen</Login>

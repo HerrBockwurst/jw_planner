@@ -1,0 +1,21 @@
+#CalAdminHeadHolder {
+	 background-color: rgb(250,250,250);
+	 padding: 10px;"
+}
+#CalAdminBody {
+	margin-top: 20px;
+}
+#CalAdminPatternHolder {
+	float: left;
+	min-width: 600px;
+	margin-right: 20px;
+}
+#CalAdminCommonInfos, #CalendarListmode {
+	float: left;
+	margin-bottom: 10px;
+}
+#CalAdminHeadHolder:after, #CalAdminBody:after {
+	content: "";
+	display: block;
+	clear: both;
+}

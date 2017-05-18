@@ -1,0 +1,54 @@
+<div id="CalAdminHeadHolder">
+	<div style="float: left">
+		<div style="margin: 5px;">[(Common Versammlung)]</div>
+		<select id="VersSelect">
+			(VERS)
+		</select>
+	</div>
+	<div style="float: left; margin-left: 30px">
+		<div style="margin: 5px;">[(Common Calendar)]</div>
+		<select id="CalSelect">
+			(CALENDAR)
+		</select>
+	</div>
+	<div style="float: left; margin-left: 30px">
+		<button style="margin-top: calc(1em + 15px)">[(Admin NewCalendar)]</button>
+	</div>
+</div>
+<div id="CalAdminBody">
+	<div id="CalAdminPatternHolder" style="display: none">
+	</div>
+	<div id="CalAdminCommonInfos" style="display: none">
+	</div>
+	<div id="CalendarListmode" style="display: none">
+	</div>
+</div>
+<script>
+$('#VersSelect, #CalSelect').scombobox();
+$('#VersSelect').scombobox('change', updateCalendarList);
+$('#CalSelect').scombobox('change', loadCalendarData).scombobox('change');
+
+function loadCalendarData() {
+	var CID = $('#CalSelect').scombobox('val');
+	LoadingBox(1);
+	
+	$.post('^PROTO^^APPHOME^/calendarmanagement/getCalendarData', {cid: CID}, function(data) {
+		var jdata = getJData(data);
+		LoadingBox(-1);
+		if(!jdata) return;
+	});
+	
+}
+
+function updateCalendarList() {
+	LoadingBox(1);
+	$.post('^PROTO^^APPHOME^/calendarmanagement/getCalendar', {vsid: $('#VersSelect').scombobox('val')}, function(data) {
+		var jdata = getJData(data);
+		LoadingBox(-1);
+		if(!jdata) return;
+				
+		$('#CalSelect').scombobox({data: jdata.calendar, sort: false})
+	});	
+}
+
+</script>
